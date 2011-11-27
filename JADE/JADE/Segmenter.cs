@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsApplication4
+namespace JADE
 {
     class Segmenter
     {
