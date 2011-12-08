@@ -11,7 +11,7 @@ namespace JADE
     {
         private Hashtable chartype_ = new Hashtable();
 
-        public void TinySegmenter()
+        public Daten TinySegmenter(String input)
         {
 
             //Anlegen einer Hashtable welche später zur Zeichentyp bestimmung genutzt wird)
@@ -116,14 +116,141 @@ namespace JADE
             UW5__.Add(",", 465); UW5__.Add(".", -299); UW5__.Add("1", -514); UW5__.Add("E2", -32768); UW5__.Add("]", -2762); UW5__.Add("、", 465); UW5__.Add("。", -299); UW5__.Add("「", 363); UW5__.Add("あ", 1655); UW5__.Add("い", 331); UW5__.Add("う", -503); UW5__.Add("え", 1199); UW5__.Add("お", 527); UW5__.Add("か", 647); UW5__.Add("が", -421); UW5__.Add("き", 1624); UW5__.Add("ぎ", 1971); UW5__.Add("く", 312); UW5__.Add("げ", -983); UW5__.Add("さ", -1537); UW5__.Add("し", -1371); UW5__.Add("す", -852); UW5__.Add("だ", -1186); UW5__.Add("ち", 1093); UW5__.Add("っ", 52); UW5__.Add("つ", 921); UW5__.Add("て", -18); UW5__.Add("で", -850); UW5__.Add("と", -127); UW5__.Add("ど", 1682); UW5__.Add("な", -787); UW5__.Add("に", -1224); UW5__.Add("の", -635); UW5__.Add("は", -578); UW5__.Add("べ", 1001); UW5__.Add("み", 502); UW5__.Add("め", 865); UW5__.Add("ゃ", 3350); UW5__.Add("ょ", 854); UW5__.Add("り", -208); UW5__.Add("る", 429); UW5__.Add("れ", 504); UW5__.Add("わ", 419); UW5__.Add("を", -1264); UW5__.Add("ん", 327); UW5__.Add("イ", 241); UW5__.Add("ル", 451); UW5__.Add("ン", -343); UW5__.Add("中", -871); UW5__.Add("京", 722); UW5__.Add("会", -1153); UW5__.Add("党", -654); UW5__.Add("務", 3519); UW5__.Add("区", -901); UW5__.Add("告", 848); UW5__.Add("員", 2104); UW5__.Add("大", -1296); UW5__.Add("学", -548); UW5__.Add("定", 1785); UW5__.Add("嵐", -1304); UW5__.Add("市", -2991); UW5__.Add("席", 921); UW5__.Add("年", 1763); UW5__.Add("思", 872); UW5__.Add("所", -814); UW5__.Add("挙", 1618); UW5__.Add("新", -1682); UW5__.Add("日", 218); UW5__.Add("月", -4353); UW5__.Add("査", 932); UW5__.Add("格", 1356); UW5__.Add("機", -1508); UW5__.Add("氏", -1347); UW5__.Add("田", 240); UW5__.Add("町", -3912); UW5__.Add("的", -3149); UW5__.Add("相", 1319); UW5__.Add("省", -1052); UW5__.Add("県", -4003); UW5__.Add("研", -997); UW5__.Add("社", -278); UW5__.Add("空", -813); UW5__.Add("統", 1955); UW5__.Add("者", -2233); UW5__.Add("表", 663); UW5__.Add("語", -1073); UW5__.Add("議", 1219); UW5__.Add("選", -1018); UW5__.Add("郎", -368); UW5__.Add("長", 786); UW5__.Add("間", 1191); UW5__.Add("題", 2368); UW5__.Add("館", -689); UW5__.Add("１", -514); UW5__.Add("Ｅ２", -32768); UW5__.Add("｢", 363); UW5__.Add("ｲ", 241); UW5__.Add("ﾙ", 451); UW5__.Add("ﾝ", -343);
             Hashtable UW6__ = new Hashtable();
             UW6__.Add(",", 227); UW6__.Add(".", 808); UW6__.Add("1", -270); UW6__.Add("E1", 306); UW6__.Add("、", 227); UW6__.Add("。", 808); UW6__.Add("あ", -307); UW6__.Add("う", 189); UW6__.Add("か", 241); UW6__.Add("が", -73); UW6__.Add("く", -121); UW6__.Add("こ", -200); UW6__.Add("じ", 1782); UW6__.Add("す", 383); UW6__.Add("た", -428); UW6__.Add("っ", 573); UW6__.Add("て", -1014); UW6__.Add("で", 101); UW6__.Add("と", -105); UW6__.Add("な", -253); UW6__.Add("に", -149); UW6__.Add("の", -417); UW6__.Add("は", -236); UW6__.Add("も", -206); UW6__.Add("り", 187); UW6__.Add("る", -135); UW6__.Add("を", 195); UW6__.Add("ル", -673); UW6__.Add("ン", -496); UW6__.Add("一", -277); UW6__.Add("中", 201); UW6__.Add("件", -800); UW6__.Add("会", 624); UW6__.Add("前", 302); UW6__.Add("区", 1792); UW6__.Add("員", -1212); UW6__.Add("委", 798); UW6__.Add("学", -960); UW6__.Add("市", 887); UW6__.Add("広", -695); UW6__.Add("後", 535); UW6__.Add("業", -697); UW6__.Add("相", 753); UW6__.Add("社", -507); UW6__.Add("福", 974); UW6__.Add("空", -822); UW6__.Add("者", 1811); UW6__.Add("連", 463); UW6__.Add("郎", 1082); UW6__.Add("１", -270); UW6__.Add("Ｅ１", 306); UW6__.Add("ﾙ", -673); UW6__.Add("ﾝ", -496);
-        }
 
-        // Funktion erhält einen String, vergleicht diesen mit den Einträgen in einer Hashtable und gibt wenn gefunden den Schlüsselwert zurück. Die Funktion dient zur Bestimmung des Typs eines einzel Zeichens( Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
+            //segment Funktion
+
+            ArrayList result = new ArrayList();
+            ArrayList seg = new ArrayList();
+            seg.Add("B3"); seg.Add("B2"); seg.Add("B1");
+            ArrayList ctype = new ArrayList();
+            ctype.Add("O"); ctype.Add("O"); ctype.Add("O");
+
+            //erstellt Arraylist und füllt diese mit den Einzelzeichen aus input
+            ArrayList o = new ArrayList();
+            foreach (char s in input)
+            {
+                o.Add(s);
+            }
+            //fügt die einzelnen chars als Strings in die Arraylist seg und die Typen aus der Hashtable in ctype
+            for (int i = 0; i < o.Count; ++i)
+            {
+                seg.Add(o[i]);
+                String h1 = o[i].ToString();
+                String h2 = ctype_(h1);
+                ctype.Add(h2);
+            }
+
+            seg.Add("E1");
+            seg.Add("E2");
+            seg.Add("E3");
+            ctype.Add("O");
+            ctype.Add("O");
+            ctype.Add("O");
+            String word = seg[3].ToString();
+            String p1 = "U";
+            String p2 = "U";
+            String p3 = "U";
+
+            for (int i = 4; i < seg.Count - 3; ++i)
+            {
+                int score = BIAS__;
+                String w1 = seg[i - 3].ToString();
+                String w2 = seg[i - 2].ToString();
+                String w3 = seg[i - 1].ToString();
+                String w4 = seg[i].ToString();
+                String w5 = seg[i + 1].ToString();
+                String w6 = seg[i + 2].ToString();
+
+                String c1 = ctype[i - 3].ToString();
+                String c2 = ctype[i - 2].ToString();
+                String c3 = ctype[i - 1].ToString();
+                String c4 = ctype[i].ToString();
+                String c5 = ctype[i + 1].ToString();
+                String c6 = ctype[i + 2].ToString();
+
+                score += ts_(UP1__, p1);
+                score += ts_(UP2__, p2);
+                score += ts_(UP3__, p3);
+                score += ts_(BP1__, p1 + p2);
+                score += ts_(BP2__, p2 + p3);
+                score += ts_(UW1__, w1);
+                score += ts_(UW2__, w2);
+                score += ts_(UW3__, w3);
+                score += ts_(UW4__, w4);
+                score += ts_(UW5__, w5);
+                score += ts_(UW6__, w6);
+                score += ts_(BW1__, w2+w3);
+                score += ts_(BW2__, w3 + w4);
+                score += ts_(BW3__, w4 + w5);
+                score += ts_(TW1__,w1 + w2 + w3);
+                score += ts_(TW2__, w2 + w3 + w4);
+                score += ts_(TW3__, w3 + w4 + w5);
+                score += ts_(TW4__, w4 + w5 + w6);
+                score += ts_(UC1__, c1);
+                score += ts_(UC2__, c2);
+                score += ts_(UC3__, c3);
+                score += ts_(UC4__, c4);
+                score += ts_(UC5__, c5);
+                score += ts_(UC6__, c6);
+                score += ts_(BC1__, c2 + c3);
+                score += ts_(BC2__, c3 + c4);
+                score += ts_(BC3__, c4 + c5);
+                score += ts_(TC1__, c1 + c2 + c3);
+                score += ts_(TC2__, c2 + c3 + c4);
+                score += ts_(TC3__, c3 + c4 + c5);
+                score += ts_(TC4__, c4 + c5 + c6);
+                score += ts_(UQ1__, p1 + c1);
+                score += ts_(UQ2__, p2 + c2);
+                score += ts_(UQ1__, p3 + c3);
+                score += ts_(BQ1__, p2 + c2 + c3);
+                score += ts_(BQ2__, p2 + c3 + c4);
+                score += ts_(BQ3__, p3 + c2 + c3);
+                score += ts_(BQ4__, p3 + c3 + c4);
+                score += ts_(TQ1__, p2 + c1 + c2 + c3);
+                score += ts_(TQ2__, p2 + c2 + c3 + c4);
+                score += ts_(TQ3__, p3 + c1 + c2 + c3);
+                score += ts_(TQ4__, p3 + c2 + c3 + c4);
+                
+                String p = "O";
+                if (score > 0)
+                {
+                    result.Add(word);
+                    word = "";
+                    p = "B";
+                }
+                p1 = p2;
+                p2 = p3;
+                p3 = p;
+                word += seg[i].ToString();
+            }
+            result.Add(word);
+            //Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur
+            Daten rueck = new Daten();
+            ArrayList hilf = new ArrayList();
+            ArrayList container = new ArrayList();
+            foreach (object s in result)
+            {
+                if ((Equals((String)s, " ")) || (Equals((String)s, "。")) || (Equals((String)s, "！")) || (Equals((String)s, "？")))
+                {
+                    container.Add(hilf);
+                    hilf.Clear();
+                }
+                else 
+                {
+                    hilf.Add((String)s);
+                }
+                container.Add(hilf);
+            }
+            rueck.Zugriff= container;
+            return rueck;
+        }
+        //erhält einen String, vergleicht diesen mit den Einträgen in einer Hashtable und gibt wenn gefunden den Schlüsselwert zurück. Die Funktion dient zur Bestimmung des Typs eines einzel Zeichens( Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
         public string ctype_(String str)
         {
             foreach (DictionaryEntry element in chartype_)
             {
                 Regex rgx = (Regex)element.Key;
+
                 if (rgx.IsMatch(str))
                 {
                     String s = (String)element.Value;
@@ -133,25 +260,22 @@ namespace JADE
             return "O";
         }
 
-
-        public int ts_(int v)
-        { return 0; }
-
-        public String[] segment(String input)
+        //erhält eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
+        public int ts_(Hashtable table,String s)
         {
-            ArrayList result = new ArrayList();
-            ArrayList seg = new ArrayList();
-            seg.Add("B3"); seg.Add("B2"); seg.Add("B1");
-            ArrayList ctype = new ArrayList();
-            ctype.Add("O"); ctype.Add("O"); ctype.Add("O");
-            String[] o = input.Split();
-            return o;
-        }
+            foreach (DictionaryEntry element in table)
+            {
+                String s2 = (String)element.Key;
+                if (Equals(s,s2))
+                {
+                    int ret = (int)element.Value;
+                    return ret;
+                }
+            }
+            return 0; 
+            }
 
-
-        // element.Value;  gibt den String aus. Als key sind die regexp gespeichert
-
-
+        
     }
 }
 
