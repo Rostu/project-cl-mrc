@@ -179,10 +179,10 @@ namespace JADE
                 score += ts_(UW4__, w4);
                 score += ts_(UW5__, w5);
                 score += ts_(UW6__, w6);
-                score += ts_(BW1__, w2+w3);
+                score += ts_(BW1__, w2 + w3);
                 score += ts_(BW2__, w3 + w4);
                 score += ts_(BW3__, w4 + w5);
-                score += ts_(TW1__,w1 + w2 + w3);
+                score += ts_(TW1__, w1 + w2 + w3);
                 score += ts_(TW2__, w2 + w3 + w4);
                 score += ts_(TW3__, w3 + w4 + w5);
                 score += ts_(TW4__, w4 + w5 + w6);
@@ -210,7 +210,7 @@ namespace JADE
                 score += ts_(TQ2__, p2 + c2 + c3 + c4);
                 score += ts_(TQ3__, p3 + c1 + c2 + c3);
                 score += ts_(TQ4__, p3 + c2 + c3 + c4);
-                
+
                 String p = "O";
                 if (score > 0)
                 {
@@ -224,26 +224,42 @@ namespace JADE
                 word += seg[i].ToString();
             }
             result.Add(word);
+
+
             //Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur
-            Daten rueck = new Daten();
-            ArrayList hilf = new ArrayList();
+
+            Daten rueck = new Daten();                  //Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist)
             ArrayList container = new ArrayList();
-            foreach (object s in result)
+            //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste" geschrieben und zum "Text-Container hinzugefügt"
+            int x = 0;
+            for (int i = 0; i < result.Count; i++)     
             {
-                if ((Equals((String)s, " ")) || (Equals((String)s, "。")) || (Equals((String)s, "！")) || (Equals((String)s, "？")))
+                if ((Equals(result[i], " ")) || (Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")))
                 {
+                    ArrayList hilf = new ArrayList();
+                    for (int y = x; y <= i; y++)
+                    {
+                        hilf.Add(result[y]);
+                    }
                     container.Add(hilf);
-                    hilf.Clear();
+                    x = i + 1;
                 }
-                else 
+            }
+            //Falls am Ende kein Satzendzeichen steht, oder ueberhaupt kein satzendzeichen vorkommt, wird der Rest bzw Alles als ein Satz übergeben.
+            int z = result.Count;
+            if (!((Equals(result[result.Count - 1], " ")) || (Equals(result[result.Count - 1], "。")) || (Equals(result[result.Count - 1], "！")) || (Equals(result[result.Count - 1], "？"))))
+            {
+                ArrayList hilf = new ArrayList();
+                for (int y = x; y <= result.Count - 1; y++)
                 {
-                    hilf.Add((String)s);
+                    hilf.Add(result[y]);
                 }
                 container.Add(hilf);
             }
-            rueck.Zugriff= container;
+            rueck.Zugriff = container;
             return rueck;
         }
+
         //erhält einen String, vergleicht diesen mit den Einträgen in einer Hashtable und gibt wenn gefunden den Schlüsselwert zurück. Die Funktion dient zur Bestimmung des Typs eines einzel Zeichens( Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
         public string ctype_(String str)
         {
