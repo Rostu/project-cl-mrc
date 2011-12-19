@@ -33,6 +33,40 @@ namespace JADE
             }
         }
 
+        //Zusammenfuegen zweier Token 
+        public void zusammen(int Satznummer, int Tok1, int Tok2)
+        {
+            ArrayList Alist = this.Zugriff;                             //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];              //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet   
+                  
+            Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);     //Zusammenfügen der Token tok1 und tok2 an Position von tok1
+            Satz.RemoveAt(Tok2);                                        //Loeschen des nun überfluessigen tok2
+
+            Alist[Satznummer] = Satz;                                   //Schreiben des geaenderten Satzes in die Arraylist
+            this.Zugriff = Alist;                                       //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+        }
+
+        //Trennen eines Token 
+        public void trennen(int Satznummer, int Tok)
+        {
+            ArrayList Alist = this.Zugriff;                                 //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            String str = (String)Satz[Tok];
+            BearbeitenFenster neumit = new BearbeitenFenster(this,Satznummer,Tok,str);         //Erzeugt bearbeiten Fenster und ruft dieses auf
+            neumit.Show();
+        }
+        //Trennen eines Token 
+        public void trennen2(int Satznummer, int Tok, String neu1, String neu2)
+        {
+            ArrayList Alist = this.Zugriff;                                 //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            Satz.Insert(Tok, neu2);
+            Satz.Insert(Tok, neu1);
+            Satz.RemoveAt(Tok+2);
+            Alist[Satznummer] = Satz;                                   //Schreiben des geaenderten Satzes in die Arraylist
+            this.Zugriff = Alist;                                       //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+        }
+
         //Spezial Konstruktor fuer deserialisation 
         public Daten(SerializationInfo info, StreamingContext ctxt)
         {
