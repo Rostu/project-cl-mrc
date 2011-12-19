@@ -531,7 +531,7 @@ namespace JADE
             result.Add(word);
 
 
-            //Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur
+            //Aufsplitten der Token in Sätze und Schreiben in unsere Datenstruktur
 
             Daten rueck = new Daten();                  //Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist)
             ArrayList container = new ArrayList();
@@ -581,8 +581,17 @@ namespace JADE
             return "O";
         }
 
+<<<<<<< .mine
+
+        public int ts_(int v)
+        { return 0; }
+
+
+        public String[] segment(String input)
+=======
         //erhält eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
         public int ts_(Hashtable table,String s)
+>>>>>>> .r16
         {
             foreach (DictionaryEntry element in table)
             {
@@ -595,11 +604,32 @@ namespace JADE
             }
             return 0; 
             }
+<<<<<<< .mine
+=======
 
         
     }
 }
 
 
+>>>>>>> .r16
 
+<<<<<<< .mine
+        public string ausgabe()
+        {
+            String aus = "";
+            foreach (DictionaryEntry element in chartype_)
+            {
+                    aus += element.Value;//gibt den String aus. Als key sind die regexp gespeichert
+                    aus += "---";
+            }
+            return aus;
+        }
+    }
+}
+      
+    
+    
 
+=======
+>>>>>>> .r16
