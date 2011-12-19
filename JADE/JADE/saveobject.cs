@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace JADE
 {
-// Wird unsere Datenstruktur zum abspeichern bekommen.
+// Wird unsere Datenstruktur zum abspeichern bekommen, kann aber später auch andere Daten zum Speichern bekommen.
     
     [Serializable()]
     public class SaveObjekt : ISerializable
@@ -23,7 +23,6 @@ namespace JADE
         public SaveObjekt()
         {
         }
-
         public SaveObjekt(SerializationInfo info, StreamingContext ctxt)
         {
             this.list = (Daten[])info.GetValue("LIST", typeof(Daten[]));
@@ -33,7 +32,5 @@ namespace JADE
         {
             info.AddValue("LIST", this.list);
         }
-
-
     }
 }
