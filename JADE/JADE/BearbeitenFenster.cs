@@ -27,7 +27,7 @@ namespace JADE
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1.Testdaten.trennen2(Satznummer, Tok, this.textBox1.Text, this.textBox2.Text);
+            Form1.Instanzdaten.trennen2(Satznummer, Tok, this.textBox1.Text, this.textBox2.Text);
             this.Close();
         }
       
