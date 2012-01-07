@@ -21,7 +21,6 @@ namespace JADE
 
             //Segmenter segtest = new Segmenter();  
             //Instanzdaten.Zugriff = segtest.TinySegmenter(this.textBox1.Text);
-
             //Instanzdaten.trennen(0,4);
             //Instanzdaten.zusammen(0, 1, 2);
         }
@@ -40,7 +39,11 @@ namespace JADE
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
+            Segmenter segtest = new Segmenter();
+            Instanzdaten = segtest.TinySegmenter("一二三四五六七八九十");
+            this.richTextBox1.Text = Instanzdaten.getToken(0, 0);
 
         }
+
     }
 }
