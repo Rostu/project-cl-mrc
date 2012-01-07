@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label label3;
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Satz 1");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Satz 2");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Satz 3");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Satz 4");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Satz 1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Satz 2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Satz 3");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Satz 4");
             this.Tokenize = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -104,10 +104,11 @@
             this.richTextBox1.Size = new System.Drawing.Size(707, 129);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(172, 160);
+            this.label2.Location = new System.Drawing.Point(203, 160);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(233, 23);
             this.label2.TabIndex = 5;
@@ -277,19 +278,19 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(2, 217);
             this.treeView1.Name = "treeView1";
-            treeNode9.Name = "Node0";
-            treeNode9.Text = "Satz 1";
-            treeNode10.Name = "Node1";
-            treeNode10.Text = "Satz 2";
-            treeNode11.Name = "Node2";
-            treeNode11.Text = "Satz 3";
-            treeNode12.Name = "Node3";
-            treeNode12.Text = "Satz 4";
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "Satz 1";
+            treeNode2.Name = "Node1";
+            treeNode2.Text = "Satz 2";
+            treeNode3.Name = "Node2";
+            treeNode3.Text = "Satz 3";
+            treeNode4.Name = "Node3";
+            treeNode4.Text = "Satz 4";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.treeView1.Size = new System.Drawing.Size(152, 330);
             this.treeView1.TabIndex = 7;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
