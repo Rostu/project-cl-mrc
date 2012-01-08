@@ -32,27 +32,24 @@ namespace JADE
 
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            textBox1.Show(); 
-         
+            //ArrayList Alist = Instanzdaten.Zugriff;
+            ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);
+            String test;
+            foreach (object a in Satz)
+            {
+                test += " " + (String)a;
+
+            }
+                     
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
             Segmenter segtest = new Segmenter();                                // erstellt ein neues Segmenter Obejekt
             Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);       // Weißt dem Objekt die Daten aus der richTextBox zu
-            // this.richTextBox1.Text = Instanzdaten.getToken(3, 0);
-            /* ArrayList Alist = new ArrayList();
-            Alist = Instanzdaten.Zugriff; foreach (ArrayList a in Alist)
-            {
-                this.richTextBox1.Text += "Satz: ";
-                foreach (String s in a)
-                {
-                    this.richTextBox1.Text += s + "  ";
-                }
-            }
-             */
+         
             ArrayList Alist = Instanzdaten.Zugriff;
             int i = 0;
             foreach (ArrayList a in Alist)
