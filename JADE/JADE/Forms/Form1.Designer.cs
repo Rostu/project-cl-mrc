@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label label3;
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node2");
             this.Tokenize = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,7 +55,7 @@
             this.richTextBox8 = new System.Windows.Forms.RichTextBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.treeView2 = new System.Windows.Forms.TreeView();
             label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -277,7 +280,6 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(152, 330);
             this.treeView1.TabIndex = 7;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // checkBox1
             // 
@@ -289,19 +291,30 @@
             this.checkBox1.Text = "BLA!";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // treeView2
             // 
-            this.textBox1.Location = new System.Drawing.Point(206, 191);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(472, 20);
-            this.textBox1.TabIndex = 9;
+            this.treeView2.Location = new System.Drawing.Point(192, 187);
+            this.treeView2.Name = "treeView2";
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "Node0";
+            treeNode2.Name = "Node1";
+            treeNode2.Text = "Node1";
+            treeNode3.Name = "Node2";
+            treeNode3.Text = "Node2";
+            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            this.treeView2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.treeView2.Size = new System.Drawing.Size(517, 56);
+            this.treeView2.TabIndex = 9;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(742, 559);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.treeView2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -344,7 +357,7 @@
         private System.Windows.Forms.RichTextBox richTextBox12;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TreeView treeView2;
     }
 }
 

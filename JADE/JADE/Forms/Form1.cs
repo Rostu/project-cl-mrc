@@ -36,7 +36,7 @@ namespace JADE
         {
             //ArrayList Alist = Instanzdaten.Zugriff;
             ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);
-            String test;
+            String test="";
             foreach (object a in Satz)
             {
                 test += " " + (String)a;
