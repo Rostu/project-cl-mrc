@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label label3;
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Satz 1");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Satz 2");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Satz 3");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Satz 4");
             this.Tokenize = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,6 +52,7 @@
             this.richTextBox8 = new System.Windows.Forms.RichTextBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -278,19 +275,6 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(2, 217);
             this.treeView1.Name = "treeView1";
-            treeNode25.Name = "Node0";
-            treeNode25.Text = "Satz 1";
-            treeNode26.Name = "Node1";
-            treeNode26.Text = "Satz 2";
-            treeNode27.Name = "Node2";
-            treeNode27.Text = "Satz 3";
-            treeNode28.Name = "Node3";
-            treeNode28.Text = "Satz 4";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode25,
-            treeNode26,
-            treeNode27,
-            treeNode28});
             this.treeView1.Size = new System.Drawing.Size(152, 330);
             this.treeView1.TabIndex = 7;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -298,18 +282,26 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(195, 217);
+            this.checkBox1.Location = new System.Drawing.Point(660, 164);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(49, 17);
             this.checkBox1.TabIndex = 8;
             this.checkBox1.Text = "BLA!";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(206, 191);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(472, 20);
+            this.textBox1.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(742, 559);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -352,6 +344,7 @@
         private System.Windows.Forms.RichTextBox richTextBox12;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
