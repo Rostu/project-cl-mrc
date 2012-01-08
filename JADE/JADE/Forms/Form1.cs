@@ -24,24 +24,21 @@ namespace JADE
             //Instanzdaten.zusammen(0, 1, 2);
         }
 
-       
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             //ArrayList Alist = Instanzdaten.Zugriff;
             ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);
             String test="";
-            foreach (object a in Satz)
+            foreach (String a in Satz)
             {
                 test += " " + (String)a;
-                textBox1.Text = test;
             }
-                   
+            this.textBox1.Text = test;      
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
@@ -86,7 +83,6 @@ namespace JADE
         {
 
         }
-
     }
 }
 
