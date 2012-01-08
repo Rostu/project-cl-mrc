@@ -34,7 +34,7 @@ namespace JADE
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            
+            textBox1.Show(); 
          
         }
 
@@ -57,7 +57,7 @@ namespace JADE
             int i = 0;
             foreach (ArrayList a in Alist)
             {
-                TreeNode Instanz = new TreeNode("Satz" + i + ": " + Instanzdaten.getToken(i, 0));
+                TreeNode Instanz = new TreeNode("Satz"+ (i+1) +": "+ Instanzdaten.getToken(i,0));
                 i++;
                 treeView1.Nodes.Add(Instanz);
                 
