@@ -39,11 +39,44 @@ namespace JADE
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
-            Segmenter segtest = new Segmenter();
-            Instanzdaten = segtest.TinySegmenter("一二三四五六七八九十");
-            this.richTextBox1.Text = Instanzdaten.getToken(0, 0);
+            Segmenter segtest = new Segmenter();                                // erstellt ein neues Segmenter Obejekt
+            Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);       // Weißt dem Objekt die Daten aus der richTextBox zu
+            // this.richTextBox1.Text = Instanzdaten.getToken(3, 0);
+            /* ArrayList Alist = new ArrayList();
+            Alist = Instanzdaten.Zugriff; foreach (ArrayList a in Alist)
+            {
+                this.richTextBox1.Text += "Satz: ";
+                foreach (String s in a)
+                {
+                    this.richTextBox1.Text += s + "  ";
+                }
+            }
+             */
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+           // Segmenter segtest = new Segmenter();
+           // Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);
+           // TreeNode Instanz = new TreeNode();
+           // treeView1.Nodes.Add(Instanz);
+            ArrayList Alist = new ArrayList();
+            for (int i = 0; i < Alist; i++)
+            {
+                TreeNode n = new TreeNode();
+                treeView1.Nodes.Add(n);
+            }
 
         }
 
     }
 }
+
+
+
+
