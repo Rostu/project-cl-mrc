@@ -100,12 +100,12 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(707, 129);
             this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = "同じ学校の留学生を指名。手配台湾人女子留学生。殺害容疑！";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(203, 160);
+            this.label2.Location = new System.Drawing.Point(185, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(233, 23);
             this.label2.TabIndex = 5;
@@ -282,7 +282,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(660, 164);
+            this.checkBox1.Location = new System.Drawing.Point(629, 164);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(49, 17);
             this.checkBox1.TabIndex = 8;
@@ -291,9 +291,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(206, 191);
+            this.textBox1.Location = new System.Drawing.Point(188, 200);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(472, 20);
+            this.textBox1.Size = new System.Drawing.Size(521, 20);
             this.textBox1.TabIndex = 9;
             // 
             // Form1
