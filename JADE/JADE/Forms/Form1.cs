@@ -34,7 +34,13 @@ namespace JADE
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+            
+            ArrayList Alist = Instanzdaten.Zugriff;
+            foreach (ArrayList a in Alist)
+            {
+                 TreeNode Instanz = new TreeNode("bla");
+                 treeView1.Nodes.Add(Instanz);
+            }
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
@@ -65,13 +71,13 @@ namespace JADE
            // Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);
            // TreeNode Instanz = new TreeNode();
            // treeView1.Nodes.Add(Instanz);
-            ArrayList Alist = new ArrayList();
+           /* ArrayList Alist = new ArrayList();
             for (int i = 0; i < Alist; i++)
             {
                 TreeNode n = new TreeNode();
                 treeView1.Nodes.Add(n);
             }
-
+            */
         }
 
     }
