@@ -18,7 +18,6 @@ namespace JADE
         public Form1()
         {
             InitializeComponent();
-
             //Segmenter segtest = new Segmenter();  
             //Instanzdaten.Zugriff = segtest.TinySegmenter(this.textBox1.Text);
             //Instanzdaten.trennen(0,4);
@@ -40,16 +39,18 @@ namespace JADE
             foreach (object a in Satz)
             {
                 test += " " + (String)a;
-
+                textBox1.Text = test;
             }
-                     
+                   
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
             Segmenter segtest = new Segmenter();                                // erstellt ein neues Segmenter Obejekt
             Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);       // Weißt dem Objekt die Daten aus der richTextBox zu
-         
+
+            
+
             ArrayList Alist = Instanzdaten.Zugriff;
             int i = 0;
             foreach (ArrayList a in Alist)
@@ -79,6 +80,11 @@ namespace JADE
                 treeView1.Nodes.Add(n);
             }
             */
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
     }
