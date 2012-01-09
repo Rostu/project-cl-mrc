@@ -12,8 +12,8 @@ namespace JADE
 {
     public partial class Form1 : Form
     {
-         public static Daten Instanzdaten = new Daten();
-        
+        public static Daten Instanzdaten = new Daten();
+
 
         public Form1()
         {
@@ -32,15 +32,20 @@ namespace JADE
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);
-            String test="";
+            String test = "";
             this.flowLayoutPanel1.Controls.Clear();
             foreach (String a in Satz)
             {
                 test += (String)a + "  ";
-                CheckBox Box = new System.Windows.Forms.CheckBox();
-                Box.Text = (String)a;
-                Box.Size = new Size(80,30);
-                this.flowLayoutPanel1.Controls.Add(Box);
+                if ((Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？")))
+                    break;
+                else
+                {
+                    CheckBox Box = new System.Windows.Forms.CheckBox();
+                    Box.Text = (String)a;
+                    Box.Size = new Size(80, 30);
+                    this.flowLayoutPanel1.Controls.Add(Box);
+                }
             }
             this.textBox1.Text = test;
         }
@@ -54,31 +59,31 @@ namespace JADE
             int i = 0;
             foreach (ArrayList a in Alist)
             {
-                TreeNode Instanz = new TreeNode("Satz"+ (i+1) +": "+ Instanzdaten.getToken(i,0));
+                TreeNode Instanz = new TreeNode("Satz" + (i + 1) + ": " + Instanzdaten.getToken(i, 0));
                 i++;
                 treeView1.Nodes.Add(Instanz);
-                
+
             }
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           // Segmenter segtest = new Segmenter();
-           // Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);
-           // TreeNode Instanz = new TreeNode();
-           // treeView1.Nodes.Add(Instanz);
-           /* ArrayList Alist = new ArrayList();
-            for (int i = 0; i < Alist; i++)
-            {
-                TreeNode n = new TreeNode();
-                treeView1.Nodes.Add(n);
-            }
-            */
+            // Segmenter segtest = new Segmenter();
+            // Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);
+            // TreeNode Instanz = new TreeNode();
+            // treeView1.Nodes.Add(Instanz);
+            /* ArrayList Alist = new ArrayList();
+             for (int i = 0; i < Alist; i++)
+             {
+                 TreeNode n = new TreeNode();
+                 treeView1.Nodes.Add(n);
+             }
+             */
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
