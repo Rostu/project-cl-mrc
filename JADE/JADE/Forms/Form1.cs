@@ -31,33 +31,34 @@ namespace JADE
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);
-            String test = "";
-            this.flowLayoutPanel1.Controls.Clear();
-            foreach (String a in Satz)
+            ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);                                                                            // Durch e.Node.Index wird der selektierte Satz ausgwählt
+            String test = "";                                                                                                               // neue Variable
+            this.flowLayoutPanel1.Controls.Clear();                                                                                         // leert das flowlayoutoutPanel vor dem Start
+            foreach (String a in Satz)                                                                                                      // für jedes Token im Satz
             {
-                test += (String)a + "  ";
-                if ((Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？")))
+                test += (String)a + "  ";                                                                                                   // Variable test der Wert eines Tokens zugeteilt mit Leerzeichen
+                if ((Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？")))        // Ausnahmebehandulung: Satzenden werden keine Checkboxen zugeteilt, sondern einfach ingnoriert.
                     break;
-                else
+                else                                                                                                                        // für jedes Token im Satz wird eine neue Checkbox angelegt
                 {
-                    CheckBox Box = new System.Windows.Forms.CheckBox();
+                    CheckBox Box = new System.Windows.Forms.CheckBox();         
                     Box.Text = (String)a;
                     Box.Size = new Size(80, 30);
                     this.flowLayoutPanel1.Controls.Add(Box);
                 }
+                
             }
-            this.textBox1.Text = test;
+            this.textBox1.Text = test;                                                                                                      // schreibt den selektierten Satz in die TextBox
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
-            this.treeView1.Nodes.Clear();
+            this.treeView1.Nodes.Clear();                                       // leert das treeview Objekt
             Segmenter segtest = new Segmenter();                                // erstellt ein neues Segmenter Obejekt
             Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);       // Weißt dem Objekt die Daten aus der richTextBox zu
-            ArrayList Alist = Instanzdaten.Zugriff;
-            int i = 0;
-            foreach (ArrayList a in Alist)
+            ArrayList Alist = Instanzdaten.Zugriff;                             // greift auf die Instanzdaten zu       
+            int i = 0;                                                          // Initialiert neue Variable
+            foreach (ArrayList a in Alist)                                      // Schleife für jedes Element im Array wird neues treeveiw Element angelegt. Satznummer fängt bei 1 an.
             {
                 TreeNode Instanz = new TreeNode("Satz" + (i + 1) + ": " + Instanzdaten.getToken(i, 0));
                 i++;
