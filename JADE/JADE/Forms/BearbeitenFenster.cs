@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-//hello ther
+
 
 namespace JADE
 {
@@ -30,6 +30,8 @@ namespace JADE
         private void button1_Click(object sender, EventArgs e)
         {
             Form1.Instanzdaten.trennen2(Satznummer, Tok, this.textBox1.Text, this.textBox2.Text);
+            //TreeViewEventArgs ev = new TreeViewEventArgs(Form1.treeView1.SelectedNode);
+            //Form1.treeView1_AfterSelect(Form1.treeView1, ev);
             this.Close();
         }
       
@@ -37,6 +39,16 @@ namespace JADE
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void BearbeitenFenster_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -90,6 +90,7 @@
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(100, 19);
             this.textBox3.TabIndex = 7;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // BearbeitenFenster
             // 
@@ -104,6 +105,7 @@
             this.Controls.Add(this.button1);
             this.Name = "BearbeitenFenster";
             this.Text = "Token Trennen";
+            this.Load += new System.EventHandler(this.BearbeitenFenster_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
