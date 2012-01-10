@@ -59,11 +59,11 @@ namespace JADE
         {
             ArrayList Alist = this.Zugriff;                                 //Zugriff auf Datenstruktur
             ArrayList Satz = (ArrayList)Alist[Satznummer];                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
-            Satz.Insert(Tok, neu2);
-            Satz.Insert(Tok, neu1);
-            Satz.RemoveAt(Tok+2);
-            Alist[Satznummer] = Satz;                                   //Schreiben des geaenderten Satzes in die Arraylist
-            this.Zugriff = Alist;                                       //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+            Satz.Insert(Tok, neu2);                                         //Fügt die getrennten Teile in die Arraylist ein(an der Stelle Tok)
+            Satz.Insert(Tok, neu1);                                         
+            Satz.RemoveAt(Tok+2);                                           //Löscht den zu trennenden Token 
+            Alist[Satznummer] = Satz;                                       //Schreiben des geaenderten Satzes in die Arraylist
+            this.Zugriff = Alist;                                           //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
         }
 
         //Spezial Konstruktor fuer deserialisation 
@@ -97,5 +97,6 @@ namespace JADE
         {
             info.AddValue("Daten", this.data);
         }
-    }
+
+  }
 }

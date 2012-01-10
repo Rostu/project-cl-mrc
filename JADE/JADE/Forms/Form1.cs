@@ -29,7 +29,7 @@ namespace JADE
 
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);
             String test = "";
@@ -90,6 +90,13 @@ namespace JADE
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+        public void treeviewupdate()
+        {
+            TreeViewEventArgs ev = new TreeViewEventArgs(this.treeView1.SelectedNode);
+            treeView1_AfterSelect(this.treeView1, ev);
         }
 
         private void button2_Click(object sender, EventArgs e)
