@@ -18,7 +18,7 @@ namespace JADE
         private int Tok;
         private Daten obj;
 
-        public BearbeitenFenster(Daten obj,int Satznummer,int Tok,String str)
+        public BearbeitenFenster(Daten obj, int Satznummer, int Tok, String str)
         {
             this.Satznummer = Satznummer;
             this.Tok = Tok;
@@ -29,9 +29,13 @@ namespace JADE
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1.Instanzdaten.trennen2(Satznummer, Tok, this.textBox1.Text, this.textBox2.Text);
-            //TreeViewEventArgs ev = new TreeViewEventArgs(Form1.treeView1.SelectedNode);
-            //Form1.treeView1_AfterSelect(Form1.treeView1, ev);
+            ArrayList Alist = obj.Zugriff;                                 //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                 //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            Satz.Insert(Tok, this.textBox1.Text);                          //Fügt die getrennten Teile in die Arraylist ein(an der Stelle Tok)
+            Satz.Insert(Tok, this.textBox2.Text);
+            Satz.RemoveAt(Tok + 2);                                        //Löscht den zu trennenden Token 
+            Alist[Satznummer] = Satz;                                      //Schreiben des geaenderten Satzes in die Arraylist
+            obj.Zugriff = Alist;                                           //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
             this.Close();
         }
       
