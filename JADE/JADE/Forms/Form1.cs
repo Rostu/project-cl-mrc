@@ -31,7 +31,11 @@ namespace JADE
 
         public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            ArrayList Satz = Instanzdaten.getSatz(e.Node.Index);
+            flowupdate();
+        }
+        public void flowupdate()
+        {
+            ArrayList Satz = Instanzdaten.getSatz(this.treeView1.SelectedNode.Index);
             String test = "";
             this.flowLayoutPanel1.Controls.Clear();
             int i = 0;
@@ -92,16 +96,8 @@ namespace JADE
 
         }
 
-
-        public void treeviewupdate()
-        {
-            TreeViewEventArgs ev = new TreeViewEventArgs(this.treeView1.SelectedNode);
-            treeView1_AfterSelect(this.treeView1, ev);
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            TreeViewEventArgs ev = new TreeViewEventArgs(this.treeView1.SelectedNode);
             int count = 0;
             int first = 0;
             int second = 0;
@@ -131,7 +127,7 @@ namespace JADE
                 switch (count)
                 {
                     case 1:
-                        Instanzdaten.trennen(this.treeView1.SelectedNode.Index, first);
+                        trennen(this.treeView1.SelectedNode.Index, first);
                         break;
                     case 2:
                         if (first + 1 != second)
@@ -141,12 +137,54 @@ namespace JADE
                         }
                         else
                         {
-                            Instanzdaten.zusammen(this.treeView1.SelectedNode.Index, first, second);
+                            zusammen(this.treeView1.SelectedNode.Index, first, second);
                             break;
                         }
                 }
             }
-            treeView1_AfterSelect(this.treeView1, ev);
+            flowupdate();
+        }
+
+        //Trennen eines Token 
+        public void trennen(int Satznummer, int Tok)
+        {
+            ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                                                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            String str = (String)Satz[Tok];
+            BearbeitenFenster neumit = new BearbeitenFenster(Instanzdaten, Satznummer, Tok, str);           //Erzeugt bearbeiten Fenster und ruft dieses auf
+            neumit.FormClosing += new FormClosingEventHandler(frm2_FormClosing);
+            neumit.Show();
+        }
+
+        //EventHandler der bei schließen des bearbeiten Fensters den Listener ausschaltet und die FlowlayoutPanel mit den Token updatet
+        void frm2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BearbeitenFenster neumit = (BearbeitenFenster)sender;
+            neumit.FormClosing -= new FormClosingEventHandler(frm2_FormClosing);
+            flowupdate();
+        }
+
+        //Trennen eines Token 
+        public void trennen2(int Satznummer, int Tok, String neu1, String neu2)
+        {
+            ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                                                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            Satz.Insert(Tok, neu2);                                                                         //Fügt die getrennten Teile in die Arraylist ein(an der Stelle Tok)
+            Satz.Insert(Tok, neu1);
+            Satz.RemoveAt(Tok + 2);                                                                         //Löscht den zu trennenden Token 
+            Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist
+            Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+        }
+
+        //Zusammenfuegen zweier Token 
+        public void zusammen(int Satznummer, int Tok1, int Tok2)
+        {
+            ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                                                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet   
+            Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1
+            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun überfluessigen tok2
+            Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist
+            Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
         }
     }
 }
