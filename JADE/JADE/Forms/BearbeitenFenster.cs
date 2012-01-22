@@ -30,13 +30,22 @@ namespace JADE
         private void button1_Click(object sender, EventArgs e)
         {
             ArrayList Alist = obj.Zugriff;                                 //Zugriff auf Datenstruktur
-            ArrayList Satz = (ArrayList)Alist[Satznummer];                 //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
-            Satz.Insert(Tok, this.textBox1.Text);                          //Fügt die getrennten Teile in die Arraylist ein(an der Stelle Tok)
-            Satz.Insert(Tok, this.textBox2.Text);
-            Satz.RemoveAt(Tok + 2);                                        //Löscht den zu trennenden Token 
-            Alist[Satznummer] = Satz;                                      //Schreiben des geaenderten Satzes in die Arraylist
-            obj.Zugriff = Alist;                                           //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
-            this.Close();
+            ArrayList Satz = (ArrayList)Alist[Satznummer];  
+            //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            String test = this.textBox1.Text + this.textBox2.Text;
+            if (Equals(test, (String)Satz[Tok]))
+            {
+                Satz.Insert(Tok, this.textBox1.Text);                          //Fügt die getrennten Teile in die Arraylist ein(an der Stelle Tok)
+                Satz.Insert(Tok, this.textBox2.Text);
+                Satz.RemoveAt(Tok + 2);                                        //Löscht den zu trennenden Token 
+                Alist[Satznummer] = Satz;                                      //Schreiben des geaenderten Satzes in die Arraylist
+                obj.Zugriff = Alist;                                           //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Die 2 neuen Token müssen aus den Zeichen \ndes zu bearbeitenden Token bestehen");
+            }
         }
       
 
