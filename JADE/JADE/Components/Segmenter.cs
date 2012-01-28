@@ -569,14 +569,6 @@ namespace JADE
             ArrayList container = new ArrayList();
             //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste" geschrieben und zum "Text-Container hinzugefügt"
             int x = 0;
-
-            for (int i = 0; i < result.Count; i++)
-            {
-                if ((Equals(result[i], " ")))
-                {
-                    result.RemoveAt(i);
-                }
-            }
             for (int i = 0; i < result.Count; i++)
             {
                 if ((Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")))
