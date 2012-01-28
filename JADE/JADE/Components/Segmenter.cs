@@ -592,7 +592,7 @@ namespace JADE
             }
             //Falls am Ende kein Satzendzeichen steht, oder ueberhaupt kein Satzendzeichen vorkommt, wird der Rest bzw Alles als ein Satz übergeben.
             int z = result.Count;
-            if (!((Equals(result[result.Count - 1], " ")) || (Equals(result[result.Count - 1], "。")) || (Equals(result[result.Count - 1], "！")) || (Equals(result[result.Count - 1], "？"))))
+            if (!((Equals(result[result.Count - 1], "。")) || (Equals(result[result.Count - 1], "！")) || (Equals(result[result.Count - 1], "？"))))
             {
                 ArrayList hilf = new ArrayList();
                 for (int y = x; y <= result.Count - 1; y++)
