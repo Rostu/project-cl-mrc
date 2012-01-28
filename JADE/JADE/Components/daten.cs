@@ -19,7 +19,6 @@ namespace JADE
     public class Daten : ISerializable
     {
         private ArrayList data = new ArrayList();
-        public Form1 main;
 
         //leerer Konstruktor
         public Daten() { }
@@ -43,13 +42,13 @@ namespace JADE
             this.data = (ArrayList)info.GetValue("Daten", typeof(ArrayList));
         }
 
-        //Funktion zur Rückgabe eines einzelnen Token(String)  
+        //Funktion zur Rückgabe eines einzelnen Token(String)
         public String getToken(int Satznummer, int Tok)
         {
             String rueckgabe;
             ArrayList hilf = new ArrayList();
-            hilf = Form1.Instanzdaten.Zugriff;      
-            ArrayList hilf2 = (ArrayList)hilf[Satznummer];
+            hilf = this.Zugriff;      
+            ArrayList hilf2 = this.getSatz(Satznummer);
             rueckgabe = (String)hilf2[Tok];
             return rueckgabe;
         }
@@ -58,12 +57,12 @@ namespace JADE
         public ArrayList getSatz(int Satznummer)
         {
             ArrayList hilf = new ArrayList();
-            hilf = Form1.Instanzdaten.Zugriff;
+            hilf = this.Zugriff;
             ArrayList rueckgabe = (ArrayList)hilf[Satznummer];
             return rueckgabe;
         }
 
-        //Benötigt die Serializer Funktion
+        //Benoetigt die Serialize Funktion(liefert spaeter eine info an die Serialize Funktion ueber die zu serialisierenden Daten)
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("Daten", this.data);

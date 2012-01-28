@@ -124,7 +124,7 @@ namespace JADE
             }
             if (count > 2)
             {
-                MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen");
+                MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -136,7 +136,7 @@ namespace JADE
                     case 2:
                         if (first + 1 != second)
                         {
-                            MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen");
+                            MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen","Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             break;
                         }
                         else
@@ -168,7 +168,7 @@ namespace JADE
         public void zusammen(int Satznummer, int Tok1, int Tok2)
         {
             ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
-            ArrayList Satz = (ArrayList)Alist[Satznummer];                                                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet   
+            ArrayList Satz = Instanzdaten.getSatz(Satznummer);                                              //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet   
             Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1
             Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberfluessigen tok2
             Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist
