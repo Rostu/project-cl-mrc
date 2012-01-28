@@ -487,7 +487,7 @@ namespace JADE
             String p1 = "U";
             String p2 = "U";
             String p3 = "U";
-
+            //Durchlaufen der Potentiellen Woerter(durch Kombination gebildet) und Addieren der in der Hashtable gespeicherten Werte zu Score
             for (int i = 4; i < seg.Count - 3; ++i)
             {
                 int score = BIAS__;
@@ -569,9 +569,17 @@ namespace JADE
             ArrayList container = new ArrayList();
             //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste" geschrieben und zum "Text-Container hinzugefügt"
             int x = 0;
+
             for (int i = 0; i < result.Count; i++)
             {
-                if ((Equals(result[i], " ")) || (Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")))
+                if ((Equals(result[i], " ")))
+                {
+                    result.RemoveAt(i);
+                }
+            }
+            for (int i = 0; i < result.Count; i++)
+            {
+                if ((Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")))
                 {
                     ArrayList hilf = new ArrayList();
                     for (int y = x; y <= i; y++)
@@ -582,7 +590,7 @@ namespace JADE
                     x = i + 1;
                 }
             }
-            //Falls am Ende kein Satzendzeichen steht, oder ueberhaupt kein satzendzeichen vorkommt, wird der Rest bzw Alles als ein Satz übergeben.
+            //Falls am Ende kein Satzendzeichen steht, oder ueberhaupt kein Satzendzeichen vorkommt, wird der Rest bzw Alles als ein Satz übergeben.
             int z = result.Count;
             if (!((Equals(result[result.Count - 1], " ")) || (Equals(result[result.Count - 1], "。")) || (Equals(result[result.Count - 1], "！")) || (Equals(result[result.Count - 1], "？"))))
             {

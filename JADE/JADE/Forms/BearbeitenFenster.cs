@@ -18,7 +18,7 @@ namespace JADE
         private int Tok;
         private Daten obj;
 
-        public BearbeitenFenster(Daten obj, int Satznummer, int Tok, String str)
+        public BearbeitenFenster(Daten obj, int Satznummer, int Tok, String str)    //
         {
             this.Satznummer = Satznummer;
             this.Tok = Tok;
@@ -29,15 +29,14 @@ namespace JADE
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ArrayList Alist = obj.Zugriff;                                 //Zugriff auf Datenstruktur
-            ArrayList Satz = (ArrayList)Alist[Satznummer];  
-            //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
-            String test = this.textBox1.Text + this.textBox2.Text;
-            if (Equals(test, (String)Satz[Tok]))
+            ArrayList Alist = obj.Zugriff;                                     //Zugriff auf Datenstruktur
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                     //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            String test = this.textBox1.Text + this.textBox2.Text;             //Hilfs-String bestehend aus der Summe der Inhalt von Textbox1+2 (String) 
+            if (Equals(test, (String)Satz[Tok]))                               //Um unsinniges trennen zu vermeiden wird geprüft ob sich die getrennten neuen Token aus den Zeichen des urspruenglichen Token zusammen setzen 
             {
-                Satz.Insert(Tok, this.textBox1.Text);                          //Fügt die getrennten Teile in die Arraylist ein(an der Stelle Tok)
-                Satz.Insert(Tok, this.textBox2.Text);
-                Satz.RemoveAt(Tok + 2);                                        //Löscht den zu trennenden Token 
+                Satz.Insert(Tok, this.textBox2.Text);                          //Fügt den Inhalt der 2ten Textbox in die Arraylist ein(an der Stelle Tok)
+                Satz.Insert(Tok, this.textBox1.Text);                          //Fügt den Inhalt der 1ten Textbox in die Arraylist ein(an der Stelle Tok), Tok2 rückt dadurch nach hinten
+                Satz.RemoveAt(Tok + 2);                                        //Löscht den zu trennenden ursprünglichen Token 
                 Alist[Satznummer] = Satz;                                      //Schreiben des geaenderten Satzes in die Arraylist
                 obj.Zugriff = Alist;                                           //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
                 this.Close();
@@ -47,7 +46,7 @@ namespace JADE
                 MessageBox.Show("Die 2 neuen Token müssen aus den Zeichen \ndes zu bearbeitenden Token bestehen");
             }
         }
-      
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -60,6 +59,11 @@ namespace JADE
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

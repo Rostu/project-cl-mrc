@@ -59,8 +59,12 @@ namespace JADE
         private void Tokenize_Click(object sender, EventArgs e)
         {
             this.treeView1.Nodes.Clear();
-            Segmenter segtest = new Segmenter();                                // erstellt ein neues Segmenter Obejekt
-            Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);       // Weißt dem Objekt die Daten aus der richTextBox zu
+            Segmenter segtest = new Segmenter();     // erstellt ein neues Segmenter Obejekt
+            String toTok = this.richTextBox1.Text;
+            toTok = toTok.Replace("\n", "");
+            toTok = toTok.Replace("\t", "");
+            toTok = toTok.Replace(" ", "");
+            Instanzdaten = segtest.TinySegmenter(toTok);       // Weißt dem Objekt die Daten aus der richTextBox zu
             ArrayList Alist = Instanzdaten.Zugriff;
             int i = 0;
             foreach (ArrayList a in Alist)
@@ -148,43 +152,32 @@ namespace JADE
         //Trennen eines Token 
         public void trennen(int Satznummer, int Tok)
         {
-            ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
-            ArrayList Satz = (ArrayList)Alist[Satznummer];                                                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
-            String str = (String)Satz[Tok];
+            String str = Instanzdaten.getToken(Satznummer, Tok);
             BearbeitenFenster neumit = new BearbeitenFenster(Instanzdaten, Satznummer, Tok, str);           //Erzeugt bearbeiten Fenster und ruft dieses auf
-            neumit.FormClosing += new FormClosingEventHandler(frm2_FormClosing);
+            neumit.FormClosing += new FormClosingEventHandler(frm2_FormClosing);                            //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler
             neumit.Show();
         }
-
-        //EventHandler der bei schließen des bearbeiten Fensters den Listener ausschaltet und die FlowlayoutPanel mit den Token updatet
+        //EventHandler der bei schließen des bearbeiten Fensters den Listener ausschaltet und die FlowlayoutPanel mit den Token(die Anzeige der Tokenliste) updatet
         void frm2_FormClosing(object sender, FormClosingEventArgs e)
         {
             BearbeitenFenster neumit = (BearbeitenFenster)sender;
             neumit.FormClosing -= new FormClosingEventHandler(frm2_FormClosing);
             flowupdate();
         }
-
-        //Trennen eines Token 
-        public void trennen2(int Satznummer, int Tok, String neu1, String neu2)
-        {
-            ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
-            ArrayList Satz = (ArrayList)Alist[Satznummer];                                                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
-            Satz.Insert(Tok, neu2);                                                                         //Fügt die getrennten Teile in die Arraylist ein(an der Stelle Tok)
-            Satz.Insert(Tok, neu1);
-            Satz.RemoveAt(Tok + 2);                                                                         //Löscht den zu trennenden Token 
-            Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist
-            Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
-        }
-
         //Zusammenfuegen zweier Token 
         public void zusammen(int Satznummer, int Tok1, int Tok2)
         {
             ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
             ArrayList Satz = (ArrayList)Alist[Satznummer];                                                  //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet   
             Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1
-            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun überfluessigen tok2
+            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberfluessigen tok2
             Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist
             Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
