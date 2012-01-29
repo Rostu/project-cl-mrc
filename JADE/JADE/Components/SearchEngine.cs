@@ -111,7 +111,10 @@ namespace WindowsFormsApplication1
                                                                entry.Element(xns + "gramGrp"),
                                                                new XElement("prons", entry.Element(xns + "form").Elements(xns + "pron")),
                                                                new XElement("senses", entry.Elements(xns + "sense")))));
-                return createResultTable(results, satzNr, tokenNr, absolute);
+                
+                DataTable outputTable = (results.HasElements) 
+                                            ? (createResultTable(results, satzNr, tokenNr, absolute)) : (new DataTable()); 
+                return outputTable;
             }
 
         }
@@ -175,145 +178,9 @@ namespace WindowsFormsApplication1
                     if (senseData != "") senses.Add("(" + ++senseCount + ") " + senseData);
                 }
 
-                searchResults.Rows.Add(++resultCount, handle_orths(resultEntry.Element("orths")), handle_gramGrpData(resultEntry.Element(xns + "gramGrp")), handle_prons(resultEntry.Element("prons")), (String.Join(". ", senses) + "."));
+                searchResults.Rows.Add(++resultCount, manage_orths(resultEntry.Element("orths")), manage_gramGrpData(resultEntry.Element(xns + "gramGrp")), manage_prons(resultEntry.Element("prons")), (String.Join(". ", senses) + "."));
             }
             return searchResults;
-        }
-
-        private string handle_orths(XElement orths)
-        {
-            List<String> orthsData = new List<String>();
-            List<String> deviatingOrthsData = new List<String>();
-
-            int orthCount = 0;
-            string orthsString = "";
-
-            foreach (XElement orth in orths.Elements())
-            {
-                string orthData = "";
-                bool variant = false;
-
-                if (orth.Attribute("midashigo") == null)
-                {
-                    if (orth.Attribute("irr") != null)
-                    {
-                        if (orth.Value != "") orthData = orth.Value;
-                        variant = true;
-                    }
-                    else
-                    {
-                        if (orth.Value != "") orthData = orth.Value;
-                    }
-                }
-
-                if (orthData != "")
-                {
-                    if (variant)
-                    {
-                        deviatingOrthsData.Add("(" + ++orthCount + ") " + orthData);
-                    }
-                    else
-                    {
-                        orthsData.Add("(" + ++orthCount + ") " + orthData);
-                    }
-                }
-            }
-            orthsString = String.Join("; ", orthsData) + ((deviatingOrthsData.Count > 0) ? ("; [auch: " + String.Join("; ", deviatingOrthsData) + "]") : "");
-            return orthsString;
-        }
-
-        private string handle_gramGrpData(XElement gramGrp)
-        {
-            List<String> gramGrpData = new List<String>();
-            string gramGrpString = "";
-
-            XElement trDummy = new XElement("tr");
-            string posData = "";
-
-            if (gramGrp != null)
-            {
-                foreach (XElement elem in gramGrp.Elements())
-                {
-                    posData = "";
-                    if (elem.Name == xns + "pos")
-                    {
-                        if (trDummy.Elements().Count() > 0)
-                        {
-                            if ((posData = manage_trContent(trDummy)) != "")
-                            {
-                                gramGrpData.Add(posData);
-                                posData = "";
-                                trDummy = new XElement("tr");
-                            }
-                        }
-                        if (elem.HasAttributes)
-                        {
-                            if (elem.Attribute("type") != null)
-                            {
-                                posData = (string)posDeciphering[elem.Attribute("type").Value];
-                            }
-                            if (elem.HasElements)
-                            {
-                                string posDescendantsData = "";
-                                posData += ((posDescendantsData = manage_trContent(elem)) != "")
-                                            ? (": " + posDescendantsData) : "";
-                            }
-                        }
-                        if (posData != "") gramGrpData.Add(posData);
-                    }
-                    else
-                    {
-                        trDummy.Add(elem);
-                    }
-                }
-                if (trDummy.Elements().Count() > 0)
-                {
-                    if ((posData = manage_trContent(trDummy)) != "") gramGrpData.Add(posData);
-                }
-            }
-            return ((gramGrpString = String.Join("; ", gramGrpData)) != "") ? (gramGrpString + ";") : "";
-        }
-
-        private string handle_prons(XElement prons)
-        {
-            List<String> pronsData = new List<String>();
-            List<String> deviatingPronsData = new List<String>();
-
-            int pronCount = 0;
-            string pronsString = "";
-
-            foreach (XElement pron in prons.Elements())
-            {
-                string pronData = "";
-                bool variant = false;
-
-                if (pron.Attribute("type") != null)
-                {
-                    if (pron.Attribute("type").Value == "romaji")
-                    {
-                        if (pron.Value != "") pronData = pron.Value;
-                        variant = true;
-                    }
-                }
-                else
-                {
-                    if (pron.Value != "") pronData = pron.Value;
-                }
-
-                if (pronData != "")
-                {
-                    if (variant)
-                    {
-                        deviatingPronsData.Add("(" + ++pronCount + ") " + pronData);
-                    }
-                    else
-                    {
-                        pronsData.Add("(" + ++pronCount + ") " + pronData);
-                    }
-                }
-            }
-            pronsString = String.Join("; ", pronsData) + ((deviatingPronsData.Count > 0) ? ("; [Romaji: " + String.Join("; ", deviatingPronsData) + "]") : "");
-            return pronsString;
         }
 
         private DataTable defineResultTable(string tableName)
@@ -378,6 +245,142 @@ namespace WindowsFormsApplication1
             result.PrimaryKey = PrimaryKeyColumns;                  // Markiert die "Eintrag"-Spalte als Primärschlüssel.
 
             return result;                                          // Gibt die fertig definierte Tabelle "result" zurück.
+        }
+
+        private string manage_orths(XElement orths)
+        {
+            List<String> orthsData = new List<String>();
+            List<String> deviatingOrthsData = new List<String>();
+
+            int orthCount = 0;
+            string orthsString = "";
+
+            foreach (XElement orth in orths.Elements())
+            {
+                string orthData = "";
+                bool variant = false;
+
+                if (orth.Attribute("midashigo") == null)
+                {
+                    if (orth.Attribute("irr") != null)
+                    {
+                        if (orth.Value != "") orthData = orth.Value;
+                        variant = true;
+                    }
+                    else
+                    {
+                        if (orth.Value != "") orthData = orth.Value;
+                    }
+                }
+
+                if (orthData != "")
+                {
+                    if (variant)
+                    {
+                        deviatingOrthsData.Add("(" + ++orthCount + ") " + orthData);
+                    }
+                    else
+                    {
+                        orthsData.Add("(" + ++orthCount + ") " + orthData);
+                    }
+                }
+            }
+            orthsString = String.Join("; ", orthsData) + ((deviatingOrthsData.Count > 0) ? ("; [auch: " + String.Join("; ", deviatingOrthsData) + "]") : "");
+            return orthsString;
+        }
+
+        private string manage_gramGrpData(XElement gramGrp)
+        {
+            List<String> gramGrpData = new List<String>();
+            string gramGrpString = "";
+
+            XElement trDummy = new XElement("tr");
+            string posData = "";
+
+            if (gramGrp != null)
+            {
+                foreach (XElement elem in gramGrp.Elements())
+                {
+                    posData = "";
+                    if (elem.Name == xns + "pos")
+                    {
+                        if (trDummy.Elements().Count() > 0)
+                        {
+                            if ((posData = manage_trContent(trDummy)) != "")
+                            {
+                                gramGrpData.Add(posData);
+                                posData = "";
+                                trDummy = new XElement("tr");
+                            }
+                        }
+                        if (elem.HasAttributes)
+                        {
+                            if (elem.Attribute("type") != null)
+                            {
+                                posData = (string)posDeciphering[elem.Attribute("type").Value];
+                            }
+                            if (elem.HasElements)
+                            {
+                                string posDescendantsData = "";
+                                posData += ((posDescendantsData = manage_trContent(elem)) != "")
+                                            ? (": " + posDescendantsData) : "";
+                            }
+                        }
+                        if (posData != "") gramGrpData.Add(posData);
+                    }
+                    else
+                    {
+                        trDummy.Add(elem);
+                    }
+                }
+                if (trDummy.Elements().Count() > 0)
+                {
+                    if ((posData = manage_trContent(trDummy)) != "") gramGrpData.Add(posData);
+                }
+            }
+            return ((gramGrpString = String.Join("; ", gramGrpData)) != "") ? (gramGrpString + ";") : "";
+        }
+
+        private string manage_prons(XElement prons)
+        {
+            List<String> pronsData = new List<String>();
+            List<String> deviatingPronsData = new List<String>();
+
+            int pronCount = 0;
+            string pronsString = "";
+
+            foreach (XElement pron in prons.Elements())
+            {
+                string pronData = "";
+                bool variant = false;
+
+                if (pron.Attribute("type") != null)
+                {
+                    if (pron.Attribute("type").Value == "romaji")
+                    {
+                        if (pron.Value != "") pronData = pron.Value;
+                        variant = true;
+                    }
+                }
+                else
+                {
+                    if (pron.Value != "") pronData = pron.Value;
+                }
+
+                if (pronData != "")
+                {
+                    if (variant)
+                    {
+                        deviatingPronsData.Add("(" + ++pronCount + ") " + pronData);
+                    }
+                    else
+                    {
+                        pronsData.Add("(" + ++pronCount + ") " + pronData);
+                    }
+                }
+            }
+            pronsString = String.Join("; ", pronsData) + ((deviatingPronsData.Count > 0) ? ("; [Romaji: " + String.Join("; ", deviatingPronsData) + "]") : "");
+            return pronsString;
         }
 
         private string manage_trContent(XElement tr)
