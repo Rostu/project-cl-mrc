@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections;
 
-namespace WindowsFormsApplication1
+namespace JADE
 {
     public class SearchEngine
     {
