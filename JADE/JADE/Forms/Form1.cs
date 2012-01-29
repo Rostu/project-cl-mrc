@@ -243,6 +243,11 @@ namespace JADE
                 this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
 
+            private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+                System.Windows.Forms.Application.Exit();
+            }
+
       /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
