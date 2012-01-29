@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace JADE
 {
@@ -182,6 +183,32 @@ namespace JADE
         {
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void öffnenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader myFile = new StreamReader(openFileDialog1.FileName);
+                String myString = myFile.ReadToEnd();
+                richTextBox1.Text = myString;
+
+            }
+        }
+
+      /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter File = new StreamWriter(saveFileDialog1.FileName);
+                File.WriteLine(richTextBox1.Text);
+                File.Close();
+            }
+        } */
     }
 }
 
