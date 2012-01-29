@@ -42,6 +42,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -146,7 +147,8 @@
             // dateiToolStripMenuItem
             // 
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.öffnenToolStripMenuItem});
+            this.öffnenToolStripMenuItem,
+            this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
             this.dateiToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -155,7 +157,7 @@
             // öffnenToolStripMenuItem
             // 
             this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
-            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.öffnenToolStripMenuItem.Text = "Öffnen";
             this.öffnenToolStripMenuItem.Click += new System.EventHandler(this.öffnenToolStripMenuItem_Click);
             // 
@@ -179,6 +181,13 @@
             this.checkBox1.TabIndex = 15;
             this.checkBox1.Text = "Genaue Übereinstimmung";
             this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // beendenToolStripMenuItem
+            // 
+            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.beendenToolStripMenuItem.Text = "Beenden";
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -225,6 +234,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
     }
 }
 
