@@ -33,6 +33,8 @@ namespace JADE
         {
             flowupdate();
         }
+
+        //Funktion zum updaten der Token Anzeige
         public void flowupdate()
         {
             ArrayList Satz = Instanzdaten.getSatz(this.treeView1.SelectedNode.Index);
@@ -64,6 +66,7 @@ namespace JADE
             toTok = toTok.Replace("\n", "");
             toTok = toTok.Replace("\t", "");
             toTok = toTok.Replace(" ", "");
+            this.richTextBox1.Text = toTok;
             Instanzdaten = segtest.TinySegmenter(toTok);       // Weißt dem Objekt die Daten aus der richTextBox zu
             ArrayList Alist = Instanzdaten.Zugriff;
             int i = 0;
