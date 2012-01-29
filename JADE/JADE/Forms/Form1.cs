@@ -161,6 +161,7 @@ namespace JADE
             neumit.FormClosing += new FormClosingEventHandler(frm2_FormClosing);                            //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler
             neumit.Show();
         }
+
         //EventHandler der bei schließen des bearbeiten Fensters den Listener ausschaltet und die FlowlayoutPanel mit den Token(die Anzeige der Tokenliste) updatet
         void frm2_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -168,6 +169,7 @@ namespace JADE
             neumit.FormClosing -= new FormClosingEventHandler(frm2_FormClosing);
             flowupdate();
         }
+
         //Zusammenfuegen zweier Token 
         public void zusammen(int Satznummer, int Tok1, int Tok2)
         {
@@ -216,10 +218,10 @@ namespace JADE
                     }
                     count++;
                 }
-                if (count > 1)
-                {
-                    MessageBox.Show("Bitte Maximal 1 Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+            }
+            if (count > 1)
+            {
+                MessageBox.Show("Bitte Maximal 1 Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
                if (count == 1)
                 {
@@ -234,7 +236,6 @@ namespace JADE
                    }
                 }
             }   
-        
 
       /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
