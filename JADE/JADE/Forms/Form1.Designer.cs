@@ -173,9 +173,9 @@
             this.checkBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.Location = new System.Drawing.Point(741, 400);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(203, 23);
+            this.checkBox1.Size = new System.Drawing.Size(205, 23);
             this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "genaue Übereinstimmung";
+            this.checkBox1.Text = "Genaue Übereinstimmung";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
