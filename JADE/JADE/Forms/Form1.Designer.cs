@@ -48,6 +48,7 @@
             // 
             // Tokenize
             // 
+            this.Tokenize.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Tokenize.Location = new System.Drawing.Point(3, 197);
             this.Tokenize.Margin = new System.Windows.Forms.Padding(4);
             this.Tokenize.Name = "Tokenize";
@@ -59,7 +60,8 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(426, 370);
+            this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(233, 371);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(171, 52);
@@ -112,7 +114,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(605, 370);
+            this.button1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(492, 371);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(171, 52);
@@ -139,8 +142,9 @@
             // 
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.öffnenToolStripMenuItem});
+            this.dateiToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.dateiToolStripMenuItem.Text = "Datei";
             // 
             // öffnenToolStripMenuItem
@@ -161,11 +165,12 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(817, 404);
+            this.checkBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(741, 400);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(99, 20);
+            this.checkBox1.Size = new System.Drawing.Size(203, 23);
             this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.Text = "genaue Übereinstimmung";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
