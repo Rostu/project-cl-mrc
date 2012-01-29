@@ -61,6 +61,7 @@ namespace JADE
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
+            suche.clearDataSet();
             this.treeView1.Nodes.Clear();
             Segmenter segtest = new Segmenter();     // erstellt ein neues Segmenter Obejekt
             String toTok = this.richTextBox1.Text;
