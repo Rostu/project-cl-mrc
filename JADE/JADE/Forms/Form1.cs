@@ -236,7 +236,12 @@ namespace JADE
                        MessageBox.Show("Keine Einträge gefunden", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                    }
                 }
-            }   
+            }
+
+            private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+            {
+                this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
 
       /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
