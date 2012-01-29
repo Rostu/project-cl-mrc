@@ -14,7 +14,7 @@ namespace JADE
     public partial class Form1 : Form
     {
         public static Daten Instanzdaten = new Daten();
-
+        private static SearchEngine suche = SearchEngine.Engine;
 
         public Form1()
         {
@@ -199,6 +199,42 @@ namespace JADE
 
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int count = 0;
+            int first = 0;
+            foreach (Control con in this.flowLayoutPanel1.Controls)
+            {
+                CheckBox box = (CheckBox)con;
+                int index = this.flowLayoutPanel1.Controls.IndexOf(con);
+                if (box.Checked == true)
+                {
+                    if (count == 0)
+                    {
+                        first = index;
+                    }
+                    count++;
+                }
+                if (count > 1)
+                {
+                    MessageBox.Show("Bitte Maximal 1 Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+               if (count == 1)
+                {
+                   DataTable result = suche.search(Instanzdaten.getToken(this.treeView1.SelectedNode.Index, first), this.treeView1.SelectedNode.Index, first, this.checkBox1.Checked);
+                   if (result.Rows.Count > 0)
+                   {
+                       this.dataGridView1.DataSource = result;
+                   }
+                   else
+                   {
+                       MessageBox.Show("Keine Einträge gefunden", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                   }
+                }
+            }   
+        
 
       /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
