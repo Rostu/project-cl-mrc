@@ -38,25 +38,30 @@ namespace JADE
         //Funktion zum updaten der Token Anzeige
         public void flowupdate()
         {
-            ArrayList Satz = Instanzdaten.getSatz(this.treeView1.SelectedNode.Index);
-            String test = "";
-            this.flowLayoutPanel1.Controls.Clear();
-            int i = 0;
-            foreach (String a in Satz)
+            TreeNode tn = treeView1.SelectedNode;
+            if (tn != null)
             {
-                test += (String)a + "  ";
-                if ((Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？")))
-                    break;
-                else
+
+                ArrayList Satz = Instanzdaten.getSatz(this.treeView1.SelectedNode.Index);
+                String test = "";
+                this.flowLayoutPanel1.Controls.Clear();
+                int i = 0;
+                foreach (String a in Satz)
                 {
-                    CheckBox Box = new System.Windows.Forms.CheckBox();
-                    Box.Text = (String)a;
-                    Box.Size = new Size(80, 30);
-                    Box.Name = "checkBox" + i; i++;
-                    this.flowLayoutPanel1.Controls.Add(Box);
+                    test += (String)a + "  ";
+                    if ((Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？")))
+                        break;
+                    else
+                    {
+                        CheckBox Box = new System.Windows.Forms.CheckBox();
+                        Box.Text = (String)a;
+                        Box.Size = new Size(80, 30);
+                        Box.Name = "checkBox" + i; i++;
+                        this.flowLayoutPanel1.Controls.Add(Box);
+                    }
                 }
+                this.textBox1.Text = test;
             }
-            this.textBox1.Text = test;
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
@@ -133,23 +138,23 @@ namespace JADE
             }
             else
             {
-                switch (count)
-                {
-                    case 1:
-                        trennen(this.treeView1.SelectedNode.Index, first);
-                        break;
-                    case 2:
-                        if (first + 1 != second)
-                        {
-                            MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen","Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    switch (count)
+                    {
+                        case 1:
+                            trennen(this.treeView1.SelectedNode.Index, first);
                             break;
-                        }
-                        else
-                        {
-                            zusammen(this.treeView1.SelectedNode.Index, first, second);
-                            break;
-                        }
-                }
+                        case 2:
+                            if (first + 1 != second)
+                            {
+                                MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                break;
+                            }
+                            else
+                            {
+                                zusammen(this.treeView1.SelectedNode.Index, first, second);
+                                break;
+                            }
+                    }
             }
             flowupdate();
         }
@@ -199,7 +204,6 @@ namespace JADE
                 StreamReader myFile = new StreamReader(openFileDialog1.FileName);
                 String myString = myFile.ReadToEnd();
                 richTextBox1.Text = myString;
-
             }
         }
 
