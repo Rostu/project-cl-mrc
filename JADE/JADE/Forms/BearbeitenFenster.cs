@@ -35,8 +35,8 @@ namespace JADE
             if (Equals(test, (String)Satz[Tok]))                               //Um unsinniges trennen zu vermeiden wird geprüft ob sich die getrennten neuen Token aus den Zeichen des urspruenglichen Token zusammen setzen 
             {
                 Satz.Insert(Tok, this.textBox2.Text);                          //Fuegt den Inhalt der 2ten Textbox in die Arraylist ein(an der Stelle Tok)
-                Satz.Insert(Tok, this.textBox1.Text);                          //Fügt den Inhalt der 1ten Textbox in die Arraylist ein(an der Stelle Tok), Tok2 rückt dadurch nach hinten
-                Satz.RemoveAt(Tok + 2);                                        //Löscht den zu trennenden ursprünglichen Token 
+                Satz.Insert(Tok, this.textBox1.Text);                          //Fuegt den Inhalt der 1ten Textbox in die Arraylist ein(an der Stelle Tok), Tok2 rückt dadurch nach hinten
+                Satz.RemoveAt(Tok + 2);                                        //Loescht den zu trennenden ursprünglichen Token 
                 Alist[Satznummer] = Satz;                                      //Schreiben des geaenderten Satzes in die Arraylist
                 obj.Zugriff = Alist;                                           //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
                 this.Close();

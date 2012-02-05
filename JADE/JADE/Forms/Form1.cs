@@ -66,22 +66,29 @@ namespace JADE
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
-            suche.clearDataSet();
-            this.treeView1.Nodes.Clear();
-            Segmenter segtest = new Segmenter();     // erstellt ein neues Segmenter Obejekt
-            String toTok = this.richTextBox1.Text;
-            toTok = toTok.Replace("\n", "");
-            toTok = toTok.Replace("\t", "");
-            toTok = toTok.Replace(" ", "");
-            this.richTextBox1.Text = toTok;
-            Instanzdaten = segtest.TinySegmenter(toTok);       // Weißt dem Objekt die Daten aus der richTextBox zu
-            ArrayList Alist = Instanzdaten.Zugriff;
-            int i = 0;
-            foreach (ArrayList a in Alist)
+            if (!(Equals(richTextBox1.Text, "")))
             {
-                TreeNode Instanz = new TreeNode("Satz" + (i + 1) + ": " + Instanzdaten.getToken(i, 0));
-                i++;
-                treeView1.Nodes.Add(Instanz);
+                suche.clearDataSet();
+                this.treeView1.Nodes.Clear();
+                Segmenter segtest = new Segmenter();     // erstellt ein neues Segmenter Obejekt
+                String toTok = this.richTextBox1.Text;
+                toTok = toTok.Replace("\n", "");
+                toTok = toTok.Replace("\t", "");
+                toTok = toTok.Replace(" ", "");
+                this.richTextBox1.Text = toTok;
+                Instanzdaten = segtest.TinySegmenter(toTok);       // Weißt dem Objekt die Daten aus der richTextBox zu
+                ArrayList Alist = Instanzdaten.Zugriff;
+                int i = 0;
+                foreach (ArrayList a in Alist)
+                {
+                    TreeNode Instanz = new TreeNode("Satz" + (i + 1) + ": " + Instanzdaten.getToken(i, 0));
+                    i++;
+                    treeView1.Nodes.Add(Instanz);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Kein Text zum Tokenisieren gegeben", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
