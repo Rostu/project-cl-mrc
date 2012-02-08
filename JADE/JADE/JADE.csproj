@@ -53,11 +53,13 @@
       <DependentUpon>BearbeitenFenster.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\daten.cs" />
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="..\..\..\Form1.cs">
       <SubType>Form</SubType>
+      <Link>Forms\Form1.cs</Link>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
+    <Compile Include="..\..\..\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+      <Link>Forms\Form1.Designer.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +70,9 @@
     <EmbeddedResource Include="Forms\BearbeitenFenster.resx">
       <DependentUpon>BearbeitenFenster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
+    <EmbeddedResource Include="..\..\..\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <Link>Forms\Form1.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -91,6 +94,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="jade.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="wadoku.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
