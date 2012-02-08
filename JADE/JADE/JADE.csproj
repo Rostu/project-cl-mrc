@@ -94,7 +94,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="jade.ico" />
+    <Content Include="jade.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wadoku.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
