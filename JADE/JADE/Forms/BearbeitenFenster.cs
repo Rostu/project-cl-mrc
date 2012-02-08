@@ -25,6 +25,7 @@ namespace JADE
             this.obj = obj;
             InitializeComponent();
             this.textBox3.Text = str;
+            this.Icon = new System.Drawing.Icon("jade.ico");
         }
 
         private void button1_Click(object sender, EventArgs e)
