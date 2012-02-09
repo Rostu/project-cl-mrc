@@ -85,7 +85,7 @@ namespace JADE
             }
         }
 
-        public void DisposeTable(int satzNr, int tokenNr)
+        public static void DisposeTable(int satzNr, int tokenNr)
         {
             DataTable tableToDispose = dataSet.Tables["results_" + satzNr + tokenNr];
             DataTable tableToDispose_absolute = dataSet.Tables["results_" + satzNr + tokenNr + "_absolute"];
