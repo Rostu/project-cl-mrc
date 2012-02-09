@@ -54,11 +54,11 @@
             // 
             this.Tokenize.Dock = System.Windows.Forms.DockStyle.Top;
             this.Tokenize.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Tokenize.Location = new System.Drawing.Point(190, 144);
+            this.Tokenize.Location = new System.Drawing.Point(130, 144);
             this.Tokenize.Margin = new System.Windows.Forms.Padding(4);
             this.Tokenize.MinimumSize = new System.Drawing.Size(100, 29);
             this.Tokenize.Name = "Tokenize";
-            this.Tokenize.Size = new System.Drawing.Size(514, 29);
+            this.Tokenize.Size = new System.Drawing.Size(574, 29);
             this.Tokenize.TabIndex = 0;
             this.Tokenize.Text = "Tokenize";
             this.Tokenize.UseVisualStyleBackColor = true;
@@ -84,9 +84,9 @@
             this.treeView1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView1.Location = new System.Drawing.Point(0, 144);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
-            this.treeView1.MinimumSize = new System.Drawing.Size(190, 4);
+            this.treeView1.MinimumSize = new System.Drawing.Size(130, 4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(190, 288);
+            this.treeView1.Size = new System.Drawing.Size(130, 320);
             this.treeView1.TabIndex = 7;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -95,11 +95,11 @@
             this.textBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(190, 173);
+            this.textBox1.Location = new System.Drawing.Point(130, 173);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(514, 27);
+            this.textBox1.Size = new System.Drawing.Size(574, 27);
             this.textBox1.TabIndex = 9;
             // 
             // flowLayoutPanel1
@@ -109,13 +109,14 @@
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(190, 200);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(130, 200);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(170, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(514, 120);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(574, 120);
             this.flowLayoutPanel1.TabIndex = 10;
             this.flowLayoutPanel1.WrapContents = false;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // openFileDialog1
             // 
@@ -145,13 +146,13 @@
             // öffnenToolStripMenuItem
             // 
             this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
-            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.öffnenToolStripMenuItem.Text = "Öffnen";
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click_1);
             // 
@@ -161,10 +162,10 @@
             this.flowLayoutPanel2.Controls.Add(this.button1);
             this.flowLayoutPanel2.Controls.Add(this.checkBox1);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(190, 320);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(130, 320);
             this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(100, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(514, 39);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(574, 39);
             this.flowLayoutPanel2.TabIndex = 17;
             // 
             // button2
@@ -208,9 +209,9 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(190, 359);
+            this.dataGridView1.Location = new System.Drawing.Point(130, 359);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(514, 73);
+            this.dataGridView1.Size = new System.Drawing.Size(574, 105);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -219,7 +220,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(704, 432);
+            this.ClientSize = new System.Drawing.Size(704, 464);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -231,7 +232,7 @@
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(720, 470);
+            this.MinimumSize = new System.Drawing.Size(720, 500);
             this.Name = "Form1";
             this.Text = "JaDe - Tokenizer";
             this.Load += new System.EventHandler(this.Form1_Load);
