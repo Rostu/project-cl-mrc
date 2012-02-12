@@ -134,7 +134,7 @@ namespace JADE
             SearchEngine.DisposeTable(Satznummer, Tok2);
         }
 
-        private void öffnenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void öffnenToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
