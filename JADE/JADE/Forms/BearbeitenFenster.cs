@@ -55,11 +55,6 @@ namespace JADE
             this.Close();
         }
 
-        private void BearbeitenFenster_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
@@ -68,6 +63,11 @@ namespace JADE
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void BearbeitenFenster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
         }
 
     }

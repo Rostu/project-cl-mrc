@@ -16,6 +16,7 @@ namespace JADE
         public static Daten Instanzdaten;
         private static SearchEngine suche;
         private static Segmenter segtest;
+        //private static ArrayList textDataPerSentence;
 
         public Form1()
         {
@@ -29,6 +30,9 @@ namespace JADE
             Instanzdaten = new Daten();
             suche = SearchEngine.Engine;
             segtest = new Segmenter();
+            //textDataPerSentence = new ArrayList();
+            //Console.WriteLine(textDataPerSentence.Count);
+            //Console.WriteLine(textDataPerSentence.Capacity);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -59,29 +63,76 @@ namespace JADE
         //Funktion zum Updaten der Token Anzeige
         public void flowupdate()
         {
-            TreeNode tn = treeView1.SelectedNode;
-            if (tn != null)
+            TreeNode selectedTreeNode = treeView1.SelectedNode;
+            int satzIndex = this.treeView1.SelectedNode.Index;
+
+            if (selectedTreeNode != null)
             {
 
-                ArrayList Satz = Instanzdaten.getSatz(this.treeView1.SelectedNode.Index);
-                String test = "";
                 this.flowLayoutPanel1.Controls.Clear();
-                int i = 0;
-                foreach (String a in Satz)
-                {
-                    test += (String)a + "  ";
-                    if (!((Equals((String)a, "、")) || (Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？"))))
+
+                //if (textDataPerSentence[satzIndex] == null)
+                //{
+                    string satzText = "";
+                    List<Control> checkBoxes = new List<Control>();
+
+
+
+                    ArrayList satz = Instanzdaten.getSatz(satzIndex);
+
+                    int i = 0;
+                    string token = "";
+
+                    foreach (var tokenObj in satz)
                     {
-                        CheckBox Box = new System.Windows.Forms.CheckBox();
-                        Console.WriteLine((String)a);
-                        Box.Text = ((String)a)/*.PadRight(4, '　')*/;
-                        Box.AutoSize = true;
-                        Box.Name = "checkBox" + i++;
-                        this.flowLayoutPanel1.Controls.Add(Box);
+                        token = (String)tokenObj;
+                        satzText += token + "  ";
+
+                        if (!("、？！。".Contains(token)))
+                        {
+                            checkBoxes.Add
+                                (new System.Windows.Forms.CheckBox 
+                                { 
+                                    Name = "" + i,
+                                    Text = token,
+                                    AutoSize = true
+                                });
+                        }
+                        i++;
                     }
-                }
-                this.textBox1.Text = test;
+
+
+
+                    this.textBox1.Text = satzText;
+                    this.flowLayoutPanel1.Controls.AddRange(checkBoxes.ToArray());
+                    
+                //}               
             }
+
+
+
+            //TreeNode tn = treeView1.SelectedNode;
+            //if (tn != null)
+            //{
+
+            //    ArrayList Satz = Instanzdaten.getSatz(this.treeView1.SelectedNode.Index);
+            //    String test = "";
+            //    this.flowLayoutPanel1.Controls.Clear();
+            //    int i = 0;
+            //    foreach (String a in Satz)
+            //    {
+            //        test += (String)a + "  ";
+            //        if (!((Equals((String)a, "、")) || (Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？"))))
+            //        {
+            //            CheckBox Box = new System.Windows.Forms.CheckBox();
+            //            Box.Text = ((String)a)/*.PadRight(4, '　')*/;
+            //            Box.AutoSize = true;
+            //            Box.Name = "checkBox" + i++;
+            //            this.flowLayoutPanel1.Controls.Add(Box);
+            //        }
+            //    }
+            //    this.textBox1.Text = test;
+            //}
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
@@ -98,15 +149,20 @@ namespace JADE
             if (!(Equals(richTextBox1.Text, "")))
             {
                 suche.clearDataSet();
+                dataGridView1.DataSource = null;
                 this.treeView1.Nodes.Clear();
+                this.textBox1.Text = "";
+                this.flowLayoutPanel1.Controls.Clear();
+
                 Instanzdaten = segtest.TinySegmenter(toTok);       // Weißt dem Objekt die Daten aus der richTextBox zu
                 ArrayList Alist = Instanzdaten.Zugriff;
+
                 int i = 0;
                 foreach (ArrayList a in Alist)
                 {
                     TreeNode Instanz = new TreeNode("Satz " +  ("" + (i + 1)).PadLeft(2,'0') + ": " + Instanzdaten.getToken(i, 0));
-                    i++;
                     treeView1.Nodes.Add(Instanz);
+                    i++;
                 }
             }
             else
@@ -220,7 +276,7 @@ namespace JADE
             foreach (Control con in this.flowLayoutPanel1.Controls)
             {
                 CheckBox box = (CheckBox)con;
-                int index = this.flowLayoutPanel1.Controls.IndexOf(con);
+                int index = Int32.Parse(box.Name); //this.flowLayoutPanel1.Controls.IndexOf(con);
                 if (box.Checked == true)
                 {
                     if (count == 0)
@@ -254,11 +310,12 @@ namespace JADE
                         else
                         {
                             zusammen(this.treeView1.SelectedNode.Index, first, second);
+                            flowupdate(); //sollte hierher, da hier ja das Zusammenfügen fertig ist
                             break;
                         }
                 }
             }
-            flowupdate();
+            //flowupdate(); 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -268,7 +325,7 @@ namespace JADE
             foreach (Control con in this.flowLayoutPanel1.Controls)
             {
                 CheckBox box = (CheckBox)con;
-                int index = this.flowLayoutPanel1.Controls.IndexOf(con);
+                int index = Int32.Parse(box.Name); //this.flowLayoutPanel1.Controls.IndexOf(con);
                 if (box.Checked == true)
                 {
                     if (count == 0)

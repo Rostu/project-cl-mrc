@@ -44,7 +44,7 @@ using System.Windows.Forms;
 
 namespace JADE
 {
-    class Segmenter
+    public class Segmenter
     {
 
         private Hashtable chartype_ = new Hashtable();
@@ -68,7 +68,7 @@ namespace JADE
             reg = new Regex("[0-9０-９]");
             chartype_.Add(reg, "N");
 
-            //hier werden verschiedene Hashtables angelegt welche später zur Score bestimmung einzelner Zeichenkombinationen dienen 
+            //hier werden verschiedene Hashtables angelegt welche später zur Scorebestimmung einzelner Zeichenkombinationen dienen 
             int BIAS__ = -332;
             Hashtable BC1__ = new Hashtable();
             BC1__.Add("HH", 6); BC1__.Add("II", 2461); BC1__.Add("KH", 406); BC1__.Add("OH", -1378);
