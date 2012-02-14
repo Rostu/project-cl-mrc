@@ -19,6 +19,8 @@ namespace JADE
         public Form1()
         {
             InitializeComponent();
+            flowLayoutPanel1.HorizontalScroll.Enabled = false;
+            flowLayoutPanel1.HorizontalScroll.Visible = false;
             this.Icon = new System.Drawing.Icon("jade.ico");
         }
 
