@@ -77,7 +77,6 @@
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "１３日、千葉県東金市のファミリーレストランの店内で男性が拳銃で撃たれて殺害された事件で、警察は、殺人などの疑いで全国に指名手配している元暴力団員の男の写真を公開し" +
     "、行方を捜査しています。";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // treeView1
             // 
@@ -103,9 +102,8 @@
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(170, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(567, 120);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(567, 108);
             this.flowLayoutPanel1.TabIndex = 10;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // menuStrip1
             // 
@@ -131,14 +129,14 @@
             // öffnenToolStripMenuItem
             // 
             this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
-            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.öffnenToolStripMenuItem.Text = "Öffnen";
             this.öffnenToolStripMenuItem.Click += new System.EventHandler(this.öffnenToolStripMenuItem_Click_1);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click_1);
             // 
@@ -148,7 +146,7 @@
             this.flowLayoutPanel2.Controls.Add(this.button1);
             this.flowLayoutPanel2.Controls.Add(this.checkBox1);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(137, 385);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(137, 373);
             this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(100, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(567, 39);
@@ -195,9 +193,9 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(137, 424);
+            this.dataGridView1.Location = new System.Drawing.Point(137, 412);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(567, 98);
+            this.dataGridView1.Size = new System.Drawing.Size(567, 110);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
