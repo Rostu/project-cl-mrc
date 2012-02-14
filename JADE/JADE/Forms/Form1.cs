@@ -20,10 +20,6 @@ namespace JADE
         {
             InitializeComponent();
             this.Icon = new System.Drawing.Icon("jade.ico");
-            //Segmenter segtest = new Segmenter();  
-            //Instanzdaten.Zugriff = segtest.TinySegmenter(this.textBox1.Text);
-            //Instanzdaten.trennen(0,4);
-            //Instanzdaten.zusammen(0, 1, 2);
         }
 
         public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -62,16 +58,18 @@ namespace JADE
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
+            Segmenter segtest = new Segmenter();
+            String toTok = this.richTextBox1.Text;
+            toTok = toTok.Replace("\n", "");
+            toTok = toTok.Replace("\t", "");
+            toTok = toTok.Replace(" ", "");
+            this.richTextBox1.Text = toTok;
+            segtest.TextTest(this.richTextBox1.Text);
+            
             if (!(Equals(richTextBox1.Text, "")))
             {
                 suche.clearDataSet();
                 this.treeView1.Nodes.Clear();
-                Segmenter segtest = new Segmenter();     // erstellt ein neues Segmenter Obejekt
-                String toTok = this.richTextBox1.Text;
-                toTok = toTok.Replace("\n", "");
-                toTok = toTok.Replace("\t", "");
-                toTok = toTok.Replace(" ", "");
-                this.richTextBox1.Text = toTok;
                 Instanzdaten = segtest.TinySegmenter(toTok);       // Weißt dem Objekt die Daten aus der richTextBox zu
                 ArrayList Alist = Instanzdaten.Zugriff;
                 int i = 0;
@@ -86,6 +84,7 @@ namespace JADE
             {
                 MessageBox.Show("Kein Text zum Tokenisieren gegeben", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -147,11 +146,6 @@ namespace JADE
             private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
             {
                 this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            }
-
-            private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-                System.Windows.Forms.Application.Exit();
             }
 
             private void button2_Click_1(object sender, EventArgs e)
@@ -250,6 +244,11 @@ namespace JADE
             public void TableDel(int satznummer,int tok)
             {
                 SearchEngine.DisposeTable(satznummer, tok);
+            }
+
+            private void richTextBox1_TextChanged(object sender, EventArgs e)
+            {
+
             }
 
       /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
