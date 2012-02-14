@@ -41,13 +41,11 @@ namespace JADE
                 foreach (String a in Satz)
                 {
                     test += (String)a + "  ";
-                    if ((Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？")))
-                        break;
-                    else
+                    if (!((Equals((String)a, "、")) || (Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？"))))
                     {
                         CheckBox Box = new System.Windows.Forms.CheckBox();
-                        Box.Text = (String)a;
-                        Box.Size = new Size(80, 30);
+                        Box.Text = ((String)a)/*.PadRight(4, '　')*/;
+                        Box.AutoSize = true;
                         Box.Name = "checkBox" + i; i++;
                         this.flowLayoutPanel1.Controls.Add(Box);
                     }
