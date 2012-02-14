@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\TextData.cs" />
     <Compile Include="Forms\BearbeitenFenster.cs">
       <SubType>Form</SubType>
     </Compile>

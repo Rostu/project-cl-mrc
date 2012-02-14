@@ -115,7 +115,7 @@
             this.Name = "BearbeitenFenster";
             this.Text = "JaDe - Token trennen";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.BearbeitenFenster_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BearbeitenFenster_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
