@@ -32,16 +32,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Windows.Forms;
+
 
 namespace JADE
 {
     class Segmenter
     {
+
         private Hashtable chartype_ = new Hashtable();
 
         public Daten TinySegmenter(String input)
@@ -610,7 +615,7 @@ namespace JADE
                     return s;
                 }
             }
-            return "O";
+                return "O"; 
         }
 
         //erhält eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
@@ -629,6 +634,70 @@ namespace JADE
         }
 
 
+        private String type(String eingabe)                                 //Funktion die Testet ob der Eingabe Sring der Japanischen Sprache zugehoerig ist 
+        {
+            Hashtable hash = new Hashtable();                               //erzeugt eine Hashtable in der im Folgenden einzelne Regular Expression Einträge zu den Japanischen unicode Zeichenentspechungen erstellt werden
+            Regex reg = new Regex("[\x3041-\x3096]");                       //erzeugt eine Regular Expression fuer Hiragana    
+            //hash.Add(reg, "H");
+            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu 
+            reg = new Regex("[\x30A0-\x30FF]");                             //erzeugt eine Regular Expression fuer Katakana (Full Width)
+            //hash.Add(reg, "K");
+            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu      
+            reg = new Regex("[\x3400-\x4DB5\x4E00-\x9FCB\xF900-\xFA6A]");   //erzeugt eine Regular Expression fuer Kanji
+            //hash.Add(reg, "J");
+            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
+            reg = new Regex("[\x2E80-\x2FD5]");                             //erzeugt eine Regular Expression fuer Kanji Radicale
+            //hash.Add(reg, "R");
+            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
+            reg = new Regex("[\xFF5F-\xFF9F]");                             //erzeugt eine Regular Expression fuer Katakana and Punctuations (Half Width)
+            //hash.Add(reg, "P");
+            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
+            reg = new Regex("[\x3000-\x303F]");                             //erzeugt eine Regular Expression fuer Japanische Symbole und Punctuations
+            //hash.Add(reg, "S");
+            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
+            reg = new Regex("[\xFF01-\xFF5E]");                             //erzeugt eine Regular Expression fuer Alphanumeric and Punctuation (Full Width)
+            //hash.Add(reg, "W1");
+            hash.Add(reg, "J");
+            /*
+            reg = new Regex("[a-zA-Z]");
+            hash.Add(reg, "W2");
+            reg = new Regex("[0-9]");
+            hash.Add(reg, "W2");
+            */
+
+            foreach (DictionaryEntry element in hash)                       //Durchlaufen der oben erstellten Hashtable
+            {
+                Regex rgx = (Regex)element.Key;                             //die Regular expression welche als Key in der Hashtable gespeichert ist wird rgx zugewiesen
+
+                if (rgx.IsMatch(eingabe))                                   //Falls der Eingabe String die Regular Expression Entspricht(mached)  
+                {
+                    String s = (String)element.Value;                       //Der String aus dem Value der Regex wird als Rueckgabe String gespeichert
+                    return s;                                               //Rueckgabe String wird zurueck gegeben
+                }
+            }
+            return "O";                                                     //Falls keine uebereinstimmung gefunden werden konnte wird der String "O" zurueck gegeben
+        }
+
+        public void TextTest(String text)                                   //TestFunktion um einen Text (eingabe String) auf dem Japanischen fremde Zeichen zu testen
+        {
+            double count = 0;                                               //double Hilfsvariable
+            double rel = 0;                                                 //double Hilfsvariable
+
+            foreach (char ch in text)                                       //durchleauft alle zeichen des EIngabe Textes
+            {
+                if (Equals(type(ch.ToString()), "J"))                       //Falls die Testfuntion(oben beschrieben) ein japanisches Zeichen ("J") als Rückgabe liefert
+                {
+                    count++;                                                //count zaehlt alle Japanischen Zeichen im Text
+                }
+            }
+            count = (text.Length) - count;                                  //liefert alle nicht erkannten und somit nicht japanischen Zeichen und bindet diesen Wert an Count
+            rel = count / (text.Length);                                    //der Variable rel wird hier die relative Haeufigkeit des Ereignisses "Kein japanisches Zeichen" zugeordnet 
+            if (rel > 0)                                                    //Falls die relative Haeufigkeit groeßer 0 (sobald also nicht japanische Zeichen im Text vorhanden sind)erfolgt die ausgabe der unten stehenden Message Box
+            {
+                MessageBox.Show("Der Segmenter ist nur für japanischen Text geeignet.Schriftzeichen anderer Sprachen können fehlerhafte Segmentierungen zur Folge haben", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+                //MessageBox.Show(count + " || " + (text.Length) + " || " + test, "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);  
+        }
     }
 }
 
