@@ -13,15 +13,42 @@ namespace JADE
 {
     public partial class Form1 : Form
     {
-        public static Daten Instanzdaten = new Daten();
-        private static SearchEngine suche = SearchEngine.Engine;
+        public static Daten Instanzdaten;
+        private static SearchEngine suche;
+        private static Segmenter segtest;
 
         public Form1()
         {
             InitializeComponent();
+
+            this.Icon = new System.Drawing.Icon("jade.ico");
+
             flowLayoutPanel1.HorizontalScroll.Enabled = false;
             flowLayoutPanel1.HorizontalScroll.Visible = false;
-            this.Icon = new System.Drawing.Icon("jade.ico");
+
+            Instanzdaten = new Daten();
+            suche = SearchEngine.Engine;
+            segtest = new Segmenter();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Segmenter segtest = new Segmenter();
+            // Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);
+            // TreeNode Instanz = new TreeNode();
+            // treeView1.Nodes.Add(Instanz);
+            /* ArrayList Alist = new ArrayList();
+             for (int i = 0; i < Alist; i++)
+             {
+                 TreeNode n = new TreeNode();
+                 treeView1.Nodes.Add(n);
+             }
+             */
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
         }
 
         public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -29,7 +56,7 @@ namespace JADE
             flowupdate();
         }
 
-        //Funktion zum updaten der Token Anzeige
+        //Funktion zum Updaten der Token Anzeige
         public void flowupdate()
         {
             TreeNode tn = treeView1.SelectedNode;
@@ -46,9 +73,10 @@ namespace JADE
                     if (!((Equals((String)a, "、")) || (Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？"))))
                     {
                         CheckBox Box = new System.Windows.Forms.CheckBox();
+                        Console.WriteLine((String)a);
                         Box.Text = ((String)a)/*.PadRight(4, '　')*/;
                         Box.AutoSize = true;
-                        Box.Name = "checkBox" + i; i++;
+                        Box.Name = "checkBox" + i++;
                         this.flowLayoutPanel1.Controls.Add(Box);
                     }
                 }
@@ -58,9 +86,7 @@ namespace JADE
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
-
-
-            Segmenter segtest = new Segmenter();
+            //Segmenter segtest = new Segmenter();
             String toTok = this.richTextBox1.Text;
             toTok = toTok.Replace("\n", "");
             toTok = toTok.Replace("\t", "");
@@ -89,24 +115,8 @@ namespace JADE
             }
 
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Segmenter segtest = new Segmenter();
-            // Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);
-            // TreeNode Instanz = new TreeNode();
-            // treeView1.Nodes.Add(Instanz);
-            /* ArrayList Alist = new ArrayList();
-             for (int i = 0; i < Alist; i++)
-             {
-                 TreeNode n = new TreeNode();
-                 treeView1.Nodes.Add(n);
-             }
-             */
-        }
-
+     
         //Trennen eines Token 
-
         public void trennen(int Satznummer, int Tok)
         {
             String str = Instanzdaten.getToken(Satznummer, Tok);
@@ -115,7 +125,7 @@ namespace JADE
             neumit.Show();
         }
 
-        //EventHandler der bei schließen des bearbeiten Fensters den Listener ausschaltet und die FlowlayoutPanel mit den Token(die Anzeige der Tokenliste) updatet
+        //EventHandler der bei Schließen des Bearbeiten-Fensters den Listener ausschaltet und das FlowlayoutPanel mit den Token(die Anzeige der Tokenliste) updatet.
         void frm2_FormClosing(object sender, FormClosingEventArgs e)
         {
             BearbeitenFenster neumit = (BearbeitenFenster)sender;
@@ -202,113 +212,99 @@ namespace JADE
             //}
         }
 
-            private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            int count = 0;
+            int first = 0;
+            int second = 0;
+            foreach (Control con in this.flowLayoutPanel1.Controls)
             {
-                this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            }
-
-            private void button2_Click_1(object sender, EventArgs e)
-            {
-                int count = 0;
-                int first = 0;
-                int second = 0;
-                foreach (Control con in this.flowLayoutPanel1.Controls)
+                CheckBox box = (CheckBox)con;
+                int index = this.flowLayoutPanel1.Controls.IndexOf(con);
+                if (box.Checked == true)
                 {
-                    CheckBox box = (CheckBox)con;
-                    int index = this.flowLayoutPanel1.Controls.IndexOf(con);
-                    if (box.Checked == true)
+                    if (count == 0)
                     {
-                        if (count == 0)
-                        {
-                            first = index;
-                        }
-                        if (count > 0)
-                        {
-                            second = index;
-                        }
-                        count++;
+                        first = index;
                     }
+                    if (count > 0)
+                    {
+                        second = index;
+                    }
+                    count++;
                 }
-                if (count > 2)
+            }
+            if (count > 2)
+            {
+                MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                switch (count)
                 {
-                    MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    case 1:
+                        trennen(this.treeView1.SelectedNode.Index, first);
+                        break;
+                    case 2:
+                        if (first + 1 != second)
+                        {
+                            MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            break;
+                        }
+                        else
+                        {
+                            zusammen(this.treeView1.SelectedNode.Index, first, second);
+                            break;
+                        }
+                }
+            }
+            flowupdate();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            int count = 0;
+            int first = 0;
+            foreach (Control con in this.flowLayoutPanel1.Controls)
+            {
+                CheckBox box = (CheckBox)con;
+                int index = this.flowLayoutPanel1.Controls.IndexOf(con);
+                if (box.Checked == true)
+                {
+                    if (count == 0)
+                    {
+                        first = index;
+                    }
+                    count++;
+                }
+            }
+            if (count > 1)
+            {
+                MessageBox.Show("Bitte wählen Sie maximal ein Token aus.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (count == 1)
+            {
+                DataTable result = suche.search(Instanzdaten.getToken(this.treeView1.SelectedNode.Index, first), this.treeView1.SelectedNode.Index, first, this.checkBox1.Checked);
+                if (result.Rows.Count > 0)
+                {
+                    this.dataGridView1.DataSource = result;
                 }
                 else
                 {
-                    switch (count)
-                    {
-                        case 1:
-                            trennen(this.treeView1.SelectedNode.Index, first);
-                            break;
-                        case 2:
-                            if (first + 1 != second)
-                            {
-                                MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                break;
-                            }
-                            else
-                            {
-                                zusammen(this.treeView1.SelectedNode.Index, first, second);
-                                break;
-                            }
-                    }
-                }
-                flowupdate();
-            }
-
-            private void button1_Click_1(object sender, EventArgs e)
-            {
-                int count = 0;
-                int first = 0;
-                foreach (Control con in this.flowLayoutPanel1.Controls)
-                {
-                    CheckBox box = (CheckBox)con;
-                    int index = this.flowLayoutPanel1.Controls.IndexOf(con);
-                    if (box.Checked == true)
-                    {
-                        if (count == 0)
-                        {
-                            first = index;
-                        }
-                        count++;
-                    }
-                }
-                if (count > 1)
-                {
-                    MessageBox.Show("Bitte wählen Sie maximal ein Token aus.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                if (count == 1)
-                {
-                    DataTable result = suche.search(Instanzdaten.getToken(this.treeView1.SelectedNode.Index, first), this.treeView1.SelectedNode.Index, first, this.checkBox1.Checked);
-                    if (result.Rows.Count > 0)
-                    {
-                        this.dataGridView1.DataSource = result;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Es wurden keine Einträge gefunden.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    MessageBox.Show("Es wurden keine Einträge gefunden.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
 
-            private void beendenToolStripMenuItem_Click_1(object sender, EventArgs e)
-            {
-                System.Windows.Forms.Application.Exit();
-            }
+        private void beendenToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
 
-            private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-            {
-
-            }
-            public void TableDel(int satznummer,int tok)
-            {
-                SearchEngine.DisposeTable(satznummer, tok);
-            }
-
-            private void richTextBox1_TextChanged(object sender, EventArgs e)
-            {
-
-            }
+        public void TableDel(int satznummer,int tok)
+        {
+            SearchEngine.DisposeTable(satznummer, tok);
+        }
 
       /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
