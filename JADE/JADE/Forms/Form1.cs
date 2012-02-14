@@ -58,11 +58,14 @@ namespace JADE
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
+
+
             Segmenter segtest = new Segmenter();
             String toTok = this.richTextBox1.Text;
             toTok = toTok.Replace("\n", "");
             toTok = toTok.Replace("\t", "");
             toTok = toTok.Replace(" ", "");
+            toTok = toTok.Replace("　", "");
             this.richTextBox1.Text = toTok;
             segtest.TextTest(this.richTextBox1.Text);
             
@@ -75,7 +78,7 @@ namespace JADE
                 int i = 0;
                 foreach (ArrayList a in Alist)
                 {
-                    TreeNode Instanz = new TreeNode("Satz" + (i + 1) + ": " + Instanzdaten.getToken(i, 0));
+                    TreeNode Instanz = new TreeNode("Satz " +  ("" + (i + 1)).PadLeft(2,'0') + ": " + Instanzdaten.getToken(i, 0));
                     i++;
                     treeView1.Nodes.Add(Instanz);
                 }
@@ -135,12 +138,68 @@ namespace JADE
 
         private void öffnenToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.RestoreDirectory = true;
+
+            StreamReader openFileStream;
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                StreamReader myFile = new StreamReader(openFileDialog1.FileName);
-                String myString = myFile.ReadToEnd();
-                richTextBox1.Text = myString;
+                try
+                {
+                    if ((openFileStream = new StreamReader(openFileDialog1.FileName)) != null)
+                    {
+                        using (openFileStream)
+                        {
+                            // Make sure you read from the file or it won't be able
+                            // to guess the encoding
+                            var file = openFileStream.ReadToEnd();
+
+                            // Create two different encodings.
+                            Encoding utf8 = Encoding.UTF8;
+                            Encoding detectedEncoding = openFileStream.CurrentEncoding;
+
+                            // Convert the string into a byte array.
+                            byte[] detectedEncodingBytes = detectedEncoding.GetBytes(file);
+
+                            // Perform the conversion from one encoding to the other.
+                            byte[] utf8Bytes = Encoding.Convert(detectedEncoding, utf8, detectedEncodingBytes);
+
+                            // Convert the new byte[] into a char[] and then into a string.
+                            char[] utf8Chars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
+                            utf8.GetChars(utf8Bytes, 0, utf8Bytes.Length, utf8Chars, 0);
+
+                            richTextBox1.Text = new string(utf8Chars);
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Es ist ein Fehler beim Öffnen der angegebenen Datei aufgetreten.\n\nFehlermeldung:\n" + exception.Message, "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                }
             }
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    if (File.Exists(openFileDialog1.FileName))
+            //    {
+            //        using (StreamReader myFile = new StreamReader(openFileDialog1.FileName))
+            //        {
+
+            //        }
+            //    }
+            //    using (StreamReader myFile = new StreamReader(openFileDialog1.FileName))
+            //    {
+
+            //    }
+            //    StreamReader myFile = new StreamReader(openFileDialog1.FileName);
+            //    String myString = myFile.ReadToEnd();
+            //    richTextBox1.Text = myString;
+            //}
         }
 
             private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -216,7 +275,7 @@ namespace JADE
                 }
                 if (count > 1)
                 {
-                    MessageBox.Show("Bitte Maximal 1 Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Bitte wählen Sie maximal ein Token aus.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 if (count == 1)
                 {
@@ -227,7 +286,7 @@ namespace JADE
                     }
                     else
                     {
-                        MessageBox.Show("Keine Einträge gefunden", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Es wurden keine Einträge gefunden.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
