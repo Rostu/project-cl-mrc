@@ -39,13 +39,13 @@ namespace JADE
                 Satz.Insert(Tok, this.textBox1.Text);                          //Fuegt den Inhalt der 1ten Textbox in die Arraylist ein(an der Stelle Tok), Tok2 rückt dadurch nach hinten
                 Satz.RemoveAt(Tok + 2);                                        //Loescht den zu trennenden ursprünglichen Token 
                 Alist[Satznummer] = Satz;                                      //Schreiben des geaenderten Satzes in die Arraylist
-                obj.Zugriff = Alist;                                            //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+                obj.Zugriff = Alist;                                           //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
                 SearchEngine.DisposeTable(Satznummer, Tok);
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Die 2 neuen Token müssen aus den Zeichen \ndes zu bearbeitenden Token bestehen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Die 2 neuen Token müssen aus den Zeichen \ndes zu bearbeitenden Token bestehen.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -68,6 +68,11 @@ namespace JADE
         private void BearbeitenFenster_FormClosed(object sender, FormClosedEventArgs e)
         {
             
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
         }
 
     }

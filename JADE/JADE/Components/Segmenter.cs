@@ -576,7 +576,7 @@ namespace JADE
             int x = 0;
             for (int i = 0; i < result.Count; i++)
             {
-                if ((Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")))
+                if ((Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")) || (Equals(result[i], "。。")) || (Equals(result[i], "！！")) || (Equals(result[i], "？？")))
                 {
                     ArrayList hilf = new ArrayList();
                     for (int y = x; y <= i; y++)
@@ -603,7 +603,7 @@ namespace JADE
         }
 
         //erhält einen String, vergleicht diesen mit den Einträgen in einer Hashtable und gibt wenn gefunden den Schlüsselwert zurück. Die Funktion dient zur Bestimmung des Typs eines einzel Zeichens( Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
-        public string ctype_(String str)
+        private string ctype_(String str)
         {
             foreach (DictionaryEntry element in chartype_)
             {
@@ -619,7 +619,7 @@ namespace JADE
         }
 
         //erhält eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
-        public int ts_(Hashtable table, String s)
+        private int ts_(Hashtable table, String s)
         {
             foreach (DictionaryEntry element in table)
             {
