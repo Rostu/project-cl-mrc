@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using href.Utils;
 
 namespace JADE
 {
@@ -218,7 +219,7 @@ namespace JADE
             {
                 try
                 {
-                    if ((openFileStream = new StreamReader(openFileDialog1.FileName)) != null)
+                    if ((openFileStream = EncodingTools.OpenTextFile(openFileDialog1.FileName)) != null)
                     {
                         using (openFileStream)
                         {
@@ -228,7 +229,8 @@ namespace JADE
 
                             // Create two different encodings.
                             Encoding utf8 = Encoding.UTF8;
-                            Encoding detectedEncoding = openFileStream.CurrentEncoding;
+                            Encoding detectedEncoding = EncodingTools.GetMostEfficientEncoding(file);
+                            Console.WriteLine(detectedEncoding);
 
                             // Convert the string into a byte array.
                             byte[] detectedEncodingBytes = detectedEncoding.GetBytes(file);
@@ -362,6 +364,33 @@ namespace JADE
         {
             SearchEngine.DisposeTable(satznummer, tok);
         }
+
+        //private void richTextBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        //{
+        //    if ((e.Modifiers == Keys.Control && e.KeyCode.ToString() == "V"))
+        //    {
+        //        string clipText = Clipboard.GetText();
+
+        //        // Create two different encodings.
+        //        Encoding utf8 = Encoding.UTF8;
+        //        Encoding detectedEncoding = EncodingTools.GetMostEfficientEncoding(clipText);
+        //        Console.WriteLine(detectedEncoding);
+
+        //        // Convert the string into a byte array.
+        //        byte[] detectedEncodingBytes = detectedEncoding.GetBytes(clipText);
+
+        //        // Perform the conversion from one encoding to the other.
+        //        byte[] utf8Bytes = Encoding.Convert(detectedEncoding, utf8, detectedEncodingBytes);
+
+        //        // Convert the new byte[] into a char[] and then into a string.
+        //        char[] utf8Chars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
+        //        utf8.GetChars(utf8Bytes, 0, utf8Bytes.Length, utf8Chars, 0);
+
+        //        //richTextBox1.Paste
+        //        Clipboard.SetText(new string(utf8Chars));
+        //        //richTextBox1.Paste(DataFormats.GetFormat(DataFormats.Rtf));
+        //    }
+        //}
 
       /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
