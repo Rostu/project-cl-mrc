@@ -292,7 +292,7 @@ namespace JADE
             }
             if (count > 2)
             {
-                MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -304,7 +304,7 @@ namespace JADE
                     case 2:
                         if (first + 1 != second)
                         {
-                            MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Bitte Maximal 2 (nebeneinander liegende) Token auswählen.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             break;
                         }
                         else
