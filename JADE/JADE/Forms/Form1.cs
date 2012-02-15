@@ -230,7 +230,6 @@ namespace JADE
                             // Create two different encodings.
                             Encoding utf8 = Encoding.UTF8;
                             Encoding detectedEncoding = EncodingTools.GetMostEfficientEncoding(file);
-                            Console.WriteLine(detectedEncoding);
 
                             // Convert the string into a byte array.
                             byte[] detectedEncodingBytes = detectedEncoding.GetBytes(file);
