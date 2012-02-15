@@ -33,7 +33,8 @@ namespace JADE
             ArrayList Alist = obj.Zugriff;                                     //Zugriff auf Datenstruktur
             ArrayList Satz = (ArrayList)Alist[Satznummer];                     //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
             String test = this.textBox1.Text + this.textBox2.Text;             //Hilfs-String bestehend aus der Summe der Inhalt von Textbox1+2 (String) 
-            if (Equals(test, (String)Satz[Tok]))                               //Um unsinniges trennen zu vermeiden wird geprüft ob sich die getrennten neuen Token aus den Zeichen des urspruenglichen Token zusammen setzen 
+
+            if ((Equals(test, (String)Satz[Tok])) && !((Equals(this.textBox1.Text, "")) || (Equals(this.textBox2.Text, ""))))                               //Um unsinniges trennen zu vermeiden wird geprüft ob sich die getrennten neuen Token aus den Zeichen des urspruenglichen Token zusammen setzen 
             {
                 Satz.Insert(Tok, this.textBox2.Text);                          //Fuegt den Inhalt der 2ten Textbox in die Arraylist ein(an der Stelle Tok)
                 Satz.Insert(Tok, this.textBox1.Text);                          //Fuegt den Inhalt der 1ten Textbox in die Arraylist ein(an der Stelle Tok), Tok2 rückt dadurch nach hinten
