@@ -46,29 +46,25 @@ namespace JADE
 {
     public class Segmenter
     {
+        private Hashtable chartype_ = new Hashtable();      //Anlegen einer Hashtable welche später zur Zeichentypbestimmung genutzt wird.      
 
-        private Hashtable chartype_ = new Hashtable();
-
+        //Funktion welche einen String aus japanischen Zeichen in seine Token zerlegt.
         public Daten TinySegmenter(String input)
         {
+            Regex reg = new Regex("[一二三四五六七八九十百千万億兆]");         //Erzeugen einer Regular Expression (Zahlzeichen).
+            chartype_.Add(reg, "M");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
+            reg = new Regex("[一-龠々〆ヵヶ]");                               //Erzeugen einer Regular Expression (Sonderzeichen).
+            chartype_.Add(reg, "H");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
+            reg = new Regex("[ぁ-ん]");                                      //Erzeugen einer Regular Expression (Hiragana).
+            chartype_.Add(reg, "I");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
+            reg = new Regex("[ァ-ヴーｱ-ﾝﾞｰ]");                               //Erzeugen einer Regular Expression (Katakana).
+            chartype_.Add(reg, "K");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
+            reg = new Regex("[a-zA-Zａ-ｚＡ-Ｚ]");                           //Erzeugen einer Regular Expression (westliche Zeichen).
+            chartype_.Add(reg, "A");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
+            reg = new Regex("[0-9０-９]");                                   //Erzeugen einer Regular Expression (Zahlen).
+            chartype_.Add(reg, "N");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
 
-            //Anlegen einer Hashtable welche später zur Zeichentypbestimmung genutzt wird)
-
-            //object[] n = new object[2];                              
-            Regex reg = new Regex("[一二三四五六七八九十百千万億兆]");
-            chartype_.Add(reg, "M");
-            reg = new Regex("[一-龠々〆ヵヶ]");
-            chartype_.Add(reg, "H");
-            reg = new Regex("[ぁ-ん]");
-            chartype_.Add(reg, "I");
-            reg = new Regex("[ァ-ヴーｱ-ﾝﾞｰ]");
-            chartype_.Add(reg, "K");
-            reg = new Regex("[a-zA-Zａ-ｚＡ-Ｚ]");
-            chartype_.Add(reg, "A");
-            reg = new Regex("[0-9０-９]");
-            chartype_.Add(reg, "N");
-
-            //hier werden verschiedene Hashtables angelegt welche später zur Scorebestimmung einzelner Zeichenkombinationen dienen 
+            //hier werden verschiedene Hashtables angelegt welche später zur Scorebestimmung einzelner Zeichenkombinationen dienen.  
             int BIAS__ = -332;
             Hashtable BC1__ = new Hashtable();
             BC1__.Add("HH", 6); BC1__.Add("II", 2461); BC1__.Add("KH", 406); BC1__.Add("OH", -1378);
@@ -460,7 +456,7 @@ namespace JADE
             UW6__.Add("郎", 1082); UW6__.Add("１", -270); UW6__.Add("Ｅ１", 306); UW6__.Add("ﾙ", -673);
             UW6__.Add("ﾝ", -496);
 
-            //segment Funktion
+            //segment Funktionen folgen hier.
             ArrayList result = new ArrayList();
             ArrayList seg = new ArrayList();
             seg.Add("B3"); seg.Add("B2"); seg.Add("B1");
@@ -567,7 +563,6 @@ namespace JADE
             }
             result.Add(word);
 
-
             //Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur
 
             Daten rueck = new Daten();                  //Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist)
@@ -602,7 +597,8 @@ namespace JADE
             return rueck;
         }
 
-        //erhält einen String, vergleicht diesen mit den Einträgen in einer Hashtable und gibt wenn gefunden den Schlüsselwert zurück. Die Funktion dient zur Bestimmung des Typs eines einzel Zeichens( Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
+        //Erhält einen String, vergleicht diesen mit den Einträgen in der Hashtable chartype_ und gibt wenn gefunden den Schlüsselwert zurück. 
+        //Die Funktion dient also zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
         private string ctype_(String str)
         {
             foreach (DictionaryEntry element in chartype_)
@@ -618,7 +614,7 @@ namespace JADE
                 return "O"; 
         }
 
-        //erhält eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
+        //Erhält eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
         private int ts_(Hashtable table, String s)
         {
             foreach (DictionaryEntry element in table)
@@ -632,7 +628,6 @@ namespace JADE
             }
             return 0;
         }
-
 
         private String type(String eingabe)                                 //Funktion die Testet ob der Eingabe Sring der Japanischen Sprache zugehoerig ist 
         {
@@ -692,11 +687,10 @@ namespace JADE
             }
             count = (text.Length) - count;                                  //liefert alle nicht erkannten und somit nicht japanischen Zeichen und bindet diesen Wert an Count
             rel = count / (text.Length);                                    //der Variable rel wird hier die relative Haeufigkeit des Ereignisses "Kein japanisches Zeichen" zugeordnet 
-            if (rel > 0)                                                    //Falls die relative Haeufigkeit groeßer 0 (sobald also nicht japanische Zeichen im Text vorhanden sind)erfolgt die ausgabe der unten stehenden Message Box
+            if (rel > 0)                                                    //Falls die relative Haeufigkeit groeßer 0 (sobald also nicht japanische Zeichen im Text vorhanden sind) erfolgt die Ausgabe der unten stehenden Message Box
             {
                 MessageBox.Show("Der Segmenter ist nur für japanischen Text geeignet.Schriftzeichen anderer Sprachen können fehlerhafte Segmentierungen zur Folge haben", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-                //MessageBox.Show(count + " || " + (text.Length) + " || " + test, "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);  
+            }  
         }
     }
 }
