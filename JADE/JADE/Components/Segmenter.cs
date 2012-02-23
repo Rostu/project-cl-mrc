@@ -568,6 +568,7 @@ namespace JADE
             Daten rueck = new Daten();                  //Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist)
             ArrayList container = new ArrayList();
             //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste"(hilf) geschrieben und zum "Text-Container hinzugefügt"
+            //Beinhaltet die unelegante Loesung fuer das Auftreten von mehreren Satzendzeichen.
             int x = 0;
             for (int i = 0; i < result.Count; i++)
             {
