@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\TextData.cs" />
     <Compile Include="EncodingTools\EncodingTools.cs" />
     <Compile Include="EncodingTools\Multilang\CMLangConvertCharset.cs" />
     <Compile Include="EncodingTools\Multilang\CMLangConvertCharsetClass.cs" />
