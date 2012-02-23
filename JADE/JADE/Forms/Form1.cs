@@ -59,8 +59,6 @@ namespace JADE
 
                 this.flowLayoutPanel1.Controls.Clear();
 
-                //if (textDataPerSentence[satzIndex] == null)
-                //{
                     string satzText = "";
                     List<Control> checkBoxes = new List<Control>();
 
