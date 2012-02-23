@@ -53,53 +53,41 @@ namespace JADE
         {
             TreeNode selectedTreeNode = treeView1.SelectedNode;
             int satzIndex = this.treeView1.SelectedNode.Index;
-
+            
             if (selectedTreeNode != null)
             {
-
                 this.flowLayoutPanel1.Controls.Clear();
-
-                    string satzText = "";
-                    List<Control> checkBoxes = new List<Control>();
-
-
-
-                    ArrayList satz = Instanzdaten.getSatz(satzIndex);
-
-                    int i = 0;
-                    string token = "";
-
-                    foreach (var tokenObj in satz)
-                    {
-                        token = (String)tokenObj;
-                        satzText += token + "  ";
-
-                        if (!("、？！。".Contains(token)))
-                        {
-                            checkBoxes.Add
-                                (new System.Windows.Forms.CheckBox 
-                                { 
-                                    Name = "" + i,
-                                    Text = token,
-                                    AutoSize = true
-                                });
-                        }
-                        i++;
-                    }
-
-
-
-                    this.textBox1.Text = satzText;
-                    this.flowLayoutPanel1.Controls.AddRange(checkBoxes.ToArray());
+                string satzText = "";
+                List<Control> checkBoxes = new List<Control>();
+                ArrayList satz = Instanzdaten.getSatz(satzIndex);
+                int i = 0;
+                string token = "";
+                
+                foreach (var tokenObj in satz)
+                {
+                    token = (String)tokenObj;
+                    satzText += token + "  ";
                     
-                             
-            }
+                    if (!("、？！。".Contains(token)))
+                    {
+                        checkBoxes.Add
+                            (new System.Windows.Forms.CheckBox 
+                            { 
+                                Name = "" + i,
+                                Text = token,
+                                AutoSize = true
+                            });
+                    }
+                    i++;
+                }
 
+                this.textBox1.Text = satzText;
+                this.flowLayoutPanel1.Controls.AddRange(checkBoxes.ToArray());
+            }
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
         {
-            //Segmenter segtest = new Segmenter();
             String toTok = this.richTextBox1.Text;
             toTok = toTok.Replace("\n", "");
             toTok = toTok.Replace("\t", "");
@@ -222,7 +210,7 @@ namespace JADE
             foreach (Control con in this.flowLayoutPanel1.Controls)
             {
                 CheckBox box = (CheckBox)con;
-                int index = Int32.Parse(box.Name); //this.flowLayoutPanel1.Controls.IndexOf(con);
+                int index = Int32.Parse(box.Name); 
                 if (box.Checked == true)
                 {
                     if (count == 0)
@@ -256,12 +244,11 @@ namespace JADE
                         else
                         {
                             zusammen(this.treeView1.SelectedNode.Index, first, second);
-                            flowupdate(); //sollte hierher, da hier ja das Zusammenfügen fertig ist
+                            flowupdate(); 
                             break;
                         }
                 }
             }
-            //flowupdate(); 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -271,7 +258,7 @@ namespace JADE
             foreach (Control con in this.flowLayoutPanel1.Controls)
             {
                 CheckBox box = (CheckBox)con;
-                int index = Int32.Parse(box.Name); //this.flowLayoutPanel1.Controls.IndexOf(con);
+                int index = Int32.Parse(box.Name);
                 if (box.Checked == true)
                 {
                     if (count == 0)
