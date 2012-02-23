@@ -35,7 +35,7 @@ namespace JADE
                 data = value;
             }
         }
-
+        
         //Spezial Konstruktor fuer die Deserialisation 
         public Daten(SerializationInfo info, StreamingContext ctxt)
         {

@@ -68,6 +68,7 @@ namespace JADE
             //Dazu wird jeweils eine neue Hashtable erstellt und diese dann per Add Funktion mit Schluessel-Wert paaren gefuellt.
             //Im Schluessel werden Zeichenkombinationen gespeichert (String) welche als Wert einen Score-Wert(Int) erhalten.
             //Muss vielleicht nocheinmal ueberarbeitet werden weil die Add Methode verhaeltnismaeßig Rechenaufwendig ist. 
+            // der Bessern Uebersicht halber erfolgt bei vielen Add Befehlen in Folge ein Zeilenumbruch nach 4-6 Adds. 
             int BIAS__ = -332;
             Hashtable BC1__ = new Hashtable();
             BC1__.Add("HH", 6); BC1__.Add("II", 2461); BC1__.Add("KH", 406); BC1__.Add("OH", -1378);
@@ -459,20 +460,22 @@ namespace JADE
             UW6__.Add("郎", 1082); UW6__.Add("１", -270); UW6__.Add("Ｅ１", 306); UW6__.Add("ﾙ", -673);
             UW6__.Add("ﾝ", -496);
 
-            //segment Funktionen folgen hier.
-            ArrayList result = new ArrayList();
-            ArrayList seg = new ArrayList();
-            seg.Add("B3"); seg.Add("B2"); seg.Add("B1");
-            ArrayList ctype = new ArrayList();
-            ctype.Add("O"); ctype.Add("O"); ctype.Add("O");
+            //Hier folgen die fuer das trennen des textes in Token wichtigen Code-Abschnitte.
 
-            //erstellt Arraylist und füllt diese mit den Einzelzeichen aus input
+            ArrayList result = new ArrayList();                                 //Erstellt Arraylist in der spaeter die Ergebnis-Token fortlaufend gespeichert werden. 
+            ArrayList seg = new ArrayList();                                    //Erstellt Arraylist in die spaeter alle einzel-Zeichen des Textes gespeichert werden. 
+            seg.Add("B3"); seg.Add("B2"); seg.Add("B1");                        //Start-Elemente der Arraylist seg werden gesetzt. 
+            ArrayList ctype = new ArrayList();                                  //Erstellt Arraylist in die spaeter die Zeichentypen zu den einzel-Zeichen des Textes gespeichert werden. 
+            ctype.Add("O"); ctype.Add("O"); ctype.Add("O");                     //Start-Elemente der Arraylist ctype werden gesetzt. 
+
+            //Erstellt Arraylist (o) und fuellt diese mit den Einzelzeichen aus dem Input(Text).
             ArrayList o = new ArrayList();
             foreach (char s in input)
             {
                 o.Add(s);
             }
-            //fügt die einzelnen chars als Strings in die Arraylist seg und die Typen aus der Hashtable in ctype
+
+            //Fuegt die einzelnen Chars als Strings in die Arraylist seg und die Typen aus der Hashtable in ctype
             for (int i = 0; i < o.Count; ++i)
             {
                 seg.Add(o[i]);
@@ -480,18 +483,15 @@ namespace JADE
                 String h2 = ctype_(h1);
                 ctype.Add(h2);
             }
+            //Fuegt in die Arraylisten seg und ctype 3 Schluss-Elemente ein.
+            seg.Add("E1");seg.Add("E2");seg.Add("E3");
+            ctype.Add("O");ctype.Add("O");ctype.Add("O");
 
-            seg.Add("E1");
-            seg.Add("E2");
-            seg.Add("E3");
-            ctype.Add("O");
-            ctype.Add("O");
-            ctype.Add("O");
             String word = seg[3].ToString();
             String p1 = "U";
             String p2 = "U";
             String p3 = "U";
-            //Durchlaufen der Potentiellen Woerter(durch Kombination gebildet) und Addieren der in der Hashtable gespeicherten Werte zu Score
+            //Durchlaufen der potentiellen Woerter(durch Kombination gebildet) und bei Uebereinstimmung mit Key-String aus den Hashtables folgt Addieren der in der Hashtable gespeicherten Werte zu Score
             for (int i = 4; i < seg.Count - 3; ++i)
             {
                 int score = BIAS__;
@@ -552,13 +552,16 @@ namespace JADE
                 score += ts_(TQ3__, p3 + c1 + c2 + c3);
                 score += ts_(TQ4__, p3 + c2 + c3 + c4);
 
-                String p = "O";
+                String p = "O";                             //Kein Wort dann p= "O" --> daraus wuerde im naechsten Durchlauf der Schleife eine andere Anfangswahrscheinlichkeit gelten  
+                
+                //Wenn score > 0 dann liegt eine hohe Wahrscheinlichkeit fuer eine Wortgrenze vor.
                 if (score > 0)
                 {
-                    result.Add(word);
-                    word = "";
-                    p = "B";
+                    result.Add(word);                       //Hinzufuegen der bisher in word gespeicherten Chars als Token in das Result Array
+                    word = "";                              //Zwischenspeicher fuer das Token wird geloescht.
+                    p = "B";                                //p wird geaendert um die geaenderte Anfangswahrscheinlichkeit in den naechsten Schleifendurchlauf zu bringen.
                 }
+                //um ein Zeichen weiter ruecken. 
                 p1 = p2;
                 p2 = p3;
                 p3 = p;
@@ -570,6 +573,7 @@ namespace JADE
 
             Daten rueck = new Daten();                  //Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist)
             ArrayList container = new ArrayList();
+
             //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste"(hilf) geschrieben und zum "Text-Container hinzugefügt"
             //Beinhaltet die unelegante Loesung fuer das Auftreten von mehreren Satzendzeichen.
             int x = 0;
