@@ -17,8 +17,7 @@ namespace JADE
         public static Daten Instanzdaten;
         private static SearchEngine suche;
         private static Segmenter segtest;
-        //private static ArrayList textDataPerSentence;
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -31,24 +30,12 @@ namespace JADE
             Instanzdaten = new Daten();
             suche = SearchEngine.Engine;
             segtest = new Segmenter();
-            //textDataPerSentence = new ArrayList();
-            //Console.WriteLine(textDataPerSentence.Count);
-            //Console.WriteLine(textDataPerSentence.Capacity);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Segmenter segtest = new Segmenter();
-            // Instanzdaten = segtest.TinySegmenter(this.richTextBox1.Text);
-            // TreeNode Instanz = new TreeNode();
-            // treeView1.Nodes.Add(Instanz);
-            /* ArrayList Alist = new ArrayList();
-             for (int i = 0; i < Alist; i++)
-             {
-                 TreeNode n = new TreeNode();
-                 treeView1.Nodes.Add(n);
-             }
-             */
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -107,33 +94,9 @@ namespace JADE
                     this.textBox1.Text = satzText;
                     this.flowLayoutPanel1.Controls.AddRange(checkBoxes.ToArray());
                     
-                //}               
+                             
             }
 
-
-
-            //TreeNode tn = treeView1.SelectedNode;
-            //if (tn != null)
-            //{
-
-            //    ArrayList Satz = Instanzdaten.getSatz(this.treeView1.SelectedNode.Index);
-            //    String test = "";
-            //    this.flowLayoutPanel1.Controls.Clear();
-            //    int i = 0;
-            //    foreach (String a in Satz)
-            //    {
-            //        test += (String)a + "  ";
-            //        if (!((Equals((String)a, "、")) || (Equals((String)a, " ")) || (Equals((String)a, "。")) || (Equals((String)a, "！")) || (Equals((String)a, "？"))))
-            //        {
-            //            CheckBox Box = new System.Windows.Forms.CheckBox();
-            //            Box.Text = ((String)a)/*.PadRight(4, '　')*/;
-            //            Box.AutoSize = true;
-            //            Box.Name = "checkBox" + i++;
-            //            this.flowLayoutPanel1.Controls.Add(Box);
-            //        }
-            //    }
-            //    this.textBox1.Text = test;
-            //}
         }
 
         private void Tokenize_Click(object sender, EventArgs e)
@@ -250,23 +213,7 @@ namespace JADE
                     MessageBox.Show("Es ist ein Fehler beim Öffnen der angegebenen Datei aufgetreten.\n\nFehlermeldung:\n" + exception.Message, "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
                 }
             }
-            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            //{
-            //    if (File.Exists(openFileDialog1.FileName))
-            //    {
-            //        using (StreamReader myFile = new StreamReader(openFileDialog1.FileName))
-            //        {
 
-            //        }
-            //    }
-            //    using (StreamReader myFile = new StreamReader(openFileDialog1.FileName))
-            //    {
-
-            //    }
-            //    StreamReader myFile = new StreamReader(openFileDialog1.FileName);
-            //    String myString = myFile.ReadToEnd();
-            //    richTextBox1.Text = myString;
-            //}
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -364,42 +311,6 @@ namespace JADE
             SearchEngine.DisposeTable(satznummer, tok);
         }
 
-        //private void richTextBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        //{
-        //    if ((e.Modifiers == Keys.Control && e.KeyCode.ToString() == "V"))
-        //    {
-        //        string clipText = Clipboard.GetText();
-
-        //        // Create two different encodings.
-        //        Encoding utf8 = Encoding.UTF8;
-        //        Encoding detectedEncoding = EncodingTools.GetMostEfficientEncoding(clipText);
-        //        Console.WriteLine(detectedEncoding);
-
-        //        // Convert the string into a byte array.
-        //        byte[] detectedEncodingBytes = detectedEncoding.GetBytes(clipText);
-
-        //        // Perform the conversion from one encoding to the other.
-        //        byte[] utf8Bytes = Encoding.Convert(detectedEncoding, utf8, detectedEncodingBytes);
-
-        //        // Convert the new byte[] into a char[] and then into a string.
-        //        char[] utf8Chars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
-        //        utf8.GetChars(utf8Bytes, 0, utf8Bytes.Length, utf8Chars, 0);
-
-        //        //richTextBox1.Paste
-        //        Clipboard.SetText(new string(utf8Chars));
-        //        //richTextBox1.Paste(DataFormats.GetFormat(DataFormats.Rtf));
-        //    }
-        //}
-
-      /*  private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                StreamWriter File = new StreamWriter(saveFileDialog1.FileName);
-                File.WriteLine(richTextBox1.Text);
-                File.Close();
-            }
-        } */
     }
 }
 
