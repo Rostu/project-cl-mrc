@@ -15,7 +15,7 @@ namespace JADE
     {
         public Saver() {}                                               //Leerer Konstruktor.
 
-        //Funktion zum Speichern 
+        //Funktion zum Speichern. 
         //Erhaelt einen String für den Filenamen und ein Objekt der SaveObjekt Klasse.
         public void Save(string filename, SaveObjekt saveObjekt)
         {
@@ -34,7 +34,7 @@ namespace JADE
             BinaryFormatter bFormatter = new BinaryFormatter();         //Erstellt ein BinaryFormatter-Objekt.
             saveObjekt = (SaveObjekt)bFormatter.Deserialize(stream);    //Erstellt ein SaveObjekt-Objekt und schreibt die gelesenen SaveDaten hinein.    
             stream.Close();                                             //schließt den Stream.
-            return saveObjekt;                                          //gibt das SaveObjekt-Objekt zurück 
+            return saveObjekt;                                          //gibt das SaveObjekt-Objekt zurück. 
         }
     }
 }
