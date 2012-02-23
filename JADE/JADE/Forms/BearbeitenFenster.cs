@@ -31,7 +31,7 @@ namespace JADE
         private void button1_Click(object sender, EventArgs e)
         {
             ArrayList Alist = obj.Zugriff;                                     //Zugriff auf Datenstruktur
-            ArrayList Satz = (ArrayList)Alist[Satznummer];                     //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet  
+            ArrayList Satz = (ArrayList)Alist[Satznummer];                     //Heraussuchen des Satzes in welchem sich das zu aendernde Token befindet  
             String test = this.textBox1.Text + this.textBox2.Text;             //Hilfs-String bestehend aus der Summe der Inhalt von Textbox1+2 (String) 
 
             if ((Equals(test, (String)Satz[Tok])) && !((Equals(this.textBox1.Text, "")) || (Equals(this.textBox2.Text, ""))))                               //Um unsinniges trennen zu vermeiden wird geprüft ob sich die getrennten neuen Token aus den Zeichen des urspruenglichen Token zusammen setzen 
@@ -72,6 +72,11 @@ namespace JADE
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BearbeitenFenster_Load(object sender, EventArgs e)
         {
 
         }

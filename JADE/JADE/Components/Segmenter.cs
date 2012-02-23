@@ -64,7 +64,10 @@ namespace JADE
             reg = new Regex("[0-9０-９]");                                   //Erzeugen einer Regular Expression (Zahlen).
             chartype_.Add(reg, "N");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
 
-            //hier werden verschiedene Hashtables angelegt welche später zur Scorebestimmung einzelner Zeichenkombinationen dienen.  
+            //Hier werden verschiedene Hashtables angelegt welche spaeter zur Scorebestimmung einzelner Zeichenkombinationen dienen.
+            //Dazu wird jeweils eine neue Hashtable erstellt und diese dann per Add Funktion mit Schluessel-Wert paaren gefuellt.
+            //Im Schluessel werden Zeichenkombinationen gespeichert (String) welche als Wert einen Score-Wert(Int) erhalten.
+            //Muss vielleicht nocheinmal ueberarbeitet werden weil die Add Methode verhaeltnismaeßig Rechenaufwendig ist. 
             int BIAS__ = -332;
             Hashtable BC1__ = new Hashtable();
             BC1__.Add("HH", 6); BC1__.Add("II", 2461); BC1__.Add("KH", 406); BC1__.Add("OH", -1378);
