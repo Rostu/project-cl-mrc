@@ -176,21 +176,21 @@ namespace JADE
                     {
                         using (openFileStream)
                         {
-                            // Make sure you read from the file or it won't be able
-                            // to guess the encoding
+                            //Muss sicher gehen, dass von einen Textfile gelesen wird.
+                            //Oder es ist unmöglich zu unterscheiden welche Encodings vorliegen.
                             var file = openFileStream.ReadToEnd();
 
-                            // Create two different encodings.
+                            //Erstellt zwei Unterschiedliche Encodings.
                             Encoding utf8 = Encoding.UTF8;
                             Encoding detectedEncoding = EncodingTools.GetMostEfficientEncoding(file);
 
-                            // Convert the string into a byte array.
+                            //Konvertiert String in ein Byte-Array.
                             byte[] detectedEncodingBytes = detectedEncoding.GetBytes(file);
 
-                            // Perform the conversion from one encoding to the other.
+                            //Fuehrt die Konvergierungen von einem zum andern Encoding aus.
                             byte[] utf8Bytes = Encoding.Convert(detectedEncoding, utf8, detectedEncodingBytes);
 
-                            // Convert the new byte[] into a char[] and then into a string.
+                            //Konvertiert das neue Byte[] in ein Char[] und dann in einen String.
                             char[] utf8Chars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
                             utf8.GetChars(utf8Bytes, 0, utf8Bytes.Length, utf8Chars, 0);
 
