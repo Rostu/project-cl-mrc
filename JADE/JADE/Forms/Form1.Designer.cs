@@ -76,7 +76,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(704, 146);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "１３日、千葉県東金市のファミリーレストランの店内で男性が拳銃で撃たれて殺害された事件で、警察は、殺人などの疑いで全国に指名手配している元暴力団員の男の写真を公開し" +
-    "、行方を捜査しています。";
+                "、行方を捜査しています。";
             // 
             // treeView1
             // 
@@ -104,6 +104,7 @@
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(567, 108);
             this.flowLayoutPanel1.TabIndex = 10;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // menuStrip1
             // 
