@@ -561,51 +561,52 @@ namespace JADE
                     word = "";                              //Zwischenspeicher fuer das Token wird geloescht.
                     p = "B";                                //p wird geaendert um die geaenderte Anfangswahrscheinlichkeit in den naechsten Schleifendurchlauf zu bringen.
                 }
-                //um ein Zeichen weiter ruecken. 
+                //um ein Zeichen weiterruecken. 
                 p1 = p2;
                 p2 = p3;
                 p3 = p;
                 word += seg[i].ToString();
             }
-            result.Add(word);
+            result.Add(word);                               //Der Rest wird als Wort in result angehaengt.
 
-            //Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur
+            
+            //Funktionen zum Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur.
+            Daten rueck = new Daten();                  //Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist).
+            ArrayList container = new ArrayList();      //Zwischenspeicher fuer die Token/Satz-Daten.
 
-            Daten rueck = new Daten();                  //Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist)
-            ArrayList container = new ArrayList();
-
-            //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste"(hilf) geschrieben und zum "Text-Container hinzugefügt"
+            //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste"(hilf) geschrieben und zum "Text-Container hinzugefügt".
             //Beinhaltet die unelegante Loesung fuer das Auftreten von mehreren Satzendzeichen.
-            int x = 0;
-            for (int i = 0; i < result.Count; i++)
+            int x = 0;                                                  //Hilfsvariable.
+            for (int i = 0; i < result.Count; i++)                      //Fuer alle Eintraege in dem result Array. 
             {
-                if ((Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")) || (Equals(result[i], "。。")) || (Equals(result[i], "！！")) || (Equals(result[i], "？？")))
+                if ((Equals(result[i], "。")) || (Equals(result[i], "！")) || (Equals(result[i], "？")) || (Equals(result[i], "。。")) || (Equals(result[i], "！！")) || (Equals(result[i], "？？")))    //Wenn aktueller Eintrag ein Satzendzeichen.
                 {
-                    ArrayList hilf = new ArrayList();
-                    for (int y = x; y <= i; y++)
+                    ArrayList hilf = new ArrayList();                   //Array das als Zwischenspeicher fuer den aktuellen Satz fungiert.
+                    for (int y = x; y <= i; y++)                        //Leauft ueber die Indexwerte welche den aktuellen Satz bilden. 
                     {
-                        hilf.Add(result[y]);
+                        hilf.Add(result[y]);                            //Schreibt die Elemente nacheinander in hilf.
                     }
-                    container.Add(hilf);
-                    x = i + 1;
+                    container.Add(hilf);                                //Fuegt den Satz zu dem Zwischenspeicher hinzu.
+                    x = i + 1;                                          //x wird auf i+1 gesetzt um die Schleife beim naechten Satzendzeichen nach der Endposition des letzten Satzes zu beginnen.
                 }
             }
-            //Falls am Ende kein Satzendzeichen steht, oder ueberhaupt kein Satzendzeichen vorkommt, wird der Rest bzw Alles als ein Satz übergeben.
+            //Falls am Ende kein Satzendzeichen steht wird der Rest als ein Satz uebergeben.
+            //Ist noch verbesserungswuerdig aber erfuellt seinen Zweck.
             int z = result.Count;
-            if (!((Equals(result[result.Count - 1], "。")) || (Equals(result[result.Count - 1], "！")) || (Equals(result[result.Count - 1], "？"))))
+            if (!((Equals(result[result.Count - 1], "。")) || (Equals(result[result.Count - 1], "！")) || (Equals(result[result.Count - 1], "？"))))      //Wenn aktueller Eintrag ein Satzendzeichen.
             {
-                ArrayList hilf = new ArrayList();
-                for (int y = x; y <= result.Count - 1; y++)
+                ArrayList hilf = new ArrayList();                       //Array das als Zwischenspeicher fuer den aktuellen Satz fungiert.
+                for (int y = x; y <= result.Count - 1; y++)             //Leauft ueber die Indexwerte welche den aktuellen Satz bilden. 
                 {
-                    hilf.Add(result[y]);
+                    hilf.Add(result[y]);                                //Schreibt die Elemente nacheinander in hilf.
                 }
-                container.Add(hilf);
+                container.Add(hilf);                                    //Fuegt den Satz zu dem Zwischenspeicher hinzu.
             }
-            rueck.Zugriff = container;
-            return rueck;
+            rueck.Zugriff = container;                                  //Schreibt den Zwischenspeicher in die Datenstruktur.
+            return rueck;                                               //Gibt rueck zurueck.
         }
 
-        //Erhält einen String, vergleicht diesen mit den Einträgen in der Hashtable chartype_ und gibt wenn gefunden den Schlüsselwert zurück. 
+        //Erhaelt einen String, vergleicht diesen mit den Eintraegen in der Hashtable chartype_ und gibt wenn gefunden den Schluesselwert zurueck. 
         //Die Funktion dient also zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
         private string ctype_(String str)
         {
@@ -622,7 +623,7 @@ namespace JADE
                 return "O"; 
         }
 
-        //Erhält eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
+        //Erhaelt eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
         private int ts_(Hashtable table, String s)
         {
             foreach (DictionaryEntry element in table)
@@ -637,64 +638,62 @@ namespace JADE
             return 0;
         }
 
-        private String type(String eingabe)                                 //Funktion die Testet ob der Eingabe Sring der Japanischen Sprache zugehoerig ist 
+        //Funktion die Testet ob der Eingabe Sring der Japanischen Sprache zugehoerig ist. 
+        private String type(String eingabe)                                 
         {
-            Hashtable hash = new Hashtable();                               //erzeugt eine Hashtable in der im Folgenden einzelne Regular Expression Einträge zu den Japanischen unicode Zeichenentspechungen erstellt werden
-            Regex reg = new Regex("[\x3041-\x3096]");                       //erzeugt eine Regular Expression fuer Hiragana    
+            Hashtable hash = new Hashtable();                               //erzeugt eine Hashtable in der im Folgenden einzelne Regular Expression Einträge zu den japanischen unicode Zeichenentspechungen erstellt werden.
+            Regex reg = new Regex("[\x3041-\x3096]");                       //erzeugt eine Regular Expression fuer Hiragana.    
             //hash.Add(reg, "H");
-            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu 
-            reg = new Regex("[\x30A0-\x30FF]");                             //erzeugt eine Regular Expression fuer Katakana (Full Width)
+            hash.Add(reg, "J");                                             //Fuegt der Hashtabel die gerade geschaffene Regex als Key und einem String als Value zu. 
+            reg = new Regex("[\x30A0-\x30FF]");                             //erzeugt eine Regular Expression fuer Katakana (Full Width).
             //hash.Add(reg, "K");
-            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu      
-            reg = new Regex("[\x3400-\x4DB5\x4E00-\x9FCB\xF900-\xFA6A]");   //erzeugt eine Regular Expression fuer Kanji
+            hash.Add(reg, "J");                                             //Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.      
+            reg = new Regex("[\x3400-\x4DB5\x4E00-\x9FCB\xF900-\xFA6A]");   //erzeugt eine Regular Expression fuer Kanji.
             //hash.Add(reg, "J");
-            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
-            reg = new Regex("[\x2E80-\x2FD5]");                             //erzeugt eine Regular Expression fuer Kanji Radicale
+            hash.Add(reg, "J");                                             //Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.
+            reg = new Regex("[\x2E80-\x2FD5]");                             //erzeugt eine Regular Expression fuer Kanji Radicale.
             //hash.Add(reg, "R");
-            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
-            reg = new Regex("[\xFF5F-\xFF9F]");                             //erzeugt eine Regular Expression fuer Katakana and Punctuations (Half Width)
+            hash.Add(reg, "J");                                             //Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.
+            reg = new Regex("[\xFF5F-\xFF9F]");                             //erzeugt eine Regular Expression fuer Katakana and Punctuations (Half Width).
             //hash.Add(reg, "P");
-            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
-            reg = new Regex("[\x3000-\x303F]");                             //erzeugt eine Regular Expression fuer Japanische Symbole und Punctuations
+            hash.Add(reg, "J");                                             //Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.
+            reg = new Regex("[\x3000-\x303F]");                             //erzeugt eine Regular Expression fuer Japanische Symbole und Punctuations.
             //hash.Add(reg, "S");
-            hash.Add(reg, "J");                                             //Fuegt der hashtabe die gerade geschaffene Regex als Key und einem String als Value zu
-            reg = new Regex("[\xFF01-\xFF5E]");                             //erzeugt eine Regular Expression fuer Alphanumeric and Punctuation (Full Width)
+            hash.Add(reg, "J");                                             //Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.
+            reg = new Regex("[\xFF01-\xFF5E]");                             //erzeugt eine Regular Expression fuer Alphanumeric and Punctuation (Full Width).
             //hash.Add(reg, "W1");
             hash.Add(reg, "J");
-            /*
-            reg = new Regex("[a-zA-Z]");
-            hash.Add(reg, "W2");
-            reg = new Regex("[0-9]");
-            hash.Add(reg, "W2");
-            */
 
-            foreach (DictionaryEntry element in hash)                       //Durchlaufen der oben erstellten Hashtable
+            foreach (DictionaryEntry element in hash)                       //Durchlaufen der oben erstellten Hashtable.
             {
-                Regex rgx = (Regex)element.Key;                             //die Regular expression welche als Key in der Hashtable gespeichert ist wird rgx zugewiesen
+                Regex rgx = (Regex)element.Key;                             //die Regular expression welche als Key in der Hashtable gespeichert ist wird rgx zugewiesen.
 
-                if (rgx.IsMatch(eingabe))                                   //Falls der Eingabe String die Regular Expression Entspricht(mached)  
+                if (rgx.IsMatch(eingabe))                                   //Falls der Eingabe String die Regular Expression Entspricht(matched).  
                 {
-                    String s = (String)element.Value;                       //Der String aus dem Value der Regex wird als Rueckgabe String gespeichert
-                    return s;                                               //Rueckgabe String wird zurueck gegeben
+                    String s = (String)element.Value;                       //Der String aus dem Value der Regex wird als Rueckgabe String gespeichert.
+                    return s;                                               //Rueckgabe String wird zurueck gegeben.
                 }
             }
-            return "O";                                                     //Falls keine uebereinstimmung gefunden werden konnte wird der String "O" zurueck gegeben
+            return "O";                                                     //Falls keine Uebereinstimmung gefunden werden konnte wird der String "O" zurueck gegeben.
         }
 
-        public void TextTest(String text)                                   //TestFunktion um einen Text (eingabe String) auf dem Japanischen fremde Zeichen zu testen
+        //TestFunktion um einen Text (eingabe String) auf dem Japanischen fremde Zeichen zu testen.
+        //Gibt momentan bei jedem Vorkommen eines nicht japanischen Zeichens im Text eine Warnmeldung aus.
+        //Kann vielleicht noch angepasst werden.
+        public void TextTest(String text)                                   
         {
-            double count = 0;                                               //double Hilfsvariable
-            double rel = 0;                                                 //double Hilfsvariable
+            double count = 0;                                               //double Hilfsvariable.
+            double rel = 0;                                                 //double Hilfsvariable.
 
-            foreach (char ch in text)                                       //durchleauft alle zeichen des EIngabe Textes
+            foreach (char ch in text)                                       //durchleauft alle Zeichen des Eingabe-Textes.
             {
-                if (Equals(type(ch.ToString()), "J"))                       //Falls die Testfuntion(oben beschrieben) ein japanisches Zeichen ("J") als Rückgabe liefert
+                if (Equals(type(ch.ToString()), "J"))                       //Falls die Testfuntkion(oben beschrieben) ein japanisches Zeichen ("J") als Rückgabe liefert.
                 {
-                    count++;                                                //count zaehlt alle Japanischen Zeichen im Text
+                    count++;                                                //count zaehlt alle Japanischen Zeichen im Text.
                 }
             }
-            count = (text.Length) - count;                                  //liefert alle nicht erkannten und somit nicht japanischen Zeichen und bindet diesen Wert an Count
-            rel = count / (text.Length);                                    //der Variable rel wird hier die relative Haeufigkeit des Ereignisses "Kein japanisches Zeichen" zugeordnet 
+            count = (text.Length) - count;                                  //Liefert alle nicht erkannten und somit nicht japanischen Zeichen und bindet diesen Wert an count.
+            rel = count / (text.Length);                                    //Der Variable rel wird hier die relative Haeufigkeit des Ereignisses "Kein japanisches Zeichen" zugeordnet. 
             if (rel > 0)                                                    //Falls die relative Haeufigkeit groeßer 0 (sobald also nicht japanische Zeichen im Text vorhanden sind) erfolgt die Ausgabe der unten stehenden Message Box
             {
                 MessageBox.Show("Der Segmenter ist nur für japanischen Text geeignet.Schriftzeichen anderer Sprachen können fehlerhafte Segmentierungen zur Folge haben", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
