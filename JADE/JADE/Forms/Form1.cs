@@ -85,7 +85,7 @@ namespace JADE
                 }
 
                 this.textBox1.Text = satzText;                                                      //Uebergibt der Textbox den String mit dem Token.
-                this.flowLayoutPanel1.Controls.AddRange(checkBoxes.ToArray());                      //Uebergibt die Checkboxen an ein Array.
+                this.flowLayoutPanel1.Controls.AddRange(checkBoxes.ToArray());                      //Uebergibt die Checkboxen an ein Array und dann and das FlowLayoutPanel.
             }
         }
 
@@ -95,9 +95,9 @@ namespace JADE
             String toTok = this.richTextBox1.Text;                                                  //Fuegt Text aus Richtextbox in ein String.
             toTok = toTok.Replace("\n", "");                                                        //Ignoriert Zeilvorschub.
             toTok = toTok.Replace("\t", "");
-            toTok = toTok.Replace(" ", "");                                                         //Ignoriert Leerzeichen.
-            toTok = toTok.Replace("　", "");                                                        //Ignoriert doppeltes Leerzeichen,
-            this.richTextBox1.Text = toTok;                                                         //Fuegt text von Richtextbox erneunt an String an.
+            toTok = toTok.Replace(" ", "");                                                         //Loescht Leerzeichen.
+            toTok = toTok.Replace("　", "");                                                        //Loescht japanische Leerzeichen,
+            this.richTextBox1.Text = toTok;                                                         //Fuegt Text von Richtextbox erneunt an String an.
             segtest.TextTest(this.richTextBox1.Text);
             
             if (!(Equals(richTextBox1.Text, "")))                                                   //Wenn die Textbox nicht leer ist, laeuft Programm weiter.
@@ -119,7 +119,7 @@ namespace JADE
                     i++;
                 }
             }
-            else                                                                                    //Falls Textnox leer ist, wird eine Fehlermeldung ausgegeben.
+            else                                                                                    //Falls Textbox leer ist, wird eine Fehlermeldung ausgegeben.
             {
                 MessageBox.Show("Kein Text zum Tokenisieren gegeben", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -130,9 +130,9 @@ namespace JADE
         public void trennen(int Satznummer, int Tok)
         {
             String str = Instanzdaten.getToken(Satznummer, Tok);
-            BearbeitenFenster neumit = new BearbeitenFenster(Instanzdaten, Satznummer, Tok, str);           //Erzeugt bearbeiten Fenster und ruft dieses auf
-            neumit.FormClosing += new FormClosingEventHandler(frm2_FormClosing);                            //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler
-            neumit.Show();
+            BearbeitenFenster neumit = new BearbeitenFenster(Instanzdaten, Satznummer, Tok, str);           //Erzeugt Bearbeiten-Fenster.
+            neumit.FormClosing += new FormClosingEventHandler(frm2_FormClosing);                            //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler.
+            neumit.Show();                                                                                  //Zeigt das Bearbeiten-Fenster.
         }
 
         //EventHandler der bei Schließen des Bearbeiten-Fensters den Listener ausschaltet und das FlowlayoutPanel mit den Token(die Anzeige der Tokenliste) updatet.
@@ -144,14 +144,15 @@ namespace JADE
         }
 
         //Zusammenfuegen zweier Token 
+        //Noch ausgelegt auf kleine Textgroessen, muss noch angepasst werden um auslesen aller Daten fuer ein zusammenfuegen von Token zu verhindern.
         public void zusammen(int Satznummer, int Tok1, int Tok2)
         {
-            ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur
-            ArrayList Satz = Instanzdaten.getSatz(Satznummer);                                              //Heraus suchen des Satzes in welchem sich das zu aendernde Token befindet   
-            Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1
-            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberfluessigen tok2
-            Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist
-            Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur
+            ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur.
+            ArrayList Satz = Instanzdaten.getSatz(Satznummer);                                              //Heraussuchen des Satzes in welchem sich das zu aendernde Token befindet.   
+            Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1.
+            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberfluessigen tok2.
+            Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist.
+            Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur.
             SearchEngine.DisposeTable(Satznummer, Tok1);
             SearchEngine.DisposeTable(Satznummer, Tok2);
         }
