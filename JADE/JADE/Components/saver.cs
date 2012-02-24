@@ -6,17 +6,23 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-// Klasse welche zum speichern unserer Datenstruktur verwendet wird. Alles sehr allgemein gehalten, zum speichern wird später ein string für den Pfad und ein saveobjekt gebraucht.
-//Fuer das Saveobjekt git es eine eigene Klasse welche spaeter unsere Datenstruktur erhaelt und so nur als "Container" fungiert.
-
 namespace JADE
 {
+    /// <summary>
+    /// Klasse welche zum speichern unserer Datenstruktur verwendet wird. Alles sehr allgemein gehalten. Zum speichern wird später ein String für den Pfad und ein saveobjekt gebraucht.
+    /// Fuer das Saveobjekt git es eine eigene Klasse welche später unsere Datenstruktur erhält und so nur als "Container" fungiert.
+    /// </summary>
     class Saver
     {
-        public Saver() {}                                               //Leerer Konstruktor.
+        /**Leerer Konstruktor.*/
+        public Saver() {}
 
-        //Funktion zum Speichern. 
-        //Erhaelt einen String für den Filenamen und ein Objekt der SaveObjekt Klasse.
+        /**
+         * Funktion zum Speichern in eine Savedatei. 
+         * Erhaelt einen String für den Filenamen und ein Objekt der SaveObjekt Klasse.
+         * @param filename Zu speichernde Datei.
+         * @param saveObjekt  Objekt der SaveObjekt-Klasse. 
+         */
         public void Save(string filename, SaveObjekt saveObjekt)
         {
             Stream stream = File.Open(filename, FileMode.Create);       //Erstellt ein Filestream-Objekt (write). 
@@ -25,8 +31,11 @@ namespace JADE
             stream.Close();                                             //schließt den Stream.
         }
 
-        //Funktion zum Laden aus einer Savedatei. 
-        //Erhaelt String der zu ladenden Datei (Dateinamen) und gibt ein SaveObjekt-Objekt zurueck.
+        /**
+         * Funktion zum Laden aus einer Savedatei.
+        * Erhaelt String der zu ladenden Datei (Dateinamen) und gibt ein SaveObjekt-Objekt zurück.
+        * @param filename Zu ladende Datei.
+        */
         public SaveObjekt DeSave(string filename)
         {
             SaveObjekt saveObjekt;
