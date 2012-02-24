@@ -93,10 +93,10 @@ namespace JADE
         private void Tokenize_Click(object sender, EventArgs e)
         {
             String toTok = this.richTextBox1.Text;                                                  //Fuegt Text aus Richtextbox in ein String.
-            toTok = toTok.Replace("\n", "");                                                        //Ignoriert Zeilvorschub.
-            toTok = toTok.Replace("\t", "");
+            toTok = toTok.Replace("\n", "");                                                        //Loescht alle Zeilvorschübe.
+            toTok = toTok.Replace("\t", "");                                                        //Loescht alle Whitespacecharakter.
             toTok = toTok.Replace(" ", "");                                                         //Loescht Leerzeichen.
-            toTok = toTok.Replace("　", "");                                                        //Loescht japanische Leerzeichen,
+            toTok = toTok.Replace("　", "");                                                        //Loescht japanische Leerzeichen.
             this.richTextBox1.Text = toTok;                                                         //Fuegt Text von Richtextbox erneunt an String an.
             segtest.TextTest(this.richTextBox1.Text);
             
