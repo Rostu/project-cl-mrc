@@ -44,20 +44,26 @@ namespace JADE
         {
         }
 
-
-        //Korrigiert bei Klick auf eine Zelle in der Wörterbuchsuch-Ausgabe die Größenanpassung der Ausgabe.
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        /**
+        * EventFunktion: Korrigiert bei Klick auf eine Zelle in der Wörterbuchsuch-Ausgabe die Größenanpassung der Ausgabe.
+        */
+        private void event_dataGridView_Click(object sender, DataGridViewCellEventArgs e)
         {
             this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);   //Automatische Spaltenskalierung.
         }
 
-        //EventFunktion, nach Klick auf einen Satz wird das FlowLayoutPanel geupdatet und damit die richtigen Token angezeigt.
-        public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        /**
+        * EventFunktion: Nach Klick auf einen Satz wird das FlowLayoutPanel geupdatet und damit die richtigen Token angezeigt.
+        */
+        public void event_TreeViewItemSelect(object sender, TreeViewEventArgs e)
         {
             flowupdate();                                                                           //Ruft Funktion flowupdate auf.
         }
 
-        //Funktion zum Updaten der Token Anzeige
+         /**
+         * Funktion zum Updaten der Token Anzeige
+         * Überprüft welcher Statz in der Treeview Makiert ist und schreibt die Token dieses Satzes als Checkboxes in das FlowLayoutPanel.
+         */
         public void flowupdate()
         {   
             TreeNode selectedTreeNode = treeView1.SelectedNode;                                     //Erstellt TreeNodeobjekt.
@@ -95,7 +101,13 @@ namespace JADE
             }
         }
 
-        //EventFunktion, bei klick auf den Tokenize Button wird ......
+        /**
+         * EventFunktion: Bei klick auf den Tokenize Button wird wird der Text aus der Richtextbox Tokenisiert und in ein statisches Objekt unserer Daten-Struktur geschrieben.
+         * Zunächst wird der Text aus der Richtextbox von störenden Whitespace,Newline und anderen Chars bereinigt.
+         * Danach wird geprüft ob sich nicht japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung asgegeben.
+         * Sofern nun also Text vorhanden ist, wird dieser mit der TinySegmenter-Funktion tokenisiert.
+         * Danach werden die Daten ausgelesen und die vorhandenen Sätze in der Treeview repräsentiert.
+         */
         private void Tokenize_Click(object sender, EventArgs e)
         {
             String toTok = this.richTextBox1.Text;                                                  //Fuegt Text aus Richtextbox in ein String.
@@ -106,7 +118,7 @@ namespace JADE
             this.richTextBox1.Text = toTok;                                                         //Fuegt Text von Richtextbox erneunt an String an.
             segtest.TextTest(this.richTextBox1.Text);
             
-            if (!(Equals(richTextBox1.Text, "")))                                                   //Wenn die Textbox nicht leer ist, laeuft Programm weiter.
+            if (!(Equals(richTextBox1.Text, "")))                                                   //Wenn die Textbox nicht leer ist, läuft Programm weiter.
             {
                 suche.clearDataSet();
                 dataGridView1.DataSource = null;
@@ -118,7 +130,7 @@ namespace JADE
                 ArrayList Alist = Instanzdaten.Zugriff;                                             //Erstellt eine Arraylist.
 
                 int i = 0;
-                foreach (ArrayList a in Alist)                                                      //Fuer Jeden Eintrag im Array wird ein neuer Eintrag im Treeview erstellt.
+                foreach (ArrayList a in Alist)                                                      //Für Jeden Eintrag im Array wird ein neuer Eintrag im Treeview erstellt.
                 {
                     TreeNode Instanz = new TreeNode("Satz " +  ("" + (i + 1)).PadLeft(2,'0') + ": " + Instanzdaten.getToken(i, 0));
                     treeView1.Nodes.Add(Instanz);
@@ -131,39 +143,55 @@ namespace JADE
             }
 
         }
-     
-        //Trennen eines Token 
+
+        /**
+         * Funktion zum trennen eines Token in unserer Daten-Struktur.
+         * @param Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
+         * @param Tok Int-Wert des Tokens der aufgeteilt werden soll.
+         */
         public void trennen(int Satznummer, int Tok)
         {
             String str = Instanzdaten.getToken(Satznummer, Tok);
             BearbeitenFenster neumit = new BearbeitenFenster(Instanzdaten, Satznummer, Tok, str);           //Erzeugt Bearbeiten-Fenster.
-            neumit.FormClosing += new FormClosingEventHandler(frm2_FormClosing);                            //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler.
+            neumit.FormClosing += new FormClosingEventHandler(event_BearbeitenFensterSchliessen);                            //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler.
             neumit.Show();                                                                                  //Zeigt das Bearbeiten-Fenster.
         }
 
-        //EventHandler der bei Schließen des Bearbeiten-Fensters den Listener ausschaltet und das FlowlayoutPanel mit den Token(die Anzeige der Tokenliste) updatet.
-        void frm2_FormClosing(object sender, FormClosingEventArgs e)
+        /**
+         * EventHandler: Der bei Schließen des Bearbeiten-Fensters den Listener ausschaltet und das FlowlayoutPanel mit den Token (die Anzeige der Tokenliste) updatet.
+         */
+        void event_BearbeitenFensterSchliessen(object sender, FormClosingEventArgs e)
         {
             BearbeitenFenster neumit = (BearbeitenFenster)sender;
-            neumit.FormClosing -= new FormClosingEventHandler(frm2_FormClosing);
+            neumit.FormClosing -= new FormClosingEventHandler(event_BearbeitenFensterSchliessen);
             flowupdate();
         }
 
-        //Zusammenfuegen zweier Token 
-        //Noch ausgelegt auf kleine Textgroessen, muss noch angepasst werden um auslesen aller Daten fuer ein zusammenfuegen von Token zu verhindern.
+        /**
+         * Funktion zum Zusammenfuegen zweier Token in unserer Daten-Struktur.
+         * Noch ausgelegt auf kleine Textgrössen, muss noch angepasst werden um auslesen aller Daten für ein Zusammenfügen von Token zu verhindern.
+         * Außerdem werden noch zwei Int-Werte übergeben welche die zu bearbeitenden Token repräsentieren, es wäre aber nur ein Wert nötig.
+         * @param Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
+         * @param Tok1 Int-Wert des ersten Tokens der mit seinem Nachfolge-Token zusammengefügt werden soll.
+         * @param Tok2 Int-Wert des zweiten Tokens der mit seinem Vorgänger-Token zusammengefügt werden soll.
+         */
         public void zusammen(int Satznummer, int Tok1, int Tok2)
         {
             ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur.
-            ArrayList Satz = Instanzdaten.getSatz(Satznummer);                                              //Heraussuchen des Satzes in welchem sich das zu aendernde Token befindet.   
+            ArrayList Satz = Instanzdaten.getSatz(Satznummer);                                              //Heraussuchen des Satzes in welchem sich das zu ändernde Token befindet.   
             Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1.
-            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberfluessigen tok2.
-            Alist[Satznummer] = Satz;                                                                       //Schreiben des geaenderten Satzes in die Arraylist.
-            Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geaenderten ARRAYLIST zurueck in die Datenstruktur.
+            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberflüssigen tok2.
+            Alist[Satznummer] = Satz;                                                                       //Schreiben des geänderten Satzes in die Arraylist.
+            Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geänderten ARRAYLIST zurück in die Datenstruktur.
             SearchEngine.DisposeTable(Satznummer, Tok1);
             SearchEngine.DisposeTable(Satznummer, Tok2);
         }
 
-        private void öffnenToolStripMenuItem_Click_1(object sender, EventArgs e)
+        /**Funktion welche beim klick auf den Öffnen-Dialog im Menü aufgerufen wird.
+         * File-Open Dialog der das Auswählen einer Textdatei ermöglicht, welche dann gelesen und in die RichTextBox des Hauptfensters geschrieben wird.
+         * Das Programm arbeitet mit UTF-8 Kodierung, wesshalb vor dem Einlesen einer Datei deren Kodierung geprüft und nötigenfalls angepasst wird.
+         */ 
+        private void öffnenToolStripMenu_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
@@ -213,13 +241,15 @@ namespace JADE
 
         }
 
-        //Funktion die ausgefuehrt werden muss um zwei Token zu trennen oder zusammen zu fuehren.
-        private void button2_Click_1(object sender, EventArgs e)
+        /**EventFunktion: Bei klick auf den "Token bearbeiten"-Button.
+         * 
+         */ 
+        private void TokenBearbeiten_Click(object sender, EventArgs e)
         {
-            int count = 0;                                                          //Variable "count" wird eingefuehrt.
-            int first = 0;                                                          //Variable "first" wird eingefuehrt.
-            int second = 0;                                                         //Variable "second" wird eingefuehrt.
-            foreach (Control con in this.flowLayoutPanel1.Controls)                 //Zaehlt wie viel Checkboxen ausgewahelt wurden.
+            int count = 0;                                                          //Variable "count" wird eingeführt.
+            int first = 0;                                                          //Variable "first" wird eingeführt.
+            int second = 0;                                                         //Variable "second" wird eingeführt.
+            foreach (Control con in this.flowLayoutPanel1.Controls)                 //Zaehlt wie viel Checkboxen ausgewählt wurden.
             {
                 CheckBox box = (CheckBox)con;
                 int index = Int32.Parse(box.Name); 
@@ -263,8 +293,8 @@ namespace JADE
             }
         }
 
-        //Funktion zum Suchen von Token im Woerterbuch.
-        private void button1_Click_1(object sender, EventArgs e)
+        //Funktion zum Suchen von Token im Wörterbuch.
+        private void TokenSuchen_Click(object sender, EventArgs e)
         {
             int count = 0;                                                                  //Erzeugt die Variable "Count" mit dem Wert Null.
             int first = 0;                                                                  //Erzeugt die Variable "first" mit dem Wert Null.
