@@ -396,9 +396,7 @@ namespace JADE
 
             foreach (XElement elem in tr.Elements())
             {
-                //Console.WriteLine(elem.ToString());
                 string elemData = "";
-
 
                 if (elem.Name == xns + "text")
                 {
