@@ -31,8 +31,8 @@ namespace JADE
 
             this.Icon = new System.Drawing.Icon("jade.ico");
 
-            flowLayoutPanel1.HorizontalScroll.Enabled = false;
-            flowLayoutPanel1.HorizontalScroll.Visible = false;
+            flowLayoutPanel_Token.HorizontalScroll.Enabled = false;
+            flowLayoutPanel_Token.HorizontalScroll.Visible = false;
 
             Instanzdaten = new Daten();
             suche = SearchEngine.Engine;
@@ -49,7 +49,7 @@ namespace JADE
         */
         private void event_dataGridView_Click(object sender, DataGridViewCellEventArgs e)
         {
-            this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);   //Automatische Spaltenskalierung.
+            this.dataGridView_Suchergebnisse.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);   //Automatische Spaltenskalierung.
         }
 
         /**
@@ -66,12 +66,12 @@ namespace JADE
          */
         public void flowupdate()
         {   
-            TreeNode selectedTreeNode = treeView1.SelectedNode;                                     //Erstellt TreeNodeobjekt.
-            int satzIndex = this.treeView1.SelectedNode.Index;                                      //Gibt verweis auf aktuellen TreeNodeobjekt.
+            TreeNode selectedTreeNode = treeView_Sätze.SelectedNode;                                     //Erstellt TreeNodeobjekt.
+            int satzIndex = this.treeView_Sätze.SelectedNode.Index;                                      //Gibt verweis auf aktuellen TreeNodeobjekt.
             
             if (selectedTreeNode != null)                                                           //Wenn Treeview Saetze enhaelt, werden diese Eintraege hier geloescht.
             {
-                this.flowLayoutPanel1.Controls.Clear();                                             //Loescht alle Checkboxen aus dem Flowlayoutpannel.
+                this.flowLayoutPanel_Token.Controls.Clear();                                             //Loescht alle Checkboxen aus dem Flowlayoutpannel.
                 string satzText = "";                                                               //Erstellt leeren String.
                 List<Control> checkBoxes = new List<Control>();                                     //Erstellt ein Control fuer Checkboxes.
                 ArrayList satz = Instanzdaten.getSatz(satzIndex);                                   //Erstellt eine Arraylist und erhaelt den Satz der markiert wurde.
@@ -97,7 +97,7 @@ namespace JADE
                 }
 
                 this.textBox1.Text = satzText;                                                      //Uebergibt der Textbox den String mit dem Token.
-                this.flowLayoutPanel1.Controls.AddRange(checkBoxes.ToArray());                      //Uebergibt die Checkboxen an ein Array und dann and das FlowLayoutPanel.
+                this.flowLayoutPanel_Token.Controls.AddRange(checkBoxes.ToArray());                      //Uebergibt die Checkboxen an ein Array und dann and das FlowLayoutPanel.
             }
         }
 
@@ -121,10 +121,10 @@ namespace JADE
             if (!(Equals(richTextBox1.Text, "")))                                                   //Wenn die Textbox nicht leer ist, läuft Programm weiter.
             {
                 suche.clearDataSet();
-                dataGridView1.DataSource = null;
-                this.treeView1.Nodes.Clear();
+                dataGridView_Suchergebnisse.DataSource = null;
+                this.treeView_Sätze.Nodes.Clear();
                 this.textBox1.Text = "";
-                this.flowLayoutPanel1.Controls.Clear();
+                this.flowLayoutPanel_Token.Controls.Clear();
 
                 Instanzdaten = segtest.TinySegmenter(toTok);                                        //Weißt dem Objekt die Daten aus der richTextBox zu
                 ArrayList Alist = Instanzdaten.Zugriff;                                             //Erstellt eine Arraylist.
@@ -133,7 +133,7 @@ namespace JADE
                 foreach (ArrayList a in Alist)                                                      //Für Jeden Eintrag im Array wird ein neuer Eintrag im Treeview erstellt.
                 {
                     TreeNode Instanz = new TreeNode("Satz " +  ("" + (i + 1)).PadLeft(2,'0') + ": " + Instanzdaten.getToken(i, 0));
-                    treeView1.Nodes.Add(Instanz);
+                    treeView_Sätze.Nodes.Add(Instanz);
                     i++;
                 }
             }
@@ -242,14 +242,17 @@ namespace JADE
         }
 
         /**EventFunktion: Bei klick auf den "Token bearbeiten"-Button.
-         * 
-         */ 
+         * Überprüft zuerst ob eine korrekte Auswahl an Token (makierte checkBoxen in der FlowLayoutPanel) vorliegen. Bei fehlerhafter Auswahl erfolgt Fehlerhinweis.
+         * Sofern korrekte Auswahl vorliegt, wird unterschieden zwischen: 
+         * - 1 Token makiert --> Token trennen Funktion wird auf dem ausgewählten Token ausgeführt.
+         * - 2 Token makiert --> Token zusammen Funktion wird auf den ausgewählten Token ausgeführt.
+         */
         private void TokenBearbeiten_Click(object sender, EventArgs e)
         {
             int count = 0;                                                          //Variable "count" wird eingeführt.
             int first = 0;                                                          //Variable "first" wird eingeführt.
             int second = 0;                                                         //Variable "second" wird eingeführt.
-            foreach (Control con in this.flowLayoutPanel1.Controls)                 //Zaehlt wie viel Checkboxen ausgewählt wurden.
+            foreach (Control con in this.flowLayoutPanel_Token.Controls)                 //Zaehlt wie viel Checkboxen ausgewählt wurden.
             {
                 CheckBox box = (CheckBox)con;
                 int index = Int32.Parse(box.Name); 
@@ -275,7 +278,7 @@ namespace JADE
                 switch (count)
                 {
                     case 1:                                                         //Trennt die ausgewaehlten Token.
-                        trennen(this.treeView1.SelectedNode.Index, first);
+                        trennen(this.treeView_Sätze.SelectedNode.Index, first);
                         break;
                     case 2:
                         if (first + 1 != second)                                    //Fehlerausgabe wenn Checkboxen nicht nebeneinader liegen.
@@ -285,7 +288,7 @@ namespace JADE
                         }
                         else                                                        //Fuegt Token zusammen.
                         {
-                            zusammen(this.treeView1.SelectedNode.Index, first, second);
+                            zusammen(this.treeView_Sätze.SelectedNode.Index, first, second);
                             flowupdate();                                           //Ruft flowupdate-Funktion auf.
                             break;                                                  //beendet diese Funktion.
                         }
@@ -293,12 +296,15 @@ namespace JADE
             }
         }
 
-        //Funktion zum Suchen von Token im Wörterbuch.
+        /**EventFunktion: Bei klick auf den "Token suchen"-Button.
+         * Überprüft zuerst ob eine korrekte Auswahl an Token (makierte checkBoxen in der FlowLayoutPanel) vorliegen. Bei fehlerhafter Auswahl erfolgt Fehlerhinweis.
+         * Sofern richtige Auswahl vorliegt werden die vorliegenden Informationen (gewählter Token, detailierte Suche ja/nein) an die Suchfunktion search übergeben, welche eine Ergebnissliste(DataTable) erstellt und diese im GridView abbildet. 
+         */
         private void TokenSuchen_Click(object sender, EventArgs e)
         {
             int count = 0;                                                                  //Erzeugt die Variable "Count" mit dem Wert Null.
             int first = 0;                                                                  //Erzeugt die Variable "first" mit dem Wert Null.
-            foreach (Control con in this.flowLayoutPanel1.Controls)                         
+            foreach (Control con in this.flowLayoutPanel_Token.Controls)                         
             {
                 CheckBox box = (CheckBox)con;
                 int index = Int32.Parse(box.Name);
@@ -317,10 +323,10 @@ namespace JADE
             }
             if (count == 1)                                                                 //Eventhaendler, wenn genau eine Checkbox ausgewaehlt ist.
             {
-                DataTable result = suche.search(Instanzdaten.getToken(this.treeView1.SelectedNode.Index, first), this.treeView1.SelectedNode.Index, first, this.checkBox1.Checked);     //Sucht nun ueber den Index, ob es im Woerterbuch passenden Eintraege gibt.
+                DataTable result = suche.search(Instanzdaten.getToken(this.treeView_Sätze.SelectedNode.Index, first), this.treeView_Sätze.SelectedNode.Index, first, this.detailSucheCheckBox.Checked);     //Sucht nun ueber den Index, ob es im Woerterbuch passenden Eintraege gibt.
                 if (result.Rows.Count > 0)                                                  //Wenn etwas gefunden wurde, wird es in Datagridview geschrieben.
                 {
-                    this.dataGridView1.DataSource = result;
+                    this.dataGridView_Suchergebnisse.DataSource = result;
                 }
                 else                                                                        //Wenn kein Eintrag gefunden wurde, wird eine Meldung ausgegeben.
                 {

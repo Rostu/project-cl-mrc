@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HauptFenster));
             this.Tokenize = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.treeView_Sätze = new System.Windows.Forms.TreeView();
+            this.flowLayoutPanel_Token = new System.Windows.Forms.FlowLayoutPanel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,12 +41,12 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.detailSucheCheckBox = new System.Windows.Forms.CheckBox();
+            this.dataGridView_Suchergebnisse = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).BeginInit();
             this.SuspendLayout();
             // 
             // Tokenize
@@ -80,31 +80,31 @@
             // 
             // treeView1
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView1.Location = new System.Drawing.Point(0, 170);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4);
-            this.treeView1.MinimumSize = new System.Drawing.Size(130, 4);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(137, 352);
-            this.treeView1.TabIndex = 7;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.event_TreeViewItemSelect);
+            this.treeView_Sätze.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView_Sätze.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeView_Sätze.Location = new System.Drawing.Point(0, 170);
+            this.treeView_Sätze.Margin = new System.Windows.Forms.Padding(4);
+            this.treeView_Sätze.MinimumSize = new System.Drawing.Size(130, 4);
+            this.treeView_Sätze.Name = "treeView1";
+            this.treeView_Sätze.Size = new System.Drawing.Size(137, 352);
+            this.treeView_Sätze.TabIndex = 7;
+            this.treeView_Sätze.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.event_TreeViewItemSelect);
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Font = new System.Drawing.Font("MS PMincho", 12F);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(137, 265);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(170, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(567, 108);
-            this.flowLayoutPanel1.TabIndex = 10;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            this.flowLayoutPanel_Token.AutoScroll = true;
+            this.flowLayoutPanel_Token.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.flowLayoutPanel_Token.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel_Token.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel_Token.Font = new System.Drawing.Font("MS PMincho", 12F);
+            this.flowLayoutPanel_Token.Location = new System.Drawing.Point(137, 265);
+            this.flowLayoutPanel_Token.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel_Token.MinimumSize = new System.Drawing.Size(170, 2);
+            this.flowLayoutPanel_Token.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel_Token.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.flowLayoutPanel_Token.Size = new System.Drawing.Size(567, 108);
+            this.flowLayoutPanel_Token.TabIndex = 10;
+            this.flowLayoutPanel_Token.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // menuStrip1
             // 
@@ -145,7 +145,7 @@
             // 
             this.flowLayoutPanel2.Controls.Add(this.button2);
             this.flowLayoutPanel2.Controls.Add(this.button1);
-            this.flowLayoutPanel2.Controls.Add(this.checkBox1);
+            this.flowLayoutPanel2.Controls.Add(this.detailSucheCheckBox);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(137, 373);
             this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(100, 0);
@@ -179,26 +179,26 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.checkBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(289, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(205, 33);
-            this.checkBox1.TabIndex = 17;
-            this.checkBox1.Text = "Genaue Übereinstimmung";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.detailSucheCheckBox.AutoSize = true;
+            this.detailSucheCheckBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.detailSucheCheckBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detailSucheCheckBox.Location = new System.Drawing.Point(289, 3);
+            this.detailSucheCheckBox.Name = "checkBox1";
+            this.detailSucheCheckBox.Size = new System.Drawing.Size(205, 33);
+            this.detailSucheCheckBox.TabIndex = 17;
+            this.detailSucheCheckBox.Text = "Genaue Übereinstimmung";
+            this.detailSucheCheckBox.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(137, 412);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(567, 110);
-            this.dataGridView1.TabIndex = 14;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.event_dataGridView_Click);
+            this.dataGridView_Suchergebnisse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridView_Suchergebnisse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Suchergebnisse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Suchergebnisse.Location = new System.Drawing.Point(137, 412);
+            this.dataGridView_Suchergebnisse.Name = "dataGridView1";
+            this.dataGridView_Suchergebnisse.Size = new System.Drawing.Size(567, 110);
+            this.dataGridView_Suchergebnisse.TabIndex = 14;
+            this.dataGridView_Suchergebnisse.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.event_dataGridView_Click);
             // 
             // textBox1
             // 
@@ -219,12 +219,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(704, 522);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_Suchergebnisse);
             this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flowLayoutPanel_Token);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Tokenize);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.treeView_Sätze);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -238,7 +238,7 @@
             this.menuStrip1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,18 +248,18 @@
 
         private System.Windows.Forms.Button Tokenize;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        public System.Windows.Forms.TreeView treeView1;
-        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        public System.Windows.Forms.TreeView treeView_Sätze;
+        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Token;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem öffnenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_Suchergebnisse;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox detailSucheCheckBox;
         private System.Windows.Forms.RichTextBox textBox1;
     }
 }
