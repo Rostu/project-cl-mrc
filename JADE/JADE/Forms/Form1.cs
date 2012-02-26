@@ -32,20 +32,19 @@ namespace JADE
             segtest = new Segmenter();
 
         }
-
         //In Dieser Funktion wird unsere Form 1 geladen.
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
-        //Zeigt die Eintraege aus unsere Worterbuch an.
+
+        //Korrigiert bei Klick auf eine Zelle in der Wörterbuchsuch-Ausgabe die Größenanpassung der Ausgabe.
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             this.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);   //Automatische Spaltenskalierung.
         }
 
-        //Funktion zum Anzeigen der Saetze in einer Baumstruktur.
+        //EventFunktion, nach Klick auf einen Satz wird das FlowLayoutPanel geupdatet und damit die richtigen Token angezeigt.
         public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             flowupdate();                                                                           //Ruft Funktion flowupdate auf.
@@ -89,7 +88,7 @@ namespace JADE
             }
         }
 
-        //Funktion die den bei klick auf den Tokenize Button aufgerufen wird.
+        //EventFunktion, bei klick auf den Tokenize Button wird ......
         private void Tokenize_Click(object sender, EventArgs e)
         {
             String toTok = this.richTextBox1.Text;                                                  //Fuegt Text aus Richtextbox in ein String.
