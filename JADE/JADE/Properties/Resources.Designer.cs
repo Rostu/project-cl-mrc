@@ -11,10 +11,6 @@
 namespace JADE.Properties
 {
 
-
-    /// <summary>
-    ///   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
-    /// </summary>
     // Diese Klasse wurde von der StronglyTypedResourceBuilder-Klasse
     // über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
