@@ -88,7 +88,7 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(137, 352);
             this.treeView1.TabIndex = 7;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.event_TreeViewItemSelect);
             // 
             // flowLayoutPanel1
             // 
@@ -132,7 +132,7 @@
             this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
             this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.öffnenToolStripMenuItem.Text = "Öffnen";
-            this.öffnenToolStripMenuItem.Click += new System.EventHandler(this.öffnenToolStripMenuItem_Click_1);
+            this.öffnenToolStripMenuItem.Click += new System.EventHandler(this.öffnenToolStripMenu_Click);
             // 
             // beendenToolStripMenuItem
             // 
@@ -163,7 +163,7 @@
             this.button2.TabIndex = 14;
             this.button2.Text = "Token bearbeiten";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.button2.Click += new System.EventHandler(this.TokenBearbeiten_Click);
             // 
             // button1
             // 
@@ -175,7 +175,7 @@
             this.button1.TabIndex = 15;
             this.button1.Text = "Token suchen";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.TokenSuchen_Click);
             // 
             // checkBox1
             // 
@@ -198,7 +198,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(567, 110);
             this.dataGridView1.TabIndex = 14;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.event_dataGridView_Click);
             // 
             // textBox1
             // 
