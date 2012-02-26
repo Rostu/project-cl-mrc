@@ -40,7 +40,7 @@ namespace JADE
         /**
          * Trennen-Button Funktion. Überprüft ob sich die beiden Neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
          */
-        private void button1_Click(object sender, EventArgs e)
+        private void TrennenButton_Click(object sender, EventArgs e)
         {
             ArrayList Alist = obj.Zugriff;                                     //Zugriff auf Datenstruktur
             ArrayList Satz = (ArrayList)Alist[Satznummer];                     //Heraussuchen des Satzes in welchem sich das zu aendernde Token befindet  
@@ -62,8 +62,10 @@ namespace JADE
             }
         }
 
-
-        private void button2_Click(object sender, EventArgs e)
+        /**
+         * Abbrechen-Button Funktion. Schließt das BearbeitenFenster.
+         */
+        private void AbbrechenButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
