@@ -12,12 +12,21 @@ using System.Windows.Forms;
 
 namespace JADE
 {
+    /// <summary>
+    ///Form-Objekt(Windows Fenster) indem das Trennen eines Token in zwei neue Token realisiert wird.
+    /// </summary>
     public partial class BearbeitenFenster : Form
     {
         private int Satznummer;
         private int Tok;
         private Daten obj;
 
+        /**
+         * Konstruktor für das Bearbeiten-Fenster.
+         * @param obj Ein Objekt der Datenstruktur Daten.
+         * @param Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
+         * @param str String der den zu trennenden Token repräsentiert. 
+         */
         public BearbeitenFenster(Daten obj, int Satznummer, int Tok, String str)    //
         {
             this.Satznummer = Satznummer;
@@ -27,7 +36,10 @@ namespace JADE
             this.textBox3.Text = str;
             this.Icon = new System.Drawing.Icon("jade.ico");
         }
-
+        
+        /**
+         * Trennen-Button Funktion. Überprüft ob sich die beiden Neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
+         */
         private void button1_Click(object sender, EventArgs e)
         {
             ArrayList Alist = obj.Zugriff;                                     //Zugriff auf Datenstruktur

@@ -1,37 +1,4 @@
-﻿//This Tokenizer is heavily based on Taku Kudo's "Tiny Segmenter". 
-//Just adapted in c# and modified for the use in this project.
-
-/*
-Copyright (c) 2008, Taku Kudo
-
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-    * Redistributions of source code must retain the above copyright notice,
-this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-    * Neither the name of the <ORGANIZATION> nor the names of its
-contributors may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -44,11 +11,47 @@ using System.Windows.Forms;
 
 namespace JADE
 {
+    /// <summary>
+    ///Segmenter-Klasse enthällt die Funktionen zum Tokenisieren des Eingabe Textes.
+    ///
+    ///This Tokenizer is based on Taku Kudo's "Tiny Segmenter". 
+    ///Just adapted in c# and modified for the use in this project.
+    ///
+    /// Copyright (c) 2008, Taku Kudo
+    ///
+    /// All rights reserved.
+    /// 
+    /// * Redistributions of source code must retain the above copyright notice,
+    /// this list of conditions and the following disclaimer.
+    /// * Redistributions in binary form must reproduce the above copyright
+    /// notice, this list of conditions and the following disclaimer in the
+    /// documentation and/or other materials provided with the distribution.
+    /// * Neither the name of the <ORGANIZATION> nor the names of its
+    /// contributors may be used to endorse or promote products derived from this
+    /// software without specific prior written permission.
+    /// 
+    /// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+    /// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+    /// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+    /// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+    /// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    /// EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+    /// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+    /// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+    /// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+    /// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    /// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    /// </summary>
+    
     public class Segmenter
     {
         private Hashtable chartype_ = new Hashtable();      //Anlegen einer Hashtable welche später zur Zeichentypbestimmung genutzt wird.      
 
-        //Funktion welche einen String aus japanischen Zeichen in seine Token zerlegt.
+        /**
+         * Funktion welche einen String aus japanischen Zeichen in seine Token zerlegt.
+         * Die Funktion gibt ein Objekt unserer Daten-Klasse zurück.
+         * @param input String Variable mit dem zu Tokenisierenden Text.
+         */
         public Daten TinySegmenter(String input)
         {
             Regex reg = new Regex("[一二三四五六七八九十百千万億兆]");         //Erzeugen einer Regular Expression (Zahlzeichen).
@@ -65,10 +68,10 @@ namespace JADE
             chartype_.Add(reg, "N");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
 
             //Hier werden verschiedene Hashtables angelegt welche spaeter zur Scorebestimmung einzelner Zeichenkombinationen dienen.
-            //Dazu wird jeweils eine neue Hashtable erstellt und diese dann per Add Funktion mit Schluessel-Wert paaren gefuellt.
-            //Im Schluessel werden Zeichenkombinationen gespeichert (String) welche als Wert einen Score-Wert(Int) erhalten.
-            //Muss vielleicht nocheinmal ueberarbeitet werden weil die Add Methode verhaeltnismaeßig Rechenaufwendig ist. 
-            // der Bessern Uebersicht halber erfolgt bei vielen Add Befehlen in Folge ein Zeilenumbruch nach 4-6 Adds. 
+            //Dazu wird jeweils eine neue Hashtable erstellt und diese dann per Add Funktion mit Schlüssel-Wert paaren gefüllt.
+            //Im Schlüssel werden Zeichenkombinationen gespeichert (String) welche als Wert einen Score-Wert(Int) erhalten.
+            //Muss vielleicht nocheinmal überarbeitet werden weil die Add Methode verhältnismäßig Rechenaufwendig ist. 
+            // der Bessern Übersicht halber erfolgt bei vielen Add Befehlen in Folge ein Zeilenumbruch nach 4-6 Adds. 
             int BIAS__ = -332;
             Hashtable BC1__ = new Hashtable();
             BC1__.Add("HH", 6); BC1__.Add("II", 2461); BC1__.Add("KH", 406); BC1__.Add("OH", -1378);
@@ -460,7 +463,7 @@ namespace JADE
             UW6__.Add("郎", 1082); UW6__.Add("１", -270); UW6__.Add("Ｅ１", 306); UW6__.Add("ﾙ", -673);
             UW6__.Add("ﾝ", -496);
 
-            //Hier folgen die fuer das trennen des textes in Token wichtigen Code-Abschnitte.
+            //Hier folgen die für das Trennen des Textes in Token wichtigen Code-Abschnitte.
 
             ArrayList result = new ArrayList();                                 //Erstellt Arraylist in der spaeter die Ergebnis-Token fortlaufend gespeichert werden. 
             ArrayList seg = new ArrayList();                                    //Erstellt Arraylist in die spaeter alle einzel-Zeichen des Textes gespeichert werden. 
@@ -468,14 +471,14 @@ namespace JADE
             ArrayList ctype = new ArrayList();                                  //Erstellt Arraylist in die spaeter die Zeichentypen zu den einzel-Zeichen des Textes gespeichert werden. 
             ctype.Add("O"); ctype.Add("O"); ctype.Add("O");                     //Start-Elemente der Arraylist ctype werden gesetzt. 
 
-            //Erstellt Arraylist (o) und fuellt diese mit den Einzelzeichen aus dem Input(Text).
+            //Erstellt Arraylist (o) und füllt diese mit den Einzelzeichen aus dem Input(Text).
             ArrayList o = new ArrayList();
             foreach (char s in input)
             {
                 o.Add(s);
             }
 
-            //Fuegt die einzelnen Chars als Strings in die Arraylist seg und die Typen aus der Hashtable in ctype
+            //Fügt die einzelnen Chars als Strings in die Arraylist seg und die Typen aus der Hashtable in ctype
             for (int i = 0; i < o.Count; ++i)
             {
                 seg.Add(o[i]);
@@ -483,7 +486,7 @@ namespace JADE
                 String h2 = ctype_(h1);
                 ctype.Add(h2);
             }
-            //Fuegt in die Arraylisten seg und ctype 3 Schluss-Elemente ein.
+            //Fügt in die Arraylisten seg und ctype 3 Schluss-Elemente ein.
             seg.Add("E1");seg.Add("E2");seg.Add("E3");
             ctype.Add("O");ctype.Add("O");ctype.Add("O");
 
@@ -491,7 +494,7 @@ namespace JADE
             String p1 = "U";
             String p2 = "U";
             String p3 = "U";
-            //Durchlaufen der potentiellen Woerter(durch Kombination gebildet) und bei Uebereinstimmung mit Key-String aus den Hashtables folgt Addieren der in der Hashtable gespeicherten Werte zu Score
+            //Durchlaufen der potentiellen Woerter(durch Kombination gebildet) und bei Übereinstimmung mit Key-String aus den Hashtables folgt Addieren der in der Hashtable gespeicherten Werte zu Score
             for (int i = 4; i < seg.Count - 3; ++i)
             {
                 int score = BIAS__;
@@ -554,12 +557,12 @@ namespace JADE
 
                 String p = "O";                             //Kein Wort dann p= "O" --> daraus wuerde im naechsten Durchlauf der Schleife eine andere Anfangswahrscheinlichkeit gelten  
                 
-                //Wenn score > 0 dann liegt eine hohe Wahrscheinlichkeit fuer eine Wortgrenze vor.
+                //Wenn score > 0 dann liegt eine hohe Wahrscheinlichkeit für eine Wortgrenze vor.
                 if (score > 0)
                 {
                     result.Add(word);                       //Hinzufuegen der bisher in word gespeicherten Chars als Token in das Result Array
                     word = "";                              //Zwischenspeicher fuer das Token wird geloescht.
-                    p = "B";                                //p wird geaendert um die geaenderte Anfangswahrscheinlichkeit in den naechsten Schleifendurchlauf zu bringen.
+                    p = "B";                                //p wird geaendert um die geaenderte Anfangswahrscheinlichkeit in den nächsten Schleifendurchlauf zu bringen.
                 }
                 //um ein Zeichen weiterruecken. 
                 p1 = p2;
@@ -567,7 +570,7 @@ namespace JADE
                 p3 = p;
                 word += seg[i].ToString();
             }
-            result.Add(word);                               //Der Rest wird als Wort in result angehaengt.
+            result.Add(word);                               //Der Rest wird als Wort in result angehängt.
 
             
             //Funktionen zum Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur.
@@ -575,7 +578,7 @@ namespace JADE
             ArrayList container = new ArrayList();      //Zwischenspeicher fuer die Token/Satz-Daten.
 
             //Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine "Satz-Liste"(hilf) geschrieben und zum "Text-Container hinzugefügt".
-            //Beinhaltet die unelegante Loesung fuer das Auftreten von mehreren Satzendzeichen.
+            //Beinhaltet die unelegante Loesung für das Auftreten von mehreren Satzendzeichen.
             int x = 0;                                                  //Hilfsvariable.
             for (int i = 0; i < result.Count; i++)                      //Fuer alle Eintraege in dem result Array. 
             {
@@ -590,13 +593,13 @@ namespace JADE
                     x = i + 1;                                          //x wird auf i+1 gesetzt um die Schleife beim naechten Satzendzeichen nach der Endposition des letzten Satzes zu beginnen.
                 }
             }
-            //Falls am Ende kein Satzendzeichen steht wird der Rest als ein Satz uebergeben.
-            //Ist noch verbesserungswuerdig aber erfuellt seinen Zweck.
+            //Falls am Ende kein Satzendzeichen steht wird der Rest als ein Satz übergeben.
+            //Ist noch verbesserungswürdig aber erfüllt seinen Zweck.
             int z = result.Count;
             if (!((Equals(result[result.Count - 1], "。")) || (Equals(result[result.Count - 1], "！")) || (Equals(result[result.Count - 1], "？"))))      //Wenn aktueller Eintrag ein Satzendzeichen.
             {
-                ArrayList hilf = new ArrayList();                       //Array das als Zwischenspeicher fuer den aktuellen Satz fungiert.
-                for (int y = x; y <= result.Count - 1; y++)             //Leauft ueber die Indexwerte welche den aktuellen Satz bilden. 
+                ArrayList hilf = new ArrayList();                       //Array das als Zwischenspeicher für den aktuellen Satz fungiert.
+                for (int y = x; y <= result.Count - 1; y++)             //Läuft ueber die Indexwerte welche den aktuellen Satz bilden. 
                 {
                     hilf.Add(result[y]);                                //Schreibt die Elemente nacheinander in hilf.
                 }
@@ -606,8 +609,11 @@ namespace JADE
             return rueck;                                               //Gibt rueck zurueck.
         }
 
-        //Erhaelt einen String, vergleicht diesen mit den Eintraegen in der Hashtable chartype_ und gibt wenn gefunden den Schluesselwert zurueck. 
-        //Die Funktion dient also zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und sonstige)
+        /**
+        * Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und Sonstige)
+        * Erhält einen String, vergleicht diesen mit den Regular Expression-Einträgen in einer Hashtable und gibt bei match den Schlüsselwert(String) zurück. 
+        * @param str String Variable welche auf Zeichenart untersucht werden soll.
+        */
         private string ctype_(String str)
         {
             foreach (DictionaryEntry element in chartype_)
@@ -623,7 +629,11 @@ namespace JADE
                 return "O"; 
         }
 
-        //Erhaelt eine Hashtable und einen String, prueft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
+        /**
+      * Erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
+      * @param table Hashtable-Objekt.
+      * @param s String-Objekt das auf matching in der Hashtable geprüft werden soll.
+      */
         private int ts_(Hashtable table, String s)
         {
             foreach (DictionaryEntry element in table)
@@ -638,7 +648,13 @@ namespace JADE
             return 0;
         }
 
-        //Funktion die Testet ob der Eingabe Sring der Japanischen Sprache zugehoerig ist. 
+        /**
+         * Funktion die Testet ob ein Eingabe Sring der japanischen Sprache zugehörig ist. 
+         * Testet den eingegebenen String(in unserem Fall immer ein einzel-Char) mittles Regular Expression matching auf Zugehörigkeit zum japanischen Zeichensatz.
+         * Rückgabewerte sind String Objekte. "J" für japanisches Zeichen. "O" für nicht japanisches Zeichen.
+         * hier wurde nicht mit boolschen Rückgabe-Werten gearbeitet weil eine spätere Modifikation bzw. Spezifikation des Rückgabewertes möglich sein sollte. 
+         * @param eingabe String-Objekt das auf japanische Zeichen hin UNtersucht werden soll.
+         */
         private String type(String eingabe)                                 
         {
             Hashtable hash = new Hashtable();                               //erzeugt eine Hashtable in der im Folgenden einzelne Regular Expression Einträge zu den japanischen unicode Zeichenentspechungen erstellt werden.
@@ -677,9 +693,12 @@ namespace JADE
             return "O";                                                     //Falls keine Uebereinstimmung gefunden werden konnte wird der String "O" zurueck gegeben.
         }
 
-        //TestFunktion um einen Text (eingabe String) auf dem Japanischen fremde Zeichen zu testen.
-        //Gibt momentan bei jedem Vorkommen eines nicht japanischen Zeichens im Text eine Warnmeldung aus.
-        //Kann vielleicht noch angepasst werden.
+        /**
+         * TestFunktion um einen Text (eingabe String) auf dem Japanischen fremde Zeichen zu testen.
+         * Gibt momentan bei jedem Vorkommen eines nicht japanischen Zeichens im Text eine Warnmeldung aus.
+         * Muss evtl. noch angepasst werden.
+         * @param text String-Objekt das auf nicht japanische Zeichen hin Untersucht werden soll.
+         */
         public void TextTest(String text)                                   
         {
             double count = 0;                                               //double Hilfsvariable.

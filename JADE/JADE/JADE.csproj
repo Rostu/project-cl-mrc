@@ -103,7 +103,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Components\saveobject.cs" />
+    <Compile Include="Components\SaveObjekt.cs" />
     <Compile Include="Components\saver.cs" />
     <Compile Include="Components\SearchEngine.cs" />
     <Compile Include="Components\Segmenter.cs" />
