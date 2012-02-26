@@ -15,7 +15,7 @@ namespace JADE
     /// <summary>
     ///Form-Objekt(Windows Fenster) HauptFenster unserer Anwendung.
     /// </summary>
-    public partial class Form1 : Form
+    public partial class HauptFenster : Form
     {
         public static Daten Instanzdaten;
         private static SearchEngine suche;
@@ -25,7 +25,7 @@ namespace JADE
          * Konstruktor für das HauptFenster.
          * initialisiert die nötigen Komponenten
          */ 
-        public Form1()
+        public HauptFenster()
         {
             InitializeComponent();
 
