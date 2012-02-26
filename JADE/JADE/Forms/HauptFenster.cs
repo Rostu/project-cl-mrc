@@ -335,13 +335,21 @@ namespace JADE
             }
         }
 
-        //Funktion die das Programm beendet, wenn es der User wuenscht.
+        /**
+         * EventFunktion: Bei klick auf den Beenden-Menüeintrag.
+         * Schließt das Programm.
+         */ 
         private void beendenToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
 
-        //Funktion erhaelt Satznummer und Tokennummer und loescht aus der Woerterbuchergebnisliste den gefunden Eintrag. Dies ist erforderlich da bei einer Aenderung des Tokens aus der Ergebnisliste, nicht der alte Eintrag wieder aufgerufen werden soll, sondern der neue.
+        /**
+         * Fukntion zum Löschen eines Eintrages aus der Ergebnissliste der Suche.
+         * Dies ist erforderlich da nach der Änderung eines Tokens, aus der Ergebnisliste nicht der alte Eintrag wieder aufgerufen werden soll, sondern ein Neuer erstellt.
+         * @param satznummer Int-Wert des Satzes in dem sich der zu löschende Token befindet.
+         * @param tok Int-Wert des Tokens der gelöscht werden soll.
+         */
         public void TableDel(int satznummer,int tok)
         {
             SearchEngine.DisposeTable(satznummer, tok);
