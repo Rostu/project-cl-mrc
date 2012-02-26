@@ -39,13 +39,13 @@ namespace JADE
             segtest = new Segmenter();
 
         }
-        //In Dieser Funktion wird unsere Form 1 geladen.
+        //In dieser Funktion wird unsere Form 1 geladen.
         private void Form1_Load(object sender, EventArgs e)
         {
         }
 
         /**
-        * EventFunktion: Korrigiert bei Klick auf eine Zelle in der Wörterbuchsuch-Ausgabe die Größenanpassung der Ausgabe.
+        * EventFunktion: Korrigiert bei klick auf eine Zelle in der Wörterbuchsuch-Ausgabe die Größenanpassung der Ausgabe.
         */
         private void event_dataGridView_Click(object sender, DataGridViewCellEventArgs e)
         {
@@ -53,7 +53,7 @@ namespace JADE
         }
 
         /**
-        * EventFunktion: Nach Klick auf einen Satz wird das FlowLayoutPanel geupdatet und damit die richtigen Token angezeigt.
+        * EventFunktion: Nach klick auf einen Satz wird das FlowLayoutPanel geupdatet und damit die richtigen Token angezeigt.
         */
         public void event_TreeViewItemSelect(object sender, TreeViewEventArgs e)
         {
@@ -62,16 +62,16 @@ namespace JADE
 
          /**
          * Funktion zum Updaten der Token Anzeige
-         * Überprüft welcher Statz in der Treeview Makiert ist und schreibt die Token dieses Satzes als Checkboxes in das FlowLayoutPanel.
+         * Überprüft welcher Satz in der Treeview makiert ist und schreibt die Token dieses Satzes als Checkboxes in das FlowLayoutPanel.
          */
         public void flowupdate()
         {   
-            TreeNode selectedTreeNode = treeView_Sätze.SelectedNode;                                     //Erstellt TreeNodeobjekt.
-            int satzIndex = this.treeView_Sätze.SelectedNode.Index;                                      //Gibt verweis auf aktuellen TreeNodeobjekt.
+            TreeNode selectedTreeNode = treeView_Sätze.SelectedNode;                                //Erstellt TreeNodeobjekt.
+            int satzIndex = this.treeView_Sätze.SelectedNode.Index;                                 //Gibt Verweis auf aktuellen TreeNodeobjekt.
             
             if (selectedTreeNode != null)                                                           //Wenn Treeview Saetze enhaelt, werden diese Eintraege hier geloescht.
             {
-                this.flowLayoutPanel_Token.Controls.Clear();                                             //Loescht alle Checkboxen aus dem Flowlayoutpannel.
+                this.flowLayoutPanel_Token.Controls.Clear();                                        //Loescht alle Checkboxen aus dem Flowlayoutpannel.
                 string satzText = "";                                                               //Erstellt leeren String.
                 List<Control> checkBoxes = new List<Control>();                                     //Erstellt ein Control fuer Checkboxes.
                 ArrayList satz = Instanzdaten.getSatz(satzIndex);                                   //Erstellt eine Arraylist und erhaelt den Satz der markiert wurde.
@@ -97,14 +97,14 @@ namespace JADE
                 }
 
                 this.textBox1.Text = satzText;                                                      //Uebergibt der Textbox den String mit dem Token.
-                this.flowLayoutPanel_Token.Controls.AddRange(checkBoxes.ToArray());                      //Uebergibt die Checkboxen an ein Array und dann and das FlowLayoutPanel.
+                this.flowLayoutPanel_Token.Controls.AddRange(checkBoxes.ToArray());                 //Uebergibt die Checkboxen an ein Array und dann and das FlowLayoutPanel.
             }
         }
 
         /**
-         * EventFunktion: Bei klick auf den Tokenize Button wird wird der Text aus der Richtextbox Tokenisiert und in ein statisches Objekt unserer Daten-Struktur geschrieben.
+         * EventFunktion: Bei klick auf den Tokenize Button wird wird der Text aus der Richtextbox tokenisiert und in ein statisches Objekt unserer Daten-Struktur geschrieben.
          * Zunächst wird der Text aus der Richtextbox von störenden Whitespace,Newline und anderen Chars bereinigt.
-         * Danach wird geprüft ob sich nicht japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung asgegeben.
+         * Danach wird geprüft ob sich nicht japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung ausgegeben.
          * Sofern nun also Text vorhanden ist, wird dieser mit der TinySegmenter-Funktion tokenisiert.
          * Danach werden die Daten ausgelesen und die vorhandenen Sätze in der Treeview repräsentiert.
          */
@@ -168,7 +168,7 @@ namespace JADE
         }
 
         /**
-         * Funktion zum Zusammenfuegen zweier Token in unserer Daten-Struktur.
+         * Funktion zum zusammenfuegen zweier Token in unserer Daten-Struktur.
          * Noch ausgelegt auf kleine Textgrössen, muss noch angepasst werden um auslesen aller Daten für ein Zusammenfügen von Token zu verhindern.
          * Außerdem werden noch zwei Int-Werte übergeben welche die zu bearbeitenden Token repräsentieren, es wäre aber nur ein Wert nötig.
          * @param Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
@@ -345,7 +345,7 @@ namespace JADE
         }
 
         /**
-         * Fukntion zum Löschen eines Eintrages aus der Ergebnissliste der Suche.
+         * Funktion zum Löschen eines Eintrages aus der Ergebnisliste der Suche.
          * Dies ist erforderlich da nach der Änderung eines Tokens, aus der Ergebnisliste nicht der alte Eintrag wieder aufgerufen werden soll, sondern ein Neuer erstellt.
          * @param satznummer Int-Wert des Satzes in dem sich der zu löschende Token befindet.
          * @param tok Int-Wert des Tokens der gelöscht werden soll.
