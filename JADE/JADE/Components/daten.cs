@@ -55,25 +55,25 @@ namespace JADE
          * Funktion zur Rückgabe eines einzelnen Token(String) aus unseren Daten.
          * Erhällt zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.
          * @param Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
-         * @param Tok INt-Wert des gewünschten Token. 
+         * @param Tok Int-Wert des gewünschten Token. 
          */
         public String getToken(int Satznummer, int Tok)
         {
-            ArrayList hilf = this.getSatz(Satznummer);              //Erzeugt eine Variable vom Typ Arraylist und fuellt diese mit den Token aus dem Zielsatz.
-            return (String)hilf[Tok];                               //Konvertiert den Arraylisteintrag an der gewuenschten Position zu String und gibt diesen zurueck.
+            ArrayList hilf = this.getSatz(Satznummer);              //Erzeugt eine Variable vom Typ Arraylist und füllt diese mit den Token aus dem Zielsatz.
+            return (String)hilf[Tok];                               //Konvertiert den Arraylisteintrag an der gewünschten Position zu String und gibt diesen zurück.
         }
 
         /**
          * Funktion zur Rückgabe eines Satzes(ArrayList) aus unseren Daten.
-         * Erhällt zu diesem Zweck einen Int-Werte für Satznummer des gewuenschen Satzes.
+         * Erhällt zu diesem Zweck einen Int-Werte für Satznummer des gewünschen Satzes.
          * @param Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
          */
         public ArrayList getSatz(int Satznummer)
         {
             ArrayList hilf = new ArrayList();                       //Erzeugt Variable vom Typ Arraylist. 
             hilf = this.Zugriff;                                    //Weist der hilfsarralist die Daten zu.  
-            ArrayList rueckgabe = (ArrayList)hilf[Satznummer];      //Erzeugt eine Variable vom Typ Arraylist und weist dieser den gewuenschten Satz zu.
-            return rueckgabe;                                       //gibt den Satz zurueck.
+            ArrayList rueckgabe = (ArrayList)hilf[Satznummer];      //Erzeugt eine Variable vom Typ Arraylist und weist dieser den gewünschten Satz zu.
+            return rueckgabe;                                       //gibt den Satz zurück.
         }
 
         /**
