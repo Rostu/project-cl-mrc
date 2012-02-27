@@ -12,7 +12,6 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-
 namespace JADE
 {
     /// <summary>
@@ -65,7 +64,7 @@ namespace JADE
 
         /**
          * Funktion zur Rückgabe eines Satzes(ArrayList) aus unseren Daten.
-         * Erhällt zu diesem Zweck einen Int-Werte für Satznummer des gewünschen Satzes.
+         * Erhält zu diesem Zweck einen Int-Werte für Satznummer des gewünschten Satzes.
          * @param Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
          */
         public ArrayList getSatz(int Satznummer)
