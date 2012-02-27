@@ -8,13 +8,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace JADE
 {
     /// <summary>
-    ///Eine allgemein gehaltene Klasse die als Container fuer zu speichernde Daten fungiert.
-    ///Wird unsere Datenstruktur zum abspeichern bekommen, kann aber später auch andere Daten zum Speichern bekommen.
+    ///Eine allgemein gehaltene Klasse die als Container für zu speichernde Daten fungiert.
+    ///Wird unsere Datenstruktur zum abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.
     /// </summary>
     [Serializable()]
     public class SaveObjekt : ISerializable                                         //Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.
     {
-        private Daten[] list;                                                       //Erzeugt Array in dem zu Serialisierte Daten(in diesem fall ein Objekt unserer DatenKlasse) gespeichert werden.
+        private Daten[] list;                                                       //Erzeugt Array in dem zu Serialisierte Daten(in diesem Fall ein Objekt unserer DatenKlasse) gespeichert werden.
         
         /*Get und Set Methoden um Zugriff zu gewährleisten.*/
         public Daten[] Transfer                                                     
@@ -26,13 +26,13 @@ namespace JADE
         public SaveObjekt(){}
 
         /**
-         * Konstruktor fuer die Serialisation/DeSerilisation.
+         * Konstruktor für die Serialisation/DeSerilisation.
          * @param info  SerilizationInfo
          * @param ctxt  StreamingContext 
          */
         public SaveObjekt(SerializationInfo info, StreamingContext ctxt)            
         {
-            this.list = (Daten[])info.GetValue("LIST", typeof(Daten[]));            //Versieht die Klassenvariable mit den fuer die Serilisation benoetigten Informationen. 
+            this.list = (Daten[])info.GetValue("LIST", typeof(Daten[]));            //Versieht die Klassenvariable mit den für die Serilisation benötigten Informationen. 
         }
 
         /**

@@ -137,6 +137,7 @@
     <Content Include="jade.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Info.h" />
     <Content Include="wadoku.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

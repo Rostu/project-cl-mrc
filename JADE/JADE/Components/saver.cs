@@ -9,8 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace JADE
 {
     /// <summary>
-    /// Klasse welche zum speichern unserer Datenstruktur verwendet wird. Alles sehr allgemein gehalten. Zum speichern wird später ein String für den Pfad und ein saveobjekt gebraucht.
-    /// Fuer das Saveobjekt git es eine eigene Klasse welche später unsere Datenstruktur erhält und so nur als "Container" fungiert.
+    /// Klasse welche zum speichern unserer Datenstruktur verwendet wird. Alles sehr allgemein gehalten. Zum speichern wird später ein String für den Pfad und ein SaveObjekt gebraucht.
     /// </summary>
     class Saver
     {
@@ -19,9 +18,9 @@ namespace JADE
 
         /**
          * Funktion zum Speichern in eine Savedatei. 
-         * Erhaelt einen String für den Filenamen und ein Objekt der SaveObjekt Klasse.
-         * @param filename Zu speichernde Datei.
-         * @param saveObjekt  Objekt der SaveObjekt-Klasse. 
+         * Erhält einen String für den Filenamen und ein Objekt der SaveObjekt Klasse.
+         * @param filename String(Pfad/Dateiname) der zu speichernde Datei.
+         * @param saveObjekt Objekt der SaveObjekt-Klasse. 
          */
         public void Save(string filename, SaveObjekt saveObjekt)
         {
@@ -33,7 +32,7 @@ namespace JADE
 
         /**
          * Funktion zum Laden aus einer Savedatei.
-        * Erhaelt String der zu ladenden Datei (Dateinamen) und gibt ein SaveObjekt-Objekt zurück.
+        * Erhält String der zu ladenden Datei (Dateinamen) und gibt ein SaveObjekt-Objekt zurück.
         * @param filename Zu ladende Datei.
         */
         public SaveObjekt DeSave(string filename)
