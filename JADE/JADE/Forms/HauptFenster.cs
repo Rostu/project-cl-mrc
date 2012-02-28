@@ -146,8 +146,8 @@ namespace JADE
 
         /**
          * Funktion zum trennen eines Token in unserer Daten-Struktur.
-         * @param Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
-         * @param Tok Int-Wert des Tokens der aufgeteilt werden soll.
+         * @param[in] Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
+         * @param[in] Tok Int-Wert des Tokens der aufgeteilt werden soll.
          */
         public void trennen(int Satznummer, int Tok)
         {
@@ -168,12 +168,12 @@ namespace JADE
         }
 
         /**
-         * Funktion zum zusammenfuegen zweier Token in unserer Daten-Struktur.
+         * Funktion zum Zusammenfügen zweier Token in unserer Daten-Struktur.
          * Noch ausgelegt auf kleine Textgrössen, muss noch angepasst werden um auslesen aller Daten für ein Zusammenfügen von Token zu verhindern.
          * Außerdem werden noch zwei Int-Werte übergeben welche die zu bearbeitenden Token repräsentieren, es wäre aber nur ein Wert nötig.
-         * @param Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
-         * @param Tok1 Int-Wert des ersten Tokens der mit seinem Nachfolge-Token zusammengefügt werden soll.
-         * @param Tok2 Int-Wert des zweiten Tokens der mit seinem Vorgänger-Token zusammengefügt werden soll.
+         * @param[in] Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
+         * @param[in] Tok1 Int-Wert des ersten Tokens der mit seinem Nachfolge-Token zusammengefügt werden soll.
+         * @param[in] Tok2 Int-Wert des zweiten Tokens der mit seinem Vorgänger-Token zusammengefügt werden soll.
          */
         public void zusammen(int Satznummer, int Tok1, int Tok2)
         {
@@ -187,7 +187,7 @@ namespace JADE
             SearchEngine.DisposeTable(Satznummer, Tok2);
         }
 
-        /**Funktion welche beim klick auf den Öffnen-Dialog im Menü aufgerufen wird.
+        /**EventFunktion welche beim klick auf den Öffnen-Dialog im Menü aufgerufen wird.
          * File-Open Dialog der das Auswählen einer Textdatei ermöglicht, welche dann gelesen und in die RichTextBox des Hauptfensters geschrieben wird.
          * Das Programm arbeitet mit UTF-8 Kodierung, wesshalb vor dem Einlesen einer Datei deren Kodierung geprüft und nötigenfalls angepasst wird.
          */ 
@@ -347,8 +347,8 @@ namespace JADE
         /**
          * Funktion zum Löschen eines Eintrages aus der Ergebnisliste der Suche.
          * Dies ist erforderlich da nach der Änderung eines Tokens, aus der Ergebnisliste nicht der alte Eintrag wieder aufgerufen werden soll, sondern ein Neuer erstellt.
-         * @param satznummer Int-Wert des Satzes in dem sich der zu löschende Token befindet.
-         * @param tok Int-Wert des Tokens der gelöscht werden soll.
+         * @param[in] satznummer Int-Wert des Satzes in dem sich der zu löschende Token befindet.
+         * @param[in] tok Int-Wert des Tokens der gelöscht werden soll.
          */
         public void TableDel(int satznummer,int tok)
         {
