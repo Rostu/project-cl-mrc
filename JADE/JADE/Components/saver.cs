@@ -19,8 +19,8 @@ namespace JADE
         /**
          * Funktion zum Speichern in eine Savedatei. 
          * Erhält einen String für den Filenamen und ein Objekt der SaveObjekt Klasse.
-         * @param filename String(Pfad/Dateiname) der zu speichernde Datei.
-         * @param saveObjekt Objekt der SaveObjekt-Klasse. 
+         * @param[in] filename String(Pfad/Dateiname) der zu speichernde Datei.
+         * @param[in] saveObjekt Objekt der SaveObjekt-Klasse. 
          */
         public void Save(string filename, SaveObjekt saveObjekt)
         {
@@ -33,7 +33,8 @@ namespace JADE
         /**
          * Funktion zum Laden aus einer Savedatei.
         * Erhält String der zu ladenden Datei (Dateinamen) und gibt ein SaveObjekt-Objekt zurück.
-        * @param filename Zu ladende Datei.
+        * @param[in] filename Zu ladende Datei.
+        * @param[out] saveObjekt Objekt der Daten Klasse, enthällt die gelesenen Daten aus der Savedatei,
         */
         public SaveObjekt DeSave(string filename)
         {

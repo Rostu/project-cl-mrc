@@ -22,8 +22,8 @@ namespace JADE
         /**
          * Konstruktor für das Bearbeiten-Fenster.
          * @param obj Ein Objekt der Datenstruktur Daten.
-         * @param Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
-         * @param str String der den zu trennenden Token repräsentiert. 
+         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
+         * @param[in] str String der den zu trennenden Token repräsentiert. 
          */
         public BearbeitenFenster(Daten obj, int Satznummer, int Tok, String str)    //
         {

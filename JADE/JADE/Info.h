@@ -10,7 +10,7 @@
  -  Christopher Michels
  -  Mirko Daumann
  -  Robert Studtrucker
- -  Youness Al Quafy
+ -  Youness El Ouafy
 
  @section sec3 Ausblick
  Im weiteren möchten zumindest Teile der Projektgruppe an dem Projekt weiter arbeiten. Daher hier noch ein Paar Funktionen/Ziele die noch nicht Umgesetzt wurden aber folgen werden:
@@ -34,7 +34,7 @@
  *  <p>Die copyright notice findet sich in der Segmenter Klasse welche maßgeblich auf dem TinySegmenter aufbaut. </p>
  *  @subsection WaDoku
  *	<p>Ebenfalls frei verfügbar ist das von uns verwendete Wörterbuch, eine xml Version des Wörterbuchprojektes von Ulrich Apel.</p>
- * 	<p><a href="http://www.wadoku.de/wiki/pages/viewpage.action?pageId=357">http://www.wadoku.de/wiki/pages/viewpage.action?pageId=357</a></p>
+ * 	<p><a href="http://www.wadoku.de/wiki/x/ZQE">http://www.wadoku.de/wiki/x/ZQE</a></p>
  *	<p>Die copyright notice findet sich in der SearchEngine Klasse.</p>
  *  @subsection Sonstiges
  *  <p>Microsoft Visual Studio Professional 2010</p>

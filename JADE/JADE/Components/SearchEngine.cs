@@ -10,6 +10,11 @@ using System.Collections;
 
 namespace JADE
 {
+    /// <summary>
+    ///*<para>SearchEngine-Klasse enthällt die Funktionen zum suchen eines Token im Wörterbuch.
+    ///*Benutzt wurde eine XML-Dump des frei verfügbaren Wörterbuch-Projektes Wadoku</para>
+    ///*<para><a href="http://www.wadoku.de/wiki/x/ZQE">http://www.wadoku.de/wiki/x/ZQE</a></para>
+    /// </summary>
     public class SearchEngine
     {
         private static SearchEngine engine;

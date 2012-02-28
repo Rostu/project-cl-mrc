@@ -41,8 +41,8 @@ namespace JADE
 
         /**
          * Konstruktor fuer die Serialisation/DeSerilisation.
-         * @param info  SerilizationInfo
-         * @param ctxt  StreamingContext 
+         * @param[in] info  SerilizationInfo
+         * @param[in] ctxt  StreamingContext 
          */
         public Daten(SerializationInfo info, StreamingContext ctxt)
         {
@@ -53,8 +53,9 @@ namespace JADE
         /**
          * Funktion zur Rückgabe eines einzelnen Token(String) aus unseren Daten.
          * Erhällt zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.
-         * @param Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
-         * @param Tok Int-Wert des gewünschten Token. 
+         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
+         * @param[in] Tok Int-Wert des gewünschten Token. 
+         * @param[out] String Repräsentation eines Token aus der Daten Struktur.
          */
         public String getToken(int Satznummer, int Tok)
         {
@@ -65,7 +66,8 @@ namespace JADE
         /**
          * Funktion zur Rückgabe eines Satzes(ArrayList) aus unseren Daten.
          * Erhält zu diesem Zweck einen Int-Werte für Satznummer des gewünschten Satzes.
-         * @param Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
+         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
+         * @param[out] Arraylist(mit String Elementen) die den gewünschten Satz repräsentiert.
          */
         public ArrayList getSatz(int Satznummer)
         {
@@ -78,8 +80,8 @@ namespace JADE
         /**
         * Benötigt die Serialize Funktion.
         * Fügt der SerializeInfo informationen über das zu serialisierende Objekt hinzu.
-        * @param info Objekt vom Typ SerializationInfo
-        * @param ctxt Objekt vom Typ StreamingContext
+        * @param[in] info Objekt vom Typ SerializationInfo
+        * @param[in] ctxt Objekt vom Typ StreamingContext
         */
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
