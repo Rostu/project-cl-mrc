@@ -1,5 +1,6 @@
 ﻿/** @mainpage JaDe-Tokenizer 
- *
+ * <a href="index2.html" target="_parent"><b>Bedienungsanleitung</b></a>
+ *  <br/>
  *  @section sec2 Projekt-Zielsetzung
  *  
  *  Im Rahmen eines ein-semestrigen Projektseminars war es unser Ziel eine Windows-Forms Anwendung in c# zu erstellen.
@@ -40,4 +41,6 @@
  *  <p>Microsoft Visual Studio Professional 2010</p>
  *  <p>DoxyGen</p>
  *  <p><a href="http://www.stack.nl/~dimitri/doxygen/index.html">http://www.stack.nl/~dimitri/doxygen/index.html</a></p>
+ *  
+ *  
  */

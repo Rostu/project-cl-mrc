@@ -11,8 +11,8 @@ using System.Collections;
 namespace JADE
 {
     /// <summary>
-    ///*<para>SearchEngine-Klasse enthällt die Funktionen zum suchen eines Token im Wörterbuch.
-    ///*Benutzt wurde eine XML-Dump des frei verfügbaren Wörterbuch-Projektes Wadoku</para>
+    ///*SearchEngine-Klasse enthällt die Funktionen zum Suchen eines Token im Wörterbuch.
+    ///*<para>Benutzt wurde eine XML-Dump des frei verfügbaren Wörterbuch-Projektes Wadoku</para>
     ///*<para><a href="http://www.wadoku.de/wiki/x/ZQE">http://www.wadoku.de/wiki/x/ZQE</a></para>
     /// </summary>
     public class SearchEngine
@@ -25,7 +25,9 @@ namespace JADE
 
         private static Hashtable posDeciphering;
 
-
+        /**
+         * Private Konstruktor für die SearchEngine.
+         */ 
         private SearchEngine()
         {
             if (engine != null)
@@ -66,7 +68,10 @@ namespace JADE
 	            {"Undef", "Undefiniert"}
             };
         }
-
+        /**
+        * Public Konstruktor für die SearchEngine.
+         * Überprüft ob es schon ein Objekt der Klasse SearchEngine gibt und erstellt falls nicht ein Objekt.
+        */ 
         public static SearchEngine Engine
         {
             get
@@ -80,7 +85,9 @@ namespace JADE
         }
 
 
-
+        /**
+        * Funktion zum Leeren der Datatable in der sich die Suchergebnisse befinden
+        */ 
         public void clearDataSet()
         {
             while (dataSet.Tables.Count > 0)
@@ -89,7 +96,12 @@ namespace JADE
                 if (dataSet.Tables.CanRemove(table)) dataSet.Tables.Remove(table);
             }
         }
-
+        /**
+        * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn ein Token geändert wurde. Weil nun der bereits bestehende (alte) Eintrag aus der Datatable gelöscht werden muss,
+         * damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird.
+         * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet dessen Table-Objekt in dem Dataset gelöscht werden soll.
+         * @param[in] tokenNr Int-Wert des Tokens dessen Table-Objekt in dem Dataset gelöscht werden soll.
+        */
         public static void DisposeTable(int satzNr, int tokenNr)
         {
             DataTable tableToDispose = dataSet.Tables["results_" + satzNr + tokenNr];
@@ -99,6 +111,14 @@ namespace JADE
             if (dataSet.Tables.CanRemove(tableToDispose_absolute)) dataSet.Tables.Remove(tableToDispose_absolute);
         }
 
+        /**
+        * Suchfunktion. Erhällt Informationen über gesuchten Token, sucht in der Wadoku-xml und liefert eine Datatable mit Ergebnissen zurück. 
+         * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet der im Wörterbuch gesucht werden soll.
+         * @param[in] tokenNr Int-Wert des Tokens der im Wörterbuch gesucht werden soll.
+         * @param[in] token String-Repräsentation des gesuchten Token.
+         * @param[in] absolute bool-Wert der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht werden soll.
+         * @param[out] outputTable Datatable-Objekt mit den gefundenen Suchergebnissen.
+        */
         public DataTable search(string token, int satzNr, int tokenNr, bool absolute)
         {
             if (dataSet.Tables.Contains("results_" + satzNr + tokenNr + ((absolute) ? "_absolute" : "")))
@@ -123,7 +143,12 @@ namespace JADE
             }
 
         }
-
+        /**
+        * ......................................................INFOS
+         * @param[in] form .....................................INFOS
+         * @param[in] token ....................................INFOS
+         * @param[in] absolute bool-Wert der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
+        */
         private bool validateEntry(XElement form, string token, bool absolute)
         {
             bool entryIsValid = false;
@@ -140,6 +165,15 @@ namespace JADE
             return entryIsValid;
         }
 
+        /**
+        * Funktion erzeugt aus Suchergebnissen eine Datatable und fügt sie zum Dataset hinzu.
+         * @param[in] resEntries Suchergebnisse
+         * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet.
+         * @param[in] tokenNr Int-Wert des Tokens.
+         * @param[in] absolute bool-Wert der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
+         * @param[out] searchResults DataTable-Objekt mit den Suchergebnissen.
+         * 
+        */
         private DataTable createResultTable(XElement resEntries, int satzNr, int tokenNr, bool absolute)
         {
             DataTable searchResults = defineResultTable("results_" + satzNr + tokenNr + ((absolute) ? "_absolute" : ""));
@@ -188,6 +222,11 @@ namespace JADE
             return searchResults;
         }
 
+        /**
+         * .......................................................INFOS
+         * @param[in] tableName Name der zu erstellenden Table.
+         * @param[out] result Die fertig definierte Tabelle.
+         */
         private DataTable defineResultTable(string tableName)
         {
             DataTable result = new DataTable(tableName);            // Erzeugt ein neues DataTable-Objekt für die Suchergebnisse
@@ -252,6 +291,11 @@ namespace JADE
             return result;                                          // Gibt die fertig definierte Tabelle "result" zurück.
         }
 
+        /**
+         * ...............................................................INFOS
+         * @param[in] orth ...............................................INFOS
+         * @param[out] orthsString .......................................INFOS
+         */
         private string manage_orths(XElement orths)
         {
             List<String> orthsData = new List<String>();
@@ -294,6 +338,11 @@ namespace JADE
             return orthsString;
         }
 
+        /**
+         * ...............................................................INFOS
+         * @param[in] gramGrp XElement-Objekt.............................INFOS
+         * @param[out] String-Objekt .....................................INFOS
+         */
         private string manage_gramGrpData(XElement gramGrp)
         {
             List<String> gramGrpData = new List<String>();
@@ -346,6 +395,11 @@ namespace JADE
             return ((gramGrpString = String.Join("; ", gramGrpData)) != "") ? (gramGrpString + ";") : "";
         }
 
+        /**
+         * ...............................................................INFOS
+         * @param[in] prons XElement-Objekt...............................INFOS
+         * @param[out] pronsString String-Objekt..........................INFOS
+         */
         private string manage_prons(XElement prons)
         {
             List<String> pronsData = new List<String>();
@@ -388,6 +442,12 @@ namespace JADE
             return pronsString;
         }
 
+
+        /**
+         * ............................................................INFOS
+         * @param[in] tr XElement-Objekt...............................INFOS
+         * @param[out] trData String-Objekt ...........................INFOS
+         */
         private string manage_trContent(XElement tr)
         {
             //Console.WriteLine(tr.ToString());
@@ -506,6 +566,11 @@ namespace JADE
             return trData;
         }
 
+        /**
+         * .................................................................INFOS
+         * @param[in] bracket XElement-Objekt...............................INFOS
+         * @param[out] String-Objekt .......................................INFOS
+         */
         private string manage_bracketData(XElement bracket)
         {
             List<String> elemsPerBracket = new List<String>();
