@@ -18,6 +18,7 @@ namespace JADE
     public class SearchEngine
     {
         private static SearchEngine engine;
+        /**Variable Test text............*/ 
         private static System.Data.DataSet dataSet;
 
         private static XNamespace xns = "http://www.wadoku.de/xml/entry";
