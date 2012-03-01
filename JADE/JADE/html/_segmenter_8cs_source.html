@@ -1,0 +1,860 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>JaDe Tokenizer: Segmenter.cs Quellcode</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  <td id="projectlogo"><img alt="Logo" src="JaDe.jpg"/></td>
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">JaDe Tokenizer
+   
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Erzeugt von Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Pakete</span></a></li>
+      <li><a href="annotated.html"><span>Klassen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+    </ul>
+  </div>
+</div>
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+  initNavTree('_segmenter_8cs.html','');
+</script>
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle">
+<div class="title">Segmenter.cs</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<a name="l00002"></a>00002 <span class="keyword">using</span> System.Collections;
+<a name="l00003"></a>00003 <span class="keyword">using</span> System.Collections.Generic;
+<a name="l00004"></a>00004 <span class="keyword">using</span> System.Text.RegularExpressions;
+<a name="l00005"></a>00005 <span class="keyword">using</span> System.ComponentModel;
+<a name="l00006"></a>00006 <span class="keyword">using</span> System.Linq;
+<a name="l00007"></a>00007 <span class="keyword">using</span> System.Text;
+<a name="l00008"></a>00008 <span class="keyword">using</span> System.Drawing;
+<a name="l00009"></a>00009 <span class="keyword">using</span> System.Windows.Forms;
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="keyword">namespace </span>JADE
+<a name="l00013"></a>00013 {<span class="comment"></span>
+<a name="l00014"></a>00014 <span class="comment">    /// &lt;summary&gt;</span>
+<a name="l00015"></a>00015 <span class="comment">    ///Segmenter-Klasse enthält die Funktionen zum Tokenisieren des Eingabe Textes.</span>
+<a name="l00016"></a>00016 <span class="comment">    ///</span>
+<a name="l00017"></a>00017 <span class="comment">    ///This Tokenizer is based on Taku Kudo&#39;s &quot;Tiny Segmenter&quot;. </span>
+<a name="l00018"></a>00018 <span class="comment">    ///Just adapted in c# and modified for the use in this project.</span>
+<a name="l00019"></a>00019 <span class="comment">    ///</span>
+<a name="l00020"></a>00020 <span class="comment">    /// Copyright (c) 2008, Taku Kudo</span>
+<a name="l00021"></a>00021 <span class="comment">    ///</span>
+<a name="l00022"></a>00022 <span class="comment">    /// All rights reserved.</span>
+<a name="l00023"></a>00023 <span class="comment">    /// </span>
+<a name="l00024"></a>00024 <span class="comment">    /// - Redistributions of source code must retain the above copyright notice,</span>
+<a name="l00025"></a>00025 <span class="comment">    /// this list of conditions and the following disclaimer.</span>
+<a name="l00026"></a>00026 <span class="comment">    /// - Redistributions in binary form must reproduce the above copyright</span>
+<a name="l00027"></a>00027 <span class="comment">    /// notice, this list of conditions and the following disclaimer in the</span>
+<a name="l00028"></a>00028 <span class="comment">    /// documentation and/or other materials provided with the distribution.</span>
+<a name="l00029"></a>00029 <span class="comment">    /// - Neither the name of the &lt;ORGANIZATION&gt; nor the names of its</span>
+<a name="l00030"></a>00030 <span class="comment">    /// contributors may be used to endorse or promote products derived from this</span>
+<a name="l00031"></a>00031 <span class="comment">    /// software without specific prior written permission.</span>
+<a name="l00032"></a>00032 <span class="comment">    /// </span>
+<a name="l00033"></a>00033 <span class="comment">    /// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<a name="l00034"></a>00034 <span class="comment">    /// &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<a name="l00035"></a>00035 <span class="comment">    /// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span>
+<a name="l00036"></a>00036 <span class="comment">    /// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR</span>
+<a name="l00037"></a>00037 <span class="comment">    /// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,</span>
+<a name="l00038"></a>00038 <span class="comment">    /// EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,</span>
+<a name="l00039"></a>00039 <span class="comment">    /// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR</span>
+<a name="l00040"></a>00040 <span class="comment">    /// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF</span>
+<a name="l00041"></a>00041 <span class="comment">    /// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING</span>
+<a name="l00042"></a>00042 <span class="comment">    /// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS</span>
+<a name="l00043"></a>00043 <span class="comment">    /// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<a name="l00044"></a>00044 <span class="comment">    /// &lt;/summary&gt;</span>
+<a name="l00045"></a>00045 <span class="comment"></span>    
+<a name="l00046"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html">00046</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_j_a_d_e_1_1_segmenter.html" title="Segmenter-Klasse enthält die Funktionen zum Tokenisieren des Eingabe Textes.">Segmenter</a>
+<a name="l00047"></a>00047     {<span class="comment"></span>
+<a name="l00048"></a>00048 <span class="comment">        /**Private Variable vom Typ Hashtable. Wird in der Klasse zur Zeichentypbestimmung genutzt. */</span>
+<a name="l00049"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">00049</a>         <span class="keyword">private</span> Hashtable <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a> = <span class="keyword">new</span> Hashtable();      <span class="comment">//Anlegen einer Hashtable welche später zur Zeichentypbestimmung genutzt wird.      </span>
+<a name="l00050"></a>00050 <span class="comment"></span>
+<a name="l00051"></a>00051 <span class="comment">        /**</span>
+<a name="l00052"></a>00052 <span class="comment">         * Funktion welche einen String aus japanischen Zeichen in seine Token zerlegt.</span>
+<a name="l00053"></a>00053 <span class="comment">         * Die Funktion gibt ein Objekt unserer Daten Klasse zurück.</span>
+<a name="l00054"></a>00054 <span class="comment">         * @param[in] input String Variable mit dem zu Tokenisierenden Text.</span>
+<a name="l00055"></a>00055 <span class="comment">         */</span>
+<a name="l00056"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#aa5a65c30d371681628783c3b17be197c">00056</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#aa5a65c30d371681628783c3b17be197c">TinySegmenter</a>(String input)
+<a name="l00057"></a>00057         {
+<a name="l00058"></a>00058             Regex reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[一二三四五六七八九十百千万億兆]&quot;</span>);         <span class="comment">//Erzeugen einer Regular Expression (Zahlzeichen).</span>
+<a name="l00059"></a>00059             <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>.Add(reg, <span class="stringliteral">&quot;M&quot;</span>);                                         <span class="comment">//Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. </span>
+<a name="l00060"></a>00060             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[一-龠々〆ヵヶ]&quot;</span>);                               <span class="comment">//Erzeugen einer Regular Expression (Sonderzeichen).</span>
+<a name="l00061"></a>00061             <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>.Add(reg, <span class="stringliteral">&quot;H&quot;</span>);                                         <span class="comment">//Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. </span>
+<a name="l00062"></a>00062             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[ぁ-ん]&quot;</span>);                                      <span class="comment">//Erzeugen einer Regular Expression (Hiragana).</span>
+<a name="l00063"></a>00063             <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>.Add(reg, <span class="stringliteral">&quot;I&quot;</span>);                                         <span class="comment">//Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. </span>
+<a name="l00064"></a>00064             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[ァ-ヴーｱ-ﾝﾞｰ]&quot;</span>);                               <span class="comment">//Erzeugen einer Regular Expression (Katakana).</span>
+<a name="l00065"></a>00065             <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>.Add(reg, <span class="stringliteral">&quot;K&quot;</span>);                                         <span class="comment">//Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. </span>
+<a name="l00066"></a>00066             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[a-zA-Zａ-ｚＡ-Ｚ]&quot;</span>);                           <span class="comment">//Erzeugen einer Regular Expression (westliche Zeichen).</span>
+<a name="l00067"></a>00067             <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>.Add(reg, <span class="stringliteral">&quot;A&quot;</span>);                                         <span class="comment">//Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. </span>
+<a name="l00068"></a>00068             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[0-9０-９]&quot;</span>);                                   <span class="comment">//Erzeugen einer Regular Expression (Zahlen).</span>
+<a name="l00069"></a>00069             <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>.Add(reg, <span class="stringliteral">&quot;N&quot;</span>);                                         <span class="comment">//Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. </span>
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071             <span class="comment">//Hier werden verschiedene Hashtables angelegt welche später zur Scorebestimmung einzelner Zeichenkombinationen dienen.</span>
+<a name="l00072"></a>00072             <span class="comment">//Dazu wird jeweils eine neue Hashtable erstellt und diese dann per Add Funktion mit Schlüssel-Wert Paaren gefüllt.</span>
+<a name="l00073"></a>00073             <span class="comment">//Im Schlüssel werden Zeichenkombinationen gespeichert (String) welche als Wert einen Score-Wert(Int) erhalten.</span>
+<a name="l00074"></a>00074             <span class="comment">//Muss vielleicht nocheinmal überarbeitet werden, weil die Add Methode verhältnismäßig rechenaufwendig ist. </span>
+<a name="l00075"></a>00075             <span class="comment">//Der bessern Übersicht halber erfolgt bei vielen Add Befehlen in Folge ein Zeilenumbruch nach 4-6 Adds. </span>
+<a name="l00076"></a>00076             <span class="keywordtype">int</span> BIAS__ = -332;
+<a name="l00077"></a>00077             Hashtable BC1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00078"></a>00078             BC1__.Add(<span class="stringliteral">&quot;HH&quot;</span>, 6); BC1__.Add(<span class="stringliteral">&quot;II&quot;</span>, 2461); BC1__.Add(<span class="stringliteral">&quot;KH&quot;</span>, 406); BC1__.Add(<span class="stringliteral">&quot;OH&quot;</span>, -1378);
+<a name="l00079"></a>00079             Hashtable BC2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00080"></a>00080             BC2__.Add(<span class="stringliteral">&quot;AA&quot;</span>, -3267); BC2__.Add(<span class="stringliteral">&quot;AI&quot;</span>, 2744); BC2__.Add(<span class="stringliteral">&quot;AN&quot;</span>, -878); BC2__.Add(<span class="stringliteral">&quot;HH&quot;</span>, -4070);
+<a name="l00081"></a>00081             BC2__.Add(<span class="stringliteral">&quot;HM&quot;</span>, -1711); BC2__.Add(<span class="stringliteral">&quot;HN&quot;</span>, 4012); BC2__.Add(<span class="stringliteral">&quot;HO&quot;</span>, 3761); BC2__.Add(<span class="stringliteral">&quot;IA&quot;</span>, 1327);
+<a name="l00082"></a>00082             BC2__.Add(<span class="stringliteral">&quot;IH&quot;</span>, -1184); BC2__.Add(<span class="stringliteral">&quot;II&quot;</span>, -1332); BC2__.Add(<span class="stringliteral">&quot;IK&quot;</span>, 1721); BC2__.Add(<span class="stringliteral">&quot;IO&quot;</span>, 5492);
+<a name="l00083"></a>00083             BC2__.Add(<span class="stringliteral">&quot;KI&quot;</span>, 3831); BC2__.Add(<span class="stringliteral">&quot;KK&quot;</span>, -8741); BC2__.Add(<span class="stringliteral">&quot;MH&quot;</span>, -3132); BC2__.Add(<span class="stringliteral">&quot;MK&quot;</span>, 3334);
+<a name="l00084"></a>00084             BC2__.Add(<span class="stringliteral">&quot;OO&quot;</span>, -2920);
+<a name="l00085"></a>00085             Hashtable BC3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00086"></a>00086             BC3__.Add(<span class="stringliteral">&quot;HH&quot;</span>, 996); BC3__.Add(<span class="stringliteral">&quot;HI&quot;</span>, 626); BC3__.Add(<span class="stringliteral">&quot;HK&quot;</span>, -721); BC3__.Add(<span class="stringliteral">&quot;HN&quot;</span>, -1307);
+<a name="l00087"></a>00087             BC3__.Add(<span class="stringliteral">&quot;HO&quot;</span>, -836); BC3__.Add(<span class="stringliteral">&quot;IH&quot;</span>, -301); BC3__.Add(<span class="stringliteral">&quot;KK&quot;</span>, 2762); BC3__.Add(<span class="stringliteral">&quot;MK&quot;</span>, 1079);
+<a name="l00088"></a>00088             BC3__.Add(<span class="stringliteral">&quot;MM&quot;</span>, 4034); BC3__.Add(<span class="stringliteral">&quot;OA&quot;</span>, -1652); BC3__.Add(<span class="stringliteral">&quot;OH&quot;</span>, 266);
+<a name="l00089"></a>00089             Hashtable BP1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00090"></a>00090             BP1__.Add(<span class="stringliteral">&quot;BB&quot;</span>, 295); BP1__.Add(<span class="stringliteral">&quot;OB&quot;</span>, 304); BP1__.Add(<span class="stringliteral">&quot;OO&quot;</span>, -125); BP1__.Add(<span class="stringliteral">&quot;UB&quot;</span>, 352);
+<a name="l00091"></a>00091             Hashtable BP2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00092"></a>00092             BP2__.Add(<span class="stringliteral">&quot;BO&quot;</span>, 60); BP2__.Add(<span class="stringliteral">&quot;OO&quot;</span>, -1762);
+<a name="l00093"></a>00093             Hashtable BQ1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00094"></a>00094             BQ1__.Add(<span class="stringliteral">&quot;BHH&quot;</span>, 1150); BQ1__.Add(<span class="stringliteral">&quot;BHM&quot;</span>, 1521); BQ1__.Add(<span class="stringliteral">&quot;BII&quot;</span>, -1158); BQ1__.Add(<span class="stringliteral">&quot;BIM&quot;</span>, 886);
+<a name="l00095"></a>00095             BQ1__.Add(<span class="stringliteral">&quot;BMH&quot;</span>, 1208); BQ1__.Add(<span class="stringliteral">&quot;BNH&quot;</span>, 449); BQ1__.Add(<span class="stringliteral">&quot;BOH&quot;</span>, -91); BQ1__.Add(<span class="stringliteral">&quot;BOO&quot;</span>, -2597);
+<a name="l00096"></a>00096             BQ1__.Add(<span class="stringliteral">&quot;OHI&quot;</span>, 451); BQ1__.Add(<span class="stringliteral">&quot;OIH&quot;</span>, -296); BQ1__.Add(<span class="stringliteral">&quot;OKA&quot;</span>, 1851); BQ1__.Add(<span class="stringliteral">&quot;OKH&quot;</span>, -1020);
+<a name="l00097"></a>00097             BQ1__.Add(<span class="stringliteral">&quot;OKK&quot;</span>, 904); BQ1__.Add(<span class="stringliteral">&quot;OOO&quot;</span>, 2965);
+<a name="l00098"></a>00098             Hashtable BQ2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00099"></a>00099             BQ2__.Add(<span class="stringliteral">&quot;BHH&quot;</span>, 118); BQ2__.Add(<span class="stringliteral">&quot;BHI&quot;</span>, -1159); BQ2__.Add(<span class="stringliteral">&quot;BHM&quot;</span>, 466); BQ2__.Add(<span class="stringliteral">&quot;BIH&quot;</span>, -919);
+<a name="l00100"></a>00100             BQ2__.Add(<span class="stringliteral">&quot;BKK&quot;</span>, -1720); BQ2__.Add(<span class="stringliteral">&quot;BKO&quot;</span>, 864); BQ2__.Add(<span class="stringliteral">&quot;OHH&quot;</span>, -1139); BQ2__.Add(<span class="stringliteral">&quot;OHM&quot;</span>, -181);
+<a name="l00101"></a>00101             BQ2__.Add(<span class="stringliteral">&quot;OIH&quot;</span>, 153); BQ2__.Add(<span class="stringliteral">&quot;UHI&quot;</span>, -1146);
+<a name="l00102"></a>00102             Hashtable BQ3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00103"></a>00103             BQ3__.Add(<span class="stringliteral">&quot;BHH&quot;</span>, -792); BQ3__.Add(<span class="stringliteral">&quot;BHI&quot;</span>, 2664); BQ3__.Add(<span class="stringliteral">&quot;BII&quot;</span>, -299); BQ3__.Add(<span class="stringliteral">&quot;BKI&quot;</span>, 419);
+<a name="l00104"></a>00104             BQ3__.Add(<span class="stringliteral">&quot;BMH&quot;</span>, 937); BQ3__.Add(<span class="stringliteral">&quot;BMM&quot;</span>, 8335); BQ3__.Add(<span class="stringliteral">&quot;BNN&quot;</span>, 998); BQ3__.Add(<span class="stringliteral">&quot;BOH&quot;</span>, 775);
+<a name="l00105"></a>00105             BQ3__.Add(<span class="stringliteral">&quot;OHH&quot;</span>, 2174); BQ3__.Add(<span class="stringliteral">&quot;OHM&quot;</span>, 439); BQ3__.Add(<span class="stringliteral">&quot;OII&quot;</span>, 280); BQ3__.Add(<span class="stringliteral">&quot;OKH&quot;</span>, 1798);
+<a name="l00106"></a>00106             BQ3__.Add(<span class="stringliteral">&quot;OKI&quot;</span>, -793); BQ3__.Add(<span class="stringliteral">&quot;OKO&quot;</span>, -2242); BQ3__.Add(<span class="stringliteral">&quot;OMH&quot;</span>, -2402); BQ3__.Add(<span class="stringliteral">&quot;OOO&quot;</span>, 11699);
+<a name="l00107"></a>00107             Hashtable BQ4__ = <span class="keyword">new</span> Hashtable();
+<a name="l00108"></a>00108             BQ4__.Add(<span class="stringliteral">&quot;BHH&quot;</span>, -3895); BQ4__.Add(<span class="stringliteral">&quot;BIH&quot;</span>, 3761); BQ4__.Add(<span class="stringliteral">&quot;BII&quot;</span>, -4654); BQ4__.Add(<span class="stringliteral">&quot;BIK&quot;</span>, 1348);
+<a name="l00109"></a>00109             BQ4__.Add(<span class="stringliteral">&quot;BKK&quot;</span>, -1806); BQ4__.Add(<span class="stringliteral">&quot;BMI&quot;</span>, -3385); BQ4__.Add(<span class="stringliteral">&quot;BOO&quot;</span>, -12396); BQ4__.Add(<span class="stringliteral">&quot;OAH&quot;</span>, 926);
+<a name="l00110"></a>00110             BQ4__.Add(<span class="stringliteral">&quot;OHH&quot;</span>, 266); BQ4__.Add(<span class="stringliteral">&quot;OHK&quot;</span>, -2036); BQ4__.Add(<span class="stringliteral">&quot;ONN&quot;</span>, -973);
+<a name="l00111"></a>00111             Hashtable BW1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00112"></a>00112             BW1__.Add(<span class="stringliteral">&quot;,と&quot;</span>, 660); BW1__.Add(<span class="stringliteral">&quot;,同&quot;</span>, 727); BW1__.Add(<span class="stringliteral">&quot;B1あ&quot;</span>, 1404); BW1__.Add(<span class="stringliteral">&quot;B1同&quot;</span>, 542);
+<a name="l00113"></a>00113             BW1__.Add(<span class="stringliteral">&quot;、と&quot;</span>, 660); BW1__.Add(<span class="stringliteral">&quot;、同&quot;</span>, 727); BW1__.Add(<span class="stringliteral">&quot;」と&quot;</span>, 1682); BW1__.Add(<span class="stringliteral">&quot;あっ&quot;</span>, 1505);
+<a name="l00114"></a>00114             BW1__.Add(<span class="stringliteral">&quot;いう&quot;</span>, 1743); BW1__.Add(<span class="stringliteral">&quot;いっ&quot;</span>, -2055); BW1__.Add(<span class="stringliteral">&quot;いる&quot;</span>, 672); BW1__.Add(<span class="stringliteral">&quot;うし&quot;</span>, -4817);
+<a name="l00115"></a>00115             BW1__.Add(<span class="stringliteral">&quot;うん&quot;</span>, 665); BW1__.Add(<span class="stringliteral">&quot;から&quot;</span>, 3472); BW1__.Add(<span class="stringliteral">&quot;がら&quot;</span>, 600); BW1__.Add(<span class="stringliteral">&quot;こう&quot;</span>, -790);
+<a name="l00116"></a>00116             BW1__.Add(<span class="stringliteral">&quot;こと&quot;</span>, 2083); BW1__.Add(<span class="stringliteral">&quot;こん&quot;</span>, -1262); BW1__.Add(<span class="stringliteral">&quot;さら&quot;</span>, -4143); BW1__.Add(<span class="stringliteral">&quot;さん&quot;</span>, 4573);
+<a name="l00117"></a>00117             BW1__.Add(<span class="stringliteral">&quot;した&quot;</span>, 2641); BW1__.Add(<span class="stringliteral">&quot;して&quot;</span>, 1104); BW1__.Add(<span class="stringliteral">&quot;すで&quot;</span>, -3399); BW1__.Add(<span class="stringliteral">&quot;そこ&quot;</span>, 1977);
+<a name="l00118"></a>00118             BW1__.Add(<span class="stringliteral">&quot;それ&quot;</span>, -871); BW1__.Add(<span class="stringliteral">&quot;たち&quot;</span>, 1122); BW1__.Add(<span class="stringliteral">&quot;ため&quot;</span>, 601); BW1__.Add(<span class="stringliteral">&quot;った&quot;</span>, 3463);
+<a name="l00119"></a>00119             BW1__.Add(<span class="stringliteral">&quot;つい&quot;</span>, -802); BW1__.Add(<span class="stringliteral">&quot;てい&quot;</span>, 805); BW1__.Add(<span class="stringliteral">&quot;てき&quot;</span>, 1249); BW1__.Add(<span class="stringliteral">&quot;でき&quot;</span>, 1127);
+<a name="l00120"></a>00120             BW1__.Add(<span class="stringliteral">&quot;です&quot;</span>, 3445); BW1__.Add(<span class="stringliteral">&quot;では&quot;</span>, 844); BW1__.Add(<span class="stringliteral">&quot;とい&quot;</span>, -4915); BW1__.Add(<span class="stringliteral">&quot;とみ&quot;</span>, 1922);
+<a name="l00121"></a>00121             BW1__.Add(<span class="stringliteral">&quot;どこ&quot;</span>, 3887); BW1__.Add(<span class="stringliteral">&quot;ない&quot;</span>, 5713); BW1__.Add(<span class="stringliteral">&quot;なっ&quot;</span>, 3015); BW1__.Add(<span class="stringliteral">&quot;など&quot;</span>, 7379);
+<a name="l00122"></a>00122             BW1__.Add(<span class="stringliteral">&quot;なん&quot;</span>, -1113); BW1__.Add(<span class="stringliteral">&quot;にし&quot;</span>, 2468); BW1__.Add(<span class="stringliteral">&quot;には&quot;</span>, 1498); BW1__.Add(<span class="stringliteral">&quot;にも&quot;</span>, 1671);
+<a name="l00123"></a>00123             BW1__.Add(<span class="stringliteral">&quot;に対&quot;</span>, -912); BW1__.Add(<span class="stringliteral">&quot;の一&quot;</span>, -501); BW1__.Add(<span class="stringliteral">&quot;の中&quot;</span>, 741); BW1__.Add(<span class="stringliteral">&quot;ませ&quot;</span>, 2448);
+<a name="l00124"></a>00124             BW1__.Add(<span class="stringliteral">&quot;まで&quot;</span>, 1711); BW1__.Add(<span class="stringliteral">&quot;まま&quot;</span>, 2600); BW1__.Add(<span class="stringliteral">&quot;まる&quot;</span>, -2155); BW1__.Add(<span class="stringliteral">&quot;やむ&quot;</span>, -1947);
+<a name="l00125"></a>00125             BW1__.Add(<span class="stringliteral">&quot;よっ&quot;</span>, -2565); BW1__.Add(<span class="stringliteral">&quot;れた&quot;</span>, 2369); BW1__.Add(<span class="stringliteral">&quot;れで&quot;</span>, -913); BW1__.Add(<span class="stringliteral">&quot;をし&quot;</span>, 1860);
+<a name="l00126"></a>00126             BW1__.Add(<span class="stringliteral">&quot;を見&quot;</span>, 731); BW1__.Add(<span class="stringliteral">&quot;亡く&quot;</span>, -1886); BW1__.Add(<span class="stringliteral">&quot;京都&quot;</span>, 2558); BW1__.Add(<span class="stringliteral">&quot;取り&quot;</span>, -2784);
+<a name="l00127"></a>00127             BW1__.Add(<span class="stringliteral">&quot;大き&quot;</span>, -2604); BW1__.Add(<span class="stringliteral">&quot;大阪&quot;</span>, 1497); BW1__.Add(<span class="stringliteral">&quot;平方&quot;</span>, -2314); BW1__.Add(<span class="stringliteral">&quot;引き&quot;</span>, -1336);
+<a name="l00128"></a>00128             BW1__.Add(<span class="stringliteral">&quot;日本&quot;</span>, -195); BW1__.Add(<span class="stringliteral">&quot;本当&quot;</span>, -2423); BW1__.Add(<span class="stringliteral">&quot;毎日&quot;</span>, -2113); BW1__.Add(<span class="stringliteral">&quot;目指&quot;</span>, -724);
+<a name="l00129"></a>00129             BW1__.Add(<span class="stringliteral">&quot;Ｂ１あ&quot;</span>, 1404); BW1__.Add(<span class="stringliteral">&quot;Ｂ１同&quot;</span>, 542); BW1__.Add(<span class="stringliteral">&quot;｣と&quot;</span>, 1682);
+<a name="l00130"></a>00130             Hashtable BW2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00131"></a>00131             BW2__.Add(<span class="stringliteral">&quot;..&quot;</span>, -11822); BW2__.Add(<span class="stringliteral">&quot;11&quot;</span>, -669); BW2__.Add(<span class="stringliteral">&quot;――&quot;</span>, -5730); BW2__.Add(<span class="stringliteral">&quot;−−&quot;</span>, -13175);
+<a name="l00132"></a>00132             BW2__.Add(<span class="stringliteral">&quot;いう&quot;</span>, -1609); BW2__.Add(<span class="stringliteral">&quot;うか&quot;</span>, 2490); BW2__.Add(<span class="stringliteral">&quot;かし&quot;</span>, -1350); BW2__.Add(<span class="stringliteral">&quot;かも&quot;</span>, -602);
+<a name="l00133"></a>00133             BW2__.Add(<span class="stringliteral">&quot;から&quot;</span>, -7194); BW2__.Add(<span class="stringliteral">&quot;かれ&quot;</span>, 4612); BW2__.Add(<span class="stringliteral">&quot;がい&quot;</span>, 853); BW2__.Add(<span class="stringliteral">&quot;がら&quot;</span>, -3198);
+<a name="l00134"></a>00134             BW2__.Add(<span class="stringliteral">&quot;きた&quot;</span>, 1941); BW2__.Add(<span class="stringliteral">&quot;くな&quot;</span>, -1597); BW2__.Add(<span class="stringliteral">&quot;こと&quot;</span>, -8392); BW2__.Add(<span class="stringliteral">&quot;この&quot;</span>, -4193);
+<a name="l00135"></a>00135             BW2__.Add(<span class="stringliteral">&quot;させ&quot;</span>, 4533); BW2__.Add(<span class="stringliteral">&quot;され&quot;</span>, 13168); BW2__.Add(<span class="stringliteral">&quot;さん&quot;</span>, -3977); BW2__.Add(<span class="stringliteral">&quot;しい&quot;</span>, -1819);
+<a name="l00136"></a>00136             BW2__.Add(<span class="stringliteral">&quot;しか&quot;</span>, -545); BW2__.Add(<span class="stringliteral">&quot;した&quot;</span>, 5078); BW2__.Add(<span class="stringliteral">&quot;して&quot;</span>, 972); BW2__.Add(<span class="stringliteral">&quot;しな&quot;</span>, 939);
+<a name="l00137"></a>00137             BW2__.Add(<span class="stringliteral">&quot;その&quot;</span>, -3744); BW2__.Add(<span class="stringliteral">&quot;たい&quot;</span>, -1253); BW2__.Add(<span class="stringliteral">&quot;たた&quot;</span>, -662); BW2__.Add(<span class="stringliteral">&quot;ただ&quot;</span>, -3857);
+<a name="l00138"></a>00138             BW2__.Add(<span class="stringliteral">&quot;たち&quot;</span>, -786); BW2__.Add(<span class="stringliteral">&quot;たと&quot;</span>, 1224); BW2__.Add(<span class="stringliteral">&quot;たは&quot;</span>, -939); BW2__.Add(<span class="stringliteral">&quot;った&quot;</span>, 4589);
+<a name="l00139"></a>00139             BW2__.Add(<span class="stringliteral">&quot;って&quot;</span>, 1647); BW2__.Add(<span class="stringliteral">&quot;っと&quot;</span>, -2094); BW2__.Add(<span class="stringliteral">&quot;てい&quot;</span>, 6144); BW2__.Add(<span class="stringliteral">&quot;てき&quot;</span>, 3640);
+<a name="l00140"></a>00140             BW2__.Add(<span class="stringliteral">&quot;てく&quot;</span>, 2551); BW2__.Add(<span class="stringliteral">&quot;ては&quot;</span>, -3110); BW2__.Add(<span class="stringliteral">&quot;ても&quot;</span>, -3065); BW2__.Add(<span class="stringliteral">&quot;でい&quot;</span>, 2666);
+<a name="l00141"></a>00141             BW2__.Add(<span class="stringliteral">&quot;でき&quot;</span>, -1528); BW2__.Add(<span class="stringliteral">&quot;でし&quot;</span>, -3828); BW2__.Add(<span class="stringliteral">&quot;です&quot;</span>, -4761); BW2__.Add(<span class="stringliteral">&quot;でも&quot;</span>, -4203);
+<a name="l00142"></a>00142             BW2__.Add(<span class="stringliteral">&quot;とい&quot;</span>, 1890); BW2__.Add(<span class="stringliteral">&quot;とこ&quot;</span>, -1746); BW2__.Add(<span class="stringliteral">&quot;とと&quot;</span>, -2279); BW2__.Add(<span class="stringliteral">&quot;との&quot;</span>, 720);
+<a name="l00143"></a>00143             BW2__.Add(<span class="stringliteral">&quot;とみ&quot;</span>, 5168); BW2__.Add(<span class="stringliteral">&quot;とも&quot;</span>, -3941); BW2__.Add(<span class="stringliteral">&quot;ない&quot;</span>, -2488); BW2__.Add(<span class="stringliteral">&quot;なが&quot;</span>, -1313);
+<a name="l00144"></a>00144             BW2__.Add(<span class="stringliteral">&quot;など&quot;</span>, -6509); BW2__.Add(<span class="stringliteral">&quot;なの&quot;</span>, 2614); BW2__.Add(<span class="stringliteral">&quot;なん&quot;</span>, 3099); BW2__.Add(<span class="stringliteral">&quot;にお&quot;</span>, -1615);
+<a name="l00145"></a>00145             BW2__.Add(<span class="stringliteral">&quot;にし&quot;</span>, 2748); BW2__.Add(<span class="stringliteral">&quot;にな&quot;</span>, 2454); BW2__.Add(<span class="stringliteral">&quot;によ&quot;</span>, -7236); BW2__.Add(<span class="stringliteral">&quot;に対&quot;</span>, -14943);
+<a name="l00146"></a>00146             BW2__.Add(<span class="stringliteral">&quot;に従&quot;</span>, -4688); BW2__.Add(<span class="stringliteral">&quot;に関&quot;</span>, -11388); BW2__.Add(<span class="stringliteral">&quot;のか&quot;</span>, 2093); BW2__.Add(<span class="stringliteral">&quot;ので&quot;</span>, -7059);
+<a name="l00147"></a>00147             BW2__.Add(<span class="stringliteral">&quot;のに&quot;</span>, -6041); BW2__.Add(<span class="stringliteral">&quot;のの&quot;</span>, -6125); BW2__.Add(<span class="stringliteral">&quot;はい&quot;</span>, 1073); BW2__.Add(<span class="stringliteral">&quot;はが&quot;</span>, -1033);
+<a name="l00148"></a>00148             BW2__.Add(<span class="stringliteral">&quot;はず&quot;</span>, -2532); BW2__.Add(<span class="stringliteral">&quot;ばれ&quot;</span>, 1813); BW2__.Add(<span class="stringliteral">&quot;まし&quot;</span>, -1316); BW2__.Add(<span class="stringliteral">&quot;まで&quot;</span>, -6621);
+<a name="l00149"></a>00149             BW2__.Add(<span class="stringliteral">&quot;まれ&quot;</span>, 5409); BW2__.Add(<span class="stringliteral">&quot;めて&quot;</span>, -3153); BW2__.Add(<span class="stringliteral">&quot;もい&quot;</span>, 2230); BW2__.Add(<span class="stringliteral">&quot;もの&quot;</span>, -10713);
+<a name="l00150"></a>00150             BW2__.Add(<span class="stringliteral">&quot;らか&quot;</span>, -944); BW2__.Add(<span class="stringliteral">&quot;らし&quot;</span>, -1611); BW2__.Add(<span class="stringliteral">&quot;らに&quot;</span>, -1897); BW2__.Add(<span class="stringliteral">&quot;りし&quot;</span>, 651);
+<a name="l00151"></a>00151             BW2__.Add(<span class="stringliteral">&quot;りま&quot;</span>, 1620); BW2__.Add(<span class="stringliteral">&quot;れた&quot;</span>, 4270); BW2__.Add(<span class="stringliteral">&quot;れて&quot;</span>, 849); BW2__.Add(<span class="stringliteral">&quot;れば&quot;</span>, 4114);
+<a name="l00152"></a>00152             BW2__.Add(<span class="stringliteral">&quot;ろう&quot;</span>, 6067); BW2__.Add(<span class="stringliteral">&quot;われ&quot;</span>, 7901); BW2__.Add(<span class="stringliteral">&quot;を通&quot;</span>, -11877); BW2__.Add(<span class="stringliteral">&quot;んだ&quot;</span>, 728);
+<a name="l00153"></a>00153             BW2__.Add(<span class="stringliteral">&quot;んな&quot;</span>, -4115); BW2__.Add(<span class="stringliteral">&quot;一人&quot;</span>, 602); BW2__.Add(<span class="stringliteral">&quot;一方&quot;</span>, -1375); BW2__.Add(<span class="stringliteral">&quot;一日&quot;</span>, 970);
+<a name="l00154"></a>00154             BW2__.Add(<span class="stringliteral">&quot;一部&quot;</span>, -1051); BW2__.Add(<span class="stringliteral">&quot;上が&quot;</span>, -4479); BW2__.Add(<span class="stringliteral">&quot;会社&quot;</span>, -1116); BW2__.Add(<span class="stringliteral">&quot;出て&quot;</span>, 2163);
+<a name="l00155"></a>00155             BW2__.Add(<span class="stringliteral">&quot;分の&quot;</span>, -7758); BW2__.Add(<span class="stringliteral">&quot;同党&quot;</span>, 970); BW2__.Add(<span class="stringliteral">&quot;同日&quot;</span>, -913); BW2__.Add(<span class="stringliteral">&quot;大阪&quot;</span>, -2471);
+<a name="l00156"></a>00156             BW2__.Add(<span class="stringliteral">&quot;委員&quot;</span>, -1250); BW2__.Add(<span class="stringliteral">&quot;少な&quot;</span>, -1050); BW2__.Add(<span class="stringliteral">&quot;年度&quot;</span>, -8669); BW2__.Add(<span class="stringliteral">&quot;年間&quot;</span>, -1626);
+<a name="l00157"></a>00157             BW2__.Add(<span class="stringliteral">&quot;府県&quot;</span>, -2363); BW2__.Add(<span class="stringliteral">&quot;手権&quot;</span>, -1982); BW2__.Add(<span class="stringliteral">&quot;新聞&quot;</span>, -4066); BW2__.Add(<span class="stringliteral">&quot;日新&quot;</span>, -722);
+<a name="l00158"></a>00158             BW2__.Add(<span class="stringliteral">&quot;日本&quot;</span>, -7068); BW2__.Add(<span class="stringliteral">&quot;日米&quot;</span>, 3372); BW2__.Add(<span class="stringliteral">&quot;曜日&quot;</span>, -601); BW2__.Add(<span class="stringliteral">&quot;朝鮮&quot;</span>, -2355);
+<a name="l00159"></a>00159             BW2__.Add(<span class="stringliteral">&quot;本人&quot;</span>, -2697); BW2__.Add(<span class="stringliteral">&quot;東京&quot;</span>, -1543); BW2__.Add(<span class="stringliteral">&quot;然と&quot;</span>, -1384); BW2__.Add(<span class="stringliteral">&quot;社会&quot;</span>, -1276);
+<a name="l00160"></a>00160             BW2__.Add(<span class="stringliteral">&quot;立て&quot;</span>, -990); BW2__.Add(<span class="stringliteral">&quot;第に&quot;</span>, -1612); BW2__.Add(<span class="stringliteral">&quot;米国&quot;</span>, -4268); BW2__.Add(<span class="stringliteral">&quot;１１&quot;</span>, -669);
+<a name="l00161"></a>00161             Hashtable BW3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00162"></a>00162             BW3__.Add(<span class="stringliteral">&quot;あた&quot;</span>, -2194); BW3__.Add(<span class="stringliteral">&quot;あり&quot;</span>, 719); BW3__.Add(<span class="stringliteral">&quot;ある&quot;</span>, 3846); BW3__.Add(<span class="stringliteral">&quot;い.&quot;</span>, -1185);
+<a name="l00163"></a>00163             BW3__.Add(<span class="stringliteral">&quot;い。&quot;</span>, -1185); BW3__.Add(<span class="stringliteral">&quot;いい&quot;</span>, 5308); BW3__.Add(<span class="stringliteral">&quot;いえ&quot;</span>, 2079); BW3__.Add(<span class="stringliteral">&quot;いく&quot;</span>, 3029);
+<a name="l00164"></a>00164             BW3__.Add(<span class="stringliteral">&quot;いた&quot;</span>, 2056); BW3__.Add(<span class="stringliteral">&quot;いっ&quot;</span>, 1883); BW3__.Add(<span class="stringliteral">&quot;いる&quot;</span>, 5600); BW3__.Add(<span class="stringliteral">&quot;いわ&quot;</span>, 1527);
+<a name="l00165"></a>00165             BW3__.Add(<span class="stringliteral">&quot;うち&quot;</span>, 1117); BW3__.Add(<span class="stringliteral">&quot;うと&quot;</span>, 4798); BW3__.Add(<span class="stringliteral">&quot;えと&quot;</span>, 1454); BW3__.Add(<span class="stringliteral">&quot;か.&quot;</span>, 2857);
+<a name="l00166"></a>00166             BW3__.Add(<span class="stringliteral">&quot;か。&quot;</span>, 2857); BW3__.Add(<span class="stringliteral">&quot;かけ&quot;</span>, -743); BW3__.Add(<span class="stringliteral">&quot;かっ&quot;</span>, -4098); BW3__.Add(<span class="stringliteral">&quot;かに&quot;</span>, -669);
+<a name="l00167"></a>00167             BW3__.Add(<span class="stringliteral">&quot;から&quot;</span>, 6520); BW3__.Add(<span class="stringliteral">&quot;かり&quot;</span>, -2670); BW3__.Add(<span class="stringliteral">&quot;が,&quot;</span>, 1816); BW3__.Add(<span class="stringliteral">&quot;が、&quot;</span>, 1816);
+<a name="l00168"></a>00168             BW3__.Add(<span class="stringliteral">&quot;がき&quot;</span>, -4855); BW3__.Add(<span class="stringliteral">&quot;がけ&quot;</span>, -1127); BW3__.Add(<span class="stringliteral">&quot;がっ&quot;</span>, -913); BW3__.Add(<span class="stringliteral">&quot;がら&quot;</span>, -4977);
+<a name="l00169"></a>00169             BW3__.Add(<span class="stringliteral">&quot;がり&quot;</span>, -2064); BW3__.Add(<span class="stringliteral">&quot;きた&quot;</span>, 1645); BW3__.Add(<span class="stringliteral">&quot;けど&quot;</span>, 1374); BW3__.Add(<span class="stringliteral">&quot;こと&quot;</span>, 7397);
+<a name="l00170"></a>00170             BW3__.Add(<span class="stringliteral">&quot;この&quot;</span>, 1542); BW3__.Add(<span class="stringliteral">&quot;ころ&quot;</span>, -2757); BW3__.Add(<span class="stringliteral">&quot;さい&quot;</span>, -714); BW3__.Add(<span class="stringliteral">&quot;さを&quot;</span>, 976);
+<a name="l00171"></a>00171             BW3__.Add(<span class="stringliteral">&quot;し,&quot;</span>, 1557); BW3__.Add(<span class="stringliteral">&quot;し、&quot;</span>, 1557); BW3__.Add(<span class="stringliteral">&quot;しい&quot;</span>, -3714); BW3__.Add(<span class="stringliteral">&quot;した&quot;</span>, 3562);
+<a name="l00172"></a>00172             BW3__.Add(<span class="stringliteral">&quot;して&quot;</span>, 1449); BW3__.Add(<span class="stringliteral">&quot;しな&quot;</span>, 2608); BW3__.Add(<span class="stringliteral">&quot;しま&quot;</span>, 1200); BW3__.Add(<span class="stringliteral">&quot;す.&quot;</span>, -1310);
+<a name="l00173"></a>00173             BW3__.Add(<span class="stringliteral">&quot;す。&quot;</span>, -1310); BW3__.Add(<span class="stringliteral">&quot;する&quot;</span>, 6521); BW3__.Add(<span class="stringliteral">&quot;ず,&quot;</span>, 3426); BW3__.Add(<span class="stringliteral">&quot;ず、&quot;</span>, 3426);
+<a name="l00174"></a>00174             BW3__.Add(<span class="stringliteral">&quot;ずに&quot;</span>, 841); BW3__.Add(<span class="stringliteral">&quot;そう&quot;</span>, 428); BW3__.Add(<span class="stringliteral">&quot;た.&quot;</span>, 8875); BW3__.Add(<span class="stringliteral">&quot;た。&quot;</span>, 8875);
+<a name="l00175"></a>00175             BW3__.Add(<span class="stringliteral">&quot;たい&quot;</span>, -594); BW3__.Add(<span class="stringliteral">&quot;たの&quot;</span>, 812); BW3__.Add(<span class="stringliteral">&quot;たり&quot;</span>, -1183); BW3__.Add(<span class="stringliteral">&quot;たる&quot;</span>, -853);
+<a name="l00176"></a>00176             BW3__.Add(<span class="stringliteral">&quot;だ.&quot;</span>, 4098); BW3__.Add(<span class="stringliteral">&quot;だ。&quot;</span>, 4098); BW3__.Add(<span class="stringliteral">&quot;だっ&quot;</span>, 1004); BW3__.Add(<span class="stringliteral">&quot;った&quot;</span>, -4748);
+<a name="l00177"></a>00177             BW3__.Add(<span class="stringliteral">&quot;って&quot;</span>, 300); BW3__.Add(<span class="stringliteral">&quot;てい&quot;</span>, 6240); BW3__.Add(<span class="stringliteral">&quot;てお&quot;</span>, 855); BW3__.Add(<span class="stringliteral">&quot;ても&quot;</span>, 302);
+<a name="l00178"></a>00178             BW3__.Add(<span class="stringliteral">&quot;です&quot;</span>, 1437); BW3__.Add(<span class="stringliteral">&quot;でに&quot;</span>, -1482); BW3__.Add(<span class="stringliteral">&quot;では&quot;</span>, 2295); BW3__.Add(<span class="stringliteral">&quot;とう&quot;</span>, -1387);
+<a name="l00179"></a>00179             BW3__.Add(<span class="stringliteral">&quot;とし&quot;</span>, 2266); BW3__.Add(<span class="stringliteral">&quot;との&quot;</span>, 541); BW3__.Add(<span class="stringliteral">&quot;とも&quot;</span>, -3543); BW3__.Add(<span class="stringliteral">&quot;どう&quot;</span>, 4664);
+<a name="l00180"></a>00180             BW3__.Add(<span class="stringliteral">&quot;ない&quot;</span>, 1796); BW3__.Add(<span class="stringliteral">&quot;なく&quot;</span>, -903); BW3__.Add(<span class="stringliteral">&quot;など&quot;</span>, 2135); BW3__.Add(<span class="stringliteral">&quot;に,&quot;</span>, -1021);
+<a name="l00181"></a>00181             BW3__.Add(<span class="stringliteral">&quot;に、&quot;</span>, -1021); BW3__.Add(<span class="stringliteral">&quot;にし&quot;</span>, 1771); BW3__.Add(<span class="stringliteral">&quot;にな&quot;</span>, 1906); BW3__.Add(<span class="stringliteral">&quot;には&quot;</span>, 2644);
+<a name="l00182"></a>00182             BW3__.Add(<span class="stringliteral">&quot;の,&quot;</span>, -724); BW3__.Add(<span class="stringliteral">&quot;の、&quot;</span>, -724); BW3__.Add(<span class="stringliteral">&quot;の子&quot;</span>, -1000); BW3__.Add(<span class="stringliteral">&quot;は,&quot;</span>, 1337);
+<a name="l00183"></a>00183             BW3__.Add(<span class="stringliteral">&quot;は、&quot;</span>, 1337); BW3__.Add(<span class="stringliteral">&quot;べき&quot;</span>, 2181); BW3__.Add(<span class="stringliteral">&quot;まし&quot;</span>, 1113); BW3__.Add(<span class="stringliteral">&quot;ます&quot;</span>, 6943);
+<a name="l00184"></a>00184             BW3__.Add(<span class="stringliteral">&quot;まっ&quot;</span>, -1549); BW3__.Add(<span class="stringliteral">&quot;まで&quot;</span>, 6154); BW3__.Add(<span class="stringliteral">&quot;まれ&quot;</span>, -793); BW3__.Add(<span class="stringliteral">&quot;らし&quot;</span>, 1479);
+<a name="l00185"></a>00185             BW3__.Add(<span class="stringliteral">&quot;られ&quot;</span>, 6820); BW3__.Add(<span class="stringliteral">&quot;るる&quot;</span>, 3818); BW3__.Add(<span class="stringliteral">&quot;れ,&quot;</span>, 854); BW3__.Add(<span class="stringliteral">&quot;れ、&quot;</span>, 854);
+<a name="l00186"></a>00186             BW3__.Add(<span class="stringliteral">&quot;れた&quot;</span>, 1850); BW3__.Add(<span class="stringliteral">&quot;れて&quot;</span>, 1375); BW3__.Add(<span class="stringliteral">&quot;れば&quot;</span>, -3246); BW3__.Add(<span class="stringliteral">&quot;れる&quot;</span>, 1091);
+<a name="l00187"></a>00187             BW3__.Add(<span class="stringliteral">&quot;われ&quot;</span>, -605); BW3__.Add(<span class="stringliteral">&quot;んだ&quot;</span>, 606); BW3__.Add(<span class="stringliteral">&quot;んで&quot;</span>, 798); BW3__.Add(<span class="stringliteral">&quot;カ月&quot;</span>, 990);
+<a name="l00188"></a>00188             BW3__.Add(<span class="stringliteral">&quot;会議&quot;</span>, 860); BW3__.Add(<span class="stringliteral">&quot;入り&quot;</span>, 1232); BW3__.Add(<span class="stringliteral">&quot;大会&quot;</span>, 2217); BW3__.Add(<span class="stringliteral">&quot;始め&quot;</span>, 1681);
+<a name="l00189"></a>00189             BW3__.Add(<span class="stringliteral">&quot;市&quot;</span>, 965); BW3__.Add(<span class="stringliteral">&quot;新聞&quot;</span>, -5055); BW3__.Add(<span class="stringliteral">&quot;日,&quot;</span>, 974); BW3__.Add(<span class="stringliteral">&quot;日、&quot;</span>, 974);
+<a name="l00190"></a>00190             BW3__.Add(<span class="stringliteral">&quot;社会&quot;</span>, 2024); BW3__.Add(<span class="stringliteral">&quot;ｶ月&quot;</span>, 990);
+<a name="l00191"></a>00191             Hashtable TC1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00192"></a>00192             TC1__.Add(<span class="stringliteral">&quot;AAA&quot;</span>, 1093); TC1__.Add(<span class="stringliteral">&quot;HHH&quot;</span>, 1029); TC1__.Add(<span class="stringliteral">&quot;HHM&quot;</span>, 580); TC1__.Add(<span class="stringliteral">&quot;HII&quot;</span>, 998);
+<a name="l00193"></a>00193             TC1__.Add(<span class="stringliteral">&quot;HOH&quot;</span>, -390); TC1__.Add(<span class="stringliteral">&quot;HOM&quot;</span>, -331); TC1__.Add(<span class="stringliteral">&quot;IHI&quot;</span>, 1169); TC1__.Add(<span class="stringliteral">&quot;IOH&quot;</span>, -142);
+<a name="l00194"></a>00194             TC1__.Add(<span class="stringliteral">&quot;IOI&quot;</span>, -1015); TC1__.Add(<span class="stringliteral">&quot;IOM&quot;</span>, 467); TC1__.Add(<span class="stringliteral">&quot;MMH&quot;</span>, 187); TC1__.Add(<span class="stringliteral">&quot;OOI&quot;</span>, -1832);
+<a name="l00195"></a>00195             Hashtable TC2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00196"></a>00196             TC2__.Add(<span class="stringliteral">&quot;HHO&quot;</span>, 2088); TC2__.Add(<span class="stringliteral">&quot;HII&quot;</span>, -1023); TC2__.Add(<span class="stringliteral">&quot;HMM&quot;</span>, -1154); TC2__.Add(<span class="stringliteral">&quot;IHI&quot;</span>, -1965);
+<a name="l00197"></a>00197             TC2__.Add(<span class="stringliteral">&quot;KKH&quot;</span>, 703); TC2__.Add(<span class="stringliteral">&quot;OII&quot;</span>, -2649);
+<a name="l00198"></a>00198             Hashtable TC3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00199"></a>00199             TC3__.Add(<span class="stringliteral">&quot;AAA&quot;</span>, -294); TC3__.Add(<span class="stringliteral">&quot;HHH&quot;</span>, 346); TC3__.Add(<span class="stringliteral">&quot;HHI&quot;</span>, -341); TC3__.Add(<span class="stringliteral">&quot;HII&quot;</span>, -1088);
+<a name="l00200"></a>00200             TC3__.Add(<span class="stringliteral">&quot;HIK&quot;</span>, 731); TC3__.Add(<span class="stringliteral">&quot;HOH&quot;</span>, -1486); TC3__.Add(<span class="stringliteral">&quot;IHH&quot;</span>, 128); TC3__.Add(<span class="stringliteral">&quot;IHI&quot;</span>, -3041);
+<a name="l00201"></a>00201             TC3__.Add(<span class="stringliteral">&quot;IHO&quot;</span>, -1935); TC3__.Add(<span class="stringliteral">&quot;IIH&quot;</span>, -825); TC3__.Add(<span class="stringliteral">&quot;IIM&quot;</span>, -1035); TC3__.Add(<span class="stringliteral">&quot;IOI&quot;</span>, -542);
+<a name="l00202"></a>00202             TC3__.Add(<span class="stringliteral">&quot;KHH&quot;</span>, -1216); TC3__.Add(<span class="stringliteral">&quot;KKA&quot;</span>, 491); TC3__.Add(<span class="stringliteral">&quot;KKH&quot;</span>, -1217); TC3__.Add(<span class="stringliteral">&quot;KOK&quot;</span>, -1009);
+<a name="l00203"></a>00203             TC3__.Add(<span class="stringliteral">&quot;MHH&quot;</span>, -2694); TC3__.Add(<span class="stringliteral">&quot;MHM&quot;</span>, -457); TC3__.Add(<span class="stringliteral">&quot;MHO&quot;</span>, 123); TC3__.Add(<span class="stringliteral">&quot;MMH&quot;</span>, -471);
+<a name="l00204"></a>00204             TC3__.Add(<span class="stringliteral">&quot;NNH&quot;</span>, -1689); TC3__.Add(<span class="stringliteral">&quot;NNO&quot;</span>, 662); TC3__.Add(<span class="stringliteral">&quot;OHO&quot;</span>, -3393);
+<a name="l00205"></a>00205             Hashtable TC4__ = <span class="keyword">new</span> Hashtable();
+<a name="l00206"></a>00206             TC4__.Add(<span class="stringliteral">&quot;HHH&quot;</span>, -203); TC4__.Add(<span class="stringliteral">&quot;HHI&quot;</span>, 1344); TC4__.Add(<span class="stringliteral">&quot;HHK&quot;</span>, 365); TC4__.Add(<span class="stringliteral">&quot;HHM&quot;</span>, -122);
+<a name="l00207"></a>00207             TC4__.Add(<span class="stringliteral">&quot;HHN&quot;</span>, 182); TC4__.Add(<span class="stringliteral">&quot;HHO&quot;</span>, 669); TC4__.Add(<span class="stringliteral">&quot;HIH&quot;</span>, 804); TC4__.Add(<span class="stringliteral">&quot;HII&quot;</span>, 679);
+<a name="l00208"></a>00208             TC4__.Add(<span class="stringliteral">&quot;HOH&quot;</span>, 446); TC4__.Add(<span class="stringliteral">&quot;IHH&quot;</span>, 695); TC4__.Add(<span class="stringliteral">&quot;IHO&quot;</span>, -2324); TC4__.Add(<span class="stringliteral">&quot;IIH&quot;</span>, 321);
+<a name="l00209"></a>00209             TC4__.Add(<span class="stringliteral">&quot;III&quot;</span>, 1497); TC4__.Add(<span class="stringliteral">&quot;IIO&quot;</span>, 656); TC4__.Add(<span class="stringliteral">&quot;IOO&quot;</span>, 54); TC4__.Add(<span class="stringliteral">&quot;KAK&quot;</span>, 4845);
+<a name="l00210"></a>00210             TC4__.Add(<span class="stringliteral">&quot;KKA&quot;</span>, 3386); TC4__.Add(<span class="stringliteral">&quot;KKK&quot;</span>, 3065); TC4__.Add(<span class="stringliteral">&quot;MHH&quot;</span>, -405); TC4__.Add(<span class="stringliteral">&quot;MHI&quot;</span>, 201);
+<a name="l00211"></a>00211             TC4__.Add(<span class="stringliteral">&quot;MMH&quot;</span>, -241); TC4__.Add(<span class="stringliteral">&quot;MMM&quot;</span>, 661); TC4__.Add(<span class="stringliteral">&quot;MOM&quot;</span>, 841);
+<a name="l00212"></a>00212             Hashtable TQ1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00213"></a>00213             TQ1__.Add(<span class="stringliteral">&quot;BHHH&quot;</span>, -227); TQ1__.Add(<span class="stringliteral">&quot;BHHI&quot;</span>, 316); TQ1__.Add(<span class="stringliteral">&quot;BHIH&quot;</span>, -132); TQ1__.Add(<span class="stringliteral">&quot;BIHH&quot;</span>, 60);
+<a name="l00214"></a>00214             TQ1__.Add(<span class="stringliteral">&quot;BIII&quot;</span>, 1595); TQ1__.Add(<span class="stringliteral">&quot;BNHH&quot;</span>, -744); TQ1__.Add(<span class="stringliteral">&quot;BOHH&quot;</span>, 225); TQ1__.Add(<span class="stringliteral">&quot;BOOO&quot;</span>, -908);
+<a name="l00215"></a>00215             TQ1__.Add(<span class="stringliteral">&quot;OAKK&quot;</span>, 482); TQ1__.Add(<span class="stringliteral">&quot;OHHH&quot;</span>, 281); TQ1__.Add(<span class="stringliteral">&quot;OHIH&quot;</span>, 249); TQ1__.Add(<span class="stringliteral">&quot;OIHI&quot;</span>, 200);
+<a name="l00216"></a>00216             TQ1__.Add(<span class="stringliteral">&quot;OIIH&quot;</span>, -68);
+<a name="l00217"></a>00217             Hashtable TQ2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00218"></a>00218             TQ2__.Add(<span class="stringliteral">&quot;BIHH&quot;</span>, -1401); TQ2__.Add(<span class="stringliteral">&quot;BIII&quot;</span>, -1033); TQ2__.Add(<span class="stringliteral">&quot;BKAK&quot;</span>, -543); TQ2__.Add(<span class="stringliteral">&quot;BOOO&quot;</span>, -5591);
+<a name="l00219"></a>00219             Hashtable TQ3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00220"></a>00220             TQ3__.Add(<span class="stringliteral">&quot;BHHH&quot;</span>, 478); TQ3__.Add(<span class="stringliteral">&quot;BHHM&quot;</span>, -1073); TQ3__.Add(<span class="stringliteral">&quot;BHIH&quot;</span>, 222); TQ3__.Add(<span class="stringliteral">&quot;BHII&quot;</span>, -504);
+<a name="l00221"></a>00221             TQ3__.Add(<span class="stringliteral">&quot;BIIH&quot;</span>, -116); TQ3__.Add(<span class="stringliteral">&quot;BIII&quot;</span>, -105); TQ3__.Add(<span class="stringliteral">&quot;BMHI&quot;</span>, -863); TQ3__.Add(<span class="stringliteral">&quot;BMHM&quot;</span>, -464);
+<a name="l00222"></a>00222             TQ3__.Add(<span class="stringliteral">&quot;BOMH&quot;</span>, 620); TQ3__.Add(<span class="stringliteral">&quot;OHHH&quot;</span>, 346); TQ3__.Add(<span class="stringliteral">&quot;OHHI&quot;</span>, 1729); TQ3__.Add(<span class="stringliteral">&quot;OHII&quot;</span>, 997);
+<a name="l00223"></a>00223             TQ3__.Add(<span class="stringliteral">&quot;OHMH&quot;</span>, 481); TQ3__.Add(<span class="stringliteral">&quot;OIHH&quot;</span>, 623); TQ3__.Add(<span class="stringliteral">&quot;OIIH&quot;</span>, 1344); TQ3__.Add(<span class="stringliteral">&quot;OKAK&quot;</span>, 2792);
+<a name="l00224"></a>00224             TQ3__.Add(<span class="stringliteral">&quot;OKHH&quot;</span>, 587); TQ3__.Add(<span class="stringliteral">&quot;OKKA&quot;</span>, 679); TQ3__.Add(<span class="stringliteral">&quot;OOHH&quot;</span>, 110); TQ3__.Add(<span class="stringliteral">&quot;OOII&quot;</span>, -685);
+<a name="l00225"></a>00225             Hashtable TQ4__ = <span class="keyword">new</span> Hashtable();
+<a name="l00226"></a>00226             TQ4__.Add(<span class="stringliteral">&quot;BHHH&quot;</span>, -721); TQ4__.Add(<span class="stringliteral">&quot;BHHM&quot;</span>, -3604); TQ4__.Add(<span class="stringliteral">&quot;BHII&quot;</span>, -966); TQ4__.Add(<span class="stringliteral">&quot;BIIH&quot;</span>, -607);
+<a name="l00227"></a>00227             TQ4__.Add(<span class="stringliteral">&quot;BIII&quot;</span>, -2181); TQ4__.Add(<span class="stringliteral">&quot;OAAA&quot;</span>, -2763); TQ4__.Add(<span class="stringliteral">&quot;OAKK&quot;</span>, 180); TQ4__.Add(<span class="stringliteral">&quot;OHHH&quot;</span>, -294);
+<a name="l00228"></a>00228             TQ4__.Add(<span class="stringliteral">&quot;OHHI&quot;</span>, 2446); TQ4__.Add(<span class="stringliteral">&quot;OHHO&quot;</span>, 480); TQ4__.Add(<span class="stringliteral">&quot;OHIH&quot;</span>, -1573); TQ4__.Add(<span class="stringliteral">&quot;OIHH&quot;</span>, 1935);
+<a name="l00229"></a>00229             TQ4__.Add(<span class="stringliteral">&quot;OIHI&quot;</span>, -493); TQ4__.Add(<span class="stringliteral">&quot;OIIH&quot;</span>, 626); TQ4__.Add(<span class="stringliteral">&quot;OIII&quot;</span>, -4007); TQ4__.Add(<span class="stringliteral">&quot;OKAK&quot;</span>, -8156);
+<a name="l00230"></a>00230             Hashtable TW1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00231"></a>00231             TW1__.Add(<span class="stringliteral">&quot;につい&quot;</span>, -4681); TW1__.Add(<span class="stringliteral">&quot;東京都&quot;</span>, 2026);
+<a name="l00232"></a>00232             Hashtable TW2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00233"></a>00233             TW2__.Add(<span class="stringliteral">&quot;ある程&quot;</span>, -2049); TW2__.Add(<span class="stringliteral">&quot;いった&quot;</span>, -1256); TW2__.Add(<span class="stringliteral">&quot;ころが&quot;</span>, -2434); TW2__.Add(<span class="stringliteral">&quot;しょう&quot;</span>, 3873);
+<a name="l00234"></a>00234             TW2__.Add(<span class="stringliteral">&quot;その後&quot;</span>, -4430); TW2__.Add(<span class="stringliteral">&quot;だって&quot;</span>, -1049); TW2__.Add(<span class="stringliteral">&quot;ていた&quot;</span>, 1833); TW2__.Add(<span class="stringliteral">&quot;として&quot;</span>, -4657);
+<a name="l00235"></a>00235             TW2__.Add(<span class="stringliteral">&quot;ともに&quot;</span>, -4517); TW2__.Add(<span class="stringliteral">&quot;もので&quot;</span>, 1882); TW2__.Add(<span class="stringliteral">&quot;一気に&quot;</span>, -792); TW2__.Add(<span class="stringliteral">&quot;初めて&quot;</span>, -1512);
+<a name="l00236"></a>00236             TW2__.Add(<span class="stringliteral">&quot;同時に&quot;</span>, -8097); TW2__.Add(<span class="stringliteral">&quot;大きな&quot;</span>, -1255); TW2__.Add(<span class="stringliteral">&quot;対して&quot;</span>, -2721); TW2__.Add(<span class="stringliteral">&quot;社会党&quot;</span>, -3216);
+<a name="l00237"></a>00237             Hashtable TW3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00238"></a>00238             TW3__.Add(<span class="stringliteral">&quot;いただ&quot;</span>, -1734); TW3__.Add(<span class="stringliteral">&quot;してい&quot;</span>, 1314); TW3__.Add(<span class="stringliteral">&quot;として&quot;</span>, -4314); TW3__.Add(<span class="stringliteral">&quot;につい&quot;</span>, -5483);
+<a name="l00239"></a>00239             TW3__.Add(<span class="stringliteral">&quot;にとっ&quot;</span>, -5989); TW3__.Add(<span class="stringliteral">&quot;に当た&quot;</span>, -6247); TW3__.Add(<span class="stringliteral">&quot;ので,&quot;</span>, -727); TW3__.Add(<span class="stringliteral">&quot;ので、&quot;</span>, -727);
+<a name="l00240"></a>00240             TW3__.Add(<span class="stringliteral">&quot;のもの&quot;</span>, -600); TW3__.Add(<span class="stringliteral">&quot;れから&quot;</span>, -3752); TW3__.Add(<span class="stringliteral">&quot;十二月&quot;</span>, -2287);
+<a name="l00241"></a>00241             Hashtable TW4__ = <span class="keyword">new</span> Hashtable();
+<a name="l00242"></a>00242             TW4__.Add(<span class="stringliteral">&quot;いう.&quot;</span>, 8576); TW4__.Add(<span class="stringliteral">&quot;いう。&quot;</span>, 8576); TW4__.Add(<span class="stringliteral">&quot;からな&quot;</span>, -2348); TW4__.Add(<span class="stringliteral">&quot;してい&quot;</span>, 2958);
+<a name="l00243"></a>00243             TW4__.Add(<span class="stringliteral">&quot;たが,&quot;</span>, 1516); TW4__.Add(<span class="stringliteral">&quot;たが、&quot;</span>, 1516); TW4__.Add(<span class="stringliteral">&quot;ている&quot;</span>, 1538); TW4__.Add(<span class="stringliteral">&quot;という&quot;</span>, 1349);
+<a name="l00244"></a>00244             TW4__.Add(<span class="stringliteral">&quot;ました&quot;</span>, 5543); TW4__.Add(<span class="stringliteral">&quot;ません&quot;</span>, 1097); TW4__.Add(<span class="stringliteral">&quot;ようと&quot;</span>, -4258); TW4__.Add(<span class="stringliteral">&quot;よると&quot;</span>, 5865);
+<a name="l00245"></a>00245             Hashtable UC1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00246"></a>00246             UC1__.Add(<span class="stringliteral">&quot;A&quot;</span>, 484); UC1__.Add(<span class="stringliteral">&quot;K&quot;</span>, 93); UC1__.Add(<span class="stringliteral">&quot;M&quot;</span>, 645); UC1__.Add(<span class="stringliteral">&quot;O&quot;</span>, -505);
+<a name="l00247"></a>00247             Hashtable UC2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00248"></a>00248             UC2__.Add(<span class="stringliteral">&quot;A&quot;</span>, 819); UC2__.Add(<span class="stringliteral">&quot;H&quot;</span>, 1059); UC2__.Add(<span class="stringliteral">&quot;I&quot;</span>, 409); UC2__.Add(<span class="stringliteral">&quot;M&quot;</span>, 3987);
+<a name="l00249"></a>00249             UC2__.Add(<span class="stringliteral">&quot;N&quot;</span>, 5775); UC2__.Add(<span class="stringliteral">&quot;O&quot;</span>, 646);
+<a name="l00250"></a>00250             Hashtable UC3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00251"></a>00251             UC3__.Add(<span class="stringliteral">&quot;A&quot;</span>, -1370); UC3__.Add(<span class="stringliteral">&quot;I&quot;</span>, 2311);
+<a name="l00252"></a>00252             Hashtable UC4__ = <span class="keyword">new</span> Hashtable();
+<a name="l00253"></a>00253             UC4__.Add(<span class="stringliteral">&quot;A&quot;</span>, -2643); UC4__.Add(<span class="stringliteral">&quot;H&quot;</span>, 1809); UC4__.Add(<span class="stringliteral">&quot;I&quot;</span>, -1032); UC4__.Add(<span class="stringliteral">&quot;K&quot;</span>, -3450);
+<a name="l00254"></a>00254             UC4__.Add(<span class="stringliteral">&quot;M&quot;</span>, 3565); UC4__.Add(<span class="stringliteral">&quot;N&quot;</span>, 3876); UC4__.Add(<span class="stringliteral">&quot;O&quot;</span>, 6646);
+<a name="l00255"></a>00255             Hashtable UC5__ = <span class="keyword">new</span> Hashtable();
+<a name="l00256"></a>00256             UC5__.Add(<span class="stringliteral">&quot;H&quot;</span>, 313); UC5__.Add(<span class="stringliteral">&quot;I&quot;</span>, -1238); UC5__.Add(<span class="stringliteral">&quot;K&quot;</span>, -799); UC5__.Add(<span class="stringliteral">&quot;M&quot;</span>, 539); UC5__.Add(<span class="stringliteral">&quot;O&quot;</span>, -831);
+<a name="l00257"></a>00257             Hashtable UC6__ = <span class="keyword">new</span> Hashtable();
+<a name="l00258"></a>00258             UC6__.Add(<span class="stringliteral">&quot;H&quot;</span>, -506); UC6__.Add(<span class="stringliteral">&quot;I&quot;</span>, -253); UC6__.Add(<span class="stringliteral">&quot;K&quot;</span>, 87); UC6__.Add(<span class="stringliteral">&quot;M&quot;</span>, 247); UC6__.Add(<span class="stringliteral">&quot;O&quot;</span>, -387);
+<a name="l00259"></a>00259             Hashtable UP1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00260"></a>00260             UP1__.Add(<span class="stringliteral">&quot;O&quot;</span>, -214);
+<a name="l00261"></a>00261             Hashtable UP2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00262"></a>00262             UP2__.Add(<span class="stringliteral">&quot;B&quot;</span>, 69); UP2__.Add(<span class="stringliteral">&quot;O&quot;</span>, 935);
+<a name="l00263"></a>00263             Hashtable UP3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00264"></a>00264             UP3__.Add(<span class="stringliteral">&quot;B&quot;</span>, 189);
+<a name="l00265"></a>00265             Hashtable UQ1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00266"></a>00266             UQ1__.Add(<span class="stringliteral">&quot;BH&quot;</span>, 21); UQ1__.Add(<span class="stringliteral">&quot;BI&quot;</span>, -12); UQ1__.Add(<span class="stringliteral">&quot;BK&quot;</span>, -99); UQ1__.Add(<span class="stringliteral">&quot;BN&quot;</span>, 142);
+<a name="l00267"></a>00267             UQ1__.Add(<span class="stringliteral">&quot;BO&quot;</span>, -56); UQ1__.Add(<span class="stringliteral">&quot;OH&quot;</span>, -95); UQ1__.Add(<span class="stringliteral">&quot;OI&quot;</span>, 477); UQ1__.Add(<span class="stringliteral">&quot;OK&quot;</span>, 410);
+<a name="l00268"></a>00268             UQ1__.Add(<span class="stringliteral">&quot;OO&quot;</span>, -2422);
+<a name="l00269"></a>00269             Hashtable UQ2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00270"></a>00270             UQ2__.Add(<span class="stringliteral">&quot;BH&quot;</span>, 216); UQ2__.Add(<span class="stringliteral">&quot;BI&quot;</span>, 113); UQ2__.Add(<span class="stringliteral">&quot;OK&quot;</span>, 1759);
+<a name="l00271"></a>00271             Hashtable UQ3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00272"></a>00272             UQ3__.Add(<span class="stringliteral">&quot;BA&quot;</span>, -479); UQ3__.Add(<span class="stringliteral">&quot;BH&quot;</span>, 42); UQ3__.Add(<span class="stringliteral">&quot;BI&quot;</span>, 1913); UQ3__.Add(<span class="stringliteral">&quot;BK&quot;</span>, -7198);
+<a name="l00273"></a>00273             UQ3__.Add(<span class="stringliteral">&quot;BM&quot;</span>, 3160); UQ3__.Add(<span class="stringliteral">&quot;BN&quot;</span>, 6427); UQ3__.Add(<span class="stringliteral">&quot;BO&quot;</span>, 14761); UQ3__.Add(<span class="stringliteral">&quot;OI&quot;</span>, -827);
+<a name="l00274"></a>00274             UQ3__.Add(<span class="stringliteral">&quot;ON&quot;</span>, -3212);
+<a name="l00275"></a>00275             Hashtable UW1__ = <span class="keyword">new</span> Hashtable();
+<a name="l00276"></a>00276             UW1__.Add(<span class="stringliteral">&quot;,&quot;</span>, 156); UW1__.Add(<span class="stringliteral">&quot;、&quot;</span>, 156); UW1__.Add(<span class="stringliteral">&quot;「&quot;</span>, -463); UW1__.Add(<span class="stringliteral">&quot;あ&quot;</span>, -941);
+<a name="l00277"></a>00277             UW1__.Add(<span class="stringliteral">&quot;う&quot;</span>, -127); UW1__.Add(<span class="stringliteral">&quot;が&quot;</span>, -553); UW1__.Add(<span class="stringliteral">&quot;き&quot;</span>, 121); UW1__.Add(<span class="stringliteral">&quot;こ&quot;</span>, 505);
+<a name="l00278"></a>00278             UW1__.Add(<span class="stringliteral">&quot;で&quot;</span>, -201); UW1__.Add(<span class="stringliteral">&quot;と&quot;</span>, -547); UW1__.Add(<span class="stringliteral">&quot;ど&quot;</span>, -123); UW1__.Add(<span class="stringliteral">&quot;に&quot;</span>, -789);
+<a name="l00279"></a>00279             UW1__.Add(<span class="stringliteral">&quot;の&quot;</span>, -185); UW1__.Add(<span class="stringliteral">&quot;は&quot;</span>, -847); UW1__.Add(<span class="stringliteral">&quot;も&quot;</span>, -466); UW1__.Add(<span class="stringliteral">&quot;や&quot;</span>, -470);
+<a name="l00280"></a>00280             UW1__.Add(<span class="stringliteral">&quot;よ&quot;</span>, 182); UW1__.Add(<span class="stringliteral">&quot;ら&quot;</span>, -292); UW1__.Add(<span class="stringliteral">&quot;り&quot;</span>, 208); UW1__.Add(<span class="stringliteral">&quot;れ&quot;</span>, 169);
+<a name="l00281"></a>00281             UW1__.Add(<span class="stringliteral">&quot;を&quot;</span>, -446); UW1__.Add(<span class="stringliteral">&quot;ん&quot;</span>, -137); UW1__.Add(<span class="stringliteral">&quot;・&quot;</span>, -135); UW1__.Add(<span class="stringliteral">&quot;主&quot;</span>, -402);
+<a name="l00282"></a>00282             UW1__.Add(<span class="stringliteral">&quot;京&quot;</span>, -268); UW1__.Add(<span class="stringliteral">&quot;区&quot;</span>, -912); UW1__.Add(<span class="stringliteral">&quot;午&quot;</span>, 871); UW1__.Add(<span class="stringliteral">&quot;国&quot;</span>, -460);
+<a name="l00283"></a>00283             UW1__.Add(<span class="stringliteral">&quot;大&quot;</span>, 561); UW1__.Add(<span class="stringliteral">&quot;委&quot;</span>, 729); UW1__.Add(<span class="stringliteral">&quot;市&quot;</span>, -411); UW1__.Add(<span class="stringliteral">&quot;日&quot;</span>, -141);
+<a name="l00284"></a>00284             UW1__.Add(<span class="stringliteral">&quot;理&quot;</span>, 361); UW1__.Add(<span class="stringliteral">&quot;生&quot;</span>, -408); UW1__.Add(<span class="stringliteral">&quot;県&quot;</span>, -386); UW1__.Add(<span class="stringliteral">&quot;都&quot;</span>, -718);
+<a name="l00285"></a>00285             UW1__.Add(<span class="stringliteral">&quot;｢&quot;</span>, -463); UW1__.Add(<span class="stringliteral">&quot;･&quot;</span>, -135);
+<a name="l00286"></a>00286             Hashtable UW2__ = <span class="keyword">new</span> Hashtable();
+<a name="l00287"></a>00287             UW2__.Add(<span class="stringliteral">&quot;,&quot;</span>, -829); UW2__.Add(<span class="stringliteral">&quot;、&quot;</span>, -829); UW2__.Add(<span class="stringliteral">&quot;〇&quot;</span>, 892); UW2__.Add(<span class="stringliteral">&quot;「&quot;</span>, -645);
+<a name="l00288"></a>00288             UW2__.Add(<span class="stringliteral">&quot;」&quot;</span>, 3145); UW2__.Add(<span class="stringliteral">&quot;あ&quot;</span>, -538); UW2__.Add(<span class="stringliteral">&quot;い&quot;</span>, 505); UW2__.Add(<span class="stringliteral">&quot;う&quot;</span>, 134);
+<a name="l00289"></a>00289             UW2__.Add(<span class="stringliteral">&quot;お&quot;</span>, -502); UW2__.Add(<span class="stringliteral">&quot;か&quot;</span>, 1454); UW2__.Add(<span class="stringliteral">&quot;が&quot;</span>, -856); UW2__.Add(<span class="stringliteral">&quot;く&quot;</span>, -412);
+<a name="l00290"></a>00290             UW2__.Add(<span class="stringliteral">&quot;こ&quot;</span>, 1141); UW2__.Add(<span class="stringliteral">&quot;さ&quot;</span>, 878); UW2__.Add(<span class="stringliteral">&quot;ざ&quot;</span>, 540); UW2__.Add(<span class="stringliteral">&quot;し&quot;</span>, 1529);
+<a name="l00291"></a>00291             UW2__.Add(<span class="stringliteral">&quot;す&quot;</span>, -675); UW2__.Add(<span class="stringliteral">&quot;せ&quot;</span>, 300); UW2__.Add(<span class="stringliteral">&quot;そ&quot;</span>, -1011); UW2__.Add(<span class="stringliteral">&quot;た&quot;</span>, 188);
+<a name="l00292"></a>00292             UW2__.Add(<span class="stringliteral">&quot;だ&quot;</span>, 1837); UW2__.Add(<span class="stringliteral">&quot;つ&quot;</span>, -949); UW2__.Add(<span class="stringliteral">&quot;て&quot;</span>, -291); UW2__.Add(<span class="stringliteral">&quot;で&quot;</span>, -268);
+<a name="l00293"></a>00293             UW2__.Add(<span class="stringliteral">&quot;と&quot;</span>, -981); UW2__.Add(<span class="stringliteral">&quot;ど&quot;</span>, 1273); UW2__.Add(<span class="stringliteral">&quot;な&quot;</span>, 1063); UW2__.Add(<span class="stringliteral">&quot;に&quot;</span>, -1764);
+<a name="l00294"></a>00294             UW2__.Add(<span class="stringliteral">&quot;の&quot;</span>, 130); UW2__.Add(<span class="stringliteral">&quot;は&quot;</span>, -409); UW2__.Add(<span class="stringliteral">&quot;ひ&quot;</span>, -1273); UW2__.Add(<span class="stringliteral">&quot;べ&quot;</span>, 1261);
+<a name="l00295"></a>00295             UW2__.Add(<span class="stringliteral">&quot;ま&quot;</span>, 600); UW2__.Add(<span class="stringliteral">&quot;も&quot;</span>, -1263); UW2__.Add(<span class="stringliteral">&quot;や&quot;</span>, -402); UW2__.Add(<span class="stringliteral">&quot;よ&quot;</span>, 1639);
+<a name="l00296"></a>00296             UW2__.Add(<span class="stringliteral">&quot;り&quot;</span>, -579); UW2__.Add(<span class="stringliteral">&quot;る&quot;</span>, -694); UW2__.Add(<span class="stringliteral">&quot;れ&quot;</span>, 571); UW2__.Add(<span class="stringliteral">&quot;を&quot;</span>, -2516);
+<a name="l00297"></a>00297             UW2__.Add(<span class="stringliteral">&quot;ん&quot;</span>, 2095); UW2__.Add(<span class="stringliteral">&quot;ア&quot;</span>, -587); UW2__.Add(<span class="stringliteral">&quot;カ&quot;</span>, 306); UW2__.Add(<span class="stringliteral">&quot;キ&quot;</span>, 568);
+<a name="l00298"></a>00298             UW2__.Add(<span class="stringliteral">&quot;ッ&quot;</span>, 831); UW2__.Add(<span class="stringliteral">&quot;三&quot;</span>, -758); UW2__.Add(<span class="stringliteral">&quot;不&quot;</span>, -2150); UW2__.Add(<span class="stringliteral">&quot;世&quot;</span>, -302);
+<a name="l00299"></a>00299             UW2__.Add(<span class="stringliteral">&quot;中&quot;</span>, -968); UW2__.Add(<span class="stringliteral">&quot;主&quot;</span>, -861); UW2__.Add(<span class="stringliteral">&quot;事&quot;</span>, 492); UW2__.Add(<span class="stringliteral">&quot;人&quot;</span>, -123);
+<a name="l00300"></a>00300             UW2__.Add(<span class="stringliteral">&quot;会&quot;</span>, 978); UW2__.Add(<span class="stringliteral">&quot;保&quot;</span>, 362); UW2__.Add(<span class="stringliteral">&quot;入&quot;</span>, 548); UW2__.Add(<span class="stringliteral">&quot;初&quot;</span>, -3025);
+<a name="l00301"></a>00301             UW2__.Add(<span class="stringliteral">&quot;副&quot;</span>, -1566); UW2__.Add(<span class="stringliteral">&quot;北&quot;</span>, -3414); UW2__.Add(<span class="stringliteral">&quot;区&quot;</span>, -422); UW2__.Add(<span class="stringliteral">&quot;大&quot;</span>, -1769);
+<a name="l00302"></a>00302             UW2__.Add(<span class="stringliteral">&quot;天&quot;</span>, -865); UW2__.Add(<span class="stringliteral">&quot;太&quot;</span>, -483); UW2__.Add(<span class="stringliteral">&quot;子&quot;</span>, -1519); UW2__.Add(<span class="stringliteral">&quot;学&quot;</span>, 760);
+<a name="l00303"></a>00303             UW2__.Add(<span class="stringliteral">&quot;実&quot;</span>, 1023); UW2__.Add(<span class="stringliteral">&quot;小&quot;</span>, -2009); UW2__.Add(<span class="stringliteral">&quot;市&quot;</span>, -813); UW2__.Add(<span class="stringliteral">&quot;年&quot;</span>, -1060);
+<a name="l00304"></a>00304             UW2__.Add(<span class="stringliteral">&quot;強&quot;</span>, 1067); UW2__.Add(<span class="stringliteral">&quot;手&quot;</span>, -1519); UW2__.Add(<span class="stringliteral">&quot;揺&quot;</span>, -1033); UW2__.Add(<span class="stringliteral">&quot;政&quot;</span>, 1522);
+<a name="l00305"></a>00305             UW2__.Add(<span class="stringliteral">&quot;文&quot;</span>, -1355); UW2__.Add(<span class="stringliteral">&quot;新&quot;</span>, -1682); UW2__.Add(<span class="stringliteral">&quot;日&quot;</span>, -1815); UW2__.Add(<span class="stringliteral">&quot;明&quot;</span>, -1462);
+<a name="l00306"></a>00306             UW2__.Add(<span class="stringliteral">&quot;最&quot;</span>, -630); UW2__.Add(<span class="stringliteral">&quot;朝&quot;</span>, -1843); UW2__.Add(<span class="stringliteral">&quot;本&quot;</span>, -1650); UW2__.Add(<span class="stringliteral">&quot;東&quot;</span>, -931);
+<a name="l00307"></a>00307             UW2__.Add(<span class="stringliteral">&quot;果&quot;</span>, -665); UW2__.Add(<span class="stringliteral">&quot;次&quot;</span>, -2378); UW2__.Add(<span class="stringliteral">&quot;民&quot;</span>, -180); UW2__.Add(<span class="stringliteral">&quot;気&quot;</span>, -1740);
+<a name="l00308"></a>00308             UW2__.Add(<span class="stringliteral">&quot;理&quot;</span>, 752); UW2__.Add(<span class="stringliteral">&quot;発&quot;</span>, 529); UW2__.Add(<span class="stringliteral">&quot;目&quot;</span>, -1584); UW2__.Add(<span class="stringliteral">&quot;相&quot;</span>, -242);
+<a name="l00309"></a>00309             UW2__.Add(<span class="stringliteral">&quot;県&quot;</span>, -1165); UW2__.Add(<span class="stringliteral">&quot;立&quot;</span>, -763); UW2__.Add(<span class="stringliteral">&quot;第&quot;</span>, 810); UW2__.Add(<span class="stringliteral">&quot;米&quot;</span>, 509);
+<a name="l00310"></a>00310             UW2__.Add(<span class="stringliteral">&quot;自&quot;</span>, -1353); UW2__.Add(<span class="stringliteral">&quot;行&quot;</span>, 838); UW2__.Add(<span class="stringliteral">&quot;西&quot;</span>, -744); UW2__.Add(<span class="stringliteral">&quot;見&quot;</span>, -3874);
+<a name="l00311"></a>00311             UW2__.Add(<span class="stringliteral">&quot;調&quot;</span>, 1010); UW2__.Add(<span class="stringliteral">&quot;議&quot;</span>, 1198); UW2__.Add(<span class="stringliteral">&quot;込&quot;</span>, 3041); UW2__.Add(<span class="stringliteral">&quot;開&quot;</span>, 1758);
+<a name="l00312"></a>00312             UW2__.Add(<span class="stringliteral">&quot;間&quot;</span>, -1257); UW2__.Add(<span class="stringliteral">&quot;｢&quot;</span>, -645); UW2__.Add(<span class="stringliteral">&quot;｣&quot;</span>, 3145); UW2__.Add(<span class="stringliteral">&quot;ｯ&quot;</span>, 831);
+<a name="l00313"></a>00313             UW2__.Add(<span class="stringliteral">&quot;ｱ&quot;</span>, -587); UW2__.Add(<span class="stringliteral">&quot;ｶ&quot;</span>, 306); UW2__.Add(<span class="stringliteral">&quot;ｷ&quot;</span>, 568);
+<a name="l00314"></a>00314             Hashtable UW3__ = <span class="keyword">new</span> Hashtable();
+<a name="l00315"></a>00315             UW3__.Add(<span class="stringliteral">&quot;,&quot;</span>, 4889); UW3__.Add(<span class="stringliteral">&quot;1&quot;</span>, -800); UW3__.Add(<span class="stringliteral">&quot;−&quot;</span>, -1723); UW3__.Add(<span class="stringliteral">&quot;、&quot;</span>, 4889);
+<a name="l00316"></a>00316             UW3__.Add(<span class="stringliteral">&quot;々&quot;</span>, -2311); UW3__.Add(<span class="stringliteral">&quot;〇&quot;</span>, 5827); UW3__.Add(<span class="stringliteral">&quot;」&quot;</span>, 2670); UW3__.Add(<span class="stringliteral">&quot;〓&quot;</span>, -3573);
+<a name="l00317"></a>00317             UW3__.Add(<span class="stringliteral">&quot;あ&quot;</span>, -2696); UW3__.Add(<span class="stringliteral">&quot;い&quot;</span>, 1006); UW3__.Add(<span class="stringliteral">&quot;う&quot;</span>, 2342); UW3__.Add(<span class="stringliteral">&quot;え&quot;</span>, 1983);
+<a name="l00318"></a>00318             UW3__.Add(<span class="stringliteral">&quot;お&quot;</span>, -4864); UW3__.Add(<span class="stringliteral">&quot;か&quot;</span>, -1163); UW3__.Add(<span class="stringliteral">&quot;が&quot;</span>, 3271); UW3__.Add(<span class="stringliteral">&quot;く&quot;</span>, 1004);
+<a name="l00319"></a>00319             UW3__.Add(<span class="stringliteral">&quot;け&quot;</span>, 388); UW3__.Add(<span class="stringliteral">&quot;げ&quot;</span>, 401); UW3__.Add(<span class="stringliteral">&quot;こ&quot;</span>, -3552); UW3__.Add(<span class="stringliteral">&quot;ご&quot;</span>, -3116);
+<a name="l00320"></a>00320             UW3__.Add(<span class="stringliteral">&quot;さ&quot;</span>, -1058); UW3__.Add(<span class="stringliteral">&quot;し&quot;</span>, -395); UW3__.Add(<span class="stringliteral">&quot;す&quot;</span>, 584); UW3__.Add(<span class="stringliteral">&quot;せ&quot;</span>, 3685);
+<a name="l00321"></a>00321             UW3__.Add(<span class="stringliteral">&quot;そ&quot;</span>, -5228); UW3__.Add(<span class="stringliteral">&quot;た&quot;</span>, 842); UW3__.Add(<span class="stringliteral">&quot;ち&quot;</span>, -521); UW3__.Add(<span class="stringliteral">&quot;っ&quot;</span>, -1444);
+<a name="l00322"></a>00322             UW3__.Add(<span class="stringliteral">&quot;つ&quot;</span>, -1081); UW3__.Add(<span class="stringliteral">&quot;て&quot;</span>, 6167); UW3__.Add(<span class="stringliteral">&quot;で&quot;</span>, 2318); UW3__.Add(<span class="stringliteral">&quot;と&quot;</span>, 1691);
+<a name="l00323"></a>00323             UW3__.Add(<span class="stringliteral">&quot;ど&quot;</span>, -899); UW3__.Add(<span class="stringliteral">&quot;な&quot;</span>, -2788); UW3__.Add(<span class="stringliteral">&quot;に&quot;</span>, 2745); UW3__.Add(<span class="stringliteral">&quot;の&quot;</span>, 4056);
+<a name="l00324"></a>00324             UW3__.Add(<span class="stringliteral">&quot;は&quot;</span>, 4555); UW3__.Add(<span class="stringliteral">&quot;ひ&quot;</span>, -2171); UW3__.Add(<span class="stringliteral">&quot;ふ&quot;</span>, -1798); UW3__.Add(<span class="stringliteral">&quot;へ&quot;</span>, 1199);
+<a name="l00325"></a>00325             UW3__.Add(<span class="stringliteral">&quot;ほ&quot;</span>, -5516); UW3__.Add(<span class="stringliteral">&quot;ま&quot;</span>, -4384); UW3__.Add(<span class="stringliteral">&quot;み&quot;</span>, -120); UW3__.Add(<span class="stringliteral">&quot;め&quot;</span>, 1205);
+<a name="l00326"></a>00326             UW3__.Add(<span class="stringliteral">&quot;も&quot;</span>, 2323); UW3__.Add(<span class="stringliteral">&quot;や&quot;</span>, -788); UW3__.Add(<span class="stringliteral">&quot;よ&quot;</span>, -202); UW3__.Add(<span class="stringliteral">&quot;ら&quot;</span>, 727);
+<a name="l00327"></a>00327             UW3__.Add(<span class="stringliteral">&quot;り&quot;</span>, 649); UW3__.Add(<span class="stringliteral">&quot;る&quot;</span>, 5905); UW3__.Add(<span class="stringliteral">&quot;れ&quot;</span>, 2773); UW3__.Add(<span class="stringliteral">&quot;わ&quot;</span>, -1207);
+<a name="l00328"></a>00328             UW3__.Add(<span class="stringliteral">&quot;を&quot;</span>, 6620); UW3__.Add(<span class="stringliteral">&quot;ん&quot;</span>, -518); UW3__.Add(<span class="stringliteral">&quot;ア&quot;</span>, 551); UW3__.Add(<span class="stringliteral">&quot;グ&quot;</span>, 1319);
+<a name="l00329"></a>00329             UW3__.Add(<span class="stringliteral">&quot;ス&quot;</span>, 874); UW3__.Add(<span class="stringliteral">&quot;ッ&quot;</span>, -1350); UW3__.Add(<span class="stringliteral">&quot;ト&quot;</span>, 521); UW3__.Add(<span class="stringliteral">&quot;ム&quot;</span>, 1109);
+<a name="l00330"></a>00330             UW3__.Add(<span class="stringliteral">&quot;ル&quot;</span>, 1591); UW3__.Add(<span class="stringliteral">&quot;ロ&quot;</span>, 2201); UW3__.Add(<span class="stringliteral">&quot;ン&quot;</span>, 278); UW3__.Add(<span class="stringliteral">&quot;・&quot;</span>, -3794);
+<a name="l00331"></a>00331             UW3__.Add(<span class="stringliteral">&quot;一&quot;</span>, -1619); UW3__.Add(<span class="stringliteral">&quot;下&quot;</span>, -1759); UW3__.Add(<span class="stringliteral">&quot;世&quot;</span>, -2087); UW3__.Add(<span class="stringliteral">&quot;両&quot;</span>, 3815);
+<a name="l00332"></a>00332             UW3__.Add(<span class="stringliteral">&quot;中&quot;</span>, 653); UW3__.Add(<span class="stringliteral">&quot;主&quot;</span>, -758); UW3__.Add(<span class="stringliteral">&quot;予&quot;</span>, -1193); UW3__.Add(<span class="stringliteral">&quot;二&quot;</span>, 974);
+<a name="l00333"></a>00333             UW3__.Add(<span class="stringliteral">&quot;人&quot;</span>, 2742); UW3__.Add(<span class="stringliteral">&quot;今&quot;</span>, 792); UW3__.Add(<span class="stringliteral">&quot;他&quot;</span>, 1889); UW3__.Add(<span class="stringliteral">&quot;以&quot;</span>, -1368);
+<a name="l00334"></a>00334             UW3__.Add(<span class="stringliteral">&quot;低&quot;</span>, 811); UW3__.Add(<span class="stringliteral">&quot;何&quot;</span>, 4265); UW3__.Add(<span class="stringliteral">&quot;作&quot;</span>, -361); UW3__.Add(<span class="stringliteral">&quot;保&quot;</span>, -2439);
+<a name="l00335"></a>00335             UW3__.Add(<span class="stringliteral">&quot;元&quot;</span>, 4858); UW3__.Add(<span class="stringliteral">&quot;党&quot;</span>, 3593); UW3__.Add(<span class="stringliteral">&quot;全&quot;</span>, 1574); UW3__.Add(<span class="stringliteral">&quot;公&quot;</span>, -3030);
+<a name="l00336"></a>00336             UW3__.Add(<span class="stringliteral">&quot;六&quot;</span>, 755); UW3__.Add(<span class="stringliteral">&quot;共&quot;</span>, -1880); UW3__.Add(<span class="stringliteral">&quot;円&quot;</span>, 5807); UW3__.Add(<span class="stringliteral">&quot;再&quot;</span>, 3095);
+<a name="l00337"></a>00337             UW3__.Add(<span class="stringliteral">&quot;分&quot;</span>, 457); UW3__.Add(<span class="stringliteral">&quot;初&quot;</span>, 2475); UW3__.Add(<span class="stringliteral">&quot;別&quot;</span>, 1129); UW3__.Add(<span class="stringliteral">&quot;前&quot;</span>, 2286);
+<a name="l00338"></a>00338             UW3__.Add(<span class="stringliteral">&quot;副&quot;</span>, 4437); UW3__.Add(<span class="stringliteral">&quot;力&quot;</span>, 365); UW3__.Add(<span class="stringliteral">&quot;動&quot;</span>, -949); UW3__.Add(<span class="stringliteral">&quot;務&quot;</span>, -1872);
+<a name="l00339"></a>00339             UW3__.Add(<span class="stringliteral">&quot;化&quot;</span>, 1327); UW3__.Add(<span class="stringliteral">&quot;北&quot;</span>, -1038); UW3__.Add(<span class="stringliteral">&quot;区&quot;</span>, 4646); UW3__.Add(<span class="stringliteral">&quot;千&quot;</span>, -2309);
+<a name="l00340"></a>00340             UW3__.Add(<span class="stringliteral">&quot;午&quot;</span>, -783); UW3__.Add(<span class="stringliteral">&quot;協&quot;</span>, -1006); UW3__.Add(<span class="stringliteral">&quot;口&quot;</span>, 483); UW3__.Add(<span class="stringliteral">&quot;右&quot;</span>, 1233);
+<a name="l00341"></a>00341             UW3__.Add(<span class="stringliteral">&quot;各&quot;</span>, 3588); UW3__.Add(<span class="stringliteral">&quot;合&quot;</span>, -241); UW3__.Add(<span class="stringliteral">&quot;同&quot;</span>, 3906); UW3__.Add(<span class="stringliteral">&quot;和&quot;</span>, -837);
+<a name="l00342"></a>00342             UW3__.Add(<span class="stringliteral">&quot;員&quot;</span>, 4513); UW3__.Add(<span class="stringliteral">&quot;国&quot;</span>, 642); UW3__.Add(<span class="stringliteral">&quot;型&quot;</span>, 1389); UW3__.Add(<span class="stringliteral">&quot;場&quot;</span>, 1219);
+<a name="l00343"></a>00343             UW3__.Add(<span class="stringliteral">&quot;外&quot;</span>, -241); UW3__.Add(<span class="stringliteral">&quot;妻&quot;</span>, 2016); UW3__.Add(<span class="stringliteral">&quot;学&quot;</span>, -1356); UW3__.Add(<span class="stringliteral">&quot;安&quot;</span>, -423);
+<a name="l00344"></a>00344             UW3__.Add(<span class="stringliteral">&quot;実&quot;</span>, -1008); UW3__.Add(<span class="stringliteral">&quot;家&quot;</span>, 1078); UW3__.Add(<span class="stringliteral">&quot;小&quot;</span>, -513); UW3__.Add(<span class="stringliteral">&quot;少&quot;</span>, -3102);
+<a name="l00345"></a>00345             UW3__.Add(<span class="stringliteral">&quot;州&quot;</span>, 1155); UW3__.Add(<span class="stringliteral">&quot;市&quot;</span>, 3197); UW3__.Add(<span class="stringliteral">&quot;平&quot;</span>, -1804); UW3__.Add(<span class="stringliteral">&quot;年&quot;</span>, 2416);
+<a name="l00346"></a>00346             UW3__.Add(<span class="stringliteral">&quot;広&quot;</span>, -1030); UW3__.Add(<span class="stringliteral">&quot;府&quot;</span>, 1605); UW3__.Add(<span class="stringliteral">&quot;度&quot;</span>, 1452); UW3__.Add(<span class="stringliteral">&quot;建&quot;</span>, -2352);
+<a name="l00347"></a>00347             UW3__.Add(<span class="stringliteral">&quot;当&quot;</span>, -3885); UW3__.Add(<span class="stringliteral">&quot;得&quot;</span>, 1905); UW3__.Add(<span class="stringliteral">&quot;思&quot;</span>, -1291); UW3__.Add(<span class="stringliteral">&quot;性&quot;</span>, 1822);
+<a name="l00348"></a>00348             UW3__.Add(<span class="stringliteral">&quot;戸&quot;</span>, -488); UW3__.Add(<span class="stringliteral">&quot;指&quot;</span>, -3973); UW3__.Add(<span class="stringliteral">&quot;政&quot;</span>, -2013); UW3__.Add(<span class="stringliteral">&quot;教&quot;</span>, -1479);
+<a name="l00349"></a>00349             UW3__.Add(<span class="stringliteral">&quot;数&quot;</span>, 3222); UW3__.Add(<span class="stringliteral">&quot;文&quot;</span>, -1489); UW3__.Add(<span class="stringliteral">&quot;新&quot;</span>, 1764); UW3__.Add(<span class="stringliteral">&quot;日&quot;</span>, 2099);
+<a name="l00350"></a>00350             UW3__.Add(<span class="stringliteral">&quot;旧&quot;</span>, 5792); UW3__.Add(<span class="stringliteral">&quot;昨&quot;</span>, -661); UW3__.Add(<span class="stringliteral">&quot;時&quot;</span>, -1248); UW3__.Add(<span class="stringliteral">&quot;曜&quot;</span>, -951);
+<a name="l00351"></a>00351             UW3__.Add(<span class="stringliteral">&quot;最&quot;</span>, -937); UW3__.Add(<span class="stringliteral">&quot;月&quot;</span>, 4125); UW3__.Add(<span class="stringliteral">&quot;期&quot;</span>, 360); UW3__.Add(<span class="stringliteral">&quot;李&quot;</span>, 3094);
+<a name="l00352"></a>00352             UW3__.Add(<span class="stringliteral">&quot;村&quot;</span>, 364); UW3__.Add(<span class="stringliteral">&quot;東&quot;</span>, -805); UW3__.Add(<span class="stringliteral">&quot;核&quot;</span>, 5156); UW3__.Add(<span class="stringliteral">&quot;森&quot;</span>, 2438);
+<a name="l00353"></a>00353             UW3__.Add(<span class="stringliteral">&quot;業&quot;</span>, 484); UW3__.Add(<span class="stringliteral">&quot;氏&quot;</span>, 2613); UW3__.Add(<span class="stringliteral">&quot;民&quot;</span>, -1694); UW3__.Add(<span class="stringliteral">&quot;決&quot;</span>, -1073);
+<a name="l00354"></a>00354             UW3__.Add(<span class="stringliteral">&quot;法&quot;</span>, 1868); UW3__.Add(<span class="stringliteral">&quot;海&quot;</span>, -495); UW3__.Add(<span class="stringliteral">&quot;無&quot;</span>, 979); UW3__.Add(<span class="stringliteral">&quot;物&quot;</span>, 461);
+<a name="l00355"></a>00355             UW3__.Add(<span class="stringliteral">&quot;特&quot;</span>, -3850); UW3__.Add(<span class="stringliteral">&quot;生&quot;</span>, -273); UW3__.Add(<span class="stringliteral">&quot;用&quot;</span>, 914); UW3__.Add(<span class="stringliteral">&quot;町&quot;</span>, 1215);
+<a name="l00356"></a>00356             UW3__.Add(<span class="stringliteral">&quot;的&quot;</span>, 7313); UW3__.Add(<span class="stringliteral">&quot;直&quot;</span>, -1835); UW3__.Add(<span class="stringliteral">&quot;省&quot;</span>, 792); UW3__.Add(<span class="stringliteral">&quot;県&quot;</span>, 6293);
+<a name="l00357"></a>00357             UW3__.Add(<span class="stringliteral">&quot;知&quot;</span>, -1528); UW3__.Add(<span class="stringliteral">&quot;私&quot;</span>, 4231); UW3__.Add(<span class="stringliteral">&quot;税&quot;</span>, 401); UW3__.Add(<span class="stringliteral">&quot;立&quot;</span>, -960);
+<a name="l00358"></a>00358             UW3__.Add(<span class="stringliteral">&quot;第&quot;</span>, 1201); UW3__.Add(<span class="stringliteral">&quot;米&quot;</span>, 7767); UW3__.Add(<span class="stringliteral">&quot;系&quot;</span>, 3066); UW3__.Add(<span class="stringliteral">&quot;約&quot;</span>, 3663);
+<a name="l00359"></a>00359             UW3__.Add(<span class="stringliteral">&quot;級&quot;</span>, 1384); UW3__.Add(<span class="stringliteral">&quot;統&quot;</span>, -4229); UW3__.Add(<span class="stringliteral">&quot;総&quot;</span>, 1163); UW3__.Add(<span class="stringliteral">&quot;線&quot;</span>, 1255);
+<a name="l00360"></a>00360             UW3__.Add(<span class="stringliteral">&quot;者&quot;</span>, 6457); UW3__.Add(<span class="stringliteral">&quot;能&quot;</span>, 725); UW3__.Add(<span class="stringliteral">&quot;自&quot;</span>, -2869); UW3__.Add(<span class="stringliteral">&quot;英&quot;</span>, 785);
+<a name="l00361"></a>00361             UW3__.Add(<span class="stringliteral">&quot;見&quot;</span>, 1044); UW3__.Add(<span class="stringliteral">&quot;調&quot;</span>, -562); UW3__.Add(<span class="stringliteral">&quot;財&quot;</span>, -733); UW3__.Add(<span class="stringliteral">&quot;費&quot;</span>, 1777);
+<a name="l00362"></a>00362             UW3__.Add(<span class="stringliteral">&quot;車&quot;</span>, 1835); UW3__.Add(<span class="stringliteral">&quot;軍&quot;</span>, 1375); UW3__.Add(<span class="stringliteral">&quot;込&quot;</span>, -1504); UW3__.Add(<span class="stringliteral">&quot;通&quot;</span>, -1136);
+<a name="l00363"></a>00363             UW3__.Add(<span class="stringliteral">&quot;選&quot;</span>, -681); UW3__.Add(<span class="stringliteral">&quot;郎&quot;</span>, 1026); UW3__.Add(<span class="stringliteral">&quot;郡&quot;</span>, 4404); UW3__.Add(<span class="stringliteral">&quot;部&quot;</span>, 1200);
+<a name="l00364"></a>00364             UW3__.Add(<span class="stringliteral">&quot;金&quot;</span>, 2163); UW3__.Add(<span class="stringliteral">&quot;長&quot;</span>, 421); UW3__.Add(<span class="stringliteral">&quot;開&quot;</span>, -1432); UW3__.Add(<span class="stringliteral">&quot;間&quot;</span>, 1302);
+<a name="l00365"></a>00365             UW3__.Add(<span class="stringliteral">&quot;関&quot;</span>, -1282); UW3__.Add(<span class="stringliteral">&quot;雨&quot;</span>, 2009); UW3__.Add(<span class="stringliteral">&quot;電&quot;</span>, -1045); UW3__.Add(<span class="stringliteral">&quot;非&quot;</span>, 2066);
+<a name="l00366"></a>00366             UW3__.Add(<span class="stringliteral">&quot;駅&quot;</span>, 1620); UW3__.Add(<span class="stringliteral">&quot;１&quot;</span>, -800); UW3__.Add(<span class="stringliteral">&quot;｣&quot;</span>, 2670); UW3__.Add(<span class="stringliteral">&quot;･&quot;</span>, -3794);
+<a name="l00367"></a>00367             UW3__.Add(<span class="stringliteral">&quot;ｯ&quot;</span>, -1350); UW3__.Add(<span class="stringliteral">&quot;ｱ&quot;</span>, 551); UW3__.Add(<span class="stringliteral">&quot;ｸﾞ&quot;</span>, 1319); UW3__.Add(<span class="stringliteral">&quot;ｽ&quot;</span>, 874);
+<a name="l00368"></a>00368             UW3__.Add(<span class="stringliteral">&quot;ﾄ&quot;</span>, 521); UW3__.Add(<span class="stringliteral">&quot;ﾑ&quot;</span>, 1109); UW3__.Add(<span class="stringliteral">&quot;ﾙ&quot;</span>, 1591); UW3__.Add(<span class="stringliteral">&quot;ﾛ&quot;</span>, 2201); UW3__.Add(<span class="stringliteral">&quot;ﾝ&quot;</span>, 278);
+<a name="l00369"></a>00369             Hashtable UW4__ = <span class="keyword">new</span> Hashtable();
+<a name="l00370"></a>00370             UW4__.Add(<span class="stringliteral">&quot;,&quot;</span>, 3930); UW4__.Add(<span class="stringliteral">&quot;.&quot;</span>, 3508); UW4__.Add(<span class="stringliteral">&quot;―&quot;</span>, -4841); UW4__.Add(<span class="stringliteral">&quot;、&quot;</span>, 3930);
+<a name="l00371"></a>00371             UW4__.Add(<span class="stringliteral">&quot;。&quot;</span>, 3508); UW4__.Add(<span class="stringliteral">&quot;〇&quot;</span>, 4999); UW4__.Add(<span class="stringliteral">&quot;「&quot;</span>, 1895); UW4__.Add(<span class="stringliteral">&quot;」&quot;</span>, 3798);
+<a name="l00372"></a>00372             UW4__.Add(<span class="stringliteral">&quot;〓&quot;</span>, -5156); UW4__.Add(<span class="stringliteral">&quot;あ&quot;</span>, 4752); UW4__.Add(<span class="stringliteral">&quot;い&quot;</span>, -3435); UW4__.Add(<span class="stringliteral">&quot;う&quot;</span>, -640);
+<a name="l00373"></a>00373             UW4__.Add(<span class="stringliteral">&quot;え&quot;</span>, -2514); UW4__.Add(<span class="stringliteral">&quot;お&quot;</span>, 2405); UW4__.Add(<span class="stringliteral">&quot;か&quot;</span>, 530); UW4__.Add(<span class="stringliteral">&quot;が&quot;</span>, 6006);
+<a name="l00374"></a>00374             UW4__.Add(<span class="stringliteral">&quot;き&quot;</span>, -4482); UW4__.Add(<span class="stringliteral">&quot;ぎ&quot;</span>, -3821); UW4__.Add(<span class="stringliteral">&quot;く&quot;</span>, -3788); UW4__.Add(<span class="stringliteral">&quot;け&quot;</span>, -4376);
+<a name="l00375"></a>00375             UW4__.Add(<span class="stringliteral">&quot;げ&quot;</span>, -4734); UW4__.Add(<span class="stringliteral">&quot;こ&quot;</span>, 2255); UW4__.Add(<span class="stringliteral">&quot;ご&quot;</span>, 1979); UW4__.Add(<span class="stringliteral">&quot;さ&quot;</span>, 2864);
+<a name="l00376"></a>00376             UW4__.Add(<span class="stringliteral">&quot;し&quot;</span>, -843); UW4__.Add(<span class="stringliteral">&quot;じ&quot;</span>, -2506); UW4__.Add(<span class="stringliteral">&quot;す&quot;</span>, -731); UW4__.Add(<span class="stringliteral">&quot;ず&quot;</span>, 1251);
+<a name="l00377"></a>00377             UW4__.Add(<span class="stringliteral">&quot;せ&quot;</span>, 181); UW4__.Add(<span class="stringliteral">&quot;そ&quot;</span>, 4091); UW4__.Add(<span class="stringliteral">&quot;た&quot;</span>, 5034); UW4__.Add(<span class="stringliteral">&quot;だ&quot;</span>, 5408);
+<a name="l00378"></a>00378             UW4__.Add(<span class="stringliteral">&quot;ち&quot;</span>, -3654); UW4__.Add(<span class="stringliteral">&quot;っ&quot;</span>, -5882); UW4__.Add(<span class="stringliteral">&quot;つ&quot;</span>, -1659); UW4__.Add(<span class="stringliteral">&quot;て&quot;</span>, 3994);
+<a name="l00379"></a>00379             UW4__.Add(<span class="stringliteral">&quot;で&quot;</span>, 7410); UW4__.Add(<span class="stringliteral">&quot;と&quot;</span>, 4547); UW4__.Add(<span class="stringliteral">&quot;な&quot;</span>, 5433); UW4__.Add(<span class="stringliteral">&quot;に&quot;</span>, 6499);
+<a name="l00380"></a>00380             UW4__.Add(<span class="stringliteral">&quot;ぬ&quot;</span>, 1853); UW4__.Add(<span class="stringliteral">&quot;ね&quot;</span>, 1413); UW4__.Add(<span class="stringliteral">&quot;の&quot;</span>, 7396); UW4__.Add(<span class="stringliteral">&quot;は&quot;</span>, 8578);
+<a name="l00381"></a>00381             UW4__.Add(<span class="stringliteral">&quot;ば&quot;</span>, 1940); UW4__.Add(<span class="stringliteral">&quot;ひ&quot;</span>, 4249); UW4__.Add(<span class="stringliteral">&quot;び&quot;</span>, -4134); UW4__.Add(<span class="stringliteral">&quot;ふ&quot;</span>, 1345);
+<a name="l00382"></a>00382             UW4__.Add(<span class="stringliteral">&quot;へ&quot;</span>, 6665); UW4__.Add(<span class="stringliteral">&quot;べ&quot;</span>, -744); UW4__.Add(<span class="stringliteral">&quot;ほ&quot;</span>, 1464); UW4__.Add(<span class="stringliteral">&quot;ま&quot;</span>, 1051);
+<a name="l00383"></a>00383             UW4__.Add(<span class="stringliteral">&quot;み&quot;</span>, -2082); UW4__.Add(<span class="stringliteral">&quot;む&quot;</span>, -882); UW4__.Add(<span class="stringliteral">&quot;め&quot;</span>, -5046); UW4__.Add(<span class="stringliteral">&quot;も&quot;</span>, 4169);
+<a name="l00384"></a>00384             UW4__.Add(<span class="stringliteral">&quot;ゃ&quot;</span>, -2666); UW4__.Add(<span class="stringliteral">&quot;や&quot;</span>, 2795); UW4__.Add(<span class="stringliteral">&quot;ょ&quot;</span>, -1544); UW4__.Add(<span class="stringliteral">&quot;よ&quot;</span>, 3351);
+<a name="l00385"></a>00385             UW4__.Add(<span class="stringliteral">&quot;ら&quot;</span>, -2922); UW4__.Add(<span class="stringliteral">&quot;り&quot;</span>, -9726); UW4__.Add(<span class="stringliteral">&quot;る&quot;</span>, -14896); UW4__.Add(<span class="stringliteral">&quot;れ&quot;</span>, -2613);
+<a name="l00386"></a>00386             UW4__.Add(<span class="stringliteral">&quot;ろ&quot;</span>, -4570); UW4__.Add(<span class="stringliteral">&quot;わ&quot;</span>, -1783); UW4__.Add(<span class="stringliteral">&quot;を&quot;</span>, 13150); UW4__.Add(<span class="stringliteral">&quot;ん&quot;</span>, -2352);
+<a name="l00387"></a>00387             UW4__.Add(<span class="stringliteral">&quot;カ&quot;</span>, 2145); UW4__.Add(<span class="stringliteral">&quot;コ&quot;</span>, 1789); UW4__.Add(<span class="stringliteral">&quot;セ&quot;</span>, 1287); UW4__.Add(<span class="stringliteral">&quot;ッ&quot;</span>, -724);
+<a name="l00388"></a>00388             UW4__.Add(<span class="stringliteral">&quot;ト&quot;</span>, -403); UW4__.Add(<span class="stringliteral">&quot;メ&quot;</span>, -1635); UW4__.Add(<span class="stringliteral">&quot;ラ&quot;</span>, -881); UW4__.Add(<span class="stringliteral">&quot;リ&quot;</span>, -541);
+<a name="l00389"></a>00389             UW4__.Add(<span class="stringliteral">&quot;ル&quot;</span>, -856); UW4__.Add(<span class="stringliteral">&quot;ン&quot;</span>, -3637); UW4__.Add(<span class="stringliteral">&quot;・&quot;</span>, -4371); UW4__.Add(<span class="stringliteral">&quot;ー&quot;</span>, -11870);
+<a name="l00390"></a>00390             UW4__.Add(<span class="stringliteral">&quot;一&quot;</span>, -2069); UW4__.Add(<span class="stringliteral">&quot;中&quot;</span>, 2210); UW4__.Add(<span class="stringliteral">&quot;予&quot;</span>, 782); UW4__.Add(<span class="stringliteral">&quot;事&quot;</span>, -190);
+<a name="l00391"></a>00391             UW4__.Add(<span class="stringliteral">&quot;井&quot;</span>, -1768); UW4__.Add(<span class="stringliteral">&quot;人&quot;</span>, 1036); UW4__.Add(<span class="stringliteral">&quot;以&quot;</span>, 544); UW4__.Add(<span class="stringliteral">&quot;会&quot;</span>, 950);
+<a name="l00392"></a>00392             UW4__.Add(<span class="stringliteral">&quot;体&quot;</span>, -1286); UW4__.Add(<span class="stringliteral">&quot;作&quot;</span>, 530); UW4__.Add(<span class="stringliteral">&quot;側&quot;</span>, 4292); UW4__.Add(<span class="stringliteral">&quot;先&quot;</span>, 601);
+<a name="l00393"></a>00393             UW4__.Add(<span class="stringliteral">&quot;党&quot;</span>, -2006); UW4__.Add(<span class="stringliteral">&quot;共&quot;</span>, -1212); UW4__.Add(<span class="stringliteral">&quot;内&quot;</span>, 584); UW4__.Add(<span class="stringliteral">&quot;円&quot;</span>, 788);
+<a name="l00394"></a>00394             UW4__.Add(<span class="stringliteral">&quot;初&quot;</span>, 1347); UW4__.Add(<span class="stringliteral">&quot;前&quot;</span>, 1623); UW4__.Add(<span class="stringliteral">&quot;副&quot;</span>, 3879); UW4__.Add(<span class="stringliteral">&quot;力&quot;</span>, -302);
+<a name="l00395"></a>00395             UW4__.Add(<span class="stringliteral">&quot;動&quot;</span>, -740); UW4__.Add(<span class="stringliteral">&quot;務&quot;</span>, -2715); UW4__.Add(<span class="stringliteral">&quot;化&quot;</span>, 776); UW4__.Add(<span class="stringliteral">&quot;区&quot;</span>, 4517);
+<a name="l00396"></a>00396             UW4__.Add(<span class="stringliteral">&quot;協&quot;</span>, 1013); UW4__.Add(<span class="stringliteral">&quot;参&quot;</span>, 1555); UW4__.Add(<span class="stringliteral">&quot;合&quot;</span>, -1834); UW4__.Add(<span class="stringliteral">&quot;和&quot;</span>, -681);
+<a name="l00397"></a>00397             UW4__.Add(<span class="stringliteral">&quot;員&quot;</span>, -910); UW4__.Add(<span class="stringliteral">&quot;器&quot;</span>, -851); UW4__.Add(<span class="stringliteral">&quot;回&quot;</span>, 1500); UW4__.Add(<span class="stringliteral">&quot;国&quot;</span>, -619);
+<a name="l00398"></a>00398             UW4__.Add(<span class="stringliteral">&quot;園&quot;</span>, -1200); UW4__.Add(<span class="stringliteral">&quot;地&quot;</span>, 866); UW4__.Add(<span class="stringliteral">&quot;場&quot;</span>, -1410); UW4__.Add(<span class="stringliteral">&quot;塁&quot;</span>, -2094);
+<a name="l00399"></a>00399             UW4__.Add(<span class="stringliteral">&quot;士&quot;</span>, -1413); UW4__.Add(<span class="stringliteral">&quot;多&quot;</span>, 1067); UW4__.Add(<span class="stringliteral">&quot;大&quot;</span>, 571); UW4__.Add(<span class="stringliteral">&quot;子&quot;</span>, -4802);
+<a name="l00400"></a>00400             UW4__.Add(<span class="stringliteral">&quot;学&quot;</span>, -1397); UW4__.Add(<span class="stringliteral">&quot;定&quot;</span>, -1057); UW4__.Add(<span class="stringliteral">&quot;寺&quot;</span>, -809); UW4__.Add(<span class="stringliteral">&quot;小&quot;</span>, 1910);
+<a name="l00401"></a>00401             UW4__.Add(<span class="stringliteral">&quot;屋&quot;</span>, -1328); UW4__.Add(<span class="stringliteral">&quot;山&quot;</span>, -1500); UW4__.Add(<span class="stringliteral">&quot;島&quot;</span>, -2056); UW4__.Add(<span class="stringliteral">&quot;川&quot;</span>, -2667);
+<a name="l00402"></a>00402             UW4__.Add(<span class="stringliteral">&quot;市&quot;</span>, 2771); UW4__.Add(<span class="stringliteral">&quot;年&quot;</span>, 374); UW4__.Add(<span class="stringliteral">&quot;庁&quot;</span>, -4556); UW4__.Add(<span class="stringliteral">&quot;後&quot;</span>, 456);
+<a name="l00403"></a>00403             UW4__.Add(<span class="stringliteral">&quot;性&quot;</span>, 553); UW4__.Add(<span class="stringliteral">&quot;感&quot;</span>, 916); UW4__.Add(<span class="stringliteral">&quot;所&quot;</span>, -1566); UW4__.Add(<span class="stringliteral">&quot;支&quot;</span>, 856);
+<a name="l00404"></a>00404             UW4__.Add(<span class="stringliteral">&quot;改&quot;</span>, 787); UW4__.Add(<span class="stringliteral">&quot;政&quot;</span>, 2182); UW4__.Add(<span class="stringliteral">&quot;教&quot;</span>, 704); UW4__.Add(<span class="stringliteral">&quot;文&quot;</span>, 522);
+<a name="l00405"></a>00405             UW4__.Add(<span class="stringliteral">&quot;方&quot;</span>, -856); UW4__.Add(<span class="stringliteral">&quot;日&quot;</span>, 1798); UW4__.Add(<span class="stringliteral">&quot;時&quot;</span>, 1829); UW4__.Add(<span class="stringliteral">&quot;最&quot;</span>, 845);
+<a name="l00406"></a>00406             UW4__.Add(<span class="stringliteral">&quot;月&quot;</span>, -9066); UW4__.Add(<span class="stringliteral">&quot;木&quot;</span>, -485); UW4__.Add(<span class="stringliteral">&quot;来&quot;</span>, -442); UW4__.Add(<span class="stringliteral">&quot;校&quot;</span>, -360);
+<a name="l00407"></a>00407             UW4__.Add(<span class="stringliteral">&quot;業&quot;</span>, -1043); UW4__.Add(<span class="stringliteral">&quot;氏&quot;</span>, 5388); UW4__.Add(<span class="stringliteral">&quot;民&quot;</span>, -2716); UW4__.Add(<span class="stringliteral">&quot;気&quot;</span>, -910);
+<a name="l00408"></a>00408             UW4__.Add(<span class="stringliteral">&quot;沢&quot;</span>, -939); UW4__.Add(<span class="stringliteral">&quot;済&quot;</span>, -543); UW4__.Add(<span class="stringliteral">&quot;物&quot;</span>, -735); UW4__.Add(<span class="stringliteral">&quot;率&quot;</span>, 672);
+<a name="l00409"></a>00409             UW4__.Add(<span class="stringliteral">&quot;球&quot;</span>, -1267); UW4__.Add(<span class="stringliteral">&quot;生&quot;</span>, -1286); UW4__.Add(<span class="stringliteral">&quot;産&quot;</span>, -1101); UW4__.Add(<span class="stringliteral">&quot;田&quot;</span>, -2900);
+<a name="l00410"></a>00410             UW4__.Add(<span class="stringliteral">&quot;町&quot;</span>, 1826); UW4__.Add(<span class="stringliteral">&quot;的&quot;</span>, 2586); UW4__.Add(<span class="stringliteral">&quot;目&quot;</span>, 922); UW4__.Add(<span class="stringliteral">&quot;省&quot;</span>, -3485);
+<a name="l00411"></a>00411             UW4__.Add(<span class="stringliteral">&quot;県&quot;</span>, 2997); UW4__.Add(<span class="stringliteral">&quot;空&quot;</span>, -867); UW4__.Add(<span class="stringliteral">&quot;立&quot;</span>, -2112); UW4__.Add(<span class="stringliteral">&quot;第&quot;</span>, 788);
+<a name="l00412"></a>00412             UW4__.Add(<span class="stringliteral">&quot;米&quot;</span>, 2937); UW4__.Add(<span class="stringliteral">&quot;系&quot;</span>, 786); UW4__.Add(<span class="stringliteral">&quot;約&quot;</span>, 2171); UW4__.Add(<span class="stringliteral">&quot;経&quot;</span>, 1146);
+<a name="l00413"></a>00413             UW4__.Add(<span class="stringliteral">&quot;統&quot;</span>, -1169); UW4__.Add(<span class="stringliteral">&quot;総&quot;</span>, 940); UW4__.Add(<span class="stringliteral">&quot;線&quot;</span>, -994); UW4__.Add(<span class="stringliteral">&quot;署&quot;</span>, 749);
+<a name="l00414"></a>00414             UW4__.Add(<span class="stringliteral">&quot;者&quot;</span>, 2145); UW4__.Add(<span class="stringliteral">&quot;能&quot;</span>, -730); UW4__.Add(<span class="stringliteral">&quot;般&quot;</span>, -852); UW4__.Add(<span class="stringliteral">&quot;行&quot;</span>, -792);
+<a name="l00415"></a>00415             UW4__.Add(<span class="stringliteral">&quot;規&quot;</span>, 792); UW4__.Add(<span class="stringliteral">&quot;警&quot;</span>, -1184); UW4__.Add(<span class="stringliteral">&quot;議&quot;</span>, -244); UW4__.Add(<span class="stringliteral">&quot;谷&quot;</span>, -1000);
+<a name="l00416"></a>00416             UW4__.Add(<span class="stringliteral">&quot;賞&quot;</span>, 730); UW4__.Add(<span class="stringliteral">&quot;車&quot;</span>, -1481); UW4__.Add(<span class="stringliteral">&quot;軍&quot;</span>, 1158); UW4__.Add(<span class="stringliteral">&quot;輪&quot;</span>, -1433);
+<a name="l00417"></a>00417             UW4__.Add(<span class="stringliteral">&quot;込&quot;</span>, -3370); UW4__.Add(<span class="stringliteral">&quot;近&quot;</span>, 929); UW4__.Add(<span class="stringliteral">&quot;道&quot;</span>, -1291); UW4__.Add(<span class="stringliteral">&quot;選&quot;</span>, 2596);
+<a name="l00418"></a>00418             UW4__.Add(<span class="stringliteral">&quot;郎&quot;</span>, -4866); UW4__.Add(<span class="stringliteral">&quot;都&quot;</span>, 1192); UW4__.Add(<span class="stringliteral">&quot;野&quot;</span>, -1100); UW4__.Add(<span class="stringliteral">&quot;銀&quot;</span>, -2213);
+<a name="l00419"></a>00419             UW4__.Add(<span class="stringliteral">&quot;長&quot;</span>, 357); UW4__.Add(<span class="stringliteral">&quot;間&quot;</span>, -2344); UW4__.Add(<span class="stringliteral">&quot;院&quot;</span>, -2297); UW4__.Add(<span class="stringliteral">&quot;際&quot;</span>, -2604);
+<a name="l00420"></a>00420             UW4__.Add(<span class="stringliteral">&quot;電&quot;</span>, -878); UW4__.Add(<span class="stringliteral">&quot;領&quot;</span>, -1659); UW4__.Add(<span class="stringliteral">&quot;題&quot;</span>, -792); UW4__.Add(<span class="stringliteral">&quot;館&quot;</span>, -1984);
+<a name="l00421"></a>00421             UW4__.Add(<span class="stringliteral">&quot;首&quot;</span>, 1749); UW4__.Add(<span class="stringliteral">&quot;高&quot;</span>, 2120); UW4__.Add(<span class="stringliteral">&quot;｢&quot;</span>, 1895); UW4__.Add(<span class="stringliteral">&quot;｣&quot;</span>, 3798);
+<a name="l00422"></a>00422             UW4__.Add(<span class="stringliteral">&quot;･&quot;</span>, -4371); UW4__.Add(<span class="stringliteral">&quot;ｯ&quot;</span>, -724); UW4__.Add(<span class="stringliteral">&quot;ｰ&quot;</span>, -11870); UW4__.Add(<span class="stringliteral">&quot;ｶ&quot;</span>, 2145);
+<a name="l00423"></a>00423             UW4__.Add(<span class="stringliteral">&quot;ｺ&quot;</span>, 1789); UW4__.Add(<span class="stringliteral">&quot;ｾ&quot;</span>, 1287); UW4__.Add(<span class="stringliteral">&quot;ﾄ&quot;</span>, -403); UW4__.Add(<span class="stringliteral">&quot;ﾒ&quot;</span>, -1635);
+<a name="l00424"></a>00424             UW4__.Add(<span class="stringliteral">&quot;ﾗ&quot;</span>, -881); UW4__.Add(<span class="stringliteral">&quot;ﾘ&quot;</span>, -541); UW4__.Add(<span class="stringliteral">&quot;ﾙ&quot;</span>, -856); UW4__.Add(<span class="stringliteral">&quot;ﾝ&quot;</span>, -3637);
+<a name="l00425"></a>00425             Hashtable UW5__ = <span class="keyword">new</span> Hashtable();
+<a name="l00426"></a>00426             UW5__.Add(<span class="stringliteral">&quot;,&quot;</span>, 465); UW5__.Add(<span class="stringliteral">&quot;.&quot;</span>, -299); UW5__.Add(<span class="stringliteral">&quot;1&quot;</span>, -514); UW5__.Add(<span class="stringliteral">&quot;E2&quot;</span>, -32768);
+<a name="l00427"></a>00427             UW5__.Add(<span class="stringliteral">&quot;]&quot;</span>, -2762); UW5__.Add(<span class="stringliteral">&quot;、&quot;</span>, 465); UW5__.Add(<span class="stringliteral">&quot;。&quot;</span>, -299); UW5__.Add(<span class="stringliteral">&quot;「&quot;</span>, 363);
+<a name="l00428"></a>00428             UW5__.Add(<span class="stringliteral">&quot;あ&quot;</span>, 1655); UW5__.Add(<span class="stringliteral">&quot;い&quot;</span>, 331); UW5__.Add(<span class="stringliteral">&quot;う&quot;</span>, -503); UW5__.Add(<span class="stringliteral">&quot;え&quot;</span>, 1199);
+<a name="l00429"></a>00429             UW5__.Add(<span class="stringliteral">&quot;お&quot;</span>, 527); UW5__.Add(<span class="stringliteral">&quot;か&quot;</span>, 647); UW5__.Add(<span class="stringliteral">&quot;が&quot;</span>, -421); UW5__.Add(<span class="stringliteral">&quot;き&quot;</span>, 1624);
+<a name="l00430"></a>00430             UW5__.Add(<span class="stringliteral">&quot;ぎ&quot;</span>, 1971); UW5__.Add(<span class="stringliteral">&quot;く&quot;</span>, 312); UW5__.Add(<span class="stringliteral">&quot;げ&quot;</span>, -983); UW5__.Add(<span class="stringliteral">&quot;さ&quot;</span>, -1537);
+<a name="l00431"></a>00431             UW5__.Add(<span class="stringliteral">&quot;し&quot;</span>, -1371); UW5__.Add(<span class="stringliteral">&quot;す&quot;</span>, -852); UW5__.Add(<span class="stringliteral">&quot;だ&quot;</span>, -1186); UW5__.Add(<span class="stringliteral">&quot;ち&quot;</span>, 1093);
+<a name="l00432"></a>00432             UW5__.Add(<span class="stringliteral">&quot;っ&quot;</span>, 52); UW5__.Add(<span class="stringliteral">&quot;つ&quot;</span>, 921); UW5__.Add(<span class="stringliteral">&quot;て&quot;</span>, -18); UW5__.Add(<span class="stringliteral">&quot;で&quot;</span>, -850);
+<a name="l00433"></a>00433             UW5__.Add(<span class="stringliteral">&quot;と&quot;</span>, -127); UW5__.Add(<span class="stringliteral">&quot;ど&quot;</span>, 1682); UW5__.Add(<span class="stringliteral">&quot;な&quot;</span>, -787); UW5__.Add(<span class="stringliteral">&quot;に&quot;</span>, -1224);
+<a name="l00434"></a>00434             UW5__.Add(<span class="stringliteral">&quot;の&quot;</span>, -635); UW5__.Add(<span class="stringliteral">&quot;は&quot;</span>, -578); UW5__.Add(<span class="stringliteral">&quot;べ&quot;</span>, 1001); UW5__.Add(<span class="stringliteral">&quot;み&quot;</span>, 502);
+<a name="l00435"></a>00435             UW5__.Add(<span class="stringliteral">&quot;め&quot;</span>, 865); UW5__.Add(<span class="stringliteral">&quot;ゃ&quot;</span>, 3350); UW5__.Add(<span class="stringliteral">&quot;ょ&quot;</span>, 854); UW5__.Add(<span class="stringliteral">&quot;り&quot;</span>, -208);
+<a name="l00436"></a>00436             UW5__.Add(<span class="stringliteral">&quot;る&quot;</span>, 429); UW5__.Add(<span class="stringliteral">&quot;れ&quot;</span>, 504); UW5__.Add(<span class="stringliteral">&quot;わ&quot;</span>, 419); UW5__.Add(<span class="stringliteral">&quot;を&quot;</span>, -1264);
+<a name="l00437"></a>00437             UW5__.Add(<span class="stringliteral">&quot;ん&quot;</span>, 327); UW5__.Add(<span class="stringliteral">&quot;イ&quot;</span>, 241); UW5__.Add(<span class="stringliteral">&quot;ル&quot;</span>, 451); UW5__.Add(<span class="stringliteral">&quot;ン&quot;</span>, -343);
+<a name="l00438"></a>00438             UW5__.Add(<span class="stringliteral">&quot;中&quot;</span>, -871); UW5__.Add(<span class="stringliteral">&quot;京&quot;</span>, 722); UW5__.Add(<span class="stringliteral">&quot;会&quot;</span>, -1153); UW5__.Add(<span class="stringliteral">&quot;党&quot;</span>, -654);
+<a name="l00439"></a>00439             UW5__.Add(<span class="stringliteral">&quot;務&quot;</span>, 3519); UW5__.Add(<span class="stringliteral">&quot;区&quot;</span>, -901); UW5__.Add(<span class="stringliteral">&quot;告&quot;</span>, 848); UW5__.Add(<span class="stringliteral">&quot;員&quot;</span>, 2104);
+<a name="l00440"></a>00440             UW5__.Add(<span class="stringliteral">&quot;大&quot;</span>, -1296); UW5__.Add(<span class="stringliteral">&quot;学&quot;</span>, -548); UW5__.Add(<span class="stringliteral">&quot;定&quot;</span>, 1785); UW5__.Add(<span class="stringliteral">&quot;嵐&quot;</span>, -1304);
+<a name="l00441"></a>00441             UW5__.Add(<span class="stringliteral">&quot;市&quot;</span>, -2991); UW5__.Add(<span class="stringliteral">&quot;席&quot;</span>, 921); UW5__.Add(<span class="stringliteral">&quot;年&quot;</span>, 1763); UW5__.Add(<span class="stringliteral">&quot;思&quot;</span>, 872);
+<a name="l00442"></a>00442             UW5__.Add(<span class="stringliteral">&quot;所&quot;</span>, -814); UW5__.Add(<span class="stringliteral">&quot;挙&quot;</span>, 1618); UW5__.Add(<span class="stringliteral">&quot;新&quot;</span>, -1682); UW5__.Add(<span class="stringliteral">&quot;日&quot;</span>, 218);
+<a name="l00443"></a>00443             UW5__.Add(<span class="stringliteral">&quot;月&quot;</span>, -4353); UW5__.Add(<span class="stringliteral">&quot;査&quot;</span>, 932); UW5__.Add(<span class="stringliteral">&quot;格&quot;</span>, 1356); UW5__.Add(<span class="stringliteral">&quot;機&quot;</span>, -1508);
+<a name="l00444"></a>00444             UW5__.Add(<span class="stringliteral">&quot;氏&quot;</span>, -1347); UW5__.Add(<span class="stringliteral">&quot;田&quot;</span>, 240); UW5__.Add(<span class="stringliteral">&quot;町&quot;</span>, -3912); UW5__.Add(<span class="stringliteral">&quot;的&quot;</span>, -3149);
+<a name="l00445"></a>00445             UW5__.Add(<span class="stringliteral">&quot;相&quot;</span>, 1319); UW5__.Add(<span class="stringliteral">&quot;省&quot;</span>, -1052); UW5__.Add(<span class="stringliteral">&quot;県&quot;</span>, -4003); UW5__.Add(<span class="stringliteral">&quot;研&quot;</span>, -997);
+<a name="l00446"></a>00446             UW5__.Add(<span class="stringliteral">&quot;社&quot;</span>, -278); UW5__.Add(<span class="stringliteral">&quot;空&quot;</span>, -813); UW5__.Add(<span class="stringliteral">&quot;統&quot;</span>, 1955); UW5__.Add(<span class="stringliteral">&quot;者&quot;</span>, -2233);
+<a name="l00447"></a>00447             UW5__.Add(<span class="stringliteral">&quot;表&quot;</span>, 663); UW5__.Add(<span class="stringliteral">&quot;語&quot;</span>, -1073); UW5__.Add(<span class="stringliteral">&quot;議&quot;</span>, 1219); UW5__.Add(<span class="stringliteral">&quot;選&quot;</span>, -1018);
+<a name="l00448"></a>00448             UW5__.Add(<span class="stringliteral">&quot;郎&quot;</span>, -368); UW5__.Add(<span class="stringliteral">&quot;長&quot;</span>, 786); UW5__.Add(<span class="stringliteral">&quot;間&quot;</span>, 1191); UW5__.Add(<span class="stringliteral">&quot;題&quot;</span>, 2368);
+<a name="l00449"></a>00449             UW5__.Add(<span class="stringliteral">&quot;館&quot;</span>, -689); UW5__.Add(<span class="stringliteral">&quot;１&quot;</span>, -514); UW5__.Add(<span class="stringliteral">&quot;Ｅ２&quot;</span>, -32768); UW5__.Add(<span class="stringliteral">&quot;｢&quot;</span>, 363);
+<a name="l00450"></a>00450             UW5__.Add(<span class="stringliteral">&quot;ｲ&quot;</span>, 241); UW5__.Add(<span class="stringliteral">&quot;ﾙ&quot;</span>, 451); UW5__.Add(<span class="stringliteral">&quot;ﾝ&quot;</span>, -343);
+<a name="l00451"></a>00451             Hashtable UW6__ = <span class="keyword">new</span> Hashtable();
+<a name="l00452"></a>00452             UW6__.Add(<span class="stringliteral">&quot;,&quot;</span>, 227); UW6__.Add(<span class="stringliteral">&quot;.&quot;</span>, 808); UW6__.Add(<span class="stringliteral">&quot;1&quot;</span>, -270); UW6__.Add(<span class="stringliteral">&quot;E1&quot;</span>, 306);
+<a name="l00453"></a>00453             UW6__.Add(<span class="stringliteral">&quot;、&quot;</span>, 227); UW6__.Add(<span class="stringliteral">&quot;。&quot;</span>, 808); UW6__.Add(<span class="stringliteral">&quot;あ&quot;</span>, -307); UW6__.Add(<span class="stringliteral">&quot;う&quot;</span>, 189);
+<a name="l00454"></a>00454             UW6__.Add(<span class="stringliteral">&quot;か&quot;</span>, 241); UW6__.Add(<span class="stringliteral">&quot;が&quot;</span>, -73); UW6__.Add(<span class="stringliteral">&quot;く&quot;</span>, -121); UW6__.Add(<span class="stringliteral">&quot;こ&quot;</span>, -200);
+<a name="l00455"></a>00455             UW6__.Add(<span class="stringliteral">&quot;じ&quot;</span>, 1782); UW6__.Add(<span class="stringliteral">&quot;す&quot;</span>, 383); UW6__.Add(<span class="stringliteral">&quot;た&quot;</span>, -428); UW6__.Add(<span class="stringliteral">&quot;っ&quot;</span>, 573);
+<a name="l00456"></a>00456             UW6__.Add(<span class="stringliteral">&quot;て&quot;</span>, -1014); UW6__.Add(<span class="stringliteral">&quot;で&quot;</span>, 101); UW6__.Add(<span class="stringliteral">&quot;と&quot;</span>, -105); UW6__.Add(<span class="stringliteral">&quot;な&quot;</span>, -253);
+<a name="l00457"></a>00457             UW6__.Add(<span class="stringliteral">&quot;に&quot;</span>, -149); UW6__.Add(<span class="stringliteral">&quot;の&quot;</span>, -417); UW6__.Add(<span class="stringliteral">&quot;は&quot;</span>, -236); UW6__.Add(<span class="stringliteral">&quot;も&quot;</span>, -206);
+<a name="l00458"></a>00458             UW6__.Add(<span class="stringliteral">&quot;り&quot;</span>, 187); UW6__.Add(<span class="stringliteral">&quot;る&quot;</span>, -135); UW6__.Add(<span class="stringliteral">&quot;を&quot;</span>, 195); UW6__.Add(<span class="stringliteral">&quot;ル&quot;</span>, -673);
+<a name="l00459"></a>00459             UW6__.Add(<span class="stringliteral">&quot;ン&quot;</span>, -496); UW6__.Add(<span class="stringliteral">&quot;一&quot;</span>, -277); UW6__.Add(<span class="stringliteral">&quot;中&quot;</span>, 201); UW6__.Add(<span class="stringliteral">&quot;件&quot;</span>, -800);
+<a name="l00460"></a>00460             UW6__.Add(<span class="stringliteral">&quot;会&quot;</span>, 624); UW6__.Add(<span class="stringliteral">&quot;前&quot;</span>, 302); UW6__.Add(<span class="stringliteral">&quot;区&quot;</span>, 1792); UW6__.Add(<span class="stringliteral">&quot;員&quot;</span>, -1212);
+<a name="l00461"></a>00461             UW6__.Add(<span class="stringliteral">&quot;委&quot;</span>, 798); UW6__.Add(<span class="stringliteral">&quot;学&quot;</span>, -960); UW6__.Add(<span class="stringliteral">&quot;市&quot;</span>, 887); UW6__.Add(<span class="stringliteral">&quot;広&quot;</span>, -695);
+<a name="l00462"></a>00462             UW6__.Add(<span class="stringliteral">&quot;後&quot;</span>, 535); UW6__.Add(<span class="stringliteral">&quot;業&quot;</span>, -697); UW6__.Add(<span class="stringliteral">&quot;相&quot;</span>, 753); UW6__.Add(<span class="stringliteral">&quot;社&quot;</span>, -507);
+<a name="l00463"></a>00463             UW6__.Add(<span class="stringliteral">&quot;福&quot;</span>, 974); UW6__.Add(<span class="stringliteral">&quot;空&quot;</span>, -822); UW6__.Add(<span class="stringliteral">&quot;者&quot;</span>, 1811); UW6__.Add(<span class="stringliteral">&quot;連&quot;</span>, 463);
+<a name="l00464"></a>00464             UW6__.Add(<span class="stringliteral">&quot;郎&quot;</span>, 1082); UW6__.Add(<span class="stringliteral">&quot;１&quot;</span>, -270); UW6__.Add(<span class="stringliteral">&quot;Ｅ１&quot;</span>, 306); UW6__.Add(<span class="stringliteral">&quot;ﾙ&quot;</span>, -673);
+<a name="l00465"></a>00465             UW6__.Add(<span class="stringliteral">&quot;ﾝ&quot;</span>, -496);
+<a name="l00466"></a>00466 
+<a name="l00467"></a>00467             <span class="comment">//Hier folgen die für das Trennen des Textes in Token wichtigen Code-Abschnitte.</span>
+<a name="l00468"></a>00468 
+<a name="l00469"></a>00469             ArrayList result = <span class="keyword">new</span> ArrayList();                                 <span class="comment">//Erstellt Arraylist in der spaeter die Ergebnis-Token fortlaufend gespeichert werden. </span>
+<a name="l00470"></a>00470             ArrayList seg = <span class="keyword">new</span> ArrayList();                                    <span class="comment">//Erstellt Arraylist in die spaeter alle einzel-Zeichen des Textes gespeichert werden. </span>
+<a name="l00471"></a>00471             seg.Add(<span class="stringliteral">&quot;B3&quot;</span>); seg.Add(<span class="stringliteral">&quot;B2&quot;</span>); seg.Add(<span class="stringliteral">&quot;B1&quot;</span>);                        <span class="comment">//Start-Elemente der Arraylist seg werden gesetzt. </span>
+<a name="l00472"></a>00472             ArrayList ctype = <span class="keyword">new</span> ArrayList();                                  <span class="comment">//Erstellt Arraylist in die spaeter die Zeichentypen zu den einzel-Zeichen des Textes gespeichert werden. </span>
+<a name="l00473"></a>00473             ctype.Add(<span class="stringliteral">&quot;O&quot;</span>); ctype.Add(<span class="stringliteral">&quot;O&quot;</span>); ctype.Add(<span class="stringliteral">&quot;O&quot;</span>);                     <span class="comment">//Start-Elemente der Arraylist ctype werden gesetzt. </span>
+<a name="l00474"></a>00474 
+<a name="l00475"></a>00475             <span class="comment">//Erstellt Arraylist (o) und füllt diese mit den Einzelzeichen aus dem Input(Text).</span>
+<a name="l00476"></a>00476             ArrayList o = <span class="keyword">new</span> ArrayList();
+<a name="l00477"></a>00477             <span class="keywordflow">foreach</span> (<span class="keywordtype">char</span> s <span class="keywordflow">in</span> input)
+<a name="l00478"></a>00478             {
+<a name="l00479"></a>00479                 o.Add(s);
+<a name="l00480"></a>00480             }
+<a name="l00481"></a>00481 
+<a name="l00482"></a>00482             <span class="comment">//Fügt die einzelnen Chars als Strings in die Arraylist seg und die Typen aus der Hashtable in ctype</span>
+<a name="l00483"></a>00483             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; o.Count; ++i)
+<a name="l00484"></a>00484             {
+<a name="l00485"></a>00485                 seg.Add(o[i]);
+<a name="l00486"></a>00486                 String h1 = o[i].ToString();
+<a name="l00487"></a>00487                 String h2 = <a class="code" href="class_j_a_d_e_1_1_segmenter.html#abc36a4df9af5aec57560d4faa4af652f">ctype_</a>(h1);
+<a name="l00488"></a>00488                 ctype.Add(h2);
+<a name="l00489"></a>00489             }
+<a name="l00490"></a>00490             <span class="comment">//Fügt in die Arraylisten seg und ctype 3 Schluss-Elemente ein.</span>
+<a name="l00491"></a>00491             seg.Add(<span class="stringliteral">&quot;E1&quot;</span>);seg.Add(<span class="stringliteral">&quot;E2&quot;</span>);seg.Add(<span class="stringliteral">&quot;E3&quot;</span>);
+<a name="l00492"></a>00492             ctype.Add(<span class="stringliteral">&quot;O&quot;</span>);ctype.Add(<span class="stringliteral">&quot;O&quot;</span>);ctype.Add(<span class="stringliteral">&quot;O&quot;</span>);
+<a name="l00493"></a>00493 
+<a name="l00494"></a>00494             String word = seg[3].ToString();
+<a name="l00495"></a>00495             String p1 = <span class="stringliteral">&quot;U&quot;</span>;
+<a name="l00496"></a>00496             String p2 = <span class="stringliteral">&quot;U&quot;</span>;
+<a name="l00497"></a>00497             String p3 = <span class="stringliteral">&quot;U&quot;</span>;
+<a name="l00498"></a>00498             <span class="comment">//Durchlaufen der potentiellen Woerter(durch Kombination gebildet) und bei Übereinstimmung mit Key-String aus den Hashtables folgt Addieren der in der Hashtable gespeicherten Werte zu Score</span>
+<a name="l00499"></a>00499             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 4; i &lt; seg.Count - 3; ++i)
+<a name="l00500"></a>00500             {
+<a name="l00501"></a>00501                 <span class="keywordtype">int</span> score = BIAS__;
+<a name="l00502"></a>00502                 String w1 = seg[i - 3].ToString();
+<a name="l00503"></a>00503                 String w2 = seg[i - 2].ToString();
+<a name="l00504"></a>00504                 String w3 = seg[i - 1].ToString();
+<a name="l00505"></a>00505                 String w4 = seg[i].ToString();
+<a name="l00506"></a>00506                 String w5 = seg[i + 1].ToString();
+<a name="l00507"></a>00507                 String w6 = seg[i + 2].ToString();
+<a name="l00508"></a>00508 
+<a name="l00509"></a>00509                 String c1 = ctype[i - 3].ToString();
+<a name="l00510"></a>00510                 String c2 = ctype[i - 2].ToString();
+<a name="l00511"></a>00511                 String c3 = ctype[i - 1].ToString();
+<a name="l00512"></a>00512                 String c4 = ctype[i].ToString();
+<a name="l00513"></a>00513                 String c5 = ctype[i + 1].ToString();
+<a name="l00514"></a>00514                 String c6 = ctype[i + 2].ToString();
+<a name="l00515"></a>00515 
+<a name="l00516"></a>00516                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UP1__, p1);
+<a name="l00517"></a>00517                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UP2__, p2);
+<a name="l00518"></a>00518                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UP3__, p3);
+<a name="l00519"></a>00519                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BP1__, p1 + p2);
+<a name="l00520"></a>00520                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BP2__, p2 + p3);
+<a name="l00521"></a>00521                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UW1__, w1);
+<a name="l00522"></a>00522                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UW2__, w2);
+<a name="l00523"></a>00523                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UW3__, w3);
+<a name="l00524"></a>00524                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UW4__, w4);
+<a name="l00525"></a>00525                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UW5__, w5);
+<a name="l00526"></a>00526                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UW6__, w6);
+<a name="l00527"></a>00527                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BW1__, w2 + w3);
+<a name="l00528"></a>00528                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BW2__, w3 + w4);
+<a name="l00529"></a>00529                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BW3__, w4 + w5);
+<a name="l00530"></a>00530                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TW1__, w1 + w2 + w3);
+<a name="l00531"></a>00531                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TW2__, w2 + w3 + w4);
+<a name="l00532"></a>00532                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TW3__, w3 + w4 + w5);
+<a name="l00533"></a>00533                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TW4__, w4 + w5 + w6);
+<a name="l00534"></a>00534                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UC1__, c1);
+<a name="l00535"></a>00535                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UC2__, c2);
+<a name="l00536"></a>00536                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UC3__, c3);
+<a name="l00537"></a>00537                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UC4__, c4);
+<a name="l00538"></a>00538                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UC5__, c5);
+<a name="l00539"></a>00539                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UC6__, c6);
+<a name="l00540"></a>00540                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BC1__, c2 + c3);
+<a name="l00541"></a>00541                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BC2__, c3 + c4);
+<a name="l00542"></a>00542                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BC3__, c4 + c5);
+<a name="l00543"></a>00543                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TC1__, c1 + c2 + c3);
+<a name="l00544"></a>00544                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TC2__, c2 + c3 + c4);
+<a name="l00545"></a>00545                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TC3__, c3 + c4 + c5);
+<a name="l00546"></a>00546                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TC4__, c4 + c5 + c6);
+<a name="l00547"></a>00547                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UQ1__, p1 + c1);
+<a name="l00548"></a>00548                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UQ2__, p2 + c2);
+<a name="l00549"></a>00549                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(UQ1__, p3 + c3);
+<a name="l00550"></a>00550                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BQ1__, p2 + c2 + c3);
+<a name="l00551"></a>00551                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BQ2__, p2 + c3 + c4);
+<a name="l00552"></a>00552                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BQ3__, p3 + c2 + c3);
+<a name="l00553"></a>00553                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(BQ4__, p3 + c3 + c4);
+<a name="l00554"></a>00554                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TQ1__, p2 + c1 + c2 + c3);
+<a name="l00555"></a>00555                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TQ2__, p2 + c2 + c3 + c4);
+<a name="l00556"></a>00556                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TQ3__, p3 + c1 + c2 + c3);
+<a name="l00557"></a>00557                 score += <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(TQ4__, p3 + c2 + c3 + c4);
+<a name="l00558"></a>00558 
+<a name="l00559"></a>00559                 String p = <span class="stringliteral">&quot;O&quot;</span>;                             <span class="comment">//Kein Wort dann p= &quot;O&quot; --&gt; daraus wuerde im naechsten Durchlauf der Schleife eine andere Anfangswahrscheinlichkeit gelten  </span>
+<a name="l00560"></a>00560                 
+<a name="l00561"></a>00561                 <span class="comment">//Wenn score &gt; 0 dann liegt eine hohe Wahrscheinlichkeit für eine Wortgrenze vor.</span>
+<a name="l00562"></a>00562                 <span class="keywordflow">if</span> (score &gt; 0)
+<a name="l00563"></a>00563                 {
+<a name="l00564"></a>00564                     result.Add(word);                       <span class="comment">//Hinzufuegen der bisher in word gespeicherten Chars als Token in das Result Array</span>
+<a name="l00565"></a>00565                     word = <span class="stringliteral">&quot;&quot;</span>;                              <span class="comment">//Zwischenspeicher fuer das Token wird geloescht.</span>
+<a name="l00566"></a>00566                     p = <span class="stringliteral">&quot;B&quot;</span>;                                <span class="comment">//p wird geaendert um die geaenderte Anfangswahrscheinlichkeit in den nächsten Schleifendurchlauf zu bringen.</span>
+<a name="l00567"></a>00567                 }
+<a name="l00568"></a>00568                 <span class="comment">//um ein Zeichen weiterruecken. </span>
+<a name="l00569"></a>00569                 p1 = p2;
+<a name="l00570"></a>00570                 p2 = p3;
+<a name="l00571"></a>00571                 p3 = p;
+<a name="l00572"></a>00572                 word += seg[i].ToString();
+<a name="l00573"></a>00573             }
+<a name="l00574"></a>00574             result.Add(word);                               <span class="comment">//Der Rest wird als Wort in result angehängt.</span>
+<a name="l00575"></a>00575 
+<a name="l00576"></a>00576             
+<a name="l00577"></a>00577             <span class="comment">//Funktionen zum Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur.</span>
+<a name="l00578"></a>00578             <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> rueck = <span class="keyword">new</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>();                  <span class="comment">//Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist).</span>
+<a name="l00579"></a>00579             ArrayList container = <span class="keyword">new</span> ArrayList();      <span class="comment">//Zwischenspeicher fuer die Token/Satz-Daten.</span>
+<a name="l00580"></a>00580 
+<a name="l00581"></a>00581             <span class="comment">//Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine &quot;Satz-Liste&quot;(hilf) geschrieben und zum &quot;Text-Container hinzugefügt&quot;.</span>
+<a name="l00582"></a>00582             <span class="comment">//Beinhaltet die unelegante Loesung für das Auftreten von mehreren Satzendzeichen.</span>
+<a name="l00583"></a>00583             <span class="keywordtype">int</span> x = 0;                                                  <span class="comment">//Hilfsvariable.</span>
+<a name="l00584"></a>00584             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; result.Count; i++)                      <span class="comment">//Fuer alle Eintraege in dem result Array. </span>
+<a name="l00585"></a>00585             {
+<a name="l00586"></a>00586                 <span class="keywordflow">if</span> ((Equals(result[i], <span class="stringliteral">&quot;。&quot;</span>)) || (Equals(result[i], <span class="stringliteral">&quot;！&quot;</span>)) || (Equals(result[i], <span class="stringliteral">&quot;？&quot;</span>)) || (Equals(result[i], <span class="stringliteral">&quot;。。&quot;</span>)) || (Equals(result[i], <span class="stringliteral">&quot;！！&quot;</span>)) || (Equals(result[i], <span class="stringliteral">&quot;？？&quot;</span>)))    <span class="comment">//Wenn aktueller Eintrag ein Satzendzeichen.</span>
+<a name="l00587"></a>00587                 {
+<a name="l00588"></a>00588                     ArrayList hilf = <span class="keyword">new</span> ArrayList();                   <span class="comment">//Array das als Zwischenspeicher fuer den aktuellen Satz fungiert.</span>
+<a name="l00589"></a>00589                     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> y = x; y &lt;= i; y++)                        <span class="comment">//Leauft ueber die Indexwerte welche den aktuellen Satz bilden. </span>
+<a name="l00590"></a>00590                     {
+<a name="l00591"></a>00591                         hilf.Add(result[y]);                            <span class="comment">//Schreibt die Elemente nacheinander in hilf.</span>
+<a name="l00592"></a>00592                     }
+<a name="l00593"></a>00593                     container.Add(hilf);                                <span class="comment">//Fuegt den Satz zu dem Zwischenspeicher hinzu.</span>
+<a name="l00594"></a>00594                     x = i + 1;                                          <span class="comment">//x wird auf i+1 gesetzt um die Schleife beim naechten Satzendzeichen nach der Endposition des letzten Satzes zu beginnen.</span>
+<a name="l00595"></a>00595                 }
+<a name="l00596"></a>00596             }
+<a name="l00597"></a>00597             <span class="comment">//Falls am Ende kein Satzendzeichen steht wird der Rest als ein Satz übergeben.</span>
+<a name="l00598"></a>00598             <span class="comment">//Ist noch verbesserungswürdig aber erfüllt seinen Zweck.</span>
+<a name="l00599"></a>00599             <span class="keywordtype">int</span> z = result.Count;
+<a name="l00600"></a>00600             <span class="keywordflow">if</span> (!((Equals(result[result.Count - 1], <span class="stringliteral">&quot;。&quot;</span>)) || (Equals(result[result.Count - 1], <span class="stringliteral">&quot;！&quot;</span>)) || (Equals(result[result.Count - 1], <span class="stringliteral">&quot;？&quot;</span>))))      <span class="comment">//Wenn aktueller Eintrag ein Satzendzeichen.</span>
+<a name="l00601"></a>00601             {
+<a name="l00602"></a>00602                 ArrayList hilf = <span class="keyword">new</span> ArrayList();                       <span class="comment">//Array das als Zwischenspeicher für den aktuellen Satz fungiert.</span>
+<a name="l00603"></a>00603                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> y = x; y &lt;= result.Count - 1; y++)             <span class="comment">//Läuft ueber die Indexwerte welche den aktuellen Satz bilden. </span>
+<a name="l00604"></a>00604                 {
+<a name="l00605"></a>00605                     hilf.Add(result[y]);                                <span class="comment">//Schreibt die Elemente nacheinander in hilf.</span>
+<a name="l00606"></a>00606                 }
+<a name="l00607"></a>00607                 container.Add(hilf);                                    <span class="comment">//Fuegt den Satz zu dem Zwischenspeicher hinzu.</span>
+<a name="l00608"></a>00608             }
+<a name="l00609"></a>00609             rueck.<a class="code" href="class_j_a_d_e_1_1_daten.html#a20e383b8e081793086f9adb40b0fe269">Zugriff</a> = container;                                  <span class="comment">//Schreibt den Zwischenspeicher in die Datenstruktur.</span>
+<a name="l00610"></a>00610             <span class="keywordflow">return</span> rueck;                                               <span class="comment">//Gibt rueck zurueck.</span>
+<a name="l00611"></a>00611         }
+<a name="l00612"></a>00612 <span class="comment"></span>
+<a name="l00613"></a>00613 <span class="comment">        /**</span>
+<a name="l00614"></a>00614 <span class="comment">        * Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und Sonstige)</span>
+<a name="l00615"></a>00615 <span class="comment">        * Erhält einen String, vergleicht diesen mit den Regular Expression-Einträgen in einer Hashtable und gibt bei match den Schlüsselwert(String) zurück. </span>
+<a name="l00616"></a>00616 <span class="comment">        * @param[in] str String Variable welche auf Zeichenart untersucht werden soll.</span>
+<a name="l00617"></a>00617 <span class="comment">        * @param[out] s String-Wert aus dem Value eines Hashtable Eintrages. </span>
+<a name="l00618"></a>00618 <span class="comment">        */</span>
+<a name="l00619"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#abc36a4df9af5aec57560d4faa4af652f">00619</a>         <span class="keyword">private</span> <span class="keywordtype">string</span> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#abc36a4df9af5aec57560d4faa4af652f">ctype_</a>(String str)
+<a name="l00620"></a>00620         {
+<a name="l00621"></a>00621             <span class="keywordflow">foreach</span> (DictionaryEntry element <span class="keywordflow">in</span> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>)
+<a name="l00622"></a>00622             {
+<a name="l00623"></a>00623                 Regex rgx = (Regex)element.Key;
+<a name="l00624"></a>00624 
+<a name="l00625"></a>00625                 if (rgx.IsMatch(str))
+<a name="l00626"></a>00626                 {
+<a name="l00627"></a>00627                     String s = (String)element.Value;
+<a name="l00628"></a>00628                     <span class="keywordflow">return</span> s;
+<a name="l00629"></a>00629                 }
+<a name="l00630"></a>00630             }
+<a name="l00631"></a>00631                 <span class="keywordflow">return</span> <span class="stringliteral">&quot;O&quot;</span>; 
+<a name="l00632"></a>00632         }
+<a name="l00633"></a>00633 <span class="comment"></span>
+<a name="l00634"></a>00634 <span class="comment">        /**</span>
+<a name="l00635"></a>00635 <span class="comment">      * Erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. </span>
+<a name="l00636"></a>00636 <span class="comment">      * @param table[in] Hashtable-Objekt.</span>
+<a name="l00637"></a>00637 <span class="comment">      * @param[in] s String-Objekt das auf matching in der Hashtable geprüft werden soll.</span>
+<a name="l00638"></a>00638 <span class="comment">      * @param[out] ret Int-Wert (Score).</span>
+<a name="l00639"></a>00639 <span class="comment">      */</span>
+<a name="l00640"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">00640</a>         <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(Hashtable table, String s)
+<a name="l00641"></a>00641         {
+<a name="l00642"></a>00642             <span class="keywordflow">foreach</span> (DictionaryEntry element <span class="keywordflow">in</span> table)
+<a name="l00643"></a>00643             {
+<a name="l00644"></a>00644                 String s2 = (String)element.Key;
+<a name="l00645"></a>00645                 if (Equals(s, s2))
+<a name="l00646"></a>00646                 {
+<a name="l00647"></a>00647                     <span class="keywordtype">int</span> ret = (int)element.Value;
+<a name="l00648"></a>00648                     <span class="keywordflow">return</span> ret;
+<a name="l00649"></a>00649                 }
+<a name="l00650"></a>00650             }
+<a name="l00651"></a>00651             <span class="keywordflow">return</span> 0;
+<a name="l00652"></a>00652         }
+<a name="l00653"></a>00653 <span class="comment"></span>
+<a name="l00654"></a>00654 <span class="comment">        /**</span>
+<a name="l00655"></a>00655 <span class="comment">         * Funktion die testet ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. </span>
+<a name="l00656"></a>00656 <span class="comment">         * Testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expression matching auf Zugehörigkeit zum japanischen Zeichensatz.</span>
+<a name="l00657"></a>00657 <span class="comment">         * Rückgabewerte sind String Objekte. &quot;J&quot; für japanisches Zeichen. &quot;O&quot; für nicht japanisches Zeichen.</span>
+<a name="l00658"></a>00658 <span class="comment">         * Hier wurde nicht mit boolschen Rückgabe-Werten gearbeitet, weil eine spätere Modifikation bzw. Spezifikation des Rückgabewertes möglich sein sollte. </span>
+<a name="l00659"></a>00659 <span class="comment">         * @param[in] eingabe String-Objekt das auf japanische Zeichen hin Untersucht werden soll.</span>
+<a name="l00660"></a>00660 <span class="comment">         * @param[out] s String-Wert aus dem Value eines Hashtable Eintrages. </span>
+<a name="l00661"></a>00661 <span class="comment">         */</span>
+<a name="l00662"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#a9a4ecd3b328ea2f7694bc799d82043a9">00662</a>         <span class="keyword">private</span> String <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a9a4ecd3b328ea2f7694bc799d82043a9">type</a>(String eingabe)                                 
+<a name="l00663"></a>00663         {
+<a name="l00664"></a>00664             Hashtable hash = <span class="keyword">new</span> Hashtable();                               <span class="comment">//erzeugt eine Hashtable in der im Folgenden einzelne Regular Expression Einträge zu den japanischen unicode Zeichenentspechungen erstellt werden.</span>
+<a name="l00665"></a>00665             Regex reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[\x3041-\x3096]&quot;</span>);                       <span class="comment">//erzeugt eine Regular Expression fuer Hiragana.    </span>
+<a name="l00666"></a>00666             <span class="comment">//hash.Add(reg, &quot;H&quot;);</span>
+<a name="l00667"></a>00667             hash.Add(reg, <span class="stringliteral">&quot;J&quot;</span>);                                             <span class="comment">//Fuegt der Hashtabel die gerade geschaffene Regex als Key und einem String als Value zu. </span>
+<a name="l00668"></a>00668             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[\x30A0-\x30FF]&quot;</span>);                             <span class="comment">//erzeugt eine Regular Expression fuer Katakana (Full Width).</span>
+<a name="l00669"></a>00669             <span class="comment">//hash.Add(reg, &quot;K&quot;);</span>
+<a name="l00670"></a>00670             hash.Add(reg, <span class="stringliteral">&quot;J&quot;</span>);                                             <span class="comment">//Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.      </span>
+<a name="l00671"></a>00671             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[\x3400-\x4DB5\x4E00-\x9FCB\xF900-\xFA6A]&quot;</span>);   <span class="comment">//erzeugt eine Regular Expression fuer Kanji.</span>
+<a name="l00672"></a>00672             <span class="comment">//hash.Add(reg, &quot;J&quot;);</span>
+<a name="l00673"></a>00673             hash.Add(reg, <span class="stringliteral">&quot;J&quot;</span>);                                             <span class="comment">//Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.</span>
+<a name="l00674"></a>00674             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[\x2E80-\x2FD5]&quot;</span>);                             <span class="comment">//erzeugt eine Regular Expression fuer Kanji Radicale.</span>
+<a name="l00675"></a>00675             <span class="comment">//hash.Add(reg, &quot;R&quot;);</span>
+<a name="l00676"></a>00676             hash.Add(reg, <span class="stringliteral">&quot;J&quot;</span>);                                             <span class="comment">//Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.</span>
+<a name="l00677"></a>00677             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[\xFF5F-\xFF9F]&quot;</span>);                             <span class="comment">//erzeugt eine Regular Expression fuer Katakana and Punctuations (Half Width).</span>
+<a name="l00678"></a>00678             <span class="comment">//hash.Add(reg, &quot;P&quot;);</span>
+<a name="l00679"></a>00679             hash.Add(reg, <span class="stringliteral">&quot;J&quot;</span>);                                             <span class="comment">//Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.</span>
+<a name="l00680"></a>00680             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[\x3000-\x303F]&quot;</span>);                             <span class="comment">//erzeugt eine Regular Expression fuer Japanische Symbole und Punctuations.</span>
+<a name="l00681"></a>00681             <span class="comment">//hash.Add(reg, &quot;S&quot;);</span>
+<a name="l00682"></a>00682             hash.Add(reg, <span class="stringliteral">&quot;J&quot;</span>);                                             <span class="comment">//Fuegt der Hashtabe die gerade geschaffene Regex als Key und einem String als Value zu.</span>
+<a name="l00683"></a>00683             reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[\xFF01-\xFF5E]&quot;</span>);                             <span class="comment">//erzeugt eine Regular Expression fuer Alphanumeric and Punctuation (Full Width).</span>
+<a name="l00684"></a>00684             <span class="comment">//hash.Add(reg, &quot;W1&quot;);</span>
+<a name="l00685"></a>00685             hash.Add(reg, <span class="stringliteral">&quot;J&quot;</span>);
+<a name="l00686"></a>00686 
+<a name="l00687"></a>00687             <span class="keywordflow">foreach</span> (DictionaryEntry element <span class="keywordflow">in</span> hash)                       <span class="comment">//Durchlaufen der oben erstellten Hashtable.</span>
+<a name="l00688"></a>00688             {
+<a name="l00689"></a>00689                 Regex rgx = (Regex)element.Key;                             <span class="comment">//die Regular expression welche als Key in der Hashtable gespeichert ist wird rgx zugewiesen.</span>
+<a name="l00690"></a>00690 
+<a name="l00691"></a>00691                 if (rgx.IsMatch(eingabe))                                   <span class="comment">//Falls der Eingabe String die Regular Expression Entspricht(matched).  </span>
+<a name="l00692"></a>00692                 {
+<a name="l00693"></a>00693                     String s = (String)element.Value;                       <span class="comment">//Der String aus dem Value der Regex wird als Rueckgabe String gespeichert.</span>
+<a name="l00694"></a>00694                     <span class="keywordflow">return</span> s;                                               <span class="comment">//Rueckgabe String wird zurueck gegeben.</span>
+<a name="l00695"></a>00695                 }
+<a name="l00696"></a>00696             }
+<a name="l00697"></a>00697             <span class="keywordflow">return</span> <span class="stringliteral">&quot;O&quot;</span>;                                                     <span class="comment">//Falls keine Uebereinstimmung gefunden werden konnte wird der String &quot;O&quot; zurueck gegeben.</span>
+<a name="l00698"></a>00698         }
+<a name="l00699"></a>00699 <span class="comment"></span>
+<a name="l00700"></a>00700 <span class="comment">        /**</span>
+<a name="l00701"></a>00701 <span class="comment">         * TestFunktion um einen Text (Eingabe String) auf dem Japanischen fremde Zeichen zu testen.</span>
+<a name="l00702"></a>00702 <span class="comment">         * Gibt momentan bei jedem Vorkommen eines nicht japanischen Zeichens im Text eine Warnmeldung aus.</span>
+<a name="l00703"></a>00703 <span class="comment">         * Kann noch angepasst werden.</span>
+<a name="l00704"></a>00704 <span class="comment">         * @param[in] text String-Objekt das auf nicht japanische Zeichen hin Untersucht werden soll.</span>
+<a name="l00705"></a>00705 <span class="comment">         */</span>
+<a name="l00706"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#a23f7bb05aaf164972d1e14f8560e5586">00706</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a23f7bb05aaf164972d1e14f8560e5586">TextTest</a>(String text)                                   
+<a name="l00707"></a>00707         {
+<a name="l00708"></a>00708             <span class="keywordtype">double</span> count = 0;                                               <span class="comment">//double Hilfsvariable.</span>
+<a name="l00709"></a>00709             <span class="keywordtype">double</span> rel = 0;                                                 <span class="comment">//double Hilfsvariable.</span>
+<a name="l00710"></a>00710 
+<a name="l00711"></a>00711             <span class="keywordflow">foreach</span> (<span class="keywordtype">char</span> ch <span class="keywordflow">in</span> text)                                       <span class="comment">//durchleauft alle Zeichen des Eingabe-Textes.</span>
+<a name="l00712"></a>00712             {
+<a name="l00713"></a>00713                 <span class="keywordflow">if</span> (Equals(<a class="code" href="class_j_a_d_e_1_1_segmenter.html#a9a4ecd3b328ea2f7694bc799d82043a9">type</a>(ch.ToString()), <span class="stringliteral">&quot;J&quot;</span>))                       <span class="comment">//Falls die Testfuntkion(oben beschrieben) ein japanisches Zeichen (&quot;J&quot;) als Rückgabe liefert.</span>
+<a name="l00714"></a>00714                 {
+<a name="l00715"></a>00715                     count++;                                                <span class="comment">//count zaehlt alle Japanischen Zeichen im Text.</span>
+<a name="l00716"></a>00716                 }
+<a name="l00717"></a>00717             }
+<a name="l00718"></a>00718             count = (text.Length) - count;                                  <span class="comment">//Liefert alle nicht erkannten und somit nicht japanischen Zeichen und bindet diesen Wert an count.</span>
+<a name="l00719"></a>00719             rel = count / (text.Length);                                    <span class="comment">//Der Variable rel wird hier die relative Haeufigkeit des Ereignisses &quot;Kein japanisches Zeichen&quot; zugeordnet. </span>
+<a name="l00720"></a>00720             <span class="keywordflow">if</span> (rel &gt; 0)                                                    <span class="comment">//Falls die relative Haeufigkeit groeßer 0 (sobald also nicht japanische Zeichen im Text vorhanden sind) erfolgt die Ausgabe der unten stehenden Message Box</span>
+<a name="l00721"></a>00721             {
+<a name="l00722"></a>00722                 MessageBox.Show(<span class="stringliteral">&quot;Der Segmenter ist nur für japanischen Text geeignet.Schriftzeichen anderer Sprachen können fehlerhafte Segmentierungen zur Folge haben&quot;</span>, <span class="stringliteral">&quot;Achtung&quot;</span>, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+<a name="l00723"></a>00723             }  
+<a name="l00724"></a>00724         }
+<a name="l00725"></a>00725     }
+<a name="l00726"></a>00726 }
+<a name="l00727"></a>00727 
+<a name="l00728"></a>00728 
+<a name="l00729"></a>00729 
+<a name="l00730"></a>00730 
+</pre></div></div><!-- contents -->
+</div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Klassen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namensbereiche</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Propertys</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><b>Segmenter.cs</b>      </li>
+
+    <li class="footer">Erzeugt am Don Mär 1 2012 15:44:05 für JaDe Tokenizer von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
+   </ul>
+ </div>
+
+
+</body>
+</html>

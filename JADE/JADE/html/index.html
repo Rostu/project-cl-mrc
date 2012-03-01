@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>JaDe Tokenizer: JaDe-Tokenizer</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  <td id="projectlogo"><img alt="Logo" src="JaDe.jpg"/></td>
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">JaDe Tokenizer
+   
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Erzeugt von Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li class="current"><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="namespaces.html"><span>Pakete</span></a></li>
+      <li><a href="annotated.html"><span>Klassen</span></a></li>
+      <li><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+  initNavTree('index.html','');
+</script>
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle">
+<div class="title">JaDe-Tokenizer </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a href="index2.html" target="_parent"><b>Bedienungsanleitung</b></a> <br/>
+ </p>
+<h2><a class="anchor" id="sec2"></a>
+Projekt-Zielsetzung</h2>
+<p>Im Rahmen eines einsemestrigen Projektseminars war es unser Ziel eine Windows-Forms Anwendung in C# zu erstellen. Grundidee war es, ein Tool bereitzustellen, mit dem man japanische Texte in Token zerlegen kann. In der Benutzeroberfläche sollte es die Möglichkeit geben, fehlerhaft erstellte Token zu bearbeiten. Außerdem sollte es möglich sein die Bedeutung, der Token in einem eingebundenen Wörterbuch (Japanisch-Deutsch) nachzuschlagen. </p>
+<h3><a class="anchor" id="Projekt-Mitglieder"></a>
+Projekt-Mitglieder</h3>
+<ul>
+<li>Christopher Michels</li>
+<li>Mirko Daumann</li>
+<li>Robert Studtrucker</li>
+<li>Youness El Ouafy</li>
+</ul>
+<h2><a class="anchor" id="sec3"></a>
+Ausblick</h2>
+<p>Im Weiteren möchten zumindest Einzelne Mitglieder der Projektgruppe an dem Projekt weiter arbeiten. Daher hier noch ein paar Funktionen/Ziele die noch nicht umgesetzt wurden, aber folgen werden:</p>
+<ul>
+<li>Ausgabe des japanischen Textes mit Übersetzungsvorschlägen für einzelne Token in einer passend formatierten Datei (Xml)<ul>
+<li>Möglichkeit, die gewählte Übersetzung für einen Token zu ändern</li>
+<li>Möglichkeit, während der Bearbeitung der Token den Fortschritt zu speichern</li>
+</ul>
+</li>
+<li>Zusätzliches Anlegen eines Nachschlagewerkes für japanische Postpositionen (mit grammatikalisch hilfreichen Einträgen)</li>
+<li>Auswahl der Token zum Bearbeiten und Suchen überarbeiten</li>
+<li>Funktion des Tokenizers überarbeiten</li>
+</ul>
+<h2><a class="anchor" id="sec4"></a>
+Verwendete Resourcen</h2>
+<h3><a class="anchor" id="TinySegmenter"></a>
+TinySegmenter</h3>
+<p>Da dies unser erstes Programmier-Projekt war und wir mit verschiedenen Komplikationen rechneten, haben wir uns aus zeitlichen Gründen dazu entschlossen, keinen eigenen Tokenizer für das Japanische zu trainieren. Stattdessen haben wir auf einen bereits implementierten Tokenizer namens TinySegmenter zurückgegriffen. Diesen haben wir lediglich in C# umgesetzt und unseren Bedürfnissen entsprechend angepasst. </p>
+<p>Der TinySegmenter ist ein durch einen maschinellen Lernprozess erstelltes Modell zur Erkennung von Wortgrenzen im Japanischen. Er verwendet kein Wörterbuch, arbeitet also nach dem Prinzip der Word-Boundary-Prediction. Im maschinellen Lernprozess wurde der RWCP-Corpus verwendet. Daher ist der TinySegmenter stark bei Zeitungstexten, hat aber Schwächen bei „einfachen“ Texten, die in Hiragana verfasst sind. Der TinySegmenter ist frei verfügbar unter: </p>
+<p><a href="http://chasen.org/~taku/software/TinySegmenter/">http://chasen.org/~taku/software/TinySegmenter/</a> </p>
+<p><a href="http://chasen.org/~taku/software/TinySegmenter/tiny_segmenter-0.1.js">http://chasen.org/~taku/software/TinySegmenter/tiny_segmenter-0.1.js</a> </p>
+<p>Der Urheberrechtsvermerk befindet sich in der Segmenter-Klasse, welche maßgeblich auf dem TinySegmenter aufbaut.  </p>
+<h3><a class="anchor" id="WaDoku"></a>
+WaDoku</h3>
+<p>Ebenfalls frei verfügbar ist das von uns verwendete Wörterbuch, eine xml Version des Wörterbuchprojektes von Ulrich Apel. </p>
+<p><a href="http://www.wadoku.de/wiki/x/ZQE">http://www.wadoku.de/wiki/x/ZQE</a> </p>
+<p>Der Urheberrechtsvermerk findet sich in der SearchEngine-Klasse. </p>
+<h3><a class="anchor" id="Sonstiges"></a>
+Sonstiges</h3>
+<p>Microsoft Visual Studio Professional 2010 </p>
+<p>AnkSVN </p>
+<p><a href="http://ankhsvn.open.collab.net/">http://ankhsvn.open.collab.net/</a> </p>
+<p>Google Code </p>
+<p><a href="http://code.google.com/p/project-cl-mrc/">http://code.google.com/p/project-cl-mrc/</a> </p>
+<p>DoxyGen </p>
+<p><a href="http://www.stack.nl/~dimitri/doxygen/index.html">http://www.stack.nl/~dimitri/doxygen/index.html</a> </p>
+</div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Klassen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namensbereiche</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Propertys</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div>
+  <div id="nav-path" class="navpath">
+    <ul>
+
+    <li class="footer">Erzeugt am Don Mär 1 2012 15:44:05 für JaDe Tokenizer von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
+   </ul>
+ </div>
+
+
+</body>
+</html>

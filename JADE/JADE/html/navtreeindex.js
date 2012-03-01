@@ -1,0 +1,21 @@
+var NAVTREEINDEX =
+{
+"index.html":[],
+"index.html":[0],
+"namespaces.html":[1,0],
+"namespace_j_a_d_e.html":[1,0,0],
+"annotated.html":[2,0],
+"class_j_a_d_e_1_1_bearbeiten_fenster.html":[2,0,0],
+"class_j_a_d_e_1_1_daten.html":[2,0,1],
+"class_j_a_d_e_1_1_haupt_fenster.html":[2,0,2],
+"class_j_a_d_e_1_1_save_objekt.html":[2,0,3],
+"class_j_a_d_e_1_1_saver.html":[2,0,4],
+"class_j_a_d_e_1_1_search_engine.html":[2,0,5],
+"class_j_a_d_e_1_1_segmenter.html":[2,0,6],
+"classes.html":[2,1],
+"functions.html":[2,2,0],
+"functions_func.html":[2,2,1],
+"functions_vars.html":[2,2,2],
+"functions_prop.html":[2,2,3],
+"files.html":[3,0]
+};

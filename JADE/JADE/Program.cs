@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace JADE
-{
+{///@cond
     static class Program
     {
         /// <summary>
@@ -18,4 +18,4 @@ namespace JADE
             Application.Run(new HauptFenster());
         }
     }
-}
+}///@endcond
