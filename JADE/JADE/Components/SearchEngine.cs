@@ -71,7 +71,7 @@ namespace JADE
         }
         /**
         * Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse SearchEngine umsetzt. Dadurch wird gewährleistet, dass nur eine und immer die selbe Instanz der SearchEngine Klasse verwendet wird.
-         * Überprüft ob es schon ein Objekt der Klasse SearchEngine gibt und erstellt falls nicht ein solches.
+         * Überprüft, ob es schon eine Instanz der Klasse SearchEngine gibt und erstellt falls nicht eine solche.
         */ 
         public static SearchEngine Engine
         {
@@ -225,9 +225,9 @@ namespace JADE
         }
 
         /**
-         * .......................................................INFOS
+         * Diese Funktion definiert für die gefundenen Wörterbucheinträge eine DataTable mit den Spalten für die Eintragsnummer, die Schreibweisen, die Wortart, die Umschrift und die Bedeutungen. Der Name der definierten Tabelle wird durch tableName bestimmt.
          * @param[in] tableName Name der zu erstellenden Table.
-         * @param[out] result Die fertig definierte Tabelle.
+         * @param[out] result Die vollständig definierte Tabelle.
          */
         private DataTable defineResultTable(string tableName)
         {
