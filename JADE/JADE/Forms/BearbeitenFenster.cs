@@ -15,8 +15,11 @@ namespace JADE
     /// </summary>
     public partial class BearbeitenFenster : Form
     {
+        /**Int-Variable, erhällt bei Aufruf des Fensters die Satznummer des zu bearbeitenden Token. */ 
         private int Satznummer;
+        /**Int-Variable, erhällt bei Aufruf des Fensters die Tokennummer des zu bearbeitenden Token. */ 
         private int Tok;
+        /**Daten Objekt, erhällt bei Aufruf des Fensters die Satz und Token Daten aus dem HauptFenster. */ 
         private Daten obj;
 
         /**
@@ -36,7 +39,7 @@ namespace JADE
         }
         
         /**
-         * Trennen-Button Funktion. Überprüft ob sich die beiden Neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
+         * Trennen-Button Funktion. Überprüft, ob sich die beiden neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
          */
         private void TrennenButton_Click(object sender, EventArgs e)
         {
@@ -59,7 +62,7 @@ namespace JADE
                 MessageBox.Show("Die 2 neuen Token müssen aus den Zeichen \ndes zu bearbeitenden Token bestehen.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        /// @cond
+        
         /**
          * Abbrechen-Button Funktion. Schließt das BearbeitenFenster.
          */
@@ -67,7 +70,7 @@ namespace JADE
         {
             this.Close();
         }
-
+        /// @cond
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
