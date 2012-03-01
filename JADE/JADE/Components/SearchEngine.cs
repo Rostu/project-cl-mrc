@@ -11,21 +11,20 @@ using System.Collections;
 namespace JADE
 {
     /// <summary>
-    ///*SearchEngine-Klasse enthällt die Funktionen zum Suchen eines Token im Wörterbuch.
+    ///*SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.
     ///*<para>Benutzt wurde eine XML-Dump des frei verfügbaren Wörterbuch-Projektes Wadoku</para>
     ///*<para><a href="http://www.wadoku.de/wiki/x/ZQE">http://www.wadoku.de/wiki/x/ZQE</a></para>
     /// </summary>
     public class SearchEngine
     {
-        private static SearchEngine engine;
-        /**Variable Test text............*/ 
+        /**Diese Variable dient der Klasse SearchEngine als Referenz auf ein DataSet, das die einzelnen Suchergebnisse, die bereits angefordert wurden, speichert. */
         private static System.Data.DataSet dataSet;
-
+        /// @cond
+        private static SearchEngine engine;
         private static XNamespace xns = "http://www.wadoku.de/xml/entry";
         private static XDocument wadoku;
-
         private static Hashtable posDeciphering;
-
+        /// @endcond
         /**
          * Private Konstruktor für die SearchEngine.
          */ 
