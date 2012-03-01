@@ -1,5 +1,7 @@
 ﻿namespace JADE
 {
+    /// @cond
+
     partial class BearbeitenFenster
     {
         /// <summary>
@@ -132,4 +134,4 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox3;
     }
-}
+}/// @endcond

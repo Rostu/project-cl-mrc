@@ -49,7 +49,7 @@ namespace JADE
             this.data = (ArrayList)info.GetValue("Daten", typeof(ArrayList));
         }
 
-
+        
         /**
          * Funktion zur Rückgabe eines einzelnen Token(String) aus unseren Daten.
          * Erhällt zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.
@@ -76,6 +76,7 @@ namespace JADE
             ArrayList rueckgabe = (ArrayList)hilf[Satznummer];      //Erzeugt eine Variable vom Typ Arraylist und weist dieser den gewünschten Satz zu.
             return rueckgabe;                                       //gibt den Satz zurück.
         }
+       
 
         /**
         * Benötigt die Serialize Funktion.
@@ -87,5 +88,6 @@ namespace JADE
         {
             info.AddValue("Daten", this.data);
         }
+        
   }
 }

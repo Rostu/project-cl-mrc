@@ -59,7 +59,7 @@ namespace JADE
                 MessageBox.Show("Die 2 neuen Token müssen aus den Zeichen \ndes zu bearbeitenden Token bestehen.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
+        /// @cond
         /**
          * Abbrechen-Button Funktion. Schließt das BearbeitenFenster.
          */
@@ -92,6 +92,6 @@ namespace JADE
         {
 
         }
-
+        /// @endcond
     }
 }
