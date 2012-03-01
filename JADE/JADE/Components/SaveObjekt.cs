@@ -14,6 +14,7 @@ namespace JADE
     [Serializable()]
     public class SaveObjekt : ISerializable                                         //Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.
     {
+        /**Variable vom Typ Daten[].*/
         private Daten[] list;                                                       //Erzeugt Array in dem zu Serialisierte Daten(in diesem Fall ein Objekt unserer DatenKlasse) gespeichert werden.
         
         /*Get und Set Methoden um Zugriff zu gewährleisten.*/

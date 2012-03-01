@@ -13,7 +13,7 @@
  -  Youness El Ouafy
 
  @section sec3 Ausblick
- Im Weiteren möchten zumindest Einzelne der Projektgruppe an dem Projekt weiter arbeiten. Daher hier noch ein paar Funktionen/Ziele die noch nicht umgesetzt wurden aber folgen werden:
+ Im Weiteren möchten zumindest Einzelne Mitglieder der Projektgruppe an dem Projekt weiter arbeiten. Daher hier noch ein paar Funktionen/Ziele die noch nicht umgesetzt wurden, aber folgen werden:
  -  Ausgabe des japanischen Textes mit Übersetzungsvorschlägen für einzelne Token in einer passend formatierten Datei (Xml)
   -  Möglichkeit, die gewählte Übersetzung für einen Token zu ändern
   -  Möglichkeit, während der Bearbeitung der Token den Fortschritt zu speichern

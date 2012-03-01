@@ -45,6 +45,7 @@ namespace JADE
     
     public class Segmenter
     {
+        /**Private Variable vom Typ Hashtable. Wird in der Klasse zur Zeichentypbestimmung genutzt. */
         private Hashtable chartype_ = new Hashtable();      //Anlegen einer Hashtable welche später zur Zeichentypbestimmung genutzt wird.      
 
         /**
