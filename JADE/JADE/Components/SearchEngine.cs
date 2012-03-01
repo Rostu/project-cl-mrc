@@ -20,30 +20,31 @@ namespace JADE
         /**Diese Variable dient der Klasse SearchEngine als Referenz auf ein DataSet, das die einzelnen Suchergebnisse, die bereits angefordert wurden, speichert. */
         private static System.Data.DataSet dataSet;
         /// @cond
-        private static SearchEngine engine;
-        private static XNamespace xns = "http://www.wadoku.de/xml/entry";
-        private static XDocument wadoku;
-        private static Hashtable posDeciphering;
+        private static SearchEngine engine; //Platzhalter, der zur Umsetzung des Singleton-Entwurfsmusters dient.
+        private static XNamespace xns; //Namespace-Angabe für Linq to XML wird hier gespeichert.
+        private static XDocument wadoku; //Variable für die Referenz auf das Wörterbuch.
+        private static Hashtable posDeciphering; // Hier wird beim Initialisieren eine Referenz auf eine Hashtable gespeichert, die bei der Erstellung von Einträgen für das Suchergebnis POS-Tag-Abkürzungen im Wörterbuch leserlich darstellbar macht. 
         /// @endcond
         /**
          * Private Konstruktor für die SearchEngine.
          */ 
         private SearchEngine()
         {
-            if (engine != null)
+            if (engine != null) //Falls bereits eine Instanz dieser Klasse erzeugt worden ist, ... => siehe Exception-Nachricht
             {
                 throw new InvalidOperationException("Es ist unmöglich eine weitere Instanz der Singleton-Klasse SearchEngine zu erzeugen.");
             }
-            if (!File.Exists("wadoku.xml"))
+            if (!File.Exists("wadoku.xml")) //Dient dazu, Probleme beim Lesezugriff auf das Wörterbuch abzufangen. => siehe Exception-Nachricht
+            {
             {
                 throw new ArgumentException("Die Wörterbuchdatei konnte nicht gefunden werden.");
             }
 
-            dataSet = new DataSet();
-            xns = "http://www.wadoku.de/xml/entry";
-            wadoku = XDocument.Load("wadoku.xml");
+            dataSet = new DataSet(); //Initialisiere das benötigte DataSet dataSet.
+            xns = "http://www.wadoku.de/xml/entry"; //Angabe des Namespaces für wadoku.xml
+            wadoku = XDocument.Load("wadoku.xml"); //Relativer Pfad zu wadoku.xml wird hier angegeben
 
-            posDeciphering = new Hashtable()
+            posDeciphering = new Hashtable() //Hashtable, die bei der Erstellung von Einträgen für das Suchergebnis POS-Tag-Abkürzungen im Wörterbuch leserlich darstellbar macht
             {
 	            {"N", "Nomen"},
 	            {"V", "Verb"},
@@ -86,14 +87,14 @@ namespace JADE
 
 
         /**
-        * Funktion zum Leeren der DataTable in der sich die Suchergebnisse befinden
+        * Funktion zum Leeren der DataTable, in der sich die Suchergebnisse befinden.
         */ 
         public void clearDataSet()
         {
-            while (dataSet.Tables.Count > 0)
+            while (dataSet.Tables.Count > 0) // Solange noch Tabellen in dataSet gespeichert sind ...
             {
-                DataTable table = dataSet.Tables[0];
-                if (dataSet.Tables.CanRemove(table)) dataSet.Tables.Remove(table);
+                DataTable table = dataSet.Tables[0]; // ... betrachte die die Tabelle mit Indexwert 0 und ...
+                if (dataSet.Tables.CanRemove(table)) dataSet.Tables.Remove(table); // ... falls die Tabelle entfernt werden kann, entferne sie auch.
             }
         }
 
@@ -105,41 +106,51 @@ namespace JADE
         */
         public static void DisposeTable(int satzNr, int tokenNr)
         {
+            //Die Variablen speichern (u.U. auch null-Referenz) Referenzen auf evtl. vorhandenen Tabellen mit Suchergebnissen (jeweils für genaue Übereinstimmung und 
+            //für Einträge, die wie das Token beginnen) für das durch die Parameter eindeutig bestimmtes Token.
             DataTable tableToDispose = dataSet.Tables["results_" + satzNr + tokenNr];
             DataTable tableToDispose_absolute = dataSet.Tables["results_" + satzNr + tokenNr + "_absolute"];
 
+            //Falls die gefundenen Tabellen gefunden wurden (keine null-Referenz) und sie gelöscht werden können, werden sie entfernt.
             if (dataSet.Tables.CanRemove(tableToDispose)) dataSet.Tables.Remove(tableToDispose);
             if (dataSet.Tables.CanRemove(tableToDispose_absolute)) dataSet.Tables.Remove(tableToDispose_absolute);
         }
 
         /**
-         * Suchfunktion. Erhält Informationen über gesuchten Token, sucht in der Wadoku-xml und liefert eine Datatable mit Ergebnissen zurück. 
-         * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet der im Wörterbuch gesucht werden soll.
+         * Suchfunktion. Erhält Informationen über das gesuchte Token, sucht in wadoku.xml und liefert eine DataTable mit Ergebnissen zurück. 
+         * @param[in] satzNr Int-Wert des Satzes in dem sich das Token befindet, der im Wörterbuch gesucht werden soll.
          * @param[in] tokenNr Int-Wert des Tokens der im Wörterbuch gesucht werden soll.
          * @param[in] token String-Repräsentation des gesuchten Token.
-         * @param[in] absolute bool-Wert der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht werden soll.
-         * @param[out] outputTable Datatable-Objekt mit den gefundenen Suchergebnissen.
+         * @param[in] absolute bool-Wert der angibt, ob nach genauer Übereinstimmung oder extensiv gesucht werden soll.
+         * @param[out] outputTable DataTable-Objekt mit den gefundenen Suchergebnissen.
         */
         public DataTable search(string token, int satzNr, int tokenNr, bool absolute)
         {
+            //Wenn im dataSet schoneinmal dasselbe Token mit/ohne genauer Übereinstimmung gesucht wurde, ...
             if (dataSet.Tables.Contains("results_" + satzNr + tokenNr + ((absolute) ? "_absolute" : "")))
             {
+                //gib die entsprechende Tabelle zurück.
                 return dataSet.Tables["results_" + satzNr + tokenNr + ((absolute) ? "_absolute" : "")];
             }
+            //Falls noch nicht nach dem Token gesucht wurde, führe eine Suche in Wadoku aus.
             else
             {
+                //Erzeuge einen Knoten, der alle Suchergebnisknoten enthält,
                 XElement results = new XElement("results",
+                                //Durchsuche alle Knoten, die der Wurzelknoten in wadoku.xml enthält, ...
                                 (from entry in wadoku.Root.Elements().OfType<XElement>()
-
+                                 //lasse validateEntry den <form>-Knoten auf die durch absolute bestimmte Weise nach dem String token durchsuchen 
                                  where validateEntry(entry.Element(xns + "form"), token, absolute)
-
-                                 select new XElement("result", new XElement("orths", entry.Element(xns + "form").Elements(xns + "orth")),
-                                                               entry.Element(xns + "gramGrp"),
-                                                               new XElement("prons", entry.Element(xns + "form").Elements(xns + "pron")),
-                                                               new XElement("senses", entry.Elements(xns + "sense")))));
-                
-                DataTable outputTable = (results.HasElements) 
-                                            ? (createResultTable(results, satzNr, tokenNr, absolute)) : (new DataTable()); 
+                                 //und wähle für einen neu erstellten <result>-Knoten die folgenden Elemente aus dem Wadoku-Eintrag aus:
+                                 select new XElement("result", new XElement("orths", entry.Element(xns + "form").Elements(xns + "orth")),   //neues xml-Element, das aus dem <form>-Knoten alle japanischen Schreibweisen aufnimmt
+                                                               entry.Element(xns + "gramGrp"),                                              //xml-Element mit grammatischen (u.a. POS-Infos) Informationen 
+                                                               new XElement("prons", entry.Element(xns + "form").Elements(xns + "pron")),   //neues xml-Element, das aus dem <form>-Knoten alle japanischen Umschriften aufnimmt
+                                                               new XElement("senses", entry.Elements(xns + "sense")))));                    //neues xml-Element, das aus dem Eintrag alle <sense>-Knoten mit deutschen Bedeutungen aufnimmt      
+                //Wurden <result>-Knoten für gefundene Einträge erstellt, ...
+                DataTable outputTable = (results.HasElements) ?
+                                            //So erstelle eine DataTable mit entsprechend formatierten Ergenissen. Erstelle ansonsten eine leere DataTable.
+                                            (createResultTable(results, satzNr, tokenNr, absolute)) : (new DataTable());
+                //Gib die der Variable outputTable zugewiesene Tabelle zurück.
                 return outputTable;
             }
 
@@ -147,10 +158,10 @@ namespace JADE
 
         /**
          * Die Funktion durchsucht einen Wadokueintrag nach japanischen Zeichenketten, die je nach Ausprägung von absolute genau mit token übereinstimmen oder mit token beginnen.
-         * @param[in] form XElement-Objekt welches das Form-Element eines Wadokueintrages beinhaltet.
+         * @param[in] form XElement-Objekt, welches das Form-Element eines Wadoku-Eintrages beinhaltet.
          * @param[in] token String-Repräsentation des gesuchten Token.
-         * @param[in] absolute Bool-Wert, der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
-         * @param[out] entryIsValid Bool-Wert der angibt, ob Übereinstimmung vorliegt oder nicht.
+         * @param[in] absolute bool-Wert, der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
+         * @param[out] entryIsValid bool-Wert der angibt, ob Übereinstimmung vorliegt oder nicht.
         */
         private bool validateEntry(XElement form, string token, bool absolute)
         {
@@ -169,13 +180,12 @@ namespace JADE
         }
 
         /**
-         * Funktion erzeugt aus Suchergebnissen eine Datatable und fügt sie zum Dataset hinzu.
+         * Funktion erzeugt aus Suchergebnissen eine DataTable und fügt sie zum DataSet hinzu.
          * @param[in] resEntries Suchergebnisse
-         * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet.
-         * @param[in] tokenNr Int-Wert des Tokens.
-         * @param[in] absolute bool-Wert der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
+         * @param[in] satzNr int-Wert des Satzes, in dem sich der Token befindet.
+         * @param[in] tokenNr int-Wert des Tokens.
+         * @param[in] absolute bool-Wert der angibt, ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
          * @param[out] searchResults DataTable-Objekt mit den Suchergebnissen.
-         * 
         */
         private DataTable createResultTable(XElement resEntries, int satzNr, int tokenNr, bool absolute)
         {
@@ -192,7 +202,6 @@ namespace JADE
 
                 foreach (XElement sense in resultEntry.Element("senses").Elements(xns + "sense"))
                 {
-                    //Console.WriteLine(sense.ToString());
                     List<String> transPerSense = new List<String>();
                     string senseData = "";
 
