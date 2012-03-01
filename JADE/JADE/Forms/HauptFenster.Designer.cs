@@ -93,7 +93,6 @@
             this.flowLayoutPanel_Token.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.flowLayoutPanel_Token.Size = new System.Drawing.Size(567, 108);
             this.flowLayoutPanel_Token.TabIndex = 10;
-            this.flowLayoutPanel_Token.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // menuStrip1
             // 
@@ -222,7 +221,6 @@
             this.MinimumSize = new System.Drawing.Size(720, 560);
             this.Name = "Form1";
             this.Text = "JaDe - Tokenizer";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
