@@ -86,7 +86,7 @@ namespace JADE
 
 
         /**
-        * Funktion zum Leeren der Datatable in der sich die Suchergebnisse befinden
+        * Funktion zum Leeren der DataTable in der sich die Suchergebnisse befinden
         */ 
         public void clearDataSet()
         {
@@ -96,6 +96,7 @@ namespace JADE
                 if (dataSet.Tables.CanRemove(table)) dataSet.Tables.Remove(table);
             }
         }
+
         /**
          * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn, ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden.
          * Damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird.
@@ -143,6 +144,7 @@ namespace JADE
             }
 
         }
+
         /**
          * Die Funktion durchsucht einen Wadokueintrag nach japanischen Zeichenketten, die je nach Ausprägung von absolute genau mit token übereinstimmen oder mit token beginnen.
          * @param[in] form XElement-Objekt welches das Form-Element eines Wadokueintrages beinhaltet.
@@ -291,6 +293,7 @@ namespace JADE
 
             return result;                                          // Gibt die fertig definierte Tabelle "result" zurück.
         }
+
 
         /// @cond
 
@@ -614,6 +617,7 @@ namespace JADE
             }
             return String.Join(", ", elemsPerOther);
         }
+
         /// @endcond 
     }
 }
