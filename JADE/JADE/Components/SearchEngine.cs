@@ -69,8 +69,8 @@ namespace JADE
             };
         }
         /**
-        * Public Konstruktor für die SearchEngine.
-         * Überprüft ob es schon ein Objekt der Klasse SearchEngine gibt und erstellt falls nicht ein Objekt.
+        * Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse SearchEngine umsetzt. Dadurch wird gewährleistet, dass nur eine und immer die selbe Instanz der SearchEngine Klasse verwendet wird.
+         * Überprüft ob es schon ein Objekt der Klasse SearchEngine gibt und erstellt falls nicht ein solches.
         */ 
         public static SearchEngine Engine
         {
@@ -97,8 +97,8 @@ namespace JADE
             }
         }
         /**
-        * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn ein Token geändert wurde. Weil nun der bereits bestehende (alte) Eintrag aus der Datatable gelöscht werden muss,
-         * damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird.
+        * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn, ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden.
+         * Damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird.
          * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet dessen Table-Objekt in dem Dataset gelöscht werden soll.
          * @param[in] tokenNr Int-Wert des Tokens dessen Table-Objekt in dem Dataset gelöscht werden soll.
         */
@@ -144,10 +144,11 @@ namespace JADE
 
         }
         /**
-        * ......................................................INFOS
-         * @param[in] form .....................................INFOS
-         * @param[in] token ....................................INFOS
-         * @param[in] absolute bool-Wert der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
+        * Die Funktion durchsucht einen Wadokueintrag nach japanischen Zeichenketten, die je nach Ausprägung von absolute genau mit token übereinstimmen oder mit token beginnen.
+         * @param[in] form XElement-Objekt welches das Form-Element eines Wadokueintrages beinhaltet.
+         * @param[in] token String-Repräsentation des gesuchten Token.
+         * @param[in] absolute Bool-Wert, der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
+         * @param[out] entryIsValid Bool-Wert der angibt, ob Übereinstimmung vorliegt oder nicht.
         */
         private bool validateEntry(XElement form, string token, bool absolute)
         {
