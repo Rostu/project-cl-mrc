@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace JADE
 {
@@ -27,16 +28,13 @@ namespace JADE
         /**
          * Konstruktor für das HauptFenster.
          * Initialisiert die nötigen Komponenten.
-         */ 
+         */
+
+
+        
         public HauptFenster()
         {
             InitializeComponent();
-            //String path = System.Windows.Forms.Application.StartupPath;
-            //path += "Page.htm";
-            //this.richTextBox1.Text = path;
-            //Process.Start(@"Page.htm");
-            //Process.Start(path);
-
             this.Icon = new System.Drawing.Icon("jade.ico");
 
             flowLayoutPanel_Token.HorizontalScroll.Enabled = false;
@@ -338,6 +336,23 @@ namespace JADE
             SearchEngine.DisposeTable(satznummer, tok);
         }
 
+
+        /// @cond
+        private static string GetDefaultBrowserPath()
+        {
+            string key = @"HTTP\shell\open\command";
+            using (RegistryKey registrykey = Registry.ClassesRoot.OpenSubKey(key, false))
+            {
+                return ((string)registrykey.GetValue(null, null)).Split('"')[1];
+            }
+        }
+
+        private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(GetDefaultBrowserPath(), "../../html/index.html");
+        }
+
+        /// @endcond
     }
 }
 

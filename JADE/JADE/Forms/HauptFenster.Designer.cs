@@ -27,12 +27,14 @@
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.öffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.detailSucheCheckBox = new System.Windows.Forms.CheckBox();
             this.dataGridView_Suchergebnisse = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.RichTextBox();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).BeginInit();
@@ -67,19 +69,19 @@
             this.richTextBox1.Text = "１３日、千葉県東金市のファミリーレストランの店内で男性が拳銃で撃たれて殺害された事件で、警察は、殺人などの疑いで全国に指名手配している元暴力団員の男の写真を公開し" +
                 "、行方を捜査しています。";
             // 
-            // treeView1
+            // treeView_Sätze
             // 
             this.treeView_Sätze.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView_Sätze.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView_Sätze.Location = new System.Drawing.Point(0, 170);
             this.treeView_Sätze.Margin = new System.Windows.Forms.Padding(4);
             this.treeView_Sätze.MinimumSize = new System.Drawing.Size(130, 4);
-            this.treeView_Sätze.Name = "treeView1";
+            this.treeView_Sätze.Name = "treeView_Sätze";
             this.treeView_Sätze.Size = new System.Drawing.Size(137, 352);
             this.treeView_Sätze.TabIndex = 7;
             this.treeView_Sätze.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.event_TreeViewItemSelect);
             // 
-            // flowLayoutPanel1
+            // flowLayoutPanel_Token
             // 
             this.flowLayoutPanel_Token.AutoScroll = true;
             this.flowLayoutPanel_Token.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -89,7 +91,7 @@
             this.flowLayoutPanel_Token.Location = new System.Drawing.Point(137, 265);
             this.flowLayoutPanel_Token.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel_Token.MinimumSize = new System.Drawing.Size(170, 2);
-            this.flowLayoutPanel_Token.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel_Token.Name = "flowLayoutPanel_Token";
             this.flowLayoutPanel_Token.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.flowLayoutPanel_Token.Size = new System.Drawing.Size(567, 108);
             this.flowLayoutPanel_Token.TabIndex = 10;
@@ -97,7 +99,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateiToolStripMenuItem});
+            this.dateiToolStripMenuItem,
+            this.hilfeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -109,7 +112,8 @@
             // 
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.öffnenToolStripMenuItem,
-            this.beendenToolStripMenuItem});
+            this.beendenToolStripMenuItem,
+            this.infoToolStripMenuItem});
             this.dateiToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
             this.dateiToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -118,16 +122,22 @@
             // öffnenToolStripMenuItem
             // 
             this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
-            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.öffnenToolStripMenuItem.Text = "Öffnen";
             this.öffnenToolStripMenuItem.Click += new System.EventHandler(this.öffnenToolStripMenu_Click);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click_1);
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infoToolStripMenuItem.Text = "Info";
             // 
             // flowLayoutPanel2
             // 
@@ -165,25 +175,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.TokenSuchen_Click);
             // 
-            // checkBox1
+            // detailSucheCheckBox
             // 
             this.detailSucheCheckBox.AutoSize = true;
             this.detailSucheCheckBox.Dock = System.Windows.Forms.DockStyle.Right;
             this.detailSucheCheckBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detailSucheCheckBox.Location = new System.Drawing.Point(289, 3);
-            this.detailSucheCheckBox.Name = "checkBox1";
+            this.detailSucheCheckBox.Name = "detailSucheCheckBox";
             this.detailSucheCheckBox.Size = new System.Drawing.Size(205, 33);
             this.detailSucheCheckBox.TabIndex = 17;
             this.detailSucheCheckBox.Text = "Genaue Übereinstimmung";
             this.detailSucheCheckBox.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridView_Suchergebnisse
             // 
             this.dataGridView_Suchergebnisse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView_Suchergebnisse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Suchergebnisse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Suchergebnisse.Location = new System.Drawing.Point(137, 412);
-            this.dataGridView_Suchergebnisse.Name = "dataGridView1";
+            this.dataGridView_Suchergebnisse.Name = "dataGridView_Suchergebnisse";
             this.dataGridView_Suchergebnisse.Size = new System.Drawing.Size(567, 110);
             this.dataGridView_Suchergebnisse.TabIndex = 14;
             this.dataGridView_Suchergebnisse.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.event_dataGridView_Click);
@@ -201,7 +211,14 @@
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "";
             // 
-            // Form1
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.hilfeToolStripMenuItem.Text = "Hilfe";
+            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
+            // 
+            // HauptFenster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -219,7 +236,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(720, 560);
-            this.Name = "Form1";
+            this.Name = "HauptFenster";
             this.Text = "JaDe - Tokenizer";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -246,6 +263,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox detailSucheCheckBox;
         private System.Windows.Forms.RichTextBox textBox1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
     }
 }
 
