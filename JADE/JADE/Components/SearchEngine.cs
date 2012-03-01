@@ -36,7 +36,6 @@ namespace JADE
             }
             if (!File.Exists("wadoku.xml")) //Dient dazu, Probleme beim Lesezugriff auf das Wörterbuch abzufangen. => siehe Exception-Nachricht
             {
-            {
                 throw new ArgumentException("Die Wörterbuchdatei konnte nicht gefunden werden.");
             }
 
