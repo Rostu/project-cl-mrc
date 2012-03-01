@@ -233,7 +233,6 @@
 
         }
 
-        #endregion
         private System.Windows.Forms.Button Tokenize;
         private System.Windows.Forms.RichTextBox richTextBox1;
         public System.Windows.Forms.TreeView treeView_Sätze;
