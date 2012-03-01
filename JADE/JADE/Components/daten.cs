@@ -16,7 +16,7 @@ namespace JADE
 {
     /// <summary>
     ///Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token.
-    ///Wurde extra angelegt weil es dann einfacher ist, etwas zu ändern wenn wir später vielleicht auch noch Zusatzinformationen wie Übersetzungen speichern wollen.
+    ///Wurde extra angelegt, weil es dann einfacher ist, etwas zu ändern wenn wir später vielleicht auch noch Zusatzinformationen wie Übersetzungen speichern wollen.
     /// </summary>
     [Serializable()]
     public class Daten : ISerializable                              //Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.
@@ -40,7 +40,7 @@ namespace JADE
         }
 
         /**
-         * Konstruktor fuer die Serialisation/DeSerilisation.
+         * Konstruktor für die Serialisation/DeSerilisation.
          * @param[in] info  SerilizationInfo
          * @param[in] ctxt  StreamingContext 
          */

@@ -39,9 +39,9 @@
  *  @subsection Sonstiges
  *  <p>Microsoft Visual Studio Professional 2010</p>
  *  <p>AnkSVN</p>
- *  <p><a href="">http://www.stack.nl/~dimitri/doxygen/index.html</a></p>
+ *  <p><a href="http://ankhsvn.open.collab.net/">http://ankhsvn.open.collab.net/</a></p>
  *  <p>Google Code</p>
- *  <p><a href="">http:/</a></p>
+ *  <p><a href="http://code.google.com/p/project-cl-mrc/">http://code.google.com/p/project-cl-mrc/</a></p>
  *  <p>DoxyGen</p>
  *  <p><a href="http://www.stack.nl/~dimitri/doxygen/index.html">http://www.stack.nl/~dimitri/doxygen/index.html</a></p>
  *  
