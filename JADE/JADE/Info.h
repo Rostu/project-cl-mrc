@@ -17,7 +17,7 @@
  -  Ausgabe des japanischen Textes mit Übersetzungsvorschlägen für einzelne Token in einer passend formatierten Datei (Xml)
   -  Möglichkeit, die gewählte Übersetzung für einen Token zu ändern
   -  Möglichkeit, während der Bearbeitung der Token den Fortschritt zu speichern
- -  Zusätzliches anlegen eines Nachschlagewerkes für japanische Postpositionen (mit grammatikalisch hilfreichen Einträgen) 
+ -  Zusätzliches Anlegen eines Nachschlagewerkes für japanische Postpositionen (mit grammatikalisch hilfreichen Einträgen) 
  -	Auswahl der Token zum Bearbeiten und Suchen überarbeiten
  -  Funktion des Tokenizers überarbeiten
 
