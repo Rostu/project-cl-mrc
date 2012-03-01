@@ -29,10 +29,10 @@ namespace JADE
         public HauptFenster()
         {
             InitializeComponent();
-            String path = System.Windows.Forms.Application.StartupPath;
+            //String path = System.Windows.Forms.Application.StartupPath;
             //path += "Page.htm";
-            this.richTextBox1.Text = path;
-            Process.Start(@"Page.htm");
+            //this.richTextBox1.Text = path;
+            //Process.Start(@"Page.htm");
             //Process.Start(path);
 
             this.Icon = new System.Drawing.Icon("jade.ico");
