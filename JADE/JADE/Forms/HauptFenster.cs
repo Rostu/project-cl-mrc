@@ -17,13 +17,16 @@ namespace JADE
     /// </summary>
     public partial class HauptFenster : Form
     {
+        /**Statische Variable vom Typ Daten. Erhält die Daten der TinySegmenter Funktion. */
         public static Daten Instanzdaten;
+        /**Statische Variable vom Typ SearchEngine. Wird im HauptFenster für den Aufruf der Suchfunktion benötigt. */
         private static SearchEngine suche;
+        /**Statische Variable vom Typ Segmenter. Wird im HauptFenster für den Aufruf der TinySegmenter Funktion benötigt. */
         private static Segmenter segtest;
 
         /**
          * Konstruktor für das HauptFenster.
-         * initialisiert die nötigen Komponenten
+         * Initialisiert die nötigen Komponenten.
          */ 
         public HauptFenster()
         {
@@ -38,15 +41,9 @@ namespace JADE
 
             flowLayoutPanel_Token.HorizontalScroll.Enabled = false;
             flowLayoutPanel_Token.HorizontalScroll.Visible = false;
-
             Instanzdaten = new Daten();
             suche = SearchEngine.Engine;
             segtest = new Segmenter();
-
-        }
-        //In dieser Funktion wird unsere Form 1 geladen.
-        private void Form1_Load(object sender, EventArgs e)
-        {
         }
 
         /**
@@ -66,7 +63,7 @@ namespace JADE
         }
 
          /**
-         * Funktion zum Updaten der Token Anzeige
+         * Funktion zum Updaten der Token Anzeige.
          * Überprüft welcher Satz in der Treeview makiert ist und schreibt die Token dieses Satzes als Checkboxes in das FlowLayoutPanel.
          */
         public void flowupdate()
@@ -107,9 +104,9 @@ namespace JADE
         }
 
         /**
-         * EventFunktion: Bei klick auf den Tokenize Button wird wird der Text aus der Richtextbox tokenisiert und in ein statisches Objekt unserer Daten-Struktur geschrieben.
-         * Zunächst wird der Text aus der Richtextbox von störenden Whitespace,Newline und anderen Chars bereinigt.
-         * Danach wird geprüft ob sich nicht japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung ausgegeben.
+         * EventFunktion: Bei klick auf den Tokenize Button wird der Text aus der Richtextbox tokenisiert und in ein statisches Objekt (Instanzdaten) unserer Daten-Struktur geschrieben.
+         * Zunächst wird der Text aus der Richtextbox von störenden Whitespace, Newline und anderen Chars bereinigt.
+         * Danach wird geprüft, ob sich nicht japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung ausgegeben.
          * Sofern nun also Text vorhanden ist, wird dieser mit der TinySegmenter-Funktion tokenisiert.
          * Danach werden die Daten ausgelesen und die vorhandenen Sätze in der Treeview repräsentiert.
          */
@@ -150,7 +147,8 @@ namespace JADE
         }
 
         /**
-         * Funktion zum trennen eines Token in unserer Daten-Struktur.
+         * Funktion zum Trennen eines Token in unserer Daten Struktur.
+         * Ruft das BeabeitenFenster auf.
          * @param[in] Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
          * @param[in] Tok Int-Wert des Tokens der aufgeteilt werden soll.
          */
@@ -158,12 +156,12 @@ namespace JADE
         {
             String str = Instanzdaten.getToken(Satznummer, Tok);
             BearbeitenFenster neumit = new BearbeitenFenster(Instanzdaten, Satznummer, Tok, str);           //Erzeugt Bearbeiten-Fenster.
-            neumit.FormClosing += new FormClosingEventHandler(event_BearbeitenFensterSchliessen);                            //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler.
+            neumit.FormClosing += new FormClosingEventHandler(event_BearbeitenFensterSchliessen);           //Erzeugt für das neue Fenster einen Fenster schließen Eventhandler.
             neumit.Show();                                                                                  //Zeigt das Bearbeiten-Fenster.
         }
 
         /**
-         * EventHandler: Der bei Schließen des Bearbeiten-Fensters den Listener ausschaltet und das FlowlayoutPanel mit den Token (die Anzeige der Tokenliste) updatet.
+         * EventHandler: Der beim Schließen des Bearbeiten-Fensters, den Listener ausschaltet und das FlowlayoutPanel mit den Token (die Anzeige der Tokenliste) updatet.
          */
         void event_BearbeitenFensterSchliessen(object sender, FormClosingEventArgs e)
         {
@@ -174,7 +172,7 @@ namespace JADE
 
         /**
          * Funktion zum Zusammenfügen zweier Token in unserer Daten-Struktur.
-         * Noch ausgelegt auf kleine Textgrössen, muss noch angepasst werden um auslesen aller Daten für ein Zusammenfügen von Token zu verhindern.
+         * Noch ausgelegt auf kleine Textgrössen. Muss noch angepasst werden um auslesen aller Daten für ein Zusammenfügen von Token zu verhindern.
          * Außerdem werden noch zwei Int-Werte übergeben welche die zu bearbeitenden Token repräsentieren, es wäre aber nur ein Wert nötig.
          * @param[in] Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
          * @param[in] Tok1 Int-Wert des ersten Tokens der mit seinem Nachfolge-Token zusammengefügt werden soll.
@@ -194,7 +192,6 @@ namespace JADE
 
         /**EventFunktion welche beim klick auf den Öffnen-Dialog im Menü aufgerufen wird.
          * File-Open Dialog der das Auswählen einer Textdatei ermöglicht, welche dann gelesen und in die RichTextBox des Hauptfensters geschrieben wird.
-         * Das Programm arbeitet mit UTF-8 Kodierung, wesshalb vor dem Einlesen einer Datei deren Kodierung geprüft und nötigenfalls angepasst wird.
          */ 
         private void öffnenToolStripMenu_Click(object sender, EventArgs e)
         {
@@ -228,7 +225,7 @@ namespace JADE
         }
 
         /**EventFunktion: Bei klick auf den "Token bearbeiten"-Button.
-         * Überprüft zuerst ob eine korrekte Auswahl an Token (makierte checkBoxen in der FlowLayoutPanel) vorliegen. Bei fehlerhafter Auswahl erfolgt Fehlerhinweis.
+         * Überprüft zuerst ob eine korrekte Auswahl an Token (makierte checkBoxen in der FlowLayoutPanel) vorliegen. Bei fehlerhafter Auswahl erfolgt Warnmeldung.
          * Sofern korrekte Auswahl vorliegt, wird unterschieden zwischen: 
          * - 1 Token makiert --> Token trennen Funktion wird auf dem ausgewählten Token ausgeführt.
          * - 2 Token makiert --> Token zusammen Funktion wird auf den ausgewählten Token ausgeführt.
@@ -238,7 +235,7 @@ namespace JADE
             int count = 0;                                                          //Variable "count" wird eingeführt.
             int first = 0;                                                          //Variable "first" wird eingeführt.
             int second = 0;                                                         //Variable "second" wird eingeführt.
-            foreach (Control con in this.flowLayoutPanel_Token.Controls)                 //Zaehlt wie viel Checkboxen ausgewählt wurden.
+            foreach (Control con in this.flowLayoutPanel_Token.Controls)            //Zaehlt wie viel Checkboxen ausgewählt wurden.
             {
                 CheckBox box = (CheckBox)con;
                 int index = Int32.Parse(box.Name); 
@@ -341,10 +338,6 @@ namespace JADE
             SearchEngine.DisposeTable(satznummer, tok);
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
 
