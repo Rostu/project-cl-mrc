@@ -21,6 +21,7 @@ namespace JADE
     [Serializable()]
     public class Daten : ISerializable                              //Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.
     {
+        /**Private Variable vom Typ ArrayList. Hier werden die Daten abgespeichert.*/
         private ArrayList data = new ArrayList();                   //Erzeugt die Variable data(Arraylist) in der unsere Daten gespeichert werden.
 
         /**leerer Konstruktor*/
