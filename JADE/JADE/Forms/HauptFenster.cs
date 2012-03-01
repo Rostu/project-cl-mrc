@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using href.Utils;
 using System.Diagnostics;
 
 namespace JADE
@@ -203,6 +202,7 @@ namespace JADE
 
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 1;
+
             openFileDialog1.RestoreDirectory = true;
 
             StreamReader openFileStream;
@@ -211,7 +211,7 @@ namespace JADE
             {
                 try
                 {
-                    if ((openFileStream = EncodingTools.OpenTextFile(openFileDialog1.FileName)) != null)
+                    if ((openFileStream = new  StreamReader(openFileDialog1.FileName)) != null)
                     {
                         using (openFileStream)
                         {
