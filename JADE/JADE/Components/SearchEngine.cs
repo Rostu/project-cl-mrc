@@ -237,7 +237,7 @@ namespace JADE
 
 
 
-            column = new DataColumn                                 // Erzeugz eine neue DataColumn, und legt Folgendes fest:
+            column = new DataColumn                                 // Erzeugt eine neue DataColumn, und legt Folgendes fest:
             {
                 DataType = System.Type.GetType("System.Int32"),     // Setzt Datentyp auf "int".
                 ColumnName = "Eintrag",                             // Der Spaltenname ist "Eintrag".
@@ -247,7 +247,7 @@ namespace JADE
 
 
 
-            column = new DataColumn                                 // Erzeugz eine neue DataColumn, und legt Folgendes fest:
+            column = new DataColumn                                 // Erzeugt eine neue DataColumn, und legt Folgendes fest:
             {
                 DataType = System.Type.GetType("System.String"),    // Setzt Datentyp auf "String".
                 ColumnName = "Schreibweise",                        // Der Spaltenname ist "Schreibweise".
@@ -257,7 +257,7 @@ namespace JADE
 
 
 
-            column = new DataColumn                                 // Erzeugz eine neue DataColumn, und legt Folgendes fest:
+            column = new DataColumn                                 // Erzeugt eine neue DataColumn, und legt Folgendes fest:
             {
                 DataType = System.Type.GetType("System.String"),    // Setzt Datentyp auf "String".
                 ColumnName = "Wortart",                             // Der Spaltenname ist "Wortart".
@@ -267,7 +267,7 @@ namespace JADE
 
 
 
-            column = new DataColumn                                 // Erzeugz eine neue DataColumn, und legt Folgendes fest:
+            column = new DataColumn                                 // Erzeugt eine neue DataColumn, und legt Folgendes fest:
             {
                 DataType = System.Type.GetType("System.String"),    // Setzt Datentyp auf "String".
                 ColumnName = "Umschrift",                           // Der Spaltenname ist "Umschrift".
@@ -277,7 +277,7 @@ namespace JADE
 
 
 
-            column = new DataColumn                                 // Erzeugz eine neue DataColumn, und legt Folgendes fest:
+            column = new DataColumn                                 // Erzeugt eine neue DataColumn, und legt Folgendes fest:
             {
                 DataType = System.Type.GetType("System.String"),    // Setzt Datentyp auf "String".
                 ColumnName = "Bedeutungen",                         // Der Spaltenname ist "Bedeutungen".

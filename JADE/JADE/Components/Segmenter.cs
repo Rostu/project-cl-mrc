@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace JADE
 {
     /// <summary>
-    ///Segmenter-Klasse enthällt die Funktionen zum Tokenisieren des Eingabe Textes.
+    ///Segmenter-Klasse enthält die Funktionen zum Tokenisieren des Eingabe Textes.
     ///
     ///This Tokenizer is based on Taku Kudo's "Tiny Segmenter". 
     ///Just adapted in c# and modified for the use in this project.
@@ -67,11 +67,11 @@ namespace JADE
             reg = new Regex("[0-9０-９]");                                   //Erzeugen einer Regular Expression (Zahlen).
             chartype_.Add(reg, "N");                                         //Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. 
 
-            //Hier werden verschiedene Hashtables angelegt welche spaeter zur Scorebestimmung einzelner Zeichenkombinationen dienen.
-            //Dazu wird jeweils eine neue Hashtable erstellt und diese dann per Add Funktion mit Schlüssel-Wert paaren gefüllt.
+            //Hier werden verschiedene Hashtables angelegt welche später zur Scorebestimmung einzelner Zeichenkombinationen dienen.
+            //Dazu wird jeweils eine neue Hashtable erstellt und diese dann per Add Funktion mit Schlüssel-Wert Paaren gefüllt.
             //Im Schlüssel werden Zeichenkombinationen gespeichert (String) welche als Wert einen Score-Wert(Int) erhalten.
-            //Muss vielleicht nocheinmal überarbeitet werden weil die Add Methode verhältnismäßig Rechenaufwendig ist. 
-            // der Bessern Übersicht halber erfolgt bei vielen Add Befehlen in Folge ein Zeilenumbruch nach 4-6 Adds. 
+            //Muss vielleicht nocheinmal überarbeitet werden, weil die Add Methode verhältnismäßig rechenaufwendig ist. 
+            //Der bessern Übersicht halber erfolgt bei vielen Add Befehlen in Folge ein Zeilenumbruch nach 4-6 Adds. 
             int BIAS__ = -332;
             Hashtable BC1__ = new Hashtable();
             BC1__.Add("HH", 6); BC1__.Add("II", 2461); BC1__.Add("KH", 406); BC1__.Add("OH", -1378);
@@ -632,7 +632,7 @@ namespace JADE
 
         /**
       * Erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
-      * @param table Hashtable-Objekt.
+      * @param table[in] Hashtable-Objekt.
       * @param[in] s String-Objekt das auf matching in der Hashtable geprüft werden soll.
       * @param[out] ret Int-Wert (Score).
       */
@@ -651,8 +651,8 @@ namespace JADE
         }
 
         /**
-         * Funktion die Testet ob ein Eingabe Sring der japanischen Sprache zugehörig ist. 
-         * Testet den eingegebenen String(in unserem Fall immer ein einzel-Char) mittles Regular Expression matching auf Zugehörigkeit zum japanischen Zeichensatz.
+         * Funktion die testet ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. 
+         * Testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expression matching auf Zugehörigkeit zum japanischen Zeichensatz.
          * Rückgabewerte sind String Objekte. "J" für japanisches Zeichen. "O" für nicht japanisches Zeichen.
          * Hier wurde nicht mit boolschen Rückgabe-Werten gearbeitet, weil eine spätere Modifikation bzw. Spezifikation des Rückgabewertes möglich sein sollte. 
          * @param[in] eingabe String-Objekt das auf japanische Zeichen hin Untersucht werden soll.

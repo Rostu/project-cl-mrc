@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace JADE
 {
     /// <summary>
-    ///Eine allgemein gehaltene Klasse die als Container für zu speichernde Daten fungiert.
+    ///Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert.
     ///Wird unsere Datenstruktur zum abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.
     /// </summary>
     [Serializable()]

@@ -51,8 +51,8 @@ namespace JADE
 
         
         /**
-         * Funktion zur Rückgabe eines einzelnen Token(String) aus unseren Daten.
-         * Erhällt zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.
+         * Funktion zur Rückgabe eines einzelnen Token (String) aus unseren Daten.
+         * Erhält zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.
          * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
          * @param[in] Tok Int-Wert des gewünschten Token. 
          * @param[out] String Repräsentation eines Token aus der Daten Struktur.
@@ -74,7 +74,7 @@ namespace JADE
             ArrayList hilf = new ArrayList();                       //Erzeugt Variable vom Typ Arraylist. 
             hilf = this.Zugriff;                                    //Weist der hilfsarralist die Daten zu.  
             ArrayList rueckgabe = (ArrayList)hilf[Satznummer];      //Erzeugt eine Variable vom Typ Arraylist und weist dieser den gewünschten Satz zu.
-            return rueckgabe;                                       //gibt den Satz zurück.
+            return rueckgabe;                                       //Gibt den Satz zurück.
         }
        
 
