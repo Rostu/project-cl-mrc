@@ -70,7 +70,7 @@ namespace JADE
             };
         }
         /**
-        * Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse SearchEngine umsetzt. Dadurch wird gewährleistet, dass nur eine und immer die selbe Instanz der SearchEngine Klasse verwendet wird.
+         * Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse SearchEngine umsetzt. Dadurch wird gewährleistet, dass nur eine und immer die selbe Instanz der SearchEngine Klasse verwendet wird.
          * Überprüft, ob es schon eine Instanz der Klasse SearchEngine gibt und erstellt falls nicht eine solche.
         */ 
         public static SearchEngine Engine
@@ -98,7 +98,7 @@ namespace JADE
             }
         }
         /**
-        * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn, ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden.
+         * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn, ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden.
          * Damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird.
          * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet dessen Table-Objekt in dem Dataset gelöscht werden soll.
          * @param[in] tokenNr Int-Wert des Tokens dessen Table-Objekt in dem Dataset gelöscht werden soll.
@@ -113,7 +113,7 @@ namespace JADE
         }
 
         /**
-        * Suchfunktion. Erhällt Informationen über gesuchten Token, sucht in der Wadoku-xml und liefert eine Datatable mit Ergebnissen zurück. 
+         * Suchfunktion. Erhält Informationen über gesuchten Token, sucht in der Wadoku-xml und liefert eine Datatable mit Ergebnissen zurück. 
          * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet der im Wörterbuch gesucht werden soll.
          * @param[in] tokenNr Int-Wert des Tokens der im Wörterbuch gesucht werden soll.
          * @param[in] token String-Repräsentation des gesuchten Token.
@@ -145,7 +145,7 @@ namespace JADE
 
         }
         /**
-        * Die Funktion durchsucht einen Wadokueintrag nach japanischen Zeichenketten, die je nach Ausprägung von absolute genau mit token übereinstimmen oder mit token beginnen.
+         * Die Funktion durchsucht einen Wadokueintrag nach japanischen Zeichenketten, die je nach Ausprägung von absolute genau mit token übereinstimmen oder mit token beginnen.
          * @param[in] form XElement-Objekt welches das Form-Element eines Wadokueintrages beinhaltet.
          * @param[in] token String-Repräsentation des gesuchten Token.
          * @param[in] absolute Bool-Wert, der angibt ob nach genauer Übereinstimmung oder Extensiv gesucht wird.
@@ -168,7 +168,7 @@ namespace JADE
         }
 
         /**
-        * Funktion erzeugt aus Suchergebnissen eine Datatable und fügt sie zum Dataset hinzu.
+         * Funktion erzeugt aus Suchergebnissen eine Datatable und fügt sie zum Dataset hinzu.
          * @param[in] resEntries Suchergebnisse
          * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet.
          * @param[in] tokenNr Int-Wert des Tokens.
@@ -292,6 +292,8 @@ namespace JADE
 
             return result;                                          // Gibt die fertig definierte Tabelle "result" zurück.
         }
+
+        /// @cond
 
         /**
          * ...............................................................INFOS
@@ -613,5 +615,6 @@ namespace JADE
             }
             return String.Join(", ", elemsPerOther);
         }
+        /// @endcond 
     }
 }
