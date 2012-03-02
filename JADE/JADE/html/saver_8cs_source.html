@@ -123,7 +123,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00022"></a>00022 <span class="comment">         * @param[in] filename String (Pfad/Dateiname) der zu speichernden Datei.</span>
 <a name="l00023"></a>00023 <span class="comment">         * @param[in] saveObjekt Objekt der SaveObjekt Klasse. </span>
 <a name="l00024"></a>00024 <span class="comment">         */</span>
-<a name="l00025"></a><a class="code" href="class_j_a_d_e_1_1_saver.html#a8df125999a50da98df3caa73eefec414">00025</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_j_a_d_e_1_1_saver.html#a8df125999a50da98df3caa73eefec414">Save</a>(<span class="keywordtype">string</span> filename, <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a> saveObjekt)
+<a name="l00025"></a><a class="code" href="class_j_a_d_e_1_1_saver.html#a8df125999a50da98df3caa73eefec414">00025</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_j_a_d_e_1_1_saver.html#a8df125999a50da98df3caa73eefec414">Save</a>(<span class="keywordtype">string</span> filename, <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a> saveObjekt)
 <a name="l00026"></a>00026         {
 <a name="l00027"></a>00027             Stream stream = File.Open(filename, FileMode.Create);       <span class="comment">//Erstellt ein Filestream-Objekt (write). </span>
 <a name="l00028"></a>00028             BinaryFormatter bFormatter = <span class="keyword">new</span> BinaryFormatter();         <span class="comment">//Erstellt ein BinaryFormatter-Objekt.</span>
@@ -137,12 +137,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00036"></a>00036 <span class="comment">        * @param[in] filename Zu ladende Datei.</span>
 <a name="l00037"></a>00037 <span class="comment">        * @param[out] saveObjekt Objekt der Daten Klasse, enthält die gelesenen Daten aus der Savedatei,</span>
 <a name="l00038"></a>00038 <span class="comment">        */</span>
-<a name="l00039"></a><a class="code" href="class_j_a_d_e_1_1_saver.html#aca3a5c264d753c00cdb37cea60d6ea86">00039</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a> <a class="code" href="class_j_a_d_e_1_1_saver.html#aca3a5c264d753c00cdb37cea60d6ea86">DeSave</a>(<span class="keywordtype">string</span> filename)
+<a name="l00039"></a><a class="code" href="class_j_a_d_e_1_1_saver.html#aca3a5c264d753c00cdb37cea60d6ea86">00039</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a> <a class="code" href="class_j_a_d_e_1_1_saver.html#aca3a5c264d753c00cdb37cea60d6ea86">DeSave</a>(<span class="keywordtype">string</span> filename)
 <a name="l00040"></a>00040         {
-<a name="l00041"></a>00041             <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a> saveObjekt;
+<a name="l00041"></a>00041             <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a> saveObjekt;
 <a name="l00042"></a>00042             Stream stream = File.Open(filename, FileMode.Open);         <span class="comment">//Erstellt ein Filestream-Objekt (read). </span>
 <a name="l00043"></a>00043             BinaryFormatter bFormatter = <span class="keyword">new</span> BinaryFormatter();         <span class="comment">//Erstellt ein BinaryFormatter-Objekt.</span>
-<a name="l00044"></a>00044             saveObjekt = (<a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a>)bFormatter.Deserialize(stream);    <span class="comment">//Erstellt ein SaveObjekt-Objekt und schreibt die gelesenen SaveDaten hinein.    </span>
+<a name="l00044"></a>00044             saveObjekt = (<a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a>)bFormatter.Deserialize(stream);    <span class="comment">//Erstellt ein SaveObjekt-Objekt und schreibt die gelesenen SaveDaten hinein.    </span>
 <a name="l00045"></a>00045             stream.Close();                                             <span class="comment">//schließt den Stream.</span>
 <a name="l00046"></a>00046             <span class="keywordflow">return</span> saveObjekt;                                          <span class="comment">//gibt das SaveObjekt-Objekt zurück. </span>
 <a name="l00047"></a>00047         }
@@ -168,7 +168,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
     <ul>
       <li class="navelem"><b>saver.cs</b>      </li>
 
-    <li class="footer">Erzeugt am Don Mär 1 2012 15:44:05 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:13 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

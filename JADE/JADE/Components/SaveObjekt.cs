@@ -9,7 +9,7 @@ namespace JADE
 {
     /// <summary>
     ///Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert.
-    ///Wird unsere Datenstruktur zum abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.
+    ///Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.
     /// </summary>
     [Serializable()]
     public class SaveObjekt : ISerializable                                         //Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.

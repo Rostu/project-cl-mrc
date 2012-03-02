@@ -6,7 +6,6 @@ var class_j_a_d_e_1_1_haupt_fenster =
     [ "event_dataGridView_Click", "class_j_a_d_e_1_1_haupt_fenster.html#a14368960602be803a61cd235f36c7a5c", null ],
     [ "event_TreeViewItemSelect", "class_j_a_d_e_1_1_haupt_fenster.html#a3bc25ba8df353d6bb7438fb863a931fe", null ],
     [ "flowupdate", "class_j_a_d_e_1_1_haupt_fenster.html#a030c7e763308f15bca00dc58b4f9c7ca", null ],
-    [ "GetDefaultBrowserPath", "class_j_a_d_e_1_1_haupt_fenster.html#a2c1041b67edda37759de0f34b9cc159a", null ],
     [ "TableDel", "class_j_a_d_e_1_1_haupt_fenster.html#a50d98696d170c88c5de009b01de0912d", null ],
     [ "TokenBearbeiten_Click", "class_j_a_d_e_1_1_haupt_fenster.html#a1fa64be155b6ed7cf444165a6239e30a", null ],
     [ "Tokenize_Click", "class_j_a_d_e_1_1_haupt_fenster.html#a0a961abed468875e10e92a0a28f6d2d8", null ],

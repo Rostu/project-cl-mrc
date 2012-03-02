@@ -336,7 +336,6 @@ namespace JADE
             SearchEngine.DisposeTable(satznummer, tok);
         }
 
-
         /// @cond
         private static string GetDefaultBrowserPath()
         {
