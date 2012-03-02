@@ -99,7 +99,7 @@ namespace JADE
         }
 
         /**
-         * EventFunktion: Beim Klick auf den Tokenize-Button wird der Text aus der Richtextbox tokenisiert und in einer Instanz unserer Daten-Klasse (Variable Instanzdaten) festgehalten.
+         * Beim Klick auf den Tokenize-Button wird der Text aus der Richtextbox tokenisiert und in einer Instanz unserer Daten-Klasse (Variable Instanzdaten) festgehalten.
          * Zunächst wird der Text aus der Richtextbox von störenden Whitespace-Chars bereinigt.
          * Danach wird geprüft, ob sich nicht-japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung ausgegeben.
          * Sofern ein Text vorhanden ist, wird dieser mit der TinySegmenter-Funktion tokenisiert.
@@ -170,29 +170,31 @@ namespace JADE
          * Außerdem werden noch zwei int-Werte (Indexwerte für Zugriff auf entsprechende Arraylists in Instanzdaten) übergeben welche den Zugriff auf den entsprechenden Satz und die betroffenen Token möglich machen.
          * @param[in] Satznummer int-Wert (Indexwert für Zugriff auf entsprechende Arraylists in Instanzdaten) des Satzes in dem sich der zu ändernde Token befindet.
          * @param[in] Tok1 int-Wert (Indexwert) des ersten Tokens, das mit seinem Nachfolger-Token zusammengefügt werden soll.
-         * @param[in] Tok2 int-Wert (Indexwert) des zweiten Tokens, das mit seinem Vörgänger-Token zusammengefügt werden soll.
          */
-        public void zusammen(int Satznummer, int Tok1, int Tok2)
+        public void zusammen(int Satznummer, int Tok1)
         {
             ArrayList Alist = Instanzdaten.Zugriff;                                                         //Zugriff auf Datenstruktur.
             ArrayList Satz = Instanzdaten.getSatz(Satznummer);                                              //Heraussuchen des Satzes in welchem sich das zu ändernde Token befindet.   
-            Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok2]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1.
-            Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberflüssigen tok2.
+            Satz[Tok1] = ((String)Satz[Tok1] + (String)Satz[Tok1+1]);                                         //Zusammenfügen der Token tok1 und tok2 an Position von tok1.
+            Satz.RemoveAt(Tok1+1);                                                                            //Loeschen des nun ueberflüssigen tok2.
             Alist[Satznummer] = Satz;                                                                       //Schreiben des geänderten Satzes in die Arraylist.
             Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geänderten ARRAYLIST zurück in die Datenstruktur.
 
             //Aktualisieren des dataSet der SearchEngine
             SearchEngine.DisposeTable(Satznummer, Tok1);
-            SearchEngine.DisposeTable(Satznummer, Tok2);
+            SearchEngine.DisposeTable(Satznummer, Tok1+1);
 
+            //Nach der Stelle, an der eine Bearbeitung vorgenommen wurde, müssen die Indizes in den Namen von eventuell vorhandenen Tabellen mit Sucheinträgen erhöht werden.
+            //Dafür werden alle Indizes im Satz zwei Stellen nach der Stelle des Zusammenfügens mit ShiftTable auf Tabellen überprüft und ggf. abgeändert werden.  
             for(int i = Tok1 + 2; i < Satz.Count; i++)
             {
                 SearchEngine.ShiftTable(Satznummer, i, true);
             }
         }
 
-        /**EventFunktion welche beim klick auf den Öffnen-Dialog im Menü aufgerufen wird.
-         * File-Open Dialog der das Auswählen einer Textdatei ermöglicht, welche dann gelesen und in die RichTextBox des Hauptfensters geschrieben wird.
+        /**
+         * Hierbei handelt es sich um eine Funktion welche beim Klick auf den Öffnen-Dialog im Menü aufgerufen wird.
+         * Ein FileOpenDialog, der das Auswählen einer Textdatei ermöglicht, welche dann gelesen und in die RichTextBox des Hauptfensters geladen wird.
          */ 
         private void öffnenToolStripMenu_Click(object sender, EventArgs e)
         {
@@ -225,11 +227,11 @@ namespace JADE
 
         }
 
-        /**EventFunktion: Bei klick auf den "Token bearbeiten"-Button.
-         * Überprüft zuerst ob eine korrekte Auswahl an Token (makierte checkBoxen in der FlowLayoutPanel) vorliegen. Bei fehlerhafter Auswahl erfolgt Warnmeldung.
+        /**Diese Funktion wird durch einen Klick auf den "Token bearbeiten"-Button ausgelöst.
+         * Sie überprüft zuerst ob eine korrekte Auswahl con Token (makierte checkBoxen in der FlowLayoutPanel) vorliegt. Bei einer fehlerhafter Auswahl erfolgt eine Warnmeldung.
          * Sofern korrekte Auswahl vorliegt, wird unterschieden zwischen: 
-         * - 1 Token makiert --> Token trennen Funktion wird auf dem ausgewählten Token ausgeführt.
-         * - 2 Token makiert --> Token zusammen Funktion wird auf den ausgewählten Token ausgeführt.
+         * - 1 Token makiert --> "Token trennen"-Funktion wird auf dem ausgewählten Token ausgeführt.
+         * - 2 Token makiert --> "Token zusammen"-Funktion wird auf den ausgewählten Token ausgeführt.
          */
         private void TokenBearbeiten_Click(object sender, EventArgs e)
         {
@@ -272,7 +274,7 @@ namespace JADE
                         }
                         else                                                        //Fuegt Token zusammen.
                         {
-                            zusammen(this.treeView_Sätze.SelectedNode.Index, first, second);
+                            zusammen(this.treeView_Sätze.SelectedNode.Index, first);
                             flowupdate();                                           //Ruft flowupdate-Funktion auf.
                             break;                                                  //beendet diese Funktion.
                         }
@@ -280,9 +282,9 @@ namespace JADE
             }
         }
 
-        /**EventFunktion: Bei klick auf den "Token suchen"-Button.
-         * Überprüft zuerst ob eine korrekte Auswahl an Token (makierte checkBoxen in der FlowLayoutPanel) vorliegen. Bei fehlerhafter Auswahl erfolgt Fehlerhinweis.
-         * Sofern richtige Auswahl vorliegt werden die vorliegenden Informationen (gewählter Token, detailierte Suche ja/nein) an die Suchfunktion search übergeben, welche eine Ergebnissliste(DataTable) erstellt und diese im GridView abbildet. 
+        /**Der Aufruf dieser Funktion geschieht beim Klick auf den "Token suchen"-Button.
+         * Diese Funktion überprüft zuerst, ob eine korrekte Auswahl an Token (makierte Checkboxen im FlowLayoutPanel) vorliegt. Bei einer fehlerhafter Auswahl erfolgt Fehlerhinweis.
+         * Sofern eine richtige Auswahl vorliegt, werden die vorliegenden Informationen (gewähltes Token, detailierte Suche ja/nein) an die Suchfunktion search übergeben, welche eine Ergebnissliste(DataTable) erstellt und diese im Gridview abbildet. 
          */
         private void TokenSuchen_Click(object sender, EventArgs e)
         {
@@ -321,23 +323,11 @@ namespace JADE
         }
 
         /**
-         * EventFunktion: Bei klick auf den Beenden-Menüeintrag.
-         * Schließt das Programm.
+         * Diese Funktion schließt nach dem Klicken auf den Beenden-Menüeintrag das Programm.
          */ 
         private void beendenToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
-        }
-
-        /**
-         * Funktion zum Löschen eines Eintrages aus der Ergebnisliste der Suche.
-         * Dies ist erforderlich da nach der Änderung eines Tokens, aus der Ergebnisliste nicht der alte Eintrag wieder aufgerufen werden soll, sondern ein Neuer erstellt.
-         * @param[in] satznummer int-Wert des Satzes in dem sich der zu löschende Token befindet.
-         * @param[in] tok int-Wert des Tokens der gelöscht werden soll.
-         */
-        public void TableDel(int satznummer,int tok)
-        {
-            SearchEngine.DisposeTable(satznummer, tok);
         }
 
         /// @cond
