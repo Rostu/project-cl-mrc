@@ -155,7 +155,7 @@ namespace JADE
         }
 
         /**
-         * EventHandler: Der beim Schließen des Bearbeiten-Fensters, den Listener ausschaltet und das FlowlayoutPanel mit den Token (die Anzeige der Tokenliste) updatet.
+         * Diese Funktion schaltet beim Schließen des Bearbeiten-Fensters den Listener aus und das FlowlayoutPanel mit der Anzeige der Tokenliste wird geupdatet.
          */
         void event_BearbeitenFensterSchliessen(object sender, FormClosingEventArgs e)
         {
