@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['tabledel',['TableDel',['../class_j_a_d_e_1_1_haupt_fenster.html#a50d98696d170c88c5de009b01de0912d',1,'JADE::HauptFenster']]],
   ['texttest',['TextTest',['../class_j_a_d_e_1_1_segmenter.html#a23f7bb05aaf164972d1e14f8560e5586',1,'JADE::Segmenter']]],
   ['tinysegmenter',['TinySegmenter',['../class_j_a_d_e_1_1_segmenter.html#aa5a65c30d371681628783c3b17be197c',1,'JADE::Segmenter']]],
   ['tok',['Tok',['../class_j_a_d_e_1_1_bearbeiten_fenster.html#abd65885829a5a400af0847477afa8c79',1,'JADE::BearbeitenFenster']]],
