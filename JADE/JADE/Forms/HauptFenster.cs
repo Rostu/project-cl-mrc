@@ -185,7 +185,7 @@ namespace JADE
             SearchEngine.DisposeTable(Satznummer, Tok1);
             SearchEngine.DisposeTable(Satznummer, Tok2);
 
-            for(int i = Tok1 + 2; i < Instanzdaten.getSatzLaenge(Satznummer); i++)
+            for(int i = Tok1 + 2; i < Satz.Count; i++)
             {
                 SearchEngine.ShiftTable(Satznummer, i, true);
             }
