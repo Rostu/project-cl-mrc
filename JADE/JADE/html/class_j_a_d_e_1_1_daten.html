@@ -106,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="JADE::Daten" -->
-<p>Eine extra Klasse für die Arraylist mit unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> also den Sätzen und Token. Wurde extra angelegt, weil es dann einfacher ist, etwas zu ändern wenn wir später vielleicht auch noch Zusatzinformationen wie Übersetzungen speichern wollen.  
+<p>Eine Klasse, die für das Speichern der Arraylist mit unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a> für den eingegebenen Text (die einzelnen Sätze und Token) gedacht ist. Sie wurde auch für den Zweck angelegt, spätere Änderungen wie das Speichern von Zusatzinformationen wie Übersetzungsmöglichkeiten zu erleichtern.  
  <a href="class_j_a_d_e_1_1_daten.html#details">Mehr ...</a></p>
 
 <p><a href="class_j_a_d_e_1_1_daten-members.html">Aufstellung aller Elemente</a></p>
@@ -115,6 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 Öffentliche Methoden</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_daten.html#a32406b992fd51adc6ae4ec1419b96212">Daten</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_daten.html#adb5f8a65691bb80c4b8cb44b912d84f2">Daten</a> (SerializationInfo info, StreamingContext ctxt)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_daten.html#a599d75542b4814c8a1a0547576d7d8ba">getSatzLaenge</a> (int Satznummer)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_daten.html#ae5a8d84433f67e4d2717797dcbd9a1a1">getToken</a> (int Satznummer, int Tok)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ArrayList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_daten.html#a77c31ff4fd4520fa53512309f2c91c2f">getSatz</a> (int Satznummer)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_daten.html#a3b1b4727626c878a19eca99da33f7362">GetObjectData</a> (SerializationInfo info, StreamingContext ctxt)</td></tr>
@@ -126,7 +127,7 @@ Private Attribute</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ArrayList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_daten.html#ace8fc8439a2b12c6e62f2799ba3c0a73">data</a> = new ArrayList()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Ausführliche Beschreibung</h2>
-<div class="textblock"><p>Eine extra Klasse für die Arraylist mit unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> also den Sätzen und Token. Wurde extra angelegt, weil es dann einfacher ist, etwas zu ändern wenn wir später vielleicht auch noch Zusatzinformationen wie Übersetzungen speichern wollen. </p>
+<div class="textblock"><p>Eine Klasse, die für das Speichern der Arraylist mit unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a> für den eingegebenen Text (die einzelnen Sätze und Token) gedacht ist. Sie wurde auch für den Zweck angelegt, spätere Änderungen wie das Speichern von Zusatzinformationen wie Übersetzungsmöglichkeiten zu erleichtern. </p>
 
 <p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00022">22</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
 </div><hr/><h2>Beschreibung der Konstruktoren und Destruktoren</h2>
@@ -173,11 +174,11 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Konstruktor für die Serialisation/DeSerilisation. </p>
+<p>Konstruktor für die Serialisation/Deserialisation. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">info</td><td>SerilizationInfo </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ctxt</td><td>StreamingContext </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">info</td><td>Objekt vom Typ SerializationInfo </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ctxt</td><td>Objekt vom Typ StreamingContext </td></tr>
   </table>
   </dd>
 </dl>
@@ -213,7 +214,7 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Benötigt die Serialize Funktion. Fügt der SerializeInfo informationen über das zu serialisierende Objekt hinzu. </p>
+<p>Benötigt die Serialize-Funktion. Fügt der SerializeInfo Informationen über das zu serialisierende Objekt hinzu. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">info</td><td>Objekt vom Typ SerializationInfo </td></tr>
@@ -222,7 +223,7 @@ Private Attribute</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00088">88</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
+<p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00101">101</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
 
 <p>Benutzt <a class="el" href="daten_8cs_source.html#l00025">JADE.Daten.data</a>.</p>
 
@@ -242,18 +243,47 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Funktion zur Rückgabe eines Satzes(ArrayList) aus unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>. Erhält zu diesem Zweck einen Int-Werte für Satznummer des gewünschten Satzes. </p>
+<p>Funktion zur Rückgabe eines Satzes (als ArrayList) aus unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a>. Erhält zu diesem Zweck einen int-Wert für Satznummer des gewünschten Satzes. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">Satznummer</td><td>Int-Wert des Satzes in dem sich der gewünschte Token befindet. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">Arraylist(mit</td><td>String Elementen) die den gewünschten Satz repräsentiert. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Satznummer</td><td>int-Wert des Satzes, in dem sich der gewünschte Token befindet. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Arraylist(mit</td><td>string-Elementen), die den gewünschten Satz repräsentiert. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00073">73</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
+<p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00086">86</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
 
 <p>Benutzt <a class="el" href="daten_8cs_source.html#l00032">JADE.Daten.Zugriff</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a599d75542b4814c8a1a0547576d7d8ba"></a><!-- doxytag: member="JADE::Daten::getSatzLaenge" ref="a599d75542b4814c8a1a0547576d7d8ba" args="(int Satznummer)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_j_a_d_e_1_1_daten.html#a599d75542b4814c8a1a0547576d7d8ba">JADE.Daten.getSatzLaenge</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Satznummer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Funktion zur Rückgabe der Länge (Anzahl der Elemente) eines Satzes. </p>
+<dl class="params"><dt><b>Parameter:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">Satznummer</td><td>Int-Wert des Satzes in dem sich der gewünschte Token befindet. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Int-Wert</td><td>der die Anzahl der Elemente eines Satzes repräsentiert. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00061">61</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
+
+<p>Benutzt <a class="el" href="daten_8cs_source.html#l00086">JADE.Daten.getSatz()</a>.</p>
 
 </div>
 </div>
@@ -281,19 +311,19 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Funktion zur Rückgabe eines einzelnen Token (String) aus unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>. Erhält zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token. </p>
+<p>Funktion zur Rückgabe eines einzelnen Token (String) aus unseren <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a>. Erhält zu diesem Zweck zwei int-Werte für Satznummer und Tokennummer, des gewünschen Token. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">Satznummer</td><td>Int-Wert des Satzes in dem sich der gewünschte Token befindet. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Tok</td><td>Int-Wert des gewünschten Token. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">String</td><td>Repräsentation eines Token aus der <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> Struktur. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Satznummer</td><td>int-Wert des Satzes, in dem sich der gewünschte Token befindet. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Tok</td><td>int-Wert des gewünschten Tokens. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">string-Repräsentation</td><td>eines Tokens aus der Datenstruktur. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00061">61</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
+<p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00074">74</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
 
-<p>Benutzt <a class="el" href="daten_8cs_source.html#l00073">JADE.Daten.getSatz()</a>.</p>
+<p>Benutzt <a class="el" href="daten_8cs_source.html#l00086">JADE.Daten.getSatz()</a>.</p>
 
 </div>
 </div>
@@ -308,7 +338,7 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Private Variable vom Typ ArrayList. Hier werden die <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> abgespeichert. </p>
+<p>Private Variable vom Typ ArrayList. Hier werden die <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a> abgespeichert. </p>
 
 <p>Definiert in Zeile <a class="el" href="daten_8cs_source.html#l00025">25</a> der Datei <a class="el" href="daten_8cs_source.html">daten.cs</a>.</p>
 
@@ -352,7 +382,7 @@ Private Attribute</h2></td></tr>
       <li class="navelem"><a class="el" href="namespace_j_a_d_e.html">JADE</a>      </li>
       <li class="navelem"><a class="el" href="class_j_a_d_e_1_1_daten.html">Daten</a>      </li>
 
-    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:14 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 15:42:41 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

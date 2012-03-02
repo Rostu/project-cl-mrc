@@ -108,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="JADE::SearchEngine" -->
-<p>SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.  
+<p>Die Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="Die Klasse SearchEngine enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.">SearchEngine</a> enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.  
  <a href="class_j_a_d_e_1_1_search_engine.html#details">Mehr ...</a></p>
 
 <p><a href="class_j_a_d_e_1_1_search_engine-members.html">Aufstellung aller Elemente</a></p>
@@ -120,6 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Öffentliche, statische Methoden</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_search_engine.html#afd36b5e9cd5a78e215e11a5083cdb015">DisposeTable</a> (int satzNr, int tokenNr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_search_engine.html#a41708a7451c96c92fa1dcab5dad831a7">ShiftTable</a> (int satzNr, int tokenNr, bool left)</td></tr>
 <tr><td colspan="2"><h2><a name="properties"></a>
 Propertys</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_j_a_d_e_1_1_search_engine.html">SearchEngine</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_search_engine.html#aadb00d679378ffa10abfd5b55c507581">Engine</a><code> [get]</code></td></tr>
@@ -134,7 +135,7 @@ Statische private Attribute</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static System.Data.DataSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_a_d_e_1_1_search_engine.html#a3ca0213ee6de4759d65608a96ae13c69">dataSet</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Ausführliche Beschreibung</h2>
-<div class="textblock"><p>SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden. </p>
+<div class="textblock"><p>Die Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="Die Klasse SearchEngine enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.">SearchEngine</a> enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden. </p>
 <p>Benutzt wurde eine XML-Dump des frei verfügbaren Wörterbuch-Projektes Wadoku</p>
 <p><a href="http://www.wadoku.de/wiki/x/ZQE">http://www.wadoku.de/wiki/x/ZQE</a></p>
 
@@ -153,7 +154,7 @@ Statische private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Private Konstruktor für die <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq t...">SearchEngine</a>. </p>
+<p>Private Konstruktor für die Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="Die Klasse SearchEngine enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.">SearchEngine</a>. </p>
 
 <p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00031">31</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
 
@@ -219,7 +220,7 @@ Statische private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Diese Funktion wird von search dazu verwendet um eine DataTable für die Anzeige zu erstellen. Mit Hilfe von defineResultTable wird dem dataSet eine Tabelle hinzugefügt und innerhalb der Funktion createResultTable selbst wird die Tabelle mit formatierten <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> aus der Wadoku-XML-Datei gefüllt. </p>
+<p>Diese Funktion wird von search dazu verwendet, eine DataTable für die Anzeige zu erstellen. Mit Hilfe von defineResultTable wird dem dataSet eine Tabelle hinzugefügt und innerhalb der Funktion createResultTable selbst wird die Tabelle mit formatierten <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a> aus der Wadoku-XML-Datei gefüllt. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">resEntries</td><td>Suchergebnisse </td></tr>
@@ -231,9 +232,9 @@ Statische private Attribute</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00194">194</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
+<p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00215">215</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
 
-<p>Benutzt <a class="el" href="_search_engine_8cs_source.html#l00021">JADE.SearchEngine.dataSet</a> und <a class="el" href="_search_engine_8cs_source.html#l00266">JADE.SearchEngine.defineResultTable()</a>.</p>
+<p>Benutzt <a class="el" href="_search_engine_8cs_source.html#l00021">JADE.SearchEngine.dataSet</a> und <a class="el" href="_search_engine_8cs_source.html#l00287">JADE.SearchEngine.defineResultTable()</a>.</p>
 
 </div>
 </div>
@@ -260,7 +261,7 @@ Statische private Attribute</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00266">266</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
+<p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00287">287</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
 
 </div>
 </div>
@@ -288,7 +289,7 @@ Statische private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn, ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden. Damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird. </p>
+<p>Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein, wenn ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden. Damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">satzNr</td><td>Int-Wert des Satzes in dem sich der Token befindet dessen Table-Objekt in dem Dataset gelöscht werden soll. </td></tr>
@@ -339,21 +340,67 @@ Statische private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Suchfunktion. Erhält Informationen über das gesuchte Token, sucht in wadoku.xml und liefert eine DataTable mit Ergebnissen zurück. </p>
+<p>Diese Suchfunktion erhält Informationen über das gesuchte Token, sucht danach in wadoku.xml und liefert eine DataTable mit Ergebnissen zurück. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">satzNr</td><td>Int-Wert des Satzes in dem sich das Token befindet, der im Wörterbuch gesucht werden soll. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tokenNr</td><td>Int-Wert des Tokens der im Wörterbuch gesucht werden soll. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">token</td><td>String-Repräsentation des gesuchten Token. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">satzNr</td><td>int-Wert des Satzes in dem sich das Token befindet, das im Wörterbuch gesucht werden soll. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tokenNr</td><td>int-Wert des Tokens der im Wörterbuch gesucht werden soll. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">token</td><td>String-Repräsentation des gesuchten Tokens. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">absolute</td><td>bool-Wert der angibt, ob nach genauer Übereinstimmung oder extensiv gesucht werden soll. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outputTable</td><td>DataTable-Objekt mit den gefundenen Suchergebnissen. </td></tr>
   </table>
   </dd>
 </dl>
 
+<p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00147">147</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
+
+<p>Benutzt <a class="el" href="_search_engine_8cs_source.html#l00215">JADE.SearchEngine.createResultTable()</a>, <a class="el" href="_search_engine_8cs_source.html#l00021">JADE.SearchEngine.dataSet</a> und <a class="el" href="_search_engine_8cs_source.html#l00186">JADE.SearchEngine.validateEntry()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a41708a7451c96c92fa1dcab5dad831a7"></a><!-- doxytag: member="JADE::SearchEngine::ShiftTable" ref="a41708a7451c96c92fa1dcab5dad831a7" args="(int satzNr, int tokenNr, bool left)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="class_j_a_d_e_1_1_search_engine.html#a41708a7451c96c92fa1dcab5dad831a7">JADE.SearchEngine.ShiftTable</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>satzNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tokenNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>left</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Funktion zum Ändern der Indizes im Namen einer Table aus dem Dataset. Gemäß dem Wert von left soll eine Verschiebung der Indizes im Tabellennamen nach links bzw. nach rechts erfolgen. Dies kann notwendig sein, wenn ein Token geändert wurde. Andere bereits getätigte Suchergebnistabellen werden dann nicht mehr gefunden. Diese Funktion kann bei einer geplanten, verbesserten Datenstruktur vernachlässigt werden. </p>
+<dl class="params"><dt><b>Parameter:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">satzNr</td><td>Int-Wert des Satzes, in dem sich das Token befindet, dessen Table-Objekt im Dataset angepasst werden soll. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tokenNr</td><td>Int-Wert des Tokens, dessen Table-Objekt im Dataset angepasst werden soll. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">left</td><td>bool-Wert´, der die Richtung der Verschiebung bestimmt. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00126">126</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
 
-<p>Benutzt <a class="el" href="_search_engine_8cs_source.html#l00194">JADE.SearchEngine.createResultTable()</a>, <a class="el" href="_search_engine_8cs_source.html#l00021">JADE.SearchEngine.dataSet</a> und <a class="el" href="_search_engine_8cs_source.html#l00165">JADE.SearchEngine.validateEntry()</a>.</p>
+<p>Benutzt <a class="el" href="_search_engine_8cs_source.html#l00021">JADE.SearchEngine.dataSet</a>.</p>
 
 </div>
 </div>
@@ -398,7 +445,7 @@ Statische private Attribute</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00165">165</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
+<p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00186">186</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
 
 </div>
 </div>
@@ -413,7 +460,7 @@ Statische private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Diese Variable dient der Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq t...">SearchEngine</a> als Referenz auf ein DataSet, das die einzelnen Suchergebnisse, die bereits angefordert wurden, speichert. </p>
+<p>Diese Variable dient der Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="Die Klasse SearchEngine enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.">SearchEngine</a> als Referenz auf ein DataSet, das die einzelnen Suchergebnisse, die bereits angefordert wurden, speichert. </p>
 
 <p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00021">21</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
 
@@ -430,7 +477,7 @@ Statische private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq t...">SearchEngine</a> umsetzt. Dadurch wird gewährleistet, dass nur eine und immer die selbe Instanz der <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq t...">SearchEngine</a> Klasse verwendet wird. Überprüft, ob es schon eine Instanz der Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq t...">SearchEngine</a> gibt und erstellt falls nicht eine solche. </p>
+<p>Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="Die Klasse SearchEngine enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.">SearchEngine</a> umsetzt. Dadurch wird gewährleistet, dass nur eine und immer dieselbe Instanz der SearchEngine-Klasse verwendet wird. Überprüft, ob es schon eine Instanz der Klasse <a class="el" href="class_j_a_d_e_1_1_search_engine.html" title="Die Klasse SearchEngine enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.">SearchEngine</a> gibt und erstellt, falls nicht, eine solche. </p>
 
 <p>Definiert in Zeile <a class="el" href="_search_engine_8cs_source.html#l00076">76</a> der Datei <a class="el" href="_search_engine_8cs_source.html">SearchEngine.cs</a>.</p>
 
@@ -457,7 +504,7 @@ Statische private Attribute</h2></td></tr>
       <li class="navelem"><a class="el" href="namespace_j_a_d_e.html">JADE</a>      </li>
       <li class="navelem"><a class="el" href="class_j_a_d_e_1_1_search_engine.html">SearchEngine</a>      </li>
 
-    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:14 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 15:42:41 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>
