@@ -11,22 +11,22 @@ using System.Windows.Forms;
 namespace JADE
 {
     /// <summary>
-    ///Form-Objekt(Windows Fenster) indem das Trennen eines Token in zwei neue Token realisiert wird.
+    ///Form-Objekt(Windows Fenster), in dem das Trennen eines Token in zwei neue Token realisiert wird.
     /// </summary>
     public partial class BearbeitenFenster : Form
     {
-        /**Int-Variable, erhällt bei Aufruf des Fensters die Satznummer des zu bearbeitenden Token. */ 
+        /**int-Variable, erhält bei Aufruf des Fensters die Satznummer des zu bearbeitenden Token. */ 
         private int Satznummer;
-        /**Int-Variable, erhällt bei Aufruf des Fensters die Tokennummer des zu bearbeitenden Token. */ 
+        /**int-Variable, erhält bei Aufruf des Fensters die Tokennummer des zu bearbeitenden Token. */ 
         private int Tok;
-        /**Daten Objekt, erhällt bei Aufruf des Fensters die Satz und Token Daten aus dem HauptFenster. */ 
+        /**Daten Objekt, erhält bei Aufruf des Fensters die Satz- und Token-Daten aus dem HauptFenster. */ 
         private Daten obj;
 
         /**
          * Konstruktor für das Bearbeiten-Fenster.
-         * @param obj Ein Objekt der Datenstruktur Daten.
-         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
-         * @param[in] str String der den zu trennenden Token repräsentiert. 
+         * @param obj Ein Objekt der Klasse Daten.
+         * @param[in] Satznummer int-Wert des Satzes, in dem sich das gewünschte Token befindet.
+         * @param[in] str string-Wert, der das zu trennenden Token repräsentiert. 
          */
         public BearbeitenFenster(Daten obj, int Satznummer, int Tok, String str)    //
         {
@@ -39,7 +39,7 @@ namespace JADE
         }
         
         /**
-         * Trennen-Button Funktion. Überprüft, ob sich die beiden neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
+         * Funktion für den TrennenButton. Überprüft, ob sich die beiden neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
          */
         private void TrennenButton_Click(object sender, EventArgs e)
         {
@@ -62,39 +62,13 @@ namespace JADE
                 MessageBox.Show("Die 2 neuen Token müssen aus den Zeichen \ndes zu bearbeitenden Token bestehen.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        
+
         /**
-         * Abbrechen-Button Funktion. Schließt das BearbeitenFenster.
+         * Funktion für den AbbrechenButton. Ein Klick auf den Button schließt das BearbeitenFenster.
          */
         private void AbbrechenButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        /// @cond
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BearbeitenFenster_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BearbeitenFenster_Load(object sender, EventArgs e)
-        {
-
-        }
-        /// @endcond
     }
 }

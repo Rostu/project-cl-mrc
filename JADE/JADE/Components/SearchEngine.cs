@@ -11,7 +11,7 @@ using System.Collections;
 namespace JADE
 {
     /// <summary>
-    ///*SearchEngine-Klasse enthält die Funktionen zum Suchen eines Token im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.
+    ///*Die Klasse SearchEngine enthält die Funktionen zum Suchen eines Tokens im Wörterbuch. Mit Hilfe von Linq to XML wird wadoku.xml durchsucht, um für ein gesuchtes Token entsprechende Einträge zu finden. Dabei gibt es die Möglichkeit, nach genau übereinstimmenden Einträgen zu suchen oder aber nach allen Einträgen, die wie das Token beginnen. So können eventuelle falsche Zerlegungen des TinySegmenters mit Hilfe von Wadoku und der Bearbeiten-Funktion verbessert werden.
     ///*<para>Benutzt wurde eine XML-Dump des frei verfügbaren Wörterbuch-Projektes Wadoku</para>
     ///*<para><a href="http://www.wadoku.de/wiki/x/ZQE">http://www.wadoku.de/wiki/x/ZQE</a></para>
     /// </summary>
@@ -26,7 +26,7 @@ namespace JADE
         private static Hashtable posDeciphering; // Hier wird beim Initialisieren eine Referenz auf eine Hashtable gespeichert, die bei der Erstellung von Einträgen für das Suchergebnis POS-Tag-Abkürzungen im Wörterbuch leserlich darstellbar macht. 
         /// @endcond
         /**
-         * Private Konstruktor für die SearchEngine.
+         * Private Konstruktor für die Klasse SearchEngine.
          */ 
         private SearchEngine()
         {
@@ -69,8 +69,8 @@ namespace JADE
             };
         }
         /**
-         * Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse SearchEngine umsetzt. Dadurch wird gewährleistet, dass nur eine und immer die selbe Instanz der SearchEngine Klasse verwendet wird.
-         * Überprüft, ob es schon eine Instanz der Klasse SearchEngine gibt und erstellt falls nicht eine solche.
+         * Get-Funktion, die das Singelton-Entwurfsmuster für die Klasse SearchEngine umsetzt. Dadurch wird gewährleistet, dass nur eine und immer dieselbe Instanz der SearchEngine-Klasse verwendet wird.
+         * Überprüft, ob es schon eine Instanz der Klasse SearchEngine gibt und erstellt, falls nicht, eine solche.
         */ 
         public static SearchEngine Engine
         {
@@ -98,7 +98,7 @@ namespace JADE
         }
 
         /**
-         * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein wenn, ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden.
+         * Funktion zum Löschen einer Table aus dem Dataset. Dies kann notwendig sein, wenn ein Token geändert wurde. Der bereits bestehende (alte) Eintrag muss nun aus der Datatable gelöscht werden.
          * Damit bei einer erneuten Suchanfrage nicht das alte Table-Objekt aufgerufen wird, sondern eine neue Suche initiiert wird.
          * @param[in] satzNr Int-Wert des Satzes in dem sich der Token befindet dessen Table-Objekt in dem Dataset gelöscht werden soll.
          * @param[in] tokenNr Int-Wert des Tokens dessen Table-Objekt in dem Dataset gelöscht werden soll.
@@ -110,16 +110,37 @@ namespace JADE
             DataTable tableToDispose = dataSet.Tables["results_" + satzNr + tokenNr];
             DataTable tableToDispose_absolute = dataSet.Tables["results_" + satzNr + tokenNr + "_absolute"];
 
-            //Falls die gefundenen Tabellen gefunden wurden (keine null-Referenz) und sie gelöscht werden können, werden sie entfernt.
+            //Falls die Tabellen gefunden werden (keine null-Referenz) und sie gelöscht werden können, werden sie entfernt.
             if (dataSet.Tables.CanRemove(tableToDispose)) dataSet.Tables.Remove(tableToDispose);
             if (dataSet.Tables.CanRemove(tableToDispose_absolute)) dataSet.Tables.Remove(tableToDispose_absolute);
         }
 
+         /**
+          * Funktion zum Ändern der Indizes im Namen einer Table aus dem Dataset. Gemäß dem Wert von left soll eine Verschiebung der Indizes im Tabellennamen nach links bzw. nach rechts erfolgen.
+          * Dies kann notwendig sein, wenn ein Token geändert wurde. Andere bereits getätigte Suchergebnistabellen werden dann nicht mehr gefunden. 
+          * Diese Funktion kann bei einer geplanten, verbesserten Datenstruktur vernachlässigt werden. 
+          * @param[in] satzNr Int-Wert des Satzes, in dem sich das Token befindet, dessen Table-Objekt im Dataset angepasst werden soll.
+          * @param[in] tokenNr Int-Wert des Tokens, dessen Table-Objekt im Dataset angepasst werden soll.
+          * @param[in] left bool-Wert´, der die Richtung der Verschiebung bestimmt.
+          */
+        public static void ShiftTable(int satzNr, int tokenNr, bool left)
+        {
+            //alten Tabellennamen speichern
+            string oldTablename = "results_" + satzNr + tokenNr;
+
+            //Gemäß dem Wert von left soll eine Verschiebung der Indizes im Tabellennamen  nach links bzw. nach rechts erfolgen. Die Änderung am Tabellennamen wird hier entsprechend vorbereitet.
+            string newTablename = "results_" + satzNr + ((left) ? (tokenNr - 1) : (tokenNr + 1));
+
+            //Falls die Tabellen gefunden werden, werden die im Namen auftauchenden Token-Indizes gemäß dem Wert von left nach links oder nach rechts verschoben.
+            if (dataSet.Tables.Contains(oldTablename)) dataSet.Tables[oldTablename].TableName = newTablename;
+            if (dataSet.Tables.Contains(oldTablename + "_absolute")) dataSet.Tables[oldTablename + "_absolute"].TableName = newTablename + "_absolute";
+        }
+
         /**
-         * Suchfunktion. Erhält Informationen über das gesuchte Token, sucht in wadoku.xml und liefert eine DataTable mit Ergebnissen zurück. 
-         * @param[in] satzNr Int-Wert des Satzes in dem sich das Token befindet, der im Wörterbuch gesucht werden soll.
-         * @param[in] tokenNr Int-Wert des Tokens der im Wörterbuch gesucht werden soll.
-         * @param[in] token String-Repräsentation des gesuchten Token.
+         * Diese Suchfunktion erhält Informationen über das gesuchte Token, sucht danach in wadoku.xml und liefert eine DataTable mit Ergebnissen zurück. 
+         * @param[in] satzNr int-Wert des Satzes in dem sich das Token befindet, das im Wörterbuch gesucht werden soll.
+         * @param[in] tokenNr int-Wert des Tokens der im Wörterbuch gesucht werden soll.
+         * @param[in] token String-Repräsentation des gesuchten Tokens.
          * @param[in] absolute bool-Wert der angibt, ob nach genauer Übereinstimmung oder extensiv gesucht werden soll.
          * @param[out] outputTable DataTable-Objekt mit den gefundenen Suchergebnissen.
         */
@@ -184,7 +205,7 @@ namespace JADE
         }
 
         /**
-         * Diese Funktion wird von search dazu verwendet um eine DataTable für die Anzeige zu erstellen. Mit Hilfe von defineResultTable wird dem dataSet eine Tabelle hinzugefügt und innerhalb der Funktion createResultTable selbst wird die Tabelle mit formatierten Daten aus der Wadoku-XML-Datei gefüllt.
+         * Diese Funktion wird von search dazu verwendet, eine DataTable für die Anzeige zu erstellen. Mit Hilfe von defineResultTable wird dem dataSet eine Tabelle hinzugefügt und innerhalb der Funktion createResultTable selbst wird die Tabelle mit formatierten Daten aus der Wadoku-XML-Datei gefüllt.
          * @param[in] resEntries Suchergebnisse
          * @param[in] satzNr int-Wert des Satzes, in dem sich der Token befindet.
          * @param[in] tokenNr int-Wert des Tokens.
