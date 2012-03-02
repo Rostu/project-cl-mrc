@@ -63,7 +63,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(214, 23);
             this.textBox1.TabIndex = 4;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // button2
             // 
@@ -97,7 +96,6 @@
             this.textBox3.Size = new System.Drawing.Size(214, 24);
             this.textBox3.TabIndex = 7;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // BearbeitenFenster
             // 
@@ -118,8 +116,6 @@
             this.Name = "BearbeitenFenster";
             this.Text = "JaDe - Token trennen";
             this.TopMost = true;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BearbeitenFenster_FormClosed);
-            this.Load += new System.EventHandler(this.BearbeitenFenster_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

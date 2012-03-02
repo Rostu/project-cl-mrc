@@ -45,13 +45,13 @@ namespace JADE
     
     public class Segmenter
     {
-        /**Private Variable vom Typ Hashtable. Wird in der Klasse zur Zeichentypbestimmung genutzt. */
-        private Hashtable chartype_ = new Hashtable();      //Anlegen einer Hashtable welche später zur Zeichentypbestimmung genutzt wird.      
+        /**Private Variable vom Typ Hashtable. Sie wird in der Klasse zur Zeichentypbestimmung genutzt. */
+        private Hashtable chartype_ = new Hashtable();      //Anlegen einer Hashtable, welche später zur Zeichentypbestimmung genutzt wird.      
 
         /**
-         * Funktion welche einen String aus japanischen Zeichen in seine Token zerlegt.
-         * Die Funktion gibt ein Objekt unserer Daten Klasse zurück.
-         * @param[in] input String Variable mit dem zu Tokenisierenden Text.
+         * Eine Funktion, welche einen String aus japanischen Zeichen in seine Token zerlegt.
+         * Die Funktion gibt ein Objekt unserer Daten-Klasse zurück.
+         * @param[in] input string-Variable mit dem zu tokenisierenden Text.
          */
         public Daten TinySegmenter(String input)
         {
@@ -611,9 +611,9 @@ namespace JADE
         }
 
         /**
-        * Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und Sonstige)
-        * Erhält einen String, vergleicht diesen mit den Regular Expression-Einträgen in einer Hashtable und gibt bei match den Schlüsselwert(String) zurück. 
-        * @param[in] str String Variable welche auf Zeichenart untersucht werden soll.
+        * Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westliche Schrifteichen, Sonderzeichen und Sonstige)
+        * Erhält einen String, vergleicht diesen mit den Regular-Expression-Einträgen in einer Hashtable und gibt bei Übereinstimmung den Schlüsselwert(String) zurück. 
+        * @param[in] str String-Wert, welcher auf Zeichenart untersucht werden soll.
         * @param[out] s String-Wert aus dem Value eines Hashtable Eintrages. 
         */
         private string ctype_(String str)
@@ -632,9 +632,9 @@ namespace JADE
         }
 
         /**
-      * Erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. 
+      * Diese Funktion erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Schlüssel vorhanden ist und gibt in diesem Fall den int-Wert des dazugehörigen Wertes zurück, ansonsten 0. 
       * @param table[in] Hashtable-Objekt.
-      * @param[in] s String-Objekt das auf matching in der Hashtable geprüft werden soll.
+      * @param[in] s String-Objekt das auf Übereinstimmung in der Hashtable geprüft werden soll.
       * @param[out] ret Int-Wert (Score).
       */
         private int ts_(Hashtable table, String s)
@@ -652,12 +652,12 @@ namespace JADE
         }
 
         /**
-         * Funktion die testet ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. 
-         * Testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expression matching auf Zugehörigkeit zum japanischen Zeichensatz.
+         * Diese Funktion testet, ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. 
+         * Sie testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expressions auf Zugehörigkeit zum japanischen Zeichensatz.
          * Rückgabewerte sind String Objekte. "J" für japanisches Zeichen. "O" für nicht japanisches Zeichen.
          * Hier wurde nicht mit boolschen Rückgabe-Werten gearbeitet, weil eine spätere Modifikation bzw. Spezifikation des Rückgabewertes möglich sein sollte. 
-         * @param[in] eingabe String-Objekt das auf japanische Zeichen hin Untersucht werden soll.
-         * @param[out] s String-Wert aus dem Value eines Hashtable Eintrages. 
+         * @param[in] eingabe String-Wert, der auf japanische Zeichen hin untersucht werden soll.
+         * @param[out] s String-Wert aus dem Wert eines Hashtable Eintrages. 
          */
         private String type(String eingabe)                                 
         {
@@ -698,10 +698,10 @@ namespace JADE
         }
 
         /**
-         * TestFunktion um einen Text (Eingabe String) auf dem Japanischen fremde Zeichen zu testen.
-         * Gibt momentan bei jedem Vorkommen eines nicht japanischen Zeichens im Text eine Warnmeldung aus.
-         * Kann noch angepasst werden.
-         * @param[in] text String-Objekt das auf nicht japanische Zeichen hin Untersucht werden soll.
+         * Diese Funktion dient dazu, in einen Text (Eingabe-String) dem Japanischen fremde Zeichen zu identifizieren.
+         * Sie gibt momentan eine Warnmeldung aus, falls ein nicht japanischen Zeichen im Text vorkommt.
+         * Anpassungen sind hier noch vorgesehen.
+         * @param[in] text String-Objekt, das auf nicht japanische Zeichen hin untersucht werden soll.
          */
         public void TextTest(String text)                                   
         {

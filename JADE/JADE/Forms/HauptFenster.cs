@@ -14,7 +14,7 @@ using Microsoft.Win32;
 namespace JADE
 {
     /// <summary>
-    ///Form-Objekt(Windows Fenster) HauptFenster unserer Anwendung.
+    ///Form-Objekt(Windows Fenster) für das Hauptfenster unserer Anwendung.
     /// </summary>
     public partial class HauptFenster : Form
     {
@@ -22,16 +22,13 @@ namespace JADE
         public static Daten Instanzdaten;
         /**Statische Variable vom Typ SearchEngine. Wird im HauptFenster für den Aufruf der Suchfunktion benötigt. */
         private static SearchEngine suche;
-        /**Statische Variable vom Typ Segmenter. Wird im HauptFenster für den Aufruf der TinySegmenter Funktion benötigt. */
+        /**Statische Variable vom Typ Segmenter. Wird im HauptFenster für den Aufruf der TinySegmenter-Funktion benötigt. */
         private static Segmenter segtest;
 
         /**
          * Konstruktor für das HauptFenster.
          * Initialisiert die nötigen Komponenten.
-         */
-
-
-        
+         */     
         public HauptFenster()
         {
             InitializeComponent();
@@ -45,7 +42,7 @@ namespace JADE
         }
 
         /**
-        * EventFunktion: Korrigiert bei klick auf eine Zelle in der Wörterbuchsuch-Ausgabe die Größenanpassung der Ausgabe.
+        * Diese Funktion passt bei einem Klick auf eine Zelle in der Tabelle für die Suchergebnisse die Größe der Tabellenspalten an die Inhalte der angezeigten Zeilen an.
         */
         private void event_dataGridView_Click(object sender, DataGridViewCellEventArgs e)
         {
@@ -53,7 +50,7 @@ namespace JADE
         }
 
         /**
-        * EventFunktion: Nach klick auf einen Satz wird das FlowLayoutPanel geupdatet und damit die richtigen Token angezeigt.
+        * Diese Funktion sorgt dafür, dass nach dem Klicken auf einen Satz das FlowLayoutPanel aktualisiert wird und damit die richtigen Token angezeigt werden.
         */
         public void event_TreeViewItemSelect(object sender, TreeViewEventArgs e)
         {
@@ -61,8 +58,8 @@ namespace JADE
         }
 
          /**
-         * Funktion zum Updaten der Token Anzeige.
-         * Überprüft welcher Satz in der Treeview makiert ist und schreibt die Token dieses Satzes als Checkboxes in das FlowLayoutPanel.
+         * Diese Funktion dient der Aktualisierung der Bereiche, in dem die Token eines Satzes angezeigt bzw. über Checkboxen ausgewählt werden können.
+         * Die Anzeige geschieht immer für den in der Treeview gerade ausgewählten Satz des eingegebenen Textes.
          */
         public void flowupdate()
         {   
@@ -102,10 +99,10 @@ namespace JADE
         }
 
         /**
-         * EventFunktion: Bei klick auf den Tokenize Button wird der Text aus der Richtextbox tokenisiert und in ein statisches Objekt (Instanzdaten) unserer Daten-Struktur geschrieben.
-         * Zunächst wird der Text aus der Richtextbox von störenden Whitespace, Newline und anderen Chars bereinigt.
-         * Danach wird geprüft, ob sich nicht japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung ausgegeben.
-         * Sofern nun also Text vorhanden ist, wird dieser mit der TinySegmenter-Funktion tokenisiert.
+         * EventFunktion: Beim Klick auf den Tokenize-Button wird der Text aus der Richtextbox tokenisiert und in einer Instanz unserer Daten-Klasse (Variable Instanzdaten) festgehalten.
+         * Zunächst wird der Text aus der Richtextbox von störenden Whitespace-Chars bereinigt.
+         * Danach wird geprüft, ob sich nicht-japanische Zeichen im Text befinden und gegebenenfalls eine Warnmeldung ausgegeben.
+         * Sofern ein Text vorhanden ist, wird dieser mit der TinySegmenter-Funktion tokenisiert.
          * Danach werden die Daten ausgelesen und die vorhandenen Sätze in der Treeview repräsentiert.
          */
         private void Tokenize_Click(object sender, EventArgs e)
@@ -145,10 +142,9 @@ namespace JADE
         }
 
         /**
-         * Funktion zum Trennen eines Token in unserer Daten Struktur.
-         * Ruft das BeabeitenFenster auf.
-         * @param[in] Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
-         * @param[in] Tok Int-Wert des Tokens der aufgeteilt werden soll.
+         * Diese Funktion setzt das Trennen eines Tokens um und ruft dazu das BeabeitenFenster auf.
+         * @param[in] Satznummer int-Wert (Indexwert für Zugriff auf entsprechende Arraylists in Instanzdaten) des Satzes, in dem sich das zu ändernde Token befindet.
+         * @param[in] Tok int-Wert (Indexwert für Zugriff auf entsprechende Arraylists in Instanzdaten) des Tokens, das aufgeteilt werden soll.
          */
         public void trennen(int Satznummer, int Tok)
         {
@@ -169,12 +165,12 @@ namespace JADE
         }
 
         /**
-         * Funktion zum Zusammenfügen zweier Token in unserer Daten-Struktur.
-         * Noch ausgelegt auf kleine Textgrössen. Muss noch angepasst werden um auslesen aller Daten für ein Zusammenfügen von Token zu verhindern.
-         * Außerdem werden noch zwei Int-Werte übergeben welche die zu bearbeitenden Token repräsentieren, es wäre aber nur ein Wert nötig.
-         * @param[in] Satznummer Int-Wert des Satzes in dem sich der zu ändernde Token befindet.
-         * @param[in] Tok1 Int-Wert des ersten Tokens der mit seinem Nachfolge-Token zusammengefügt werden soll.
-         * @param[in] Tok2 Int-Wert des zweiten Tokens der mit seinem Vorgänger-Token zusammengefügt werden soll.
+         * Diese Funktion realisiert das Zusammenfügen zweier nebeneinanderliegender, ausgewählter Token.
+         * Sie ist noch ausgelegt auf kleine Textgrössen und muss noch angepasst werden, um das Auslesen aller Daten für ein Zusammenfügen von Token zu verhindern.
+         * Außerdem werden noch zwei int-Werte (Indexwerte für Zugriff auf entsprechende Arraylists in Instanzdaten) übergeben welche den Zugriff auf den entsprechenden Satz und die betroffenen Token möglich machen.
+         * @param[in] Satznummer int-Wert (Indexwert für Zugriff auf entsprechende Arraylists in Instanzdaten) des Satzes in dem sich der zu ändernde Token befindet.
+         * @param[in] Tok1 int-Wert (Indexwert) des ersten Tokens, das mit seinem Nachfolger-Token zusammengefügt werden soll.
+         * @param[in] Tok2 int-Wert (Indexwert) des zweiten Tokens, das mit seinem Vörgänger-Token zusammengefügt werden soll.
          */
         public void zusammen(int Satznummer, int Tok1, int Tok2)
         {
@@ -184,8 +180,15 @@ namespace JADE
             Satz.RemoveAt(Tok2);                                                                            //Loeschen des nun ueberflüssigen tok2.
             Alist[Satznummer] = Satz;                                                                       //Schreiben des geänderten Satzes in die Arraylist.
             Instanzdaten.Zugriff = Alist;                                                                   //Schreiben der geänderten ARRAYLIST zurück in die Datenstruktur.
+
+            //Aktualisieren des dataSet der SearchEngine
             SearchEngine.DisposeTable(Satznummer, Tok1);
             SearchEngine.DisposeTable(Satznummer, Tok2);
+
+            for(int i = Tok1 + 2; i < Instanzdaten.getSatzLaenge(Satznummer); i++)
+            {
+                SearchEngine.ShiftTable(Satznummer, i, true);
+            }
         }
 
         /**EventFunktion welche beim klick auf den Öffnen-Dialog im Menü aufgerufen wird.
@@ -309,8 +312,9 @@ namespace JADE
                 {
                     this.dataGridView_Suchergebnisse.DataSource = result;
                 }
-                else                                                                        //Wenn kein Eintrag gefunden wurde, wird eine Meldung ausgegeben.
+                else                                                                        //Wenn kein Eintrag gefunden wurde, wird dataGridView_Suchergebnisse geleert und eine Meldung ausgegeben.
                 {
+                    dataGridView_Suchergebnisse.DataSource = null;
                     MessageBox.Show("Es wurden keine Einträge gefunden.", "Fehler bei der Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
@@ -328,8 +332,8 @@ namespace JADE
         /**
          * Funktion zum Löschen eines Eintrages aus der Ergebnisliste der Suche.
          * Dies ist erforderlich da nach der Änderung eines Tokens, aus der Ergebnisliste nicht der alte Eintrag wieder aufgerufen werden soll, sondern ein Neuer erstellt.
-         * @param[in] satznummer Int-Wert des Satzes in dem sich der zu löschende Token befindet.
-         * @param[in] tok Int-Wert des Tokens der gelöscht werden soll.
+         * @param[in] satznummer int-Wert des Satzes in dem sich der zu löschende Token befindet.
+         * @param[in] tok int-Wert des Tokens der gelöscht werden soll.
          */
         public void TableDel(int satznummer,int tok)
         {

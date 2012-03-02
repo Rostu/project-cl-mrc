@@ -9,7 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace JADE
 {
     /// <summary>
-    /// Klasse welche zum speichern unserer Datenstruktur verwendet wird. Alles sehr allgemein gehalten. Zum Speichern wird später ein String für den Pfad und ein SaveObjekt gebraucht.
+    /// Klasse welche zum Speichern unserer Datenstruktur verwendet wird. Es wurde auch hier Rücksicht auf Erweiterbarkeit genommen. Zum Speichern wird später ein String für den Pfad und ein SaveObjekt benötigt.
     /// </summary>
     class Saver
     {
@@ -17,10 +17,10 @@ namespace JADE
         public Saver() {}
 
         /**
-         * Funktion zum Speichern in eine Savedatei. 
-         * Erhält einen String für den File-Namen und ein Objekt der SaveObjekt Klasse.
+         * Funktion zum Speichern in eine Save-Datei. 
+         * Erhält einen String für den Dateipfad und ein Objekt der SaveObjekt Klasse.
          * @param[in] filename String (Pfad/Dateiname) der zu speichernden Datei.
-         * @param[in] saveObjekt Objekt der SaveObjekt Klasse. 
+         * @param[in] saveObjekt Objekt der SaveObjekt-Klasse. 
          */
         public void Save(string filename, SaveObjekt saveObjekt)
         {
@@ -32,9 +32,9 @@ namespace JADE
 
         /**
          * Funktion zum Laden aus einer Savedatei.
-        * Erhält String der zu ladenden Datei (Dateinamen) und gibt ein SaveObjekt-Objekt zurück.
-        * @param[in] filename Zu ladende Datei.
-        * @param[out] saveObjekt Objekt der Daten Klasse, enthält die gelesenen Daten aus der Savedatei,
+         * Erhält einen String mit dem Dateipfad der zu ladenden Datei und gibt ein SaveObjekt-Objekt zurück.
+         * @param[in] filename Pfad der zu ladenden Datei.
+         * @param[out] saveObjekt Objekt der Daten-Klasse, enthält die gelesenen Daten aus der Save-Datei.
         */
         public SaveObjekt DeSave(string filename)
         {
