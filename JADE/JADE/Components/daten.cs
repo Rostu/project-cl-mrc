@@ -50,7 +50,20 @@ namespace JADE
             this.data = (ArrayList)info.GetValue("Daten", typeof(ArrayList));
         }
 
-        
+
+
+
+        /**
+         * Funktion zur Rückgabe der Länge (Anzahl der Elemente) eines Satzes.
+         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
+         * @param[out] Int-Wert der die Anzahl der Elemente eines Satzes repräsentiert.
+          */
+        public int getSatzLaenge(int Satznummer)
+        {
+            ArrayList hilf = this.getSatz(Satznummer);              //Erzeugt eine Variable vom Typ Arraylist und füllt diese mit den Token aus dem Zielsatz.
+            return hilf.Count;                                      //Rückgabe eines Int-Wertes der die Anzahl der Elemente eines Satzes repräsentiert.
+        }
+
         /**
          * Funktion zur Rückgabe eines einzelnen Token (String) aus unseren Daten.
          * Erhält zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.
