@@ -7,9 +7,10 @@ var searchData=
   ['saver',['Saver',['../class_j_a_d_e_1_1_saver.html#ab8b94b5c37584139028129ba95f37119',1,'JADE::Saver']]],
   ['saver',['Saver',['../class_j_a_d_e_1_1_saver.html',1,'JADE']]],
   ['search',['search',['../class_j_a_d_e_1_1_search_engine.html#ae6d263b232b5cba97948b0df7f66c146',1,'JADE::SearchEngine']]],
-  ['searchengine',['SearchEngine',['../class_j_a_d_e_1_1_search_engine.html',1,'JADE']]],
   ['searchengine',['SearchEngine',['../class_j_a_d_e_1_1_search_engine.html#a0a641dc68b5d3d8b15cb3291090dc264',1,'JADE::SearchEngine']]],
+  ['searchengine',['SearchEngine',['../class_j_a_d_e_1_1_search_engine.html',1,'JADE']]],
   ['segmenter',['Segmenter',['../class_j_a_d_e_1_1_segmenter.html',1,'JADE']]],
   ['segtest',['segtest',['../class_j_a_d_e_1_1_haupt_fenster.html#a64aa182f3b72b8e6cb392840c0c727e6',1,'JADE::HauptFenster']]],
+  ['shifttable',['ShiftTable',['../class_j_a_d_e_1_1_search_engine.html#a41708a7451c96c92fa1dcab5dad831a7',1,'JADE::SearchEngine']]],
   ['suche',['suche',['../class_j_a_d_e_1_1_haupt_fenster.html#ab2fc69df29d29eca01daa70413e5f9e1',1,'JADE::HauptFenster']]]
 ];
