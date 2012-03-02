@@ -24,7 +24,7 @@ namespace JADE
 
         /**
          * Konstruktor für das Bearbeiten-Fenster.
-         * @param obj Ein Objekt der Klasse Daten. Erhällt bei´Initialisierung des Fensters die instanzdaten aus dem HauptFenster.
+         * @param obj Ein Objekt der Klasse Daten. Erhält bei Initialisierung des Fensters die Instanzdaten aus dem HauptFenster.
          * @param[in] Satznummer int-Wert des Satzes, in dem sich das gewünschte Token befindet.
          * @param[in] str string-Wert, der das zu trennenden Token repräsentiert. 
          */
@@ -39,7 +39,7 @@ namespace JADE
         }
         
         /**
-         * Funktion für den TrennenButton. Überprüft, ob sich die beiden neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
+         * Funktion für den Trennen-Button. Überprüft, ob sich die beiden neuen Token aus den Chars des Ursprungs-Token zusammensetzen und trennt diese dann. 
          */
         private void TrennenButton_Click(object sender, EventArgs e)
         {
@@ -55,6 +55,10 @@ namespace JADE
                 Alist[Satznummer] = Satz;                                      //Schreiben des geänderten Satzes in die Arraylist.
                 obj.Zugriff = Alist;                                           //Schreiben der geänderten ARRAYLIST zurück in die Datenstruktur.
                 SearchEngine.DisposeTable(Satznummer, Tok);
+                for (int i = Satz.Count - 1; i >= Tok + 1; i--)
+                {
+                    SearchEngine.ShiftTable(Satznummer, i, false);
+                }
                 this.Close();
             }
             else
@@ -64,7 +68,7 @@ namespace JADE
         }
 
         /**
-         * Funktion für den AbbrechenButton. Ein Klick auf den Button schließt das BearbeitenFenster.
+         * Funktion für den Abbrechen-Button. Ein Klick auf den Button schließt das BearbeitenFenster.
          */
         private void AbbrechenButton_Click(object sender, EventArgs e)
         {
