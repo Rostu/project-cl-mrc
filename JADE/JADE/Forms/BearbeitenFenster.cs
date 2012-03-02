@@ -24,7 +24,7 @@ namespace JADE
 
         /**
          * Konstruktor für das Bearbeiten-Fenster.
-         * @param obj Ein Objekt der Klasse Daten.
+         * @param obj Ein Objekt der Klasse Daten. Erhällt bei´Initialisierung des Fensters die instanzdaten aus dem HauptFenster.
          * @param[in] Satznummer int-Wert des Satzes, in dem sich das gewünschte Token befindet.
          * @param[in] str string-Wert, der das zu trennenden Token repräsentiert. 
          */
