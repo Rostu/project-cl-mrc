@@ -342,7 +342,8 @@ namespace JADE
 
         private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(GetDefaultBrowserPath(), "../../html/index.html");
+            string fullPath = Path.Combine(Path.GetFullPath(Path.GetDirectoryName(Application.ExecutablePath)), "html\\index.html");
+            Process.Start(GetDefaultBrowserPath(), "\"" + fullPath + "\"");
         }
 
         /// @endcond

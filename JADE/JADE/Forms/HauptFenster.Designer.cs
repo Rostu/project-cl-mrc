@@ -27,14 +27,13 @@
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.öffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.detailSucheCheckBox = new System.Windows.Forms.CheckBox();
             this.dataGridView_Suchergebnisse = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.RichTextBox();
-            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).BeginInit();
@@ -67,7 +66,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(704, 146);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "１３日、千葉県東金市のファミリーレストランの店内で男性が拳銃で撃たれて殺害された事件で、警察は、殺人などの疑いで全国に指名手配している元暴力団員の男の写真を公開し" +
-                "、行方を捜査しています。";
+    "、行方を捜査しています。";
             // 
             // treeView_Sätze
             // 
@@ -112,8 +111,7 @@
             // 
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.öffnenToolStripMenuItem,
-            this.beendenToolStripMenuItem,
-            this.infoToolStripMenuItem});
+            this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
             this.dateiToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -133,11 +131,13 @@
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click_1);
             // 
-            // infoToolStripMenuItem
+            // hilfeToolStripMenuItem
             // 
-            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.infoToolStripMenuItem.Text = "Info";
+            this.hilfeToolStripMenuItem.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.hilfeToolStripMenuItem.Text = "Hilfe";
+            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
             // 
             // flowLayoutPanel2
             // 
@@ -211,13 +211,6 @@
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "";
             // 
-            // hilfeToolStripMenuItem
-            // 
-            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
-            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.hilfeToolStripMenuItem.Text = "Hilfe";
-            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
-            // 
             // HauptFenster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -263,7 +256,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox detailSucheCheckBox;
         private System.Windows.Forms.RichTextBox textBox1;
-        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
     }
 }
