@@ -128,229 +128,248 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00027"></a>00027             this.dateiToolStripMenuItem = <span class="keyword">new</span> System.Windows.Forms.ToolStripMenuItem();
 <a name="l00028"></a>00028             this.öffnenToolStripMenuItem = <span class="keyword">new</span> System.Windows.Forms.ToolStripMenuItem();
 <a name="l00029"></a>00029             this.beendenToolStripMenuItem = <span class="keyword">new</span> System.Windows.Forms.ToolStripMenuItem();
-<a name="l00030"></a>00030             this.flowLayoutPanel2 = <span class="keyword">new</span> System.Windows.Forms.FlowLayoutPanel();
-<a name="l00031"></a>00031             this.button2 = <span class="keyword">new</span> System.Windows.Forms.Button();
-<a name="l00032"></a>00032             this.button1 = <span class="keyword">new</span> System.Windows.Forms.Button();
-<a name="l00033"></a>00033             this.detailSucheCheckBox = <span class="keyword">new</span> System.Windows.Forms.CheckBox();
-<a name="l00034"></a>00034             this.dataGridView_Suchergebnisse = <span class="keyword">new</span> System.Windows.Forms.DataGridView();
-<a name="l00035"></a>00035             this.textBox1 = <span class="keyword">new</span> System.Windows.Forms.RichTextBox();
-<a name="l00036"></a>00036             this.menuStrip1.SuspendLayout();
-<a name="l00037"></a>00037             this.flowLayoutPanel2.SuspendLayout();
-<a name="l00038"></a>00038             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).BeginInit();
-<a name="l00039"></a>00039             this.SuspendLayout();
-<a name="l00040"></a>00040             <span class="comment">// </span>
-<a name="l00041"></a>00041             <span class="comment">// Tokenize</span>
+<a name="l00030"></a>00030             this.infoToolStripMenuItem = <span class="keyword">new</span> System.Windows.Forms.ToolStripMenuItem();
+<a name="l00031"></a>00031             this.flowLayoutPanel2 = <span class="keyword">new</span> System.Windows.Forms.FlowLayoutPanel();
+<a name="l00032"></a>00032             this.button2 = <span class="keyword">new</span> System.Windows.Forms.Button();
+<a name="l00033"></a>00033             this.button1 = <span class="keyword">new</span> System.Windows.Forms.Button();
+<a name="l00034"></a>00034             this.detailSucheCheckBox = <span class="keyword">new</span> System.Windows.Forms.CheckBox();
+<a name="l00035"></a>00035             this.dataGridView_Suchergebnisse = <span class="keyword">new</span> System.Windows.Forms.DataGridView();
+<a name="l00036"></a>00036             this.textBox1 = <span class="keyword">new</span> System.Windows.Forms.RichTextBox();
+<a name="l00037"></a>00037             this.hilfeToolStripMenuItem = <span class="keyword">new</span> System.Windows.Forms.ToolStripMenuItem();
+<a name="l00038"></a>00038             this.menuStrip1.SuspendLayout();
+<a name="l00039"></a>00039             this.flowLayoutPanel2.SuspendLayout();
+<a name="l00040"></a>00040             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).BeginInit();
+<a name="l00041"></a>00041             this.SuspendLayout();
 <a name="l00042"></a>00042             <span class="comment">// </span>
-<a name="l00043"></a>00043             this.Tokenize.Dock = System.Windows.Forms.DockStyle.Top;
-<a name="l00044"></a>00044             this.Tokenize.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00045"></a>00045             this.Tokenize.Location = <span class="keyword">new</span> System.Drawing.Point(137, 170);
-<a name="l00046"></a>00046             this.Tokenize.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
-<a name="l00047"></a>00047             this.Tokenize.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(100, 29);
-<a name="l00048"></a>00048             this.Tokenize.Name = <span class="stringliteral">&quot;Tokenize&quot;</span>;
-<a name="l00049"></a>00049             this.Tokenize.Size = <span class="keyword">new</span> System.Drawing.Size(567, 29);
-<a name="l00050"></a>00050             this.Tokenize.TabIndex = 0;
-<a name="l00051"></a>00051             this.Tokenize.Text = <span class="stringliteral">&quot;Tokenize&quot;</span>;
-<a name="l00052"></a>00052             this.Tokenize.UseVisualStyleBackColor = <span class="keyword">true</span>;
-<a name="l00053"></a>00053             this.Tokenize.Click += <span class="keyword">new</span> System.EventHandler(this.Tokenize_Click);
-<a name="l00054"></a>00054             <span class="comment">// </span>
-<a name="l00055"></a>00055             <span class="comment">// richTextBox1</span>
+<a name="l00043"></a>00043             <span class="comment">// Tokenize</span>
+<a name="l00044"></a>00044             <span class="comment">// </span>
+<a name="l00045"></a>00045             this.Tokenize.Dock = System.Windows.Forms.DockStyle.Top;
+<a name="l00046"></a>00046             this.Tokenize.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00047"></a>00047             this.Tokenize.Location = <span class="keyword">new</span> System.Drawing.Point(137, 170);
+<a name="l00048"></a>00048             this.Tokenize.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
+<a name="l00049"></a>00049             this.Tokenize.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(100, 29);
+<a name="l00050"></a>00050             this.Tokenize.Name = <span class="stringliteral">&quot;Tokenize&quot;</span>;
+<a name="l00051"></a>00051             this.Tokenize.Size = <span class="keyword">new</span> System.Drawing.Size(567, 29);
+<a name="l00052"></a>00052             this.Tokenize.TabIndex = 0;
+<a name="l00053"></a>00053             this.Tokenize.Text = <span class="stringliteral">&quot;Tokenize&quot;</span>;
+<a name="l00054"></a>00054             this.Tokenize.UseVisualStyleBackColor = <span class="keyword">true</span>;
+<a name="l00055"></a>00055             this.Tokenize.Click += <span class="keyword">new</span> System.EventHandler(this.Tokenize_Click);
 <a name="l00056"></a>00056             <span class="comment">// </span>
-<a name="l00057"></a>00057             this.richTextBox1.DetectUrls = <span class="keyword">false</span>;
-<a name="l00058"></a>00058             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
-<a name="l00059"></a>00059             this.richTextBox1.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;MS PMincho&quot;</span>, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00060"></a>00060             this.richTextBox1.Location = <span class="keyword">new</span> System.Drawing.Point(0, 24);
-<a name="l00061"></a>00061             this.richTextBox1.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
-<a name="l00062"></a>00062             this.richTextBox1.MaxLength = 1000;
-<a name="l00063"></a>00063             this.richTextBox1.Name = <span class="stringliteral">&quot;richTextBox1&quot;</span>;
-<a name="l00064"></a>00064             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-<a name="l00065"></a>00065             this.richTextBox1.Size = <span class="keyword">new</span> System.Drawing.Size(704, 146);
-<a name="l00066"></a>00066             this.richTextBox1.TabIndex = 4;
-<a name="l00067"></a>00067             this.richTextBox1.Text = <span class="stringliteral">&quot;１３日、千葉県東金市のファミリーレストランの店内で男性が拳銃で撃たれて殺害された事件で、警察は、殺人などの疑いで全国に指名手配している元暴力団員の男の写真を公開し&quot;</span> +
-<a name="l00068"></a>00068                 <span class="stringliteral">&quot;、行方を捜査しています。&quot;</span>;
-<a name="l00069"></a>00069             <span class="comment">// </span>
-<a name="l00070"></a>00070             <span class="comment">// treeView1</span>
+<a name="l00057"></a>00057             <span class="comment">// richTextBox1</span>
+<a name="l00058"></a>00058             <span class="comment">// </span>
+<a name="l00059"></a>00059             this.richTextBox1.DetectUrls = <span class="keyword">false</span>;
+<a name="l00060"></a>00060             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
+<a name="l00061"></a>00061             this.richTextBox1.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;MS PMincho&quot;</span>, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00062"></a>00062             this.richTextBox1.Location = <span class="keyword">new</span> System.Drawing.Point(0, 24);
+<a name="l00063"></a>00063             this.richTextBox1.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
+<a name="l00064"></a>00064             this.richTextBox1.MaxLength = 1000;
+<a name="l00065"></a>00065             this.richTextBox1.Name = <span class="stringliteral">&quot;richTextBox1&quot;</span>;
+<a name="l00066"></a>00066             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+<a name="l00067"></a>00067             this.richTextBox1.Size = <span class="keyword">new</span> System.Drawing.Size(704, 146);
+<a name="l00068"></a>00068             this.richTextBox1.TabIndex = 4;
+<a name="l00069"></a>00069             this.richTextBox1.Text = <span class="stringliteral">&quot;１３日、千葉県東金市のファミリーレストランの店内で男性が拳銃で撃たれて殺害された事件で、警察は、殺人などの疑いで全国に指名手配している元暴力団員の男の写真を公開し&quot;</span> +
+<a name="l00070"></a>00070                 <span class="stringliteral">&quot;、行方を捜査しています。&quot;</span>;
 <a name="l00071"></a>00071             <span class="comment">// </span>
-<a name="l00072"></a>00072             this.treeView_Sätze.Dock = System.Windows.Forms.DockStyle.Left;
-<a name="l00073"></a>00073             this.treeView_Sätze.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00074"></a>00074             this.treeView_Sätze.Location = <span class="keyword">new</span> System.Drawing.Point(0, 170);
-<a name="l00075"></a>00075             this.treeView_Sätze.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
-<a name="l00076"></a>00076             this.treeView_Sätze.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(130, 4);
-<a name="l00077"></a>00077             this.treeView_Sätze.Name = <span class="stringliteral">&quot;treeView1&quot;</span>;
-<a name="l00078"></a>00078             this.treeView_Sätze.Size = <span class="keyword">new</span> System.Drawing.Size(137, 352);
-<a name="l00079"></a>00079             this.treeView_Sätze.TabIndex = 7;
-<a name="l00080"></a>00080             this.treeView_Sätze.AfterSelect += <span class="keyword">new</span> System.Windows.Forms.TreeViewEventHandler(this.event_TreeViewItemSelect);
-<a name="l00081"></a>00081             <span class="comment">// </span>
-<a name="l00082"></a>00082             <span class="comment">// flowLayoutPanel1</span>
+<a name="l00072"></a>00072             <span class="comment">// treeView_Sätze</span>
+<a name="l00073"></a>00073             <span class="comment">// </span>
+<a name="l00074"></a>00074             this.treeView_Sätze.Dock = System.Windows.Forms.DockStyle.Left;
+<a name="l00075"></a>00075             this.treeView_Sätze.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00076"></a>00076             this.treeView_Sätze.Location = <span class="keyword">new</span> System.Drawing.Point(0, 170);
+<a name="l00077"></a>00077             this.treeView_Sätze.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
+<a name="l00078"></a>00078             this.treeView_Sätze.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(130, 4);
+<a name="l00079"></a>00079             this.treeView_Sätze.Name = <span class="stringliteral">&quot;treeView_Sätze&quot;</span>;
+<a name="l00080"></a>00080             this.treeView_Sätze.Size = <span class="keyword">new</span> System.Drawing.Size(137, 352);
+<a name="l00081"></a>00081             this.treeView_Sätze.TabIndex = 7;
+<a name="l00082"></a>00082             this.treeView_Sätze.AfterSelect += <span class="keyword">new</span> System.Windows.Forms.TreeViewEventHandler(this.event_TreeViewItemSelect);
 <a name="l00083"></a>00083             <span class="comment">// </span>
-<a name="l00084"></a>00084             this.flowLayoutPanel_Token.AutoScroll = <span class="keyword">true</span>;
-<a name="l00085"></a>00085             this.flowLayoutPanel_Token.BackColor = System.Drawing.SystemColors.ControlLight;
-<a name="l00086"></a>00086             this.flowLayoutPanel_Token.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-<a name="l00087"></a>00087             this.flowLayoutPanel_Token.Dock = System.Windows.Forms.DockStyle.Top;
-<a name="l00088"></a>00088             this.flowLayoutPanel_Token.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;MS PMincho&quot;</span>, 12F);
-<a name="l00089"></a>00089             this.flowLayoutPanel_Token.Location = <span class="keyword">new</span> System.Drawing.Point(137, 265);
-<a name="l00090"></a>00090             this.flowLayoutPanel_Token.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
-<a name="l00091"></a>00091             this.flowLayoutPanel_Token.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(170, 2);
-<a name="l00092"></a>00092             this.flowLayoutPanel_Token.Name = <span class="stringliteral">&quot;flowLayoutPanel1&quot;</span>;
-<a name="l00093"></a>00093             this.flowLayoutPanel_Token.Padding = <span class="keyword">new</span> System.Windows.Forms.Padding(0, 0, 5, 0);
-<a name="l00094"></a>00094             this.flowLayoutPanel_Token.Size = <span class="keyword">new</span> System.Drawing.Size(567, 108);
-<a name="l00095"></a>00095             this.flowLayoutPanel_Token.TabIndex = 10;
-<a name="l00096"></a>00096             <span class="comment">// </span>
-<a name="l00097"></a>00097             <span class="comment">// menuStrip1</span>
+<a name="l00084"></a>00084             <span class="comment">// flowLayoutPanel_Token</span>
+<a name="l00085"></a>00085             <span class="comment">// </span>
+<a name="l00086"></a>00086             this.flowLayoutPanel_Token.AutoScroll = <span class="keyword">true</span>;
+<a name="l00087"></a>00087             this.flowLayoutPanel_Token.BackColor = System.Drawing.SystemColors.ControlLight;
+<a name="l00088"></a>00088             this.flowLayoutPanel_Token.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+<a name="l00089"></a>00089             this.flowLayoutPanel_Token.Dock = System.Windows.Forms.DockStyle.Top;
+<a name="l00090"></a>00090             this.flowLayoutPanel_Token.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;MS PMincho&quot;</span>, 12F);
+<a name="l00091"></a>00091             this.flowLayoutPanel_Token.Location = <span class="keyword">new</span> System.Drawing.Point(137, 265);
+<a name="l00092"></a>00092             this.flowLayoutPanel_Token.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
+<a name="l00093"></a>00093             this.flowLayoutPanel_Token.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(170, 2);
+<a name="l00094"></a>00094             this.flowLayoutPanel_Token.Name = <span class="stringliteral">&quot;flowLayoutPanel_Token&quot;</span>;
+<a name="l00095"></a>00095             this.flowLayoutPanel_Token.Padding = <span class="keyword">new</span> System.Windows.Forms.Padding(0, 0, 5, 0);
+<a name="l00096"></a>00096             this.flowLayoutPanel_Token.Size = <span class="keyword">new</span> System.Drawing.Size(567, 108);
+<a name="l00097"></a>00097             this.flowLayoutPanel_Token.TabIndex = 10;
 <a name="l00098"></a>00098             <span class="comment">// </span>
-<a name="l00099"></a>00099             this.menuStrip1.Items.AddRange(<span class="keyword">new</span> System.Windows.Forms.ToolStripItem[] {
-<a name="l00100"></a>00100             <span class="keyword">this</span>.dateiToolStripMenuItem});
-<a name="l00101"></a>00101             this.menuStrip1.Location = <span class="keyword">new</span> System.Drawing.Point(0, 0);
-<a name="l00102"></a>00102             this.menuStrip1.Name = <span class="stringliteral">&quot;menuStrip1&quot;</span>;
-<a name="l00103"></a>00103             this.menuStrip1.Padding = <span class="keyword">new</span> System.Windows.Forms.Padding(5, 2, 0, 2);
-<a name="l00104"></a>00104             this.menuStrip1.Size = <span class="keyword">new</span> System.Drawing.Size(704, 24);
-<a name="l00105"></a>00105             this.menuStrip1.TabIndex = 16;
-<a name="l00106"></a>00106             this.menuStrip1.Text = <span class="stringliteral">&quot;menuStrip1&quot;</span>;
-<a name="l00107"></a>00107             <span class="comment">// </span>
-<a name="l00108"></a>00108             <span class="comment">// dateiToolStripMenuItem</span>
-<a name="l00109"></a>00109             <span class="comment">// </span>
-<a name="l00110"></a>00110             this.dateiToolStripMenuItem.DropDownItems.AddRange(<span class="keyword">new</span> System.Windows.Forms.ToolStripItem[] {
-<a name="l00111"></a>00111             <span class="keyword">this</span>.öffnenToolStripMenuItem,
-<a name="l00112"></a>00112             <span class="keyword">this</span>.beendenToolStripMenuItem});
-<a name="l00113"></a>00113             this.dateiToolStripMenuItem.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00114"></a>00114             this.dateiToolStripMenuItem.Name = <span class="stringliteral">&quot;dateiToolStripMenuItem&quot;</span>;
-<a name="l00115"></a>00115             this.dateiToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(48, 20);
-<a name="l00116"></a>00116             this.dateiToolStripMenuItem.Text = <span class="stringliteral">&quot;Datei&quot;</span>;
-<a name="l00117"></a>00117             <span class="comment">// </span>
-<a name="l00118"></a>00118             <span class="comment">// öffnenToolStripMenuItem</span>
-<a name="l00119"></a>00119             <span class="comment">// </span>
-<a name="l00120"></a>00120             this.öffnenToolStripMenuItem.Name = <span class="stringliteral">&quot;öffnenToolStripMenuItem&quot;</span>;
-<a name="l00121"></a>00121             this.öffnenToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(123, 22);
-<a name="l00122"></a>00122             this.öffnenToolStripMenuItem.Text = <span class="stringliteral">&quot;Öffnen&quot;</span>;
-<a name="l00123"></a>00123             this.öffnenToolStripMenuItem.Click += <span class="keyword">new</span> System.EventHandler(this.öffnenToolStripMenu_Click);
-<a name="l00124"></a>00124             <span class="comment">// </span>
-<a name="l00125"></a>00125             <span class="comment">// beendenToolStripMenuItem</span>
-<a name="l00126"></a>00126             <span class="comment">// </span>
-<a name="l00127"></a>00127             this.beendenToolStripMenuItem.Name = <span class="stringliteral">&quot;beendenToolStripMenuItem&quot;</span>;
-<a name="l00128"></a>00128             this.beendenToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(123, 22);
-<a name="l00129"></a>00129             this.beendenToolStripMenuItem.Text = <span class="stringliteral">&quot;Beenden&quot;</span>;
-<a name="l00130"></a>00130             this.beendenToolStripMenuItem.Click += <span class="keyword">new</span> System.EventHandler(this.beendenToolStripMenuItem_Click_1);
-<a name="l00131"></a>00131             <span class="comment">// </span>
-<a name="l00132"></a>00132             <span class="comment">// flowLayoutPanel2</span>
-<a name="l00133"></a>00133             <span class="comment">// </span>
-<a name="l00134"></a>00134             this.flowLayoutPanel2.Controls.Add(this.button2);
-<a name="l00135"></a>00135             this.flowLayoutPanel2.Controls.Add(this.button1);
-<a name="l00136"></a>00136             this.flowLayoutPanel2.Controls.Add(this.detailSucheCheckBox);
-<a name="l00137"></a>00137             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-<a name="l00138"></a>00138             this.flowLayoutPanel2.Location = <span class="keyword">new</span> System.Drawing.Point(137, 373);
-<a name="l00139"></a>00139             this.flowLayoutPanel2.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(100, 0);
-<a name="l00140"></a>00140             this.flowLayoutPanel2.Name = <span class="stringliteral">&quot;flowLayoutPanel2&quot;</span>;
-<a name="l00141"></a>00141             this.flowLayoutPanel2.Size = <span class="keyword">new</span> System.Drawing.Size(567, 39);
-<a name="l00142"></a>00142             this.flowLayoutPanel2.TabIndex = 17;
+<a name="l00099"></a>00099             <span class="comment">// menuStrip1</span>
+<a name="l00100"></a>00100             <span class="comment">// </span>
+<a name="l00101"></a>00101             this.menuStrip1.Items.AddRange(<span class="keyword">new</span> System.Windows.Forms.ToolStripItem[] {
+<a name="l00102"></a>00102             <span class="keyword">this</span>.dateiToolStripMenuItem,
+<a name="l00103"></a>00103             <span class="keyword">this</span>.hilfeToolStripMenuItem});
+<a name="l00104"></a>00104             this.menuStrip1.Location = <span class="keyword">new</span> System.Drawing.Point(0, 0);
+<a name="l00105"></a>00105             this.menuStrip1.Name = <span class="stringliteral">&quot;menuStrip1&quot;</span>;
+<a name="l00106"></a>00106             this.menuStrip1.Padding = <span class="keyword">new</span> System.Windows.Forms.Padding(5, 2, 0, 2);
+<a name="l00107"></a>00107             this.menuStrip1.Size = <span class="keyword">new</span> System.Drawing.Size(704, 24);
+<a name="l00108"></a>00108             this.menuStrip1.TabIndex = 16;
+<a name="l00109"></a>00109             this.menuStrip1.Text = <span class="stringliteral">&quot;menuStrip1&quot;</span>;
+<a name="l00110"></a>00110             <span class="comment">// </span>
+<a name="l00111"></a>00111             <span class="comment">// dateiToolStripMenuItem</span>
+<a name="l00112"></a>00112             <span class="comment">// </span>
+<a name="l00113"></a>00113             this.dateiToolStripMenuItem.DropDownItems.AddRange(<span class="keyword">new</span> System.Windows.Forms.ToolStripItem[] {
+<a name="l00114"></a>00114             <span class="keyword">this</span>.öffnenToolStripMenuItem,
+<a name="l00115"></a>00115             <span class="keyword">this</span>.beendenToolStripMenuItem,
+<a name="l00116"></a>00116             <span class="keyword">this</span>.infoToolStripMenuItem});
+<a name="l00117"></a>00117             this.dateiToolStripMenuItem.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00118"></a>00118             this.dateiToolStripMenuItem.Name = <span class="stringliteral">&quot;dateiToolStripMenuItem&quot;</span>;
+<a name="l00119"></a>00119             this.dateiToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(48, 20);
+<a name="l00120"></a>00120             this.dateiToolStripMenuItem.Text = <span class="stringliteral">&quot;Datei&quot;</span>;
+<a name="l00121"></a>00121             <span class="comment">// </span>
+<a name="l00122"></a>00122             <span class="comment">// öffnenToolStripMenuItem</span>
+<a name="l00123"></a>00123             <span class="comment">// </span>
+<a name="l00124"></a>00124             this.öffnenToolStripMenuItem.Name = <span class="stringliteral">&quot;öffnenToolStripMenuItem&quot;</span>;
+<a name="l00125"></a>00125             this.öffnenToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(152, 22);
+<a name="l00126"></a>00126             this.öffnenToolStripMenuItem.Text = <span class="stringliteral">&quot;Öffnen&quot;</span>;
+<a name="l00127"></a>00127             this.öffnenToolStripMenuItem.Click += <span class="keyword">new</span> System.EventHandler(this.öffnenToolStripMenu_Click);
+<a name="l00128"></a>00128             <span class="comment">// </span>
+<a name="l00129"></a>00129             <span class="comment">// beendenToolStripMenuItem</span>
+<a name="l00130"></a>00130             <span class="comment">// </span>
+<a name="l00131"></a>00131             this.beendenToolStripMenuItem.Name = <span class="stringliteral">&quot;beendenToolStripMenuItem&quot;</span>;
+<a name="l00132"></a>00132             this.beendenToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(152, 22);
+<a name="l00133"></a>00133             this.beendenToolStripMenuItem.Text = <span class="stringliteral">&quot;Beenden&quot;</span>;
+<a name="l00134"></a>00134             this.beendenToolStripMenuItem.Click += <span class="keyword">new</span> System.EventHandler(this.beendenToolStripMenuItem_Click_1);
+<a name="l00135"></a>00135             <span class="comment">// </span>
+<a name="l00136"></a>00136             <span class="comment">// infoToolStripMenuItem</span>
+<a name="l00137"></a>00137             <span class="comment">// </span>
+<a name="l00138"></a>00138             this.infoToolStripMenuItem.Name = <span class="stringliteral">&quot;infoToolStripMenuItem&quot;</span>;
+<a name="l00139"></a>00139             this.infoToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(152, 22);
+<a name="l00140"></a>00140             this.infoToolStripMenuItem.Text = <span class="stringliteral">&quot;Info&quot;</span>;
+<a name="l00141"></a>00141             <span class="comment">// </span>
+<a name="l00142"></a>00142             <span class="comment">// flowLayoutPanel2</span>
 <a name="l00143"></a>00143             <span class="comment">// </span>
-<a name="l00144"></a>00144             <span class="comment">// button2</span>
-<a name="l00145"></a>00145             <span class="comment">// </span>
-<a name="l00146"></a>00146             this.button2.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00147"></a>00147             this.button2.Location = <span class="keyword">new</span> System.Drawing.Point(4, 4);
-<a name="l00148"></a>00148             this.button2.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
-<a name="l00149"></a>00149             this.button2.Name = <span class="stringliteral">&quot;button2&quot;</span>;
-<a name="l00150"></a>00150             this.button2.Size = <span class="keyword">new</span> System.Drawing.Size(138, 31);
-<a name="l00151"></a>00151             this.button2.TabIndex = 14;
-<a name="l00152"></a>00152             this.button2.Text = <span class="stringliteral">&quot;Token bearbeiten&quot;</span>;
-<a name="l00153"></a>00153             this.button2.UseVisualStyleBackColor = <span class="keyword">true</span>;
-<a name="l00154"></a>00154             this.button2.Click += <span class="keyword">new</span> System.EventHandler(this.TokenBearbeiten_Click);
+<a name="l00144"></a>00144             this.flowLayoutPanel2.Controls.Add(this.button2);
+<a name="l00145"></a>00145             this.flowLayoutPanel2.Controls.Add(this.button1);
+<a name="l00146"></a>00146             this.flowLayoutPanel2.Controls.Add(this.detailSucheCheckBox);
+<a name="l00147"></a>00147             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+<a name="l00148"></a>00148             this.flowLayoutPanel2.Location = <span class="keyword">new</span> System.Drawing.Point(137, 373);
+<a name="l00149"></a>00149             this.flowLayoutPanel2.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(100, 0);
+<a name="l00150"></a>00150             this.flowLayoutPanel2.Name = <span class="stringliteral">&quot;flowLayoutPanel2&quot;</span>;
+<a name="l00151"></a>00151             this.flowLayoutPanel2.Size = <span class="keyword">new</span> System.Drawing.Size(567, 39);
+<a name="l00152"></a>00152             this.flowLayoutPanel2.TabIndex = 17;
+<a name="l00153"></a>00153             <span class="comment">// </span>
+<a name="l00154"></a>00154             <span class="comment">// button2</span>
 <a name="l00155"></a>00155             <span class="comment">// </span>
-<a name="l00156"></a>00156             <span class="comment">// button1</span>
-<a name="l00157"></a>00157             <span class="comment">// </span>
-<a name="l00158"></a>00158             this.button1.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00159"></a>00159             this.button1.Location = <span class="keyword">new</span> System.Drawing.Point(150, 4);
-<a name="l00160"></a>00160             this.button1.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
-<a name="l00161"></a>00161             this.button1.Name = <span class="stringliteral">&quot;button1&quot;</span>;
-<a name="l00162"></a>00162             this.button1.Size = <span class="keyword">new</span> System.Drawing.Size(132, 31);
-<a name="l00163"></a>00163             this.button1.TabIndex = 15;
-<a name="l00164"></a>00164             this.button1.Text = <span class="stringliteral">&quot;Token suchen&quot;</span>;
-<a name="l00165"></a>00165             this.button1.UseVisualStyleBackColor = <span class="keyword">true</span>;
-<a name="l00166"></a>00166             this.button1.Click += <span class="keyword">new</span> System.EventHandler(this.TokenSuchen_Click);
+<a name="l00156"></a>00156             this.button2.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00157"></a>00157             this.button2.Location = <span class="keyword">new</span> System.Drawing.Point(4, 4);
+<a name="l00158"></a>00158             this.button2.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
+<a name="l00159"></a>00159             this.button2.Name = <span class="stringliteral">&quot;button2&quot;</span>;
+<a name="l00160"></a>00160             this.button2.Size = <span class="keyword">new</span> System.Drawing.Size(138, 31);
+<a name="l00161"></a>00161             this.button2.TabIndex = 14;
+<a name="l00162"></a>00162             this.button2.Text = <span class="stringliteral">&quot;Token bearbeiten&quot;</span>;
+<a name="l00163"></a>00163             this.button2.UseVisualStyleBackColor = <span class="keyword">true</span>;
+<a name="l00164"></a>00164             this.button2.Click += <span class="keyword">new</span> System.EventHandler(this.TokenBearbeiten_Click);
+<a name="l00165"></a>00165             <span class="comment">// </span>
+<a name="l00166"></a>00166             <span class="comment">// button1</span>
 <a name="l00167"></a>00167             <span class="comment">// </span>
-<a name="l00168"></a>00168             <span class="comment">// checkBox1</span>
-<a name="l00169"></a>00169             <span class="comment">// </span>
-<a name="l00170"></a>00170             this.detailSucheCheckBox.AutoSize = <span class="keyword">true</span>;
-<a name="l00171"></a>00171             this.detailSucheCheckBox.Dock = System.Windows.Forms.DockStyle.Right;
-<a name="l00172"></a>00172             this.detailSucheCheckBox.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00173"></a>00173             this.detailSucheCheckBox.Location = <span class="keyword">new</span> System.Drawing.Point(289, 3);
-<a name="l00174"></a>00174             this.detailSucheCheckBox.Name = <span class="stringliteral">&quot;checkBox1&quot;</span>;
-<a name="l00175"></a>00175             this.detailSucheCheckBox.Size = <span class="keyword">new</span> System.Drawing.Size(205, 33);
-<a name="l00176"></a>00176             this.detailSucheCheckBox.TabIndex = 17;
-<a name="l00177"></a>00177             this.detailSucheCheckBox.Text = <span class="stringliteral">&quot;Genaue Übereinstimmung&quot;</span>;
-<a name="l00178"></a>00178             this.detailSucheCheckBox.UseVisualStyleBackColor = <span class="keyword">true</span>;
+<a name="l00168"></a>00168             this.button1.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00169"></a>00169             this.button1.Location = <span class="keyword">new</span> System.Drawing.Point(150, 4);
+<a name="l00170"></a>00170             this.button1.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
+<a name="l00171"></a>00171             this.button1.Name = <span class="stringliteral">&quot;button1&quot;</span>;
+<a name="l00172"></a>00172             this.button1.Size = <span class="keyword">new</span> System.Drawing.Size(132, 31);
+<a name="l00173"></a>00173             this.button1.TabIndex = 15;
+<a name="l00174"></a>00174             this.button1.Text = <span class="stringliteral">&quot;Token suchen&quot;</span>;
+<a name="l00175"></a>00175             this.button1.UseVisualStyleBackColor = <span class="keyword">true</span>;
+<a name="l00176"></a>00176             this.button1.Click += <span class="keyword">new</span> System.EventHandler(this.TokenSuchen_Click);
+<a name="l00177"></a>00177             <span class="comment">// </span>
+<a name="l00178"></a>00178             <span class="comment">// detailSucheCheckBox</span>
 <a name="l00179"></a>00179             <span class="comment">// </span>
-<a name="l00180"></a>00180             <span class="comment">// dataGridView1</span>
-<a name="l00181"></a>00181             <span class="comment">// </span>
-<a name="l00182"></a>00182             this.dataGridView_Suchergebnisse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-<a name="l00183"></a>00183             this.dataGridView_Suchergebnisse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-<a name="l00184"></a>00184             this.dataGridView_Suchergebnisse.Dock = System.Windows.Forms.DockStyle.Fill;
-<a name="l00185"></a>00185             this.dataGridView_Suchergebnisse.Location = <span class="keyword">new</span> System.Drawing.Point(137, 412);
-<a name="l00186"></a>00186             this.dataGridView_Suchergebnisse.Name = <span class="stringliteral">&quot;dataGridView1&quot;</span>;
-<a name="l00187"></a>00187             this.dataGridView_Suchergebnisse.Size = <span class="keyword">new</span> System.Drawing.Size(567, 110);
-<a name="l00188"></a>00188             this.dataGridView_Suchergebnisse.TabIndex = 14;
-<a name="l00189"></a>00189             this.dataGridView_Suchergebnisse.CellClick += <span class="keyword">new</span> System.Windows.Forms.DataGridViewCellEventHandler(this.event_dataGridView_Click);
-<a name="l00190"></a>00190             <span class="comment">// </span>
-<a name="l00191"></a>00191             <span class="comment">// textBox1</span>
-<a name="l00192"></a>00192             <span class="comment">// </span>
-<a name="l00193"></a>00193             this.textBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-<a name="l00194"></a>00194             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-<a name="l00195"></a>00195             this.textBox1.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;MS PMincho&quot;</span>, 12F);
-<a name="l00196"></a>00196             this.textBox1.Location = <span class="keyword">new</span> System.Drawing.Point(137, 199);
-<a name="l00197"></a>00197             this.textBox1.Name = <span class="stringliteral">&quot;textBox1&quot;</span>;
-<a name="l00198"></a>00198             this.textBox1.ReadOnly = <span class="keyword">true</span>;
-<a name="l00199"></a>00199             this.textBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-<a name="l00200"></a>00200             this.textBox1.Size = <span class="keyword">new</span> System.Drawing.Size(567, 66);
-<a name="l00201"></a>00201             this.textBox1.TabIndex = 0;
-<a name="l00202"></a>00202             this.textBox1.Text = <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00203"></a>00203             <span class="comment">// </span>
-<a name="l00204"></a>00204             <span class="comment">// Form1</span>
-<a name="l00205"></a>00205             <span class="comment">// </span>
-<a name="l00206"></a>00206             this.AutoScaleDimensions = <span class="keyword">new</span> System.Drawing.SizeF(7F, 15F);
-<a name="l00207"></a>00207             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<a name="l00208"></a>00208             this.AutoScroll = <span class="keyword">true</span>;
-<a name="l00209"></a>00209             this.ClientSize = <span class="keyword">new</span> System.Drawing.Size(704, 522);
-<a name="l00210"></a>00210             this.Controls.Add(this.dataGridView_Suchergebnisse);
-<a name="l00211"></a>00211             this.Controls.Add(this.flowLayoutPanel2);
-<a name="l00212"></a>00212             this.Controls.Add(this.flowLayoutPanel_Token);
-<a name="l00213"></a>00213             this.Controls.Add(this.textBox1);
-<a name="l00214"></a>00214             this.Controls.Add(this.Tokenize);
-<a name="l00215"></a>00215             this.Controls.Add(this.treeView_Sätze);
-<a name="l00216"></a>00216             this.Controls.Add(this.richTextBox1);
-<a name="l00217"></a>00217             this.Controls.Add(this.menuStrip1);
-<a name="l00218"></a>00218             this.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00219"></a>00219             this.Icon = ((System.Drawing.Icon)(resources.GetObject(<span class="stringliteral">&quot;$this.Icon&quot;</span>)));
-<a name="l00220"></a>00220             this.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
-<a name="l00221"></a>00221             this.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(720, 560);
-<a name="l00222"></a>00222             this.Name = <span class="stringliteral">&quot;Form1&quot;</span>;
-<a name="l00223"></a>00223             this.Text = <span class="stringliteral">&quot;JaDe - Tokenizer&quot;</span>;
-<a name="l00224"></a>00224             this.menuStrip1.ResumeLayout(<span class="keyword">false</span>);
-<a name="l00225"></a>00225             this.menuStrip1.PerformLayout();
-<a name="l00226"></a>00226             this.flowLayoutPanel2.ResumeLayout(<span class="keyword">false</span>);
-<a name="l00227"></a>00227             this.flowLayoutPanel2.PerformLayout();
-<a name="l00228"></a>00228             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).EndInit();
-<a name="l00229"></a>00229             this.ResumeLayout(<span class="keyword">false</span>);
-<a name="l00230"></a>00230             this.PerformLayout();
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232         }
-<a name="l00233"></a>00233 
-<a name="l00234"></a>00234         <span class="keyword">private</span> System.Windows.Forms.Button Tokenize;
-<a name="l00235"></a>00235         <span class="keyword">private</span> System.Windows.Forms.RichTextBox richTextBox1;
-<a name="l00236"></a>00236         <span class="keyword">public</span> System.Windows.Forms.TreeView treeView_Sätze;
-<a name="l00237"></a>00237         <span class="keyword">public</span> System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Token;
-<a name="l00238"></a>00238         <span class="keyword">private</span> System.Windows.Forms.SaveFileDialog saveFileDialog1;
-<a name="l00239"></a>00239         <span class="keyword">private</span> System.Windows.Forms.MenuStrip menuStrip1;
-<a name="l00240"></a>00240         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
-<a name="l00241"></a>00241         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem öffnenToolStripMenuItem;
-<a name="l00242"></a>00242         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
-<a name="l00243"></a>00243         <span class="keyword">private</span> System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-<a name="l00244"></a>00244         <span class="keyword">private</span> System.Windows.Forms.DataGridView dataGridView_Suchergebnisse;
-<a name="l00245"></a>00245         <span class="keyword">private</span> System.Windows.Forms.Button button2;
-<a name="l00246"></a>00246         <span class="keyword">private</span> System.Windows.Forms.Button button1;
-<a name="l00247"></a>00247         <span class="keyword">private</span> System.Windows.Forms.CheckBox detailSucheCheckBox;
-<a name="l00248"></a>00248         <span class="keyword">private</span> System.Windows.Forms.RichTextBox textBox1;
-<a name="l00249"></a>00249     }
-<a name="l00250"></a>00250 }
-<a name="l00251"></a>00251 <span class="comment"></span>
-<a name="l00252"></a>00252 <span class="comment">/// @endcond</span>
+<a name="l00180"></a>00180             this.detailSucheCheckBox.AutoSize = <span class="keyword">true</span>;
+<a name="l00181"></a>00181             this.detailSucheCheckBox.Dock = System.Windows.Forms.DockStyle.Right;
+<a name="l00182"></a>00182             this.detailSucheCheckBox.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00183"></a>00183             this.detailSucheCheckBox.Location = <span class="keyword">new</span> System.Drawing.Point(289, 3);
+<a name="l00184"></a>00184             this.detailSucheCheckBox.Name = <span class="stringliteral">&quot;detailSucheCheckBox&quot;</span>;
+<a name="l00185"></a>00185             this.detailSucheCheckBox.Size = <span class="keyword">new</span> System.Drawing.Size(205, 33);
+<a name="l00186"></a>00186             this.detailSucheCheckBox.TabIndex = 17;
+<a name="l00187"></a>00187             this.detailSucheCheckBox.Text = <span class="stringliteral">&quot;Genaue Übereinstimmung&quot;</span>;
+<a name="l00188"></a>00188             this.detailSucheCheckBox.UseVisualStyleBackColor = <span class="keyword">true</span>;
+<a name="l00189"></a>00189             <span class="comment">// </span>
+<a name="l00190"></a>00190             <span class="comment">// dataGridView_Suchergebnisse</span>
+<a name="l00191"></a>00191             <span class="comment">// </span>
+<a name="l00192"></a>00192             this.dataGridView_Suchergebnisse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+<a name="l00193"></a>00193             this.dataGridView_Suchergebnisse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+<a name="l00194"></a>00194             this.dataGridView_Suchergebnisse.Dock = System.Windows.Forms.DockStyle.Fill;
+<a name="l00195"></a>00195             this.dataGridView_Suchergebnisse.Location = <span class="keyword">new</span> System.Drawing.Point(137, 412);
+<a name="l00196"></a>00196             this.dataGridView_Suchergebnisse.Name = <span class="stringliteral">&quot;dataGridView_Suchergebnisse&quot;</span>;
+<a name="l00197"></a>00197             this.dataGridView_Suchergebnisse.Size = <span class="keyword">new</span> System.Drawing.Size(567, 110);
+<a name="l00198"></a>00198             this.dataGridView_Suchergebnisse.TabIndex = 14;
+<a name="l00199"></a>00199             this.dataGridView_Suchergebnisse.CellClick += <span class="keyword">new</span> System.Windows.Forms.DataGridViewCellEventHandler(this.event_dataGridView_Click);
+<a name="l00200"></a>00200             <span class="comment">// </span>
+<a name="l00201"></a>00201             <span class="comment">// textBox1</span>
+<a name="l00202"></a>00202             <span class="comment">// </span>
+<a name="l00203"></a>00203             this.textBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+<a name="l00204"></a>00204             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
+<a name="l00205"></a>00205             this.textBox1.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;MS PMincho&quot;</span>, 12F);
+<a name="l00206"></a>00206             this.textBox1.Location = <span class="keyword">new</span> System.Drawing.Point(137, 199);
+<a name="l00207"></a>00207             this.textBox1.Name = <span class="stringliteral">&quot;textBox1&quot;</span>;
+<a name="l00208"></a>00208             this.textBox1.ReadOnly = <span class="keyword">true</span>;
+<a name="l00209"></a>00209             this.textBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+<a name="l00210"></a>00210             this.textBox1.Size = <span class="keyword">new</span> System.Drawing.Size(567, 66);
+<a name="l00211"></a>00211             this.textBox1.TabIndex = 0;
+<a name="l00212"></a>00212             this.textBox1.Text = <span class="stringliteral">&quot;&quot;</span>;
+<a name="l00213"></a>00213             <span class="comment">// </span>
+<a name="l00214"></a>00214             <span class="comment">// hilfeToolStripMenuItem</span>
+<a name="l00215"></a>00215             <span class="comment">// </span>
+<a name="l00216"></a>00216             this.hilfeToolStripMenuItem.Name = <span class="stringliteral">&quot;hilfeToolStripMenuItem&quot;</span>;
+<a name="l00217"></a>00217             this.hilfeToolStripMenuItem.Size = <span class="keyword">new</span> System.Drawing.Size(44, 20);
+<a name="l00218"></a>00218             this.hilfeToolStripMenuItem.Text = <span class="stringliteral">&quot;Hilfe&quot;</span>;
+<a name="l00219"></a>00219             this.hilfeToolStripMenuItem.Click += <span class="keyword">new</span> System.EventHandler(this.hilfeToolStripMenuItem_Click);
+<a name="l00220"></a>00220             <span class="comment">// </span>
+<a name="l00221"></a>00221             <span class="comment">// HauptFenster</span>
+<a name="l00222"></a>00222             <span class="comment">// </span>
+<a name="l00223"></a>00223             this.AutoScaleDimensions = <span class="keyword">new</span> System.Drawing.SizeF(7F, 15F);
+<a name="l00224"></a>00224             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<a name="l00225"></a>00225             this.AutoScroll = <span class="keyword">true</span>;
+<a name="l00226"></a>00226             this.ClientSize = <span class="keyword">new</span> System.Drawing.Size(704, 522);
+<a name="l00227"></a>00227             this.Controls.Add(this.dataGridView_Suchergebnisse);
+<a name="l00228"></a>00228             this.Controls.Add(this.flowLayoutPanel2);
+<a name="l00229"></a>00229             this.Controls.Add(this.flowLayoutPanel_Token);
+<a name="l00230"></a>00230             this.Controls.Add(this.textBox1);
+<a name="l00231"></a>00231             this.Controls.Add(this.Tokenize);
+<a name="l00232"></a>00232             this.Controls.Add(this.treeView_Sätze);
+<a name="l00233"></a>00233             this.Controls.Add(this.richTextBox1);
+<a name="l00234"></a>00234             this.Controls.Add(this.menuStrip1);
+<a name="l00235"></a>00235             this.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00236"></a>00236             this.Icon = ((System.Drawing.Icon)(resources.GetObject(<span class="stringliteral">&quot;$this.Icon&quot;</span>)));
+<a name="l00237"></a>00237             this.Margin = <span class="keyword">new</span> System.Windows.Forms.Padding(4);
+<a name="l00238"></a>00238             this.MinimumSize = <span class="keyword">new</span> System.Drawing.Size(720, 560);
+<a name="l00239"></a>00239             this.Name = <span class="stringliteral">&quot;HauptFenster&quot;</span>;
+<a name="l00240"></a>00240             this.Text = <span class="stringliteral">&quot;JaDe - Tokenizer&quot;</span>;
+<a name="l00241"></a>00241             this.menuStrip1.ResumeLayout(<span class="keyword">false</span>);
+<a name="l00242"></a>00242             this.menuStrip1.PerformLayout();
+<a name="l00243"></a>00243             this.flowLayoutPanel2.ResumeLayout(<span class="keyword">false</span>);
+<a name="l00244"></a>00244             this.flowLayoutPanel2.PerformLayout();
+<a name="l00245"></a>00245             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Suchergebnisse)).EndInit();
+<a name="l00246"></a>00246             this.ResumeLayout(<span class="keyword">false</span>);
+<a name="l00247"></a>00247             this.PerformLayout();
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249         }
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251         <span class="keyword">private</span> System.Windows.Forms.Button Tokenize;
+<a name="l00252"></a>00252         <span class="keyword">private</span> System.Windows.Forms.RichTextBox richTextBox1;
+<a name="l00253"></a>00253         <span class="keyword">public</span> System.Windows.Forms.TreeView treeView_Sätze;
+<a name="l00254"></a>00254         <span class="keyword">public</span> System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Token;
+<a name="l00255"></a>00255         <span class="keyword">private</span> System.Windows.Forms.SaveFileDialog saveFileDialog1;
+<a name="l00256"></a>00256         <span class="keyword">private</span> System.Windows.Forms.MenuStrip menuStrip1;
+<a name="l00257"></a>00257         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
+<a name="l00258"></a>00258         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem öffnenToolStripMenuItem;
+<a name="l00259"></a>00259         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
+<a name="l00260"></a>00260         <span class="keyword">private</span> System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+<a name="l00261"></a>00261         <span class="keyword">private</span> System.Windows.Forms.DataGridView dataGridView_Suchergebnisse;
+<a name="l00262"></a>00262         <span class="keyword">private</span> System.Windows.Forms.Button button2;
+<a name="l00263"></a>00263         <span class="keyword">private</span> System.Windows.Forms.Button button1;
+<a name="l00264"></a>00264         <span class="keyword">private</span> System.Windows.Forms.CheckBox detailSucheCheckBox;
+<a name="l00265"></a>00265         <span class="keyword">private</span> System.Windows.Forms.RichTextBox textBox1;
+<a name="l00266"></a>00266         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+<a name="l00267"></a>00267         <span class="keyword">private</span> System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
+<a name="l00268"></a>00268     }
+<a name="l00269"></a>00269 }
+<a name="l00270"></a>00270 <span class="comment"></span>
+<a name="l00271"></a>00271 <span class="comment">/// @endcond</span>
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -371,7 +390,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
     <ul>
       <li class="navelem"><b>HauptFenster.Designer.cs</b>      </li>
 
-    <li class="footer">Erzeugt am Don Mär 1 2012 15:44:05 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:13 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>
