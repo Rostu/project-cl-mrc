@@ -121,7 +121,7 @@ namespace JADE
           * Diese Funktion kann bei einer geplanten, verbesserten Datenstruktur vernachlässigt werden. 
           * @param[in] satzNr Int-Wert des Satzes, in dem sich das Token befindet, dessen Table-Objekt im Dataset angepasst werden soll.
           * @param[in] tokenNr Int-Wert des Tokens, dessen Table-Objekt im Dataset angepasst werden soll.
-          * @param[in] left bool-Wert´, der die Richtung der Verschiebung bestimmt.
+          * @param[in] left bool-Wert, der die Richtung der Verschiebung bestimmt.
           */
         public static void ShiftTable(int satzNr, int tokenNr, bool left)
         {
