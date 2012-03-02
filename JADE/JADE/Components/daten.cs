@@ -15,8 +15,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace JADE
 {
     /// <summary>
-    ///Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token.
-    ///Wurde extra angelegt, weil es dann einfacher ist, etwas zu ändern wenn wir später vielleicht auch noch Zusatzinformationen wie Übersetzungen speichern wollen.
+    ///Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die einzelnen Sätze und Token) gedacht ist.
+    ///Sie wurde auch für den Zweck angelegt, spätere Änderungen wie das Speichern von Zusatzinformationen wie Übersetzungsmöglichkeiten zu erleichtern.
     /// </summary>
     [Serializable()]
     public class Daten : ISerializable                              //Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.
@@ -41,9 +41,9 @@ namespace JADE
         }
 
         /**
-         * Konstruktor für die Serialisation/DeSerilisation.
-         * @param[in] info  SerilizationInfo
-         * @param[in] ctxt  StreamingContext 
+         * Konstruktor für die Serialisation/Deserialisation.
+        * @param[in] info Objekt vom Typ SerializationInfo
+        * @param[in] ctxt Objekt vom Typ StreamingContext
          */
         public Daten(SerializationInfo info, StreamingContext ctxt)
         {
@@ -66,10 +66,10 @@ namespace JADE
 
         /**
          * Funktion zur Rückgabe eines einzelnen Token (String) aus unseren Daten.
-         * Erhält zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.
-         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
-         * @param[in] Tok Int-Wert des gewünschten Token. 
-         * @param[out] String Repräsentation eines Token aus der Daten Struktur.
+         * Erhält zu diesem Zweck zwei int-Werte für Satznummer und Tokennummer, des gewünschen Token.
+         * @param[in] Satznummer int-Wert des Satzes, in dem sich der gewünschte Token befindet.
+         * @param[in] Tok int-Wert des gewünschten Tokens. 
+         * @param[out] string-Repräsentation eines Tokens aus der Datenstruktur.
          */
         public String getToken(int Satznummer, int Tok)
         {
@@ -78,10 +78,10 @@ namespace JADE
         }
 
         /**
-         * Funktion zur Rückgabe eines Satzes(ArrayList) aus unseren Daten.
-         * Erhält zu diesem Zweck einen Int-Werte für Satznummer des gewünschten Satzes.
-         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.
-         * @param[out] Arraylist(mit String Elementen) die den gewünschten Satz repräsentiert.
+         * Funktion zur Rückgabe eines Satzes (als ArrayList) aus unseren Daten.
+         * Erhält zu diesem Zweck einen int-Wert für Satznummer des gewünschten Satzes.
+         * @param[in] Satznummer int-Wert des Satzes, in dem sich der gewünschte Token befindet.
+         * @param[out] Arraylist(mit string-Elementen), die den gewünschten Satz repräsentiert.
          */
         public ArrayList getSatz(int Satznummer)
         {
@@ -93,8 +93,8 @@ namespace JADE
        
 
         /**
-        * Benötigt die Serialize Funktion.
-        * Fügt der SerializeInfo informationen über das zu serialisierende Objekt hinzu.
+        * Benötigt die Serialize-Funktion.
+        * Fügt der SerializeInfo Informationen über das zu serialisierende Objekt hinzu.
         * @param[in] info Objekt vom Typ SerializationInfo
         * @param[in] ctxt Objekt vom Typ StreamingContext
         */
