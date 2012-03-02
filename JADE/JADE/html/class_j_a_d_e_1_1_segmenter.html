@@ -152,10 +152,10 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und Sonstige) Erhält einen String, vergleicht diesen mit den Regular Expression-Einträgen in einer Hashtable und gibt bei match den Schlüsselwert(String) zurück. </p>
+<p>Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westliche Schrifteichen, Sonderzeichen und Sonstige) Erhält einen String, vergleicht diesen mit den Regular-Expression-Einträgen in einer Hashtable und gibt bei Übereinstimmung den Schlüsselwert(String) zurück. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>String Variable welche auf Zeichenart untersucht werden soll. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>String-Wert, welcher auf Zeichenart untersucht werden soll. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">s</td><td>String-Wert aus dem Value eines Hashtable Eintrages. </td></tr>
   </table>
   </dd>
@@ -181,10 +181,10 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>TestFunktion um einen Text (Eingabe String) auf dem Japanischen fremde Zeichen zu testen. Gibt momentan bei jedem Vorkommen eines nicht japanischen Zeichens im Text eine Warnmeldung aus. Kann noch angepasst werden. </p>
+<p>Diese Funktion dient dazu, in einen Text (Eingabe-String) dem Japanischen fremde Zeichen zu identifizieren. Sie gibt momentan eine Warnmeldung aus, falls ein nicht japanischen Zeichen im Text vorkommt. Anpassungen sind hier noch vorgesehen. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">text</td><td>String-Objekt das auf nicht japanische Zeichen hin Untersucht werden soll. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">text</td><td>String-Objekt, das auf nicht japanische Zeichen hin untersucht werden soll. </td></tr>
   </table>
   </dd>
 </dl>
@@ -209,10 +209,10 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Funktion welche einen String aus japanischen Zeichen in seine Token zerlegt. Die Funktion gibt ein Objekt unserer <a class="el" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> Klasse zurück. </p>
+<p>Eine Funktion, welche einen String aus japanischen Zeichen in seine Token zerlegt. Die Funktion gibt ein Objekt unserer Daten-Klasse zurück. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">input</td><td>String Variable mit dem zu Tokenisierenden Text. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">input</td><td>string-Variable mit dem zu tokenisierenden Text. </td></tr>
   </table>
   </dd>
 </dl>
@@ -247,11 +247,11 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. </p>
+<p>Diese Funktion erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Schlüssel vorhanden ist und gibt in diesem Fall den int-Wert des dazugehörigen Wertes zurück, ansonsten 0. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">table[in]</td><td>Hashtable-Objekt. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">s</td><td>String-Objekt das auf matching in der Hashtable geprüft werden soll. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">s</td><td>String-Objekt das auf Übereinstimmung in der Hashtable geprüft werden soll. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ret</td><td>Int-Wert (Score). </td></tr>
   </table>
   </dd>
@@ -275,11 +275,11 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Funktion die testet ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. Testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expression matching auf Zugehörigkeit zum japanischen Zeichensatz. Rückgabewerte sind String Objekte. "J" für japanisches Zeichen. "O" für nicht japanisches Zeichen. Hier wurde nicht mit boolschen Rückgabe-Werten gearbeitet, weil eine spätere Modifikation bzw. Spezifikation des Rückgabewertes möglich sein sollte. </p>
+<p>Diese Funktion testet, ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. Sie testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expressions auf Zugehörigkeit zum japanischen Zeichensatz. Rückgabewerte sind String Objekte. "J" für japanisches Zeichen. "O" für nicht japanisches Zeichen. Hier wurde nicht mit boolschen Rückgabe-Werten gearbeitet, weil eine spätere Modifikation bzw. Spezifikation des Rückgabewertes möglich sein sollte. </p>
 <dl class="params"><dt><b>Parameter:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">eingabe</td><td>String-Objekt das auf japanische Zeichen hin Untersucht werden soll. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">s</td><td>String-Wert aus dem Value eines Hashtable Eintrages. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">eingabe</td><td>String-Wert, der auf japanische Zeichen hin untersucht werden soll. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">s</td><td>String-Wert aus dem Wert eines Hashtable Eintrages. </td></tr>
   </table>
   </dd>
 </dl>
@@ -299,7 +299,7 @@ Private Attribute</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Private Variable vom Typ Hashtable. Wird in der Klasse zur Zeichentypbestimmung genutzt. </p>
+<p>Private Variable vom Typ Hashtable. Sie wird in der Klasse zur Zeichentypbestimmung genutzt. </p>
 
 <p>Definiert in Zeile <a class="el" href="_segmenter_8cs_source.html#l00049">49</a> der Datei <a class="el" href="_segmenter_8cs_source.html">Segmenter.cs</a>.</p>
 
@@ -326,7 +326,7 @@ Private Attribute</h2></td></tr>
       <li class="navelem"><a class="el" href="namespace_j_a_d_e.html">JADE</a>      </li>
       <li class="navelem"><a class="el" href="class_j_a_d_e_1_1_segmenter.html">Segmenter</a>      </li>
 
-    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:14 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 15:42:41 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

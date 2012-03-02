@@ -164,78 +164,74 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00063"></a>00063             this.textBox1.Name = <span class="stringliteral">&quot;textBox1&quot;</span>;
 <a name="l00064"></a>00064             this.textBox1.Size = <span class="keyword">new</span> System.Drawing.Size(214, 23);
 <a name="l00065"></a>00065             this.textBox1.TabIndex = 4;
-<a name="l00066"></a>00066             this.textBox1.TextChanged += <span class="keyword">new</span> System.EventHandler(this.textBox1_TextChanged_1);
-<a name="l00067"></a>00067             <span class="comment">// </span>
-<a name="l00068"></a>00068             <span class="comment">// button2</span>
-<a name="l00069"></a>00069             <span class="comment">// </span>
-<a name="l00070"></a>00070             this.button2.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00071"></a>00071             this.button2.Location = <span class="keyword">new</span> System.Drawing.Point(139, 156);
-<a name="l00072"></a>00072             this.button2.Name = <span class="stringliteral">&quot;button2&quot;</span>;
-<a name="l00073"></a>00073             this.button2.Size = <span class="keyword">new</span> System.Drawing.Size(87, 27);
-<a name="l00074"></a>00074             this.button2.TabIndex = 5;
-<a name="l00075"></a>00075             this.button2.Text = <span class="stringliteral">&quot;Abbrechen&quot;</span>;
-<a name="l00076"></a>00076             this.button2.UseVisualStyleBackColor = <span class="keyword">true</span>;
-<a name="l00077"></a>00077             this.button2.Click += <span class="keyword">new</span> System.EventHandler(this.AbbrechenButton_Click);
-<a name="l00078"></a>00078             <span class="comment">// </span>
-<a name="l00079"></a>00079             <span class="comment">// label2</span>
-<a name="l00080"></a>00080             <span class="comment">// </span>
-<a name="l00081"></a>00081             this.label2.AutoSize = <span class="keyword">true</span>;
-<a name="l00082"></a>00082             this.label2.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00083"></a>00083             this.label2.Location = <span class="keyword">new</span> System.Drawing.Point(12, 76);
-<a name="l00084"></a>00084             this.label2.Name = <span class="stringliteral">&quot;label2&quot;</span>;
-<a name="l00085"></a>00085             this.label2.Size = <span class="keyword">new</span> System.Drawing.Size(77, 18);
-<a name="l00086"></a>00086             this.label2.TabIndex = 6;
-<a name="l00087"></a>00087             this.label2.Text = <span class="stringliteral">&quot;trennen in:&quot;</span>;
-<a name="l00088"></a>00088             <span class="comment">// </span>
-<a name="l00089"></a>00089             <span class="comment">// textBox3</span>
-<a name="l00090"></a>00090             <span class="comment">// </span>
-<a name="l00091"></a>00091             this.textBox3.BackColor = System.Drawing.SystemColors.Control;
-<a name="l00092"></a>00092             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-<a name="l00093"></a>00093             this.textBox3.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00094"></a>00094             this.textBox3.Location = <span class="keyword">new</span> System.Drawing.Point(12, 31);
-<a name="l00095"></a>00095             this.textBox3.Name = <span class="stringliteral">&quot;textBox3&quot;</span>;
-<a name="l00096"></a>00096             this.textBox3.ReadOnly = <span class="keyword">true</span>;
-<a name="l00097"></a>00097             this.textBox3.Size = <span class="keyword">new</span> System.Drawing.Size(214, 24);
-<a name="l00098"></a>00098             this.textBox3.TabIndex = 7;
-<a name="l00099"></a>00099             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-<a name="l00100"></a>00100             this.textBox3.TextChanged += <span class="keyword">new</span> System.EventHandler(this.textBox3_TextChanged);
+<a name="l00066"></a>00066             <span class="comment">// </span>
+<a name="l00067"></a>00067             <span class="comment">// button2</span>
+<a name="l00068"></a>00068             <span class="comment">// </span>
+<a name="l00069"></a>00069             this.button2.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00070"></a>00070             this.button2.Location = <span class="keyword">new</span> System.Drawing.Point(139, 156);
+<a name="l00071"></a>00071             this.button2.Name = <span class="stringliteral">&quot;button2&quot;</span>;
+<a name="l00072"></a>00072             this.button2.Size = <span class="keyword">new</span> System.Drawing.Size(87, 27);
+<a name="l00073"></a>00073             this.button2.TabIndex = 5;
+<a name="l00074"></a>00074             this.button2.Text = <span class="stringliteral">&quot;Abbrechen&quot;</span>;
+<a name="l00075"></a>00075             this.button2.UseVisualStyleBackColor = <span class="keyword">true</span>;
+<a name="l00076"></a>00076             this.button2.Click += <span class="keyword">new</span> System.EventHandler(this.AbbrechenButton_Click);
+<a name="l00077"></a>00077             <span class="comment">// </span>
+<a name="l00078"></a>00078             <span class="comment">// label2</span>
+<a name="l00079"></a>00079             <span class="comment">// </span>
+<a name="l00080"></a>00080             this.label2.AutoSize = <span class="keyword">true</span>;
+<a name="l00081"></a>00081             this.label2.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00082"></a>00082             this.label2.Location = <span class="keyword">new</span> System.Drawing.Point(12, 76);
+<a name="l00083"></a>00083             this.label2.Name = <span class="stringliteral">&quot;label2&quot;</span>;
+<a name="l00084"></a>00084             this.label2.Size = <span class="keyword">new</span> System.Drawing.Size(77, 18);
+<a name="l00085"></a>00085             this.label2.TabIndex = 6;
+<a name="l00086"></a>00086             this.label2.Text = <span class="stringliteral">&quot;trennen in:&quot;</span>;
+<a name="l00087"></a>00087             <span class="comment">// </span>
+<a name="l00088"></a>00088             <span class="comment">// textBox3</span>
+<a name="l00089"></a>00089             <span class="comment">// </span>
+<a name="l00090"></a>00090             this.textBox3.BackColor = System.Drawing.SystemColors.Control;
+<a name="l00091"></a>00091             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+<a name="l00092"></a>00092             this.textBox3.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00093"></a>00093             this.textBox3.Location = <span class="keyword">new</span> System.Drawing.Point(12, 31);
+<a name="l00094"></a>00094             this.textBox3.Name = <span class="stringliteral">&quot;textBox3&quot;</span>;
+<a name="l00095"></a>00095             this.textBox3.ReadOnly = <span class="keyword">true</span>;
+<a name="l00096"></a>00096             this.textBox3.Size = <span class="keyword">new</span> System.Drawing.Size(214, 24);
+<a name="l00097"></a>00097             this.textBox3.TabIndex = 7;
+<a name="l00098"></a>00098             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+<a name="l00099"></a>00099             <span class="comment">// </span>
+<a name="l00100"></a>00100             <span class="comment">// BearbeitenFenster</span>
 <a name="l00101"></a>00101             <span class="comment">// </span>
-<a name="l00102"></a>00102             <span class="comment">// BearbeitenFenster</span>
-<a name="l00103"></a>00103             <span class="comment">// </span>
-<a name="l00104"></a>00104             this.AutoScaleDimensions = <span class="keyword">new</span> System.Drawing.SizeF(7F, 15F);
-<a name="l00105"></a>00105             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<a name="l00106"></a>00106             this.ClientSize = <span class="keyword">new</span> System.Drawing.Size(238, 195);
-<a name="l00107"></a>00107             this.Controls.Add(this.textBox3);
-<a name="l00108"></a>00108             this.Controls.Add(this.label2);
-<a name="l00109"></a>00109             this.Controls.Add(this.button2);
-<a name="l00110"></a>00110             this.Controls.Add(this.textBox1);
-<a name="l00111"></a>00111             this.Controls.Add(this.textBox2);
-<a name="l00112"></a>00112             this.Controls.Add(this.button1);
-<a name="l00113"></a>00113             this.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<a name="l00114"></a>00114             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-<a name="l00115"></a>00115             this.Icon = ((System.Drawing.Icon)(resources.GetObject(<span class="stringliteral">&quot;$this.Icon&quot;</span>)));
-<a name="l00116"></a>00116             this.MaximizeBox = <span class="keyword">false</span>;
-<a name="l00117"></a>00117             this.MinimizeBox = <span class="keyword">false</span>;
-<a name="l00118"></a>00118             this.Name = <span class="stringliteral">&quot;BearbeitenFenster&quot;</span>;
-<a name="l00119"></a>00119             this.Text = <span class="stringliteral">&quot;JaDe - Token trennen&quot;</span>;
-<a name="l00120"></a>00120             this.TopMost = <span class="keyword">true</span>;
-<a name="l00121"></a>00121             this.FormClosed += <span class="keyword">new</span> System.Windows.Forms.FormClosedEventHandler(this.BearbeitenFenster_FormClosed);
-<a name="l00122"></a>00122             this.Load += <span class="keyword">new</span> System.EventHandler(this.BearbeitenFenster_Load);
-<a name="l00123"></a>00123             this.ResumeLayout(<span class="keyword">false</span>);
-<a name="l00124"></a>00124             this.PerformLayout();
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126         }
-<a name="l00127"></a>00127 
-<a name="l00128"></a>00128 <span class="preprocessor">        #endregion</span>
-<a name="l00129"></a>00129 <span class="preprocessor"></span>
-<a name="l00130"></a>00130         <span class="keyword">private</span> System.Windows.Forms.Button button1;
-<a name="l00131"></a>00131         <span class="keyword">private</span> System.Windows.Forms.TextBox textBox2;
-<a name="l00132"></a>00132         <span class="keyword">private</span> System.Windows.Forms.TextBox textBox1;
-<a name="l00133"></a>00133         <span class="keyword">private</span> System.Windows.Forms.Button button2;
-<a name="l00134"></a>00134         <span class="keyword">private</span> System.Windows.Forms.Label label2;
-<a name="l00135"></a>00135         <span class="keyword">private</span> System.Windows.Forms.TextBox textBox3;
-<a name="l00136"></a>00136     }
-<a name="l00137"></a>00137 }<span class="comment">/// @endcond</span>
+<a name="l00102"></a>00102             this.AutoScaleDimensions = <span class="keyword">new</span> System.Drawing.SizeF(7F, 15F);
+<a name="l00103"></a>00103             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<a name="l00104"></a>00104             this.ClientSize = <span class="keyword">new</span> System.Drawing.Size(238, 195);
+<a name="l00105"></a>00105             this.Controls.Add(this.textBox3);
+<a name="l00106"></a>00106             this.Controls.Add(this.label2);
+<a name="l00107"></a>00107             this.Controls.Add(this.button2);
+<a name="l00108"></a>00108             this.Controls.Add(this.textBox1);
+<a name="l00109"></a>00109             this.Controls.Add(this.textBox2);
+<a name="l00110"></a>00110             this.Controls.Add(this.button1);
+<a name="l00111"></a>00111             this.Font = <span class="keyword">new</span> System.Drawing.Font(<span class="stringliteral">&quot;Calibri&quot;</span>, 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<a name="l00112"></a>00112             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+<a name="l00113"></a>00113             this.Icon = ((System.Drawing.Icon)(resources.GetObject(<span class="stringliteral">&quot;$this.Icon&quot;</span>)));
+<a name="l00114"></a>00114             this.MaximizeBox = <span class="keyword">false</span>;
+<a name="l00115"></a>00115             this.MinimizeBox = <span class="keyword">false</span>;
+<a name="l00116"></a>00116             this.Name = <span class="stringliteral">&quot;BearbeitenFenster&quot;</span>;
+<a name="l00117"></a>00117             this.Text = <span class="stringliteral">&quot;JaDe - Token trennen&quot;</span>;
+<a name="l00118"></a>00118             this.TopMost = <span class="keyword">true</span>;
+<a name="l00119"></a>00119             this.ResumeLayout(<span class="keyword">false</span>);
+<a name="l00120"></a>00120             this.PerformLayout();
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122         }
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 <span class="preprocessor">        #endregion</span>
+<a name="l00125"></a>00125 <span class="preprocessor"></span>
+<a name="l00126"></a>00126         <span class="keyword">private</span> System.Windows.Forms.Button button1;
+<a name="l00127"></a>00127         <span class="keyword">private</span> System.Windows.Forms.TextBox textBox2;
+<a name="l00128"></a>00128         <span class="keyword">private</span> System.Windows.Forms.TextBox textBox1;
+<a name="l00129"></a>00129         <span class="keyword">private</span> System.Windows.Forms.Button button2;
+<a name="l00130"></a>00130         <span class="keyword">private</span> System.Windows.Forms.Label label2;
+<a name="l00131"></a>00131         <span class="keyword">private</span> System.Windows.Forms.TextBox textBox3;
+<a name="l00132"></a>00132     }
+<a name="l00133"></a>00133 }<span class="comment">/// @endcond</span>
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -256,7 +252,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
     <ul>
       <li class="navelem"><b>BearbeitenFenster.Designer.cs</b>      </li>
 
-    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:13 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 15:42:41 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

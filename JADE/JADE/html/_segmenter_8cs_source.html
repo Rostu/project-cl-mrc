@@ -146,15 +146,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00045"></a>00045 <span class="comment"></span>    
 <a name="l00046"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html">00046</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_j_a_d_e_1_1_segmenter.html" title="Segmenter-Klasse enthält die Funktionen zum Tokenisieren des Eingabe Textes.">Segmenter</a>
 <a name="l00047"></a>00047     {<span class="comment"></span>
-<a name="l00048"></a>00048 <span class="comment">        /**Private Variable vom Typ Hashtable. Wird in der Klasse zur Zeichentypbestimmung genutzt. */</span>
-<a name="l00049"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">00049</a>         <span class="keyword">private</span> Hashtable <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a> = <span class="keyword">new</span> Hashtable();      <span class="comment">//Anlegen einer Hashtable welche später zur Zeichentypbestimmung genutzt wird.      </span>
+<a name="l00048"></a>00048 <span class="comment">        /**Private Variable vom Typ Hashtable. Sie wird in der Klasse zur Zeichentypbestimmung genutzt. */</span>
+<a name="l00049"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">00049</a>         <span class="keyword">private</span> Hashtable <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a> = <span class="keyword">new</span> Hashtable();      <span class="comment">//Anlegen einer Hashtable, welche später zur Zeichentypbestimmung genutzt wird.      </span>
 <a name="l00050"></a>00050 <span class="comment"></span>
 <a name="l00051"></a>00051 <span class="comment">        /**</span>
-<a name="l00052"></a>00052 <span class="comment">         * Funktion welche einen String aus japanischen Zeichen in seine Token zerlegt.</span>
-<a name="l00053"></a>00053 <span class="comment">         * Die Funktion gibt ein Objekt unserer Daten Klasse zurück.</span>
-<a name="l00054"></a>00054 <span class="comment">         * @param[in] input String Variable mit dem zu Tokenisierenden Text.</span>
+<a name="l00052"></a>00052 <span class="comment">         * Eine Funktion, welche einen String aus japanischen Zeichen in seine Token zerlegt.</span>
+<a name="l00053"></a>00053 <span class="comment">         * Die Funktion gibt ein Objekt unserer Daten-Klasse zurück.</span>
+<a name="l00054"></a>00054 <span class="comment">         * @param[in] input string-Variable mit dem zu tokenisierenden Text.</span>
 <a name="l00055"></a>00055 <span class="comment">         */</span>
-<a name="l00056"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#aa5a65c30d371681628783c3b17be197c">00056</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#aa5a65c30d371681628783c3b17be197c">TinySegmenter</a>(String input)
+<a name="l00056"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#aa5a65c30d371681628783c3b17be197c">00056</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#aa5a65c30d371681628783c3b17be197c">TinySegmenter</a>(String input)
 <a name="l00057"></a>00057         {
 <a name="l00058"></a>00058             Regex reg = <span class="keyword">new</span> Regex(<span class="stringliteral">&quot;[一二三四五六七八九十百千万億兆]&quot;</span>);         <span class="comment">//Erzeugen einer Regular Expression (Zahlzeichen).</span>
 <a name="l00059"></a>00059             <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a8766e57e08be3ce6c4a23b3489266029">chartype_</a>.Add(reg, <span class="stringliteral">&quot;M&quot;</span>);                                         <span class="comment">//Einfuegen der eben erstellten Regex mit einem Key-String in die Hashtable chartype_. </span>
@@ -676,7 +676,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00575"></a>00575 
 <a name="l00576"></a>00576             
 <a name="l00577"></a>00577             <span class="comment">//Funktionen zum Aufsplitten der Token in Sätze und schreiben in unsere Datenstruktur.</span>
-<a name="l00578"></a>00578             <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> rueck = <span class="keyword">new</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>();                  <span class="comment">//Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist).</span>
+<a name="l00578"></a>00578             <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a> rueck = <span class="keyword">new</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a>();                  <span class="comment">//Erzeugt Objekt unserer Datenstruktur(Arraylist in Arraylist).</span>
 <a name="l00579"></a>00579             ArrayList container = <span class="keyword">new</span> ArrayList();      <span class="comment">//Zwischenspeicher fuer die Token/Satz-Daten.</span>
 <a name="l00580"></a>00580 
 <a name="l00581"></a>00581             <span class="comment">//Sobald als Token ein Satzendzeichen auftritt, werden die Token bis zu diesem Punkt in eine &quot;Satz-Liste&quot;(hilf) geschrieben und zum &quot;Text-Container hinzugefügt&quot;.</span>
@@ -712,9 +712,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00611"></a>00611         }
 <a name="l00612"></a>00612 <span class="comment"></span>
 <a name="l00613"></a>00613 <span class="comment">        /**</span>
-<a name="l00614"></a>00614 <span class="comment">        * Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westl. Zeichen, Sonderzeichen und Sonstige)</span>
-<a name="l00615"></a>00615 <span class="comment">        * Erhält einen String, vergleicht diesen mit den Regular Expression-Einträgen in einer Hashtable und gibt bei match den Schlüsselwert(String) zurück. </span>
-<a name="l00616"></a>00616 <span class="comment">        * @param[in] str String Variable welche auf Zeichenart untersucht werden soll.</span>
+<a name="l00614"></a>00614 <span class="comment">        * Die Funktion dient zur Bestimmung des Typs eines Einzelzeichens (Zahlzeichen, Hiragana, Katakana, Zahlen, westliche Schrifteichen, Sonderzeichen und Sonstige)</span>
+<a name="l00615"></a>00615 <span class="comment">        * Erhält einen String, vergleicht diesen mit den Regular-Expression-Einträgen in einer Hashtable und gibt bei Übereinstimmung den Schlüsselwert(String) zurück. </span>
+<a name="l00616"></a>00616 <span class="comment">        * @param[in] str String-Wert, welcher auf Zeichenart untersucht werden soll.</span>
 <a name="l00617"></a>00617 <span class="comment">        * @param[out] s String-Wert aus dem Value eines Hashtable Eintrages. </span>
 <a name="l00618"></a>00618 <span class="comment">        */</span>
 <a name="l00619"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#abc36a4df9af5aec57560d4faa4af652f">00619</a>         <span class="keyword">private</span> <span class="keywordtype">string</span> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#abc36a4df9af5aec57560d4faa4af652f">ctype_</a>(String str)
@@ -733,9 +733,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00632"></a>00632         }
 <a name="l00633"></a>00633 <span class="comment"></span>
 <a name="l00634"></a>00634 <span class="comment">        /**</span>
-<a name="l00635"></a>00635 <span class="comment">      * Erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Key vorhanden ist und gibt in diesem Fall den Int-Wert des dazugehörigen Values zurück, ansonsten 0. </span>
+<a name="l00635"></a>00635 <span class="comment">      * Diese Funktion erhält eine Hashtable und einen String, prüft ob der String in der Hashtable als Schlüssel vorhanden ist und gibt in diesem Fall den int-Wert des dazugehörigen Wertes zurück, ansonsten 0. </span>
 <a name="l00636"></a>00636 <span class="comment">      * @param table[in] Hashtable-Objekt.</span>
-<a name="l00637"></a>00637 <span class="comment">      * @param[in] s String-Objekt das auf matching in der Hashtable geprüft werden soll.</span>
+<a name="l00637"></a>00637 <span class="comment">      * @param[in] s String-Objekt das auf Übereinstimmung in der Hashtable geprüft werden soll.</span>
 <a name="l00638"></a>00638 <span class="comment">      * @param[out] ret Int-Wert (Score).</span>
 <a name="l00639"></a>00639 <span class="comment">      */</span>
 <a name="l00640"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">00640</a>         <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#ac0ff72959ddcfc2ef01016f84bacf839">ts_</a>(Hashtable table, String s)
@@ -753,12 +753,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00652"></a>00652         }
 <a name="l00653"></a>00653 <span class="comment"></span>
 <a name="l00654"></a>00654 <span class="comment">        /**</span>
-<a name="l00655"></a>00655 <span class="comment">         * Funktion die testet ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. </span>
-<a name="l00656"></a>00656 <span class="comment">         * Testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expression matching auf Zugehörigkeit zum japanischen Zeichensatz.</span>
+<a name="l00655"></a>00655 <span class="comment">         * Diese Funktion testet, ob ein Eingabe-Sring der japanischen Sprache zugehörig ist. </span>
+<a name="l00656"></a>00656 <span class="comment">         * Sie testet den eingegebenen String (in unserem Fall immer ein einzel-Char) mittles Regular Expressions auf Zugehörigkeit zum japanischen Zeichensatz.</span>
 <a name="l00657"></a>00657 <span class="comment">         * Rückgabewerte sind String Objekte. &quot;J&quot; für japanisches Zeichen. &quot;O&quot; für nicht japanisches Zeichen.</span>
 <a name="l00658"></a>00658 <span class="comment">         * Hier wurde nicht mit boolschen Rückgabe-Werten gearbeitet, weil eine spätere Modifikation bzw. Spezifikation des Rückgabewertes möglich sein sollte. </span>
-<a name="l00659"></a>00659 <span class="comment">         * @param[in] eingabe String-Objekt das auf japanische Zeichen hin Untersucht werden soll.</span>
-<a name="l00660"></a>00660 <span class="comment">         * @param[out] s String-Wert aus dem Value eines Hashtable Eintrages. </span>
+<a name="l00659"></a>00659 <span class="comment">         * @param[in] eingabe String-Wert, der auf japanische Zeichen hin untersucht werden soll.</span>
+<a name="l00660"></a>00660 <span class="comment">         * @param[out] s String-Wert aus dem Wert eines Hashtable Eintrages. </span>
 <a name="l00661"></a>00661 <span class="comment">         */</span>
 <a name="l00662"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#a9a4ecd3b328ea2f7694bc799d82043a9">00662</a>         <span class="keyword">private</span> String <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a9a4ecd3b328ea2f7694bc799d82043a9">type</a>(String eingabe)                                 
 <a name="l00663"></a>00663         {
@@ -799,10 +799,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00698"></a>00698         }
 <a name="l00699"></a>00699 <span class="comment"></span>
 <a name="l00700"></a>00700 <span class="comment">        /**</span>
-<a name="l00701"></a>00701 <span class="comment">         * TestFunktion um einen Text (Eingabe String) auf dem Japanischen fremde Zeichen zu testen.</span>
-<a name="l00702"></a>00702 <span class="comment">         * Gibt momentan bei jedem Vorkommen eines nicht japanischen Zeichens im Text eine Warnmeldung aus.</span>
-<a name="l00703"></a>00703 <span class="comment">         * Kann noch angepasst werden.</span>
-<a name="l00704"></a>00704 <span class="comment">         * @param[in] text String-Objekt das auf nicht japanische Zeichen hin Untersucht werden soll.</span>
+<a name="l00701"></a>00701 <span class="comment">         * Diese Funktion dient dazu, in einen Text (Eingabe-String) dem Japanischen fremde Zeichen zu identifizieren.</span>
+<a name="l00702"></a>00702 <span class="comment">         * Sie gibt momentan eine Warnmeldung aus, falls ein nicht japanischen Zeichen im Text vorkommt.</span>
+<a name="l00703"></a>00703 <span class="comment">         * Anpassungen sind hier noch vorgesehen.</span>
+<a name="l00704"></a>00704 <span class="comment">         * @param[in] text String-Objekt, das auf nicht japanische Zeichen hin untersucht werden soll.</span>
 <a name="l00705"></a>00705 <span class="comment">         */</span>
 <a name="l00706"></a><a class="code" href="class_j_a_d_e_1_1_segmenter.html#a23f7bb05aaf164972d1e14f8560e5586">00706</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_j_a_d_e_1_1_segmenter.html#a23f7bb05aaf164972d1e14f8560e5586">TextTest</a>(String text)                                   
 <a name="l00707"></a>00707         {
@@ -849,7 +849,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
     <ul>
       <li class="navelem"><b>Segmenter.cs</b>      </li>
 
-    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:13 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 15:42:41 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

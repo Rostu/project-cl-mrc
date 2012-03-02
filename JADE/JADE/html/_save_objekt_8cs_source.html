@@ -109,39 +109,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00008"></a>00008 <span class="keyword">namespace </span>JADE
 <a name="l00009"></a>00009 {<span class="comment"></span>
 <a name="l00010"></a>00010 <span class="comment">    /// &lt;summary&gt;</span>
-<a name="l00011"></a>00011 <span class="comment">    ///Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert.</span>
-<a name="l00012"></a>00012 <span class="comment">    ///Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.</span>
+<a name="l00011"></a>00011 <span class="comment">    ///Eine Klasse, die als Container für zu speichernde Daten fungiert.</span>
+<a name="l00012"></a>00012 <span class="comment">    ///Sie wird um Datenstruktur zum Abspeichern erweitert werden, kann aber potentiell auch andere Daten zum Speichern erhalten.</span>
 <a name="l00013"></a>00013 <span class="comment">    /// &lt;/summary&gt;</span>
 <a name="l00014"></a>00014 <span class="comment"></span>    [Serializable()]
-<a name="l00015"></a><a class="code" href="class_j_a_d_e_1_1_save_objekt.html">00015</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a> : ISerializable                                         <span class="comment">//Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.</span>
+<a name="l00015"></a><a class="code" href="class_j_a_d_e_1_1_save_objekt.html">00015</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine Klasse, die als Container für zu speichernde Daten fungiert. Sie wird um Datenstruktur zum Abspe...">SaveObjekt</a> : ISerializable                                         <span class="comment">//Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.</span>
 <a name="l00016"></a>00016     {<span class="comment"></span>
 <a name="l00017"></a>00017 <span class="comment">        /**Variable vom Typ Daten[].*/</span>
-<a name="l00018"></a><a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">00018</a>         <span class="keyword">private</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>[] <a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">list</a>;                                                       <span class="comment">//Erzeugt Array in dem zu Serialisierte Daten(in diesem Fall ein Objekt unserer DatenKlasse) gespeichert werden.</span>
+<a name="l00018"></a><a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">00018</a>         <span class="keyword">private</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a>[] <a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">list</a>;                                                       <span class="comment">//Erzeugt Array in dem zu Serialisierte Daten(in diesem Fall ein Objekt unserer DatenKlasse) gespeichert werden.</span>
 <a name="l00019"></a>00019         
-<a name="l00020"></a>00020         <span class="comment">/*Get und Set Methoden um Zugriff zu gewährleisten.*/</span>
-<a name="l00021"></a>00021         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>[] Transfer                                                     
+<a name="l00020"></a>00020         <span class="comment">/*Get- und Set-Methoden um Lese- und Schreibzugriff zu gewährleisten.*/</span>
+<a name="l00021"></a>00021         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a>[] Transfer                                                     
 <a name="l00022"></a>00022         {
 <a name="l00023"></a>00023             <span class="keyword">get</span> { <span class="keywordflow">return</span> this.<a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">list</a>; }
 <a name="l00024"></a>00024             <span class="keyword">set</span> { this.<a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">list</a> = value; }
 <a name="l00025"></a>00025         }
 <a name="l00026"></a>00026         <span class="comment">/*Leerer Konstruktor.*/</span>
-<a name="l00027"></a>00027         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a>(){}
+<a name="l00027"></a>00027         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine Klasse, die als Container für zu speichernde Daten fungiert. Sie wird um Datenstruktur zum Abspe...">SaveObjekt</a>(){}
 <a name="l00028"></a>00028 <span class="comment"></span>
 <a name="l00029"></a>00029 <span class="comment">        /**</span>
-<a name="l00030"></a>00030 <span class="comment">         * Konstruktor für die Serialisation/DeSerilisation.</span>
-<a name="l00031"></a>00031 <span class="comment">         * @param info  SerilizationInfo</span>
-<a name="l00032"></a>00032 <span class="comment">         * @param ctxt  StreamingContext </span>
+<a name="l00030"></a>00030 <span class="comment">         * Konstruktor für die Serialisation/Deserialisation.</span>
+<a name="l00031"></a>00031 <span class="comment">        * @param[in] info Objekt vom Typ SerializationInfo</span>
+<a name="l00032"></a>00032 <span class="comment">        * @param[in] ctxt Objekt vom Typ StreamingContext</span>
 <a name="l00033"></a>00033 <span class="comment">         */</span>
-<a name="l00034"></a><a class="code" href="class_j_a_d_e_1_1_save_objekt.html#aca0ff10ca33e427332055161620e71aa">00034</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine allgemein gehaltene Klasse, die als Container für zu speichernde Daten fungiert. Wird unsere Datenstruktur zum Abspeichern bekommen, kann aber potentiell auch andere Daten zum Speichern bekommen.">SaveObjekt</a>(SerializationInfo info, StreamingContext ctxt)            
+<a name="l00034"></a><a class="code" href="class_j_a_d_e_1_1_save_objekt.html#aca0ff10ca33e427332055161620e71aa">00034</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_save_objekt.html" title="Eine Klasse, die als Container für zu speichernde Daten fungiert. Sie wird um Datenstruktur zum Abspe...">SaveObjekt</a>(SerializationInfo info, StreamingContext ctxt)            
 <a name="l00035"></a>00035         {
-<a name="l00036"></a>00036             this.<a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">list</a> = (<a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>[])info.GetValue(<span class="stringliteral">&quot;LIST&quot;</span>, typeof(<a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a>[]));            <span class="comment">//Versieht die Klassenvariable mit den für die Serilisation benötigten Informationen. </span>
+<a name="l00036"></a>00036             this.<a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a59b522dea9302f14b3d16fca52918d2a">list</a> = (<a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a>[])info.GetValue(<span class="stringliteral">&quot;LIST&quot;</span>, typeof(<a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a>[]));            <span class="comment">//Versieht die Klassenvariable mit den für die Serilisation benötigten Informationen. </span>
 <a name="l00037"></a>00037         }
 <a name="l00038"></a>00038 <span class="comment"></span>
 <a name="l00039"></a>00039 <span class="comment">        /**</span>
-<a name="l00040"></a>00040 <span class="comment">        * Benötigt die Serialize Funktion.</span>
-<a name="l00041"></a>00041 <span class="comment">        * Fügt der SerializeInfo informationen über das zu serialisierende Objekt hinzu.</span>
-<a name="l00042"></a>00042 <span class="comment">        * @param info Objekt vom Typ SerializationInfo</span>
-<a name="l00043"></a>00043 <span class="comment">        * @param ctxt Objekt vom Typ StreamingContext</span>
+<a name="l00040"></a>00040 <span class="comment">        * Benötigt die Serialize-Funktion.</span>
+<a name="l00041"></a>00041 <span class="comment">        * Fügt der SerializeInfo Informationen über das zu serialisierende Objekt hinzu.</span>
+<a name="l00042"></a>00042 <span class="comment">        * @param[in] info Objekt vom Typ SerializationInfo</span>
+<a name="l00043"></a>00043 <span class="comment">        * @param[in] ctxt Objekt vom Typ StreamingContext</span>
 <a name="l00044"></a>00044 <span class="comment">        */</span>
 <a name="l00045"></a><a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a2bdaead3be86a7e66df838cfa41143ef">00045</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_j_a_d_e_1_1_save_objekt.html#a2bdaead3be86a7e66df838cfa41143ef">GetObjectData</a>(SerializationInfo info, StreamingContext ctxt)    
 <a name="l00046"></a>00046         {
@@ -169,7 +169,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
     <ul>
       <li class="navelem"><b>SaveObjekt.cs</b>      </li>
 
-    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:13 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 15:42:41 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

@@ -116,11 +116,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00015"></a><a class="code" href="namespace_j_a_d_e.html">00015</a> <span class="keyword">namespace </span>JADE
 <a name="l00016"></a>00016 {<span class="comment"></span>
 <a name="l00017"></a>00017 <span class="comment">    /// &lt;summary&gt;</span>
-<a name="l00018"></a>00018 <span class="comment">    ///Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token.</span>
-<a name="l00019"></a>00019 <span class="comment">    ///Wurde extra angelegt, weil es dann einfacher ist, etwas zu ändern wenn wir später vielleicht auch noch Zusatzinformationen wie Übersetzungen speichern wollen.</span>
+<a name="l00018"></a>00018 <span class="comment">    ///Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die einzelnen Sätze und Token) gedacht ist.</span>
+<a name="l00019"></a>00019 <span class="comment">    ///Sie wurde auch für den Zweck angelegt, spätere Änderungen wie das Speichern von Zusatzinformationen wie Übersetzungsmöglichkeiten zu erleichtern.</span>
 <a name="l00020"></a>00020 <span class="comment">    /// &lt;/summary&gt;</span>
 <a name="l00021"></a>00021 <span class="comment"></span>    [Serializable()]
-<a name="l00022"></a><a class="code" href="class_j_a_d_e_1_1_daten.html">00022</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine extra Klasse für die Arraylist mit unseren Daten also den Sätzen und Token. Wurde extra angelegt...">Daten</a> : ISerializable                              <span class="comment">//Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.</span>
+<a name="l00022"></a><a class="code" href="class_j_a_d_e_1_1_daten.html">00022</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_j_a_d_e_1_1_daten.html" title="Eine Klasse, die für das Speichern der Arraylist mit unseren Daten für den eingegebenen Text (die ein...">Daten</a> : ISerializable                              <span class="comment">//Mit Zusatz (ISerializable) ist die Klasse später Serialisierbar.</span>
 <a name="l00023"></a>00023     {<span class="comment"></span>
 <a name="l00024"></a>00024 <span class="comment">        /**Private Variable vom Typ ArrayList. Hier werden die Daten abgespeichert.*/</span>
 <a name="l00025"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#ace8fc8439a2b12c6e62f2799ba3c0a73">00025</a>         <span class="keyword">private</span> ArrayList <a class="code" href="class_j_a_d_e_1_1_daten.html#ace8fc8439a2b12c6e62f2799ba3c0a73">data</a> = <span class="keyword">new</span> ArrayList();                   <span class="comment">//Erzeugt die Variable data(Arraylist) in der unsere Daten gespeichert werden.</span>
@@ -142,57 +142,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <a name="l00041"></a>00041         }
 <a name="l00042"></a>00042 <span class="comment"></span>
 <a name="l00043"></a>00043 <span class="comment">        /**</span>
-<a name="l00044"></a>00044 <span class="comment">         * Konstruktor für die Serialisation/DeSerilisation.</span>
-<a name="l00045"></a>00045 <span class="comment">         * @param[in] info  SerilizationInfo</span>
-<a name="l00046"></a>00046 <span class="comment">         * @param[in] ctxt  StreamingContext </span>
+<a name="l00044"></a>00044 <span class="comment">         * Konstruktor für die Serialisation/Deserialisation.</span>
+<a name="l00045"></a>00045 <span class="comment">        * @param[in] info Objekt vom Typ SerializationInfo</span>
+<a name="l00046"></a>00046 <span class="comment">        * @param[in] ctxt Objekt vom Typ StreamingContext</span>
 <a name="l00047"></a>00047 <span class="comment">         */</span>
 <a name="l00048"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#adb5f8a65691bb80c4b8cb44b912d84f2">00048</a>         <span class="keyword">public</span> <a class="code" href="class_j_a_d_e_1_1_daten.html#a32406b992fd51adc6ae4ec1419b96212">Daten</a>(SerializationInfo info, StreamingContext ctxt)
 <a name="l00049"></a>00049         {
 <a name="l00050"></a>00050             this.<a class="code" href="class_j_a_d_e_1_1_daten.html#ace8fc8439a2b12c6e62f2799ba3c0a73">data</a> = (ArrayList)info.GetValue(<span class="stringliteral">&quot;Daten&quot;</span>, typeof(ArrayList));
 <a name="l00051"></a>00051         }
 <a name="l00052"></a>00052 
-<a name="l00053"></a>00053         <span class="comment"></span>
-<a name="l00054"></a>00054 <span class="comment">        /**</span>
-<a name="l00055"></a>00055 <span class="comment">         * Funktion zur Rückgabe eines einzelnen Token (String) aus unseren Daten.</span>
-<a name="l00056"></a>00056 <span class="comment">         * Erhält zu diesem Zweck zwei Int-Werte für Satznummer und Tokennummer, des gewünschen Token.</span>
-<a name="l00057"></a>00057 <span class="comment">         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.</span>
-<a name="l00058"></a>00058 <span class="comment">         * @param[in] Tok Int-Wert des gewünschten Token. </span>
-<a name="l00059"></a>00059 <span class="comment">         * @param[out] String Repräsentation eines Token aus der Daten Struktur.</span>
-<a name="l00060"></a>00060 <span class="comment">         */</span>
-<a name="l00061"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#ae5a8d84433f67e4d2717797dcbd9a1a1">00061</a>         <span class="keyword">public</span> String <a class="code" href="class_j_a_d_e_1_1_daten.html#ae5a8d84433f67e4d2717797dcbd9a1a1">getToken</a>(<span class="keywordtype">int</span> Satznummer, <span class="keywordtype">int</span> Tok)
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="comment"></span>
+<a name="l00056"></a>00056 <span class="comment">        /**</span>
+<a name="l00057"></a>00057 <span class="comment">         * Funktion zur Rückgabe der Länge (Anzahl der Elemente) eines Satzes.</span>
+<a name="l00058"></a>00058 <span class="comment">         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.</span>
+<a name="l00059"></a>00059 <span class="comment">         * @param[out] Int-Wert der die Anzahl der Elemente eines Satzes repräsentiert.</span>
+<a name="l00060"></a>00060 <span class="comment">          */</span>
+<a name="l00061"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#a599d75542b4814c8a1a0547576d7d8ba">00061</a>         <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="class_j_a_d_e_1_1_daten.html#a599d75542b4814c8a1a0547576d7d8ba">getSatzLaenge</a>(<span class="keywordtype">int</span> Satznummer)
 <a name="l00062"></a>00062         {
 <a name="l00063"></a>00063             ArrayList hilf = this.<a class="code" href="class_j_a_d_e_1_1_daten.html#a77c31ff4fd4520fa53512309f2c91c2f">getSatz</a>(Satznummer);              <span class="comment">//Erzeugt eine Variable vom Typ Arraylist und füllt diese mit den Token aus dem Zielsatz.</span>
-<a name="l00064"></a>00064             <span class="keywordflow">return</span> (String)hilf[Tok];                               <span class="comment">//Konvertiert den Arraylisteintrag an der gewünschten Position zu String und gibt diesen zurück.</span>
+<a name="l00064"></a>00064             <span class="keywordflow">return</span> hilf.Count;                                      <span class="comment">//Rückgabe eines Int-Wertes der die Anzahl der Elemente eines Satzes repräsentiert.</span>
 <a name="l00065"></a>00065         }
 <a name="l00066"></a>00066 <span class="comment"></span>
 <a name="l00067"></a>00067 <span class="comment">        /**</span>
-<a name="l00068"></a>00068 <span class="comment">         * Funktion zur Rückgabe eines Satzes(ArrayList) aus unseren Daten.</span>
-<a name="l00069"></a>00069 <span class="comment">         * Erhält zu diesem Zweck einen Int-Werte für Satznummer des gewünschten Satzes.</span>
-<a name="l00070"></a>00070 <span class="comment">         * @param[in] Satznummer Int-Wert des Satzes in dem sich der gewünschte Token befindet.</span>
-<a name="l00071"></a>00071 <span class="comment">         * @param[out] Arraylist(mit String Elementen) die den gewünschten Satz repräsentiert.</span>
-<a name="l00072"></a>00072 <span class="comment">         */</span>
-<a name="l00073"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#a77c31ff4fd4520fa53512309f2c91c2f">00073</a>         <span class="keyword">public</span> ArrayList <a class="code" href="class_j_a_d_e_1_1_daten.html#a77c31ff4fd4520fa53512309f2c91c2f">getSatz</a>(<span class="keywordtype">int</span> Satznummer)
-<a name="l00074"></a>00074         {
-<a name="l00075"></a>00075             ArrayList hilf = <span class="keyword">new</span> ArrayList();                       <span class="comment">//Erzeugt Variable vom Typ Arraylist. </span>
-<a name="l00076"></a>00076             hilf = this.<a class="code" href="class_j_a_d_e_1_1_daten.html#a20e383b8e081793086f9adb40b0fe269">Zugriff</a>;                                    <span class="comment">//Weist der hilfsarralist die Daten zu.  </span>
-<a name="l00077"></a>00077             ArrayList rueckgabe = (ArrayList)hilf[Satznummer];      <span class="comment">//Erzeugt eine Variable vom Typ Arraylist und weist dieser den gewünschten Satz zu.</span>
-<a name="l00078"></a>00078             <span class="keywordflow">return</span> rueckgabe;                                       <span class="comment">//Gibt den Satz zurück.</span>
-<a name="l00079"></a>00079         }
-<a name="l00080"></a>00080        
-<a name="l00081"></a>00081 <span class="comment"></span>
-<a name="l00082"></a>00082 <span class="comment">        /**</span>
-<a name="l00083"></a>00083 <span class="comment">        * Benötigt die Serialize Funktion.</span>
-<a name="l00084"></a>00084 <span class="comment">        * Fügt der SerializeInfo informationen über das zu serialisierende Objekt hinzu.</span>
-<a name="l00085"></a>00085 <span class="comment">        * @param[in] info Objekt vom Typ SerializationInfo</span>
-<a name="l00086"></a>00086 <span class="comment">        * @param[in] ctxt Objekt vom Typ StreamingContext</span>
-<a name="l00087"></a>00087 <span class="comment">        */</span>
-<a name="l00088"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#a3b1b4727626c878a19eca99da33f7362">00088</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_j_a_d_e_1_1_daten.html#a3b1b4727626c878a19eca99da33f7362">GetObjectData</a>(SerializationInfo info, StreamingContext ctxt)
-<a name="l00089"></a>00089         {
-<a name="l00090"></a>00090             info.AddValue(<span class="stringliteral">&quot;Daten&quot;</span>, this.<a class="code" href="class_j_a_d_e_1_1_daten.html#ace8fc8439a2b12c6e62f2799ba3c0a73">data</a>);
-<a name="l00091"></a>00091         }
-<a name="l00092"></a>00092         
-<a name="l00093"></a>00093   }
-<a name="l00094"></a>00094 }
+<a name="l00068"></a>00068 <span class="comment">         * Funktion zur Rückgabe eines einzelnen Token (String) aus unseren Daten.</span>
+<a name="l00069"></a>00069 <span class="comment">         * Erhält zu diesem Zweck zwei int-Werte für Satznummer und Tokennummer, des gewünschen Token.</span>
+<a name="l00070"></a>00070 <span class="comment">         * @param[in] Satznummer int-Wert des Satzes, in dem sich der gewünschte Token befindet.</span>
+<a name="l00071"></a>00071 <span class="comment">         * @param[in] Tok int-Wert des gewünschten Tokens. </span>
+<a name="l00072"></a>00072 <span class="comment">         * @param[out] string-Repräsentation eines Tokens aus der Datenstruktur.</span>
+<a name="l00073"></a>00073 <span class="comment">         */</span>
+<a name="l00074"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#ae5a8d84433f67e4d2717797dcbd9a1a1">00074</a>         <span class="keyword">public</span> String <a class="code" href="class_j_a_d_e_1_1_daten.html#ae5a8d84433f67e4d2717797dcbd9a1a1">getToken</a>(<span class="keywordtype">int</span> Satznummer, <span class="keywordtype">int</span> Tok)
+<a name="l00075"></a>00075         {
+<a name="l00076"></a>00076             ArrayList hilf = this.<a class="code" href="class_j_a_d_e_1_1_daten.html#a77c31ff4fd4520fa53512309f2c91c2f">getSatz</a>(Satznummer);              <span class="comment">//Erzeugt eine Variable vom Typ Arraylist und füllt diese mit den Token aus dem Zielsatz.</span>
+<a name="l00077"></a>00077             <span class="keywordflow">return</span> (String)hilf[Tok];                               <span class="comment">//Konvertiert den Arraylisteintrag an der gewünschten Position zu String und gibt diesen zurück.</span>
+<a name="l00078"></a>00078         }
+<a name="l00079"></a>00079 <span class="comment"></span>
+<a name="l00080"></a>00080 <span class="comment">        /**</span>
+<a name="l00081"></a>00081 <span class="comment">         * Funktion zur Rückgabe eines Satzes (als ArrayList) aus unseren Daten.</span>
+<a name="l00082"></a>00082 <span class="comment">         * Erhält zu diesem Zweck einen int-Wert für Satznummer des gewünschten Satzes.</span>
+<a name="l00083"></a>00083 <span class="comment">         * @param[in] Satznummer int-Wert des Satzes, in dem sich der gewünschte Token befindet.</span>
+<a name="l00084"></a>00084 <span class="comment">         * @param[out] Arraylist(mit string-Elementen), die den gewünschten Satz repräsentiert.</span>
+<a name="l00085"></a>00085 <span class="comment">         */</span>
+<a name="l00086"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#a77c31ff4fd4520fa53512309f2c91c2f">00086</a>         <span class="keyword">public</span> ArrayList <a class="code" href="class_j_a_d_e_1_1_daten.html#a77c31ff4fd4520fa53512309f2c91c2f">getSatz</a>(<span class="keywordtype">int</span> Satznummer)
+<a name="l00087"></a>00087         {
+<a name="l00088"></a>00088             ArrayList hilf = <span class="keyword">new</span> ArrayList();                       <span class="comment">//Erzeugt Variable vom Typ Arraylist. </span>
+<a name="l00089"></a>00089             hilf = this.<a class="code" href="class_j_a_d_e_1_1_daten.html#a20e383b8e081793086f9adb40b0fe269">Zugriff</a>;                                    <span class="comment">//Weist der hilfsarralist die Daten zu.  </span>
+<a name="l00090"></a>00090             ArrayList rueckgabe = (ArrayList)hilf[Satznummer];      <span class="comment">//Erzeugt eine Variable vom Typ Arraylist und weist dieser den gewünschten Satz zu.</span>
+<a name="l00091"></a>00091             <span class="keywordflow">return</span> rueckgabe;                                       <span class="comment">//Gibt den Satz zurück.</span>
+<a name="l00092"></a>00092         }
+<a name="l00093"></a>00093        
+<a name="l00094"></a>00094 <span class="comment"></span>
+<a name="l00095"></a>00095 <span class="comment">        /**</span>
+<a name="l00096"></a>00096 <span class="comment">        * Benötigt die Serialize-Funktion.</span>
+<a name="l00097"></a>00097 <span class="comment">        * Fügt der SerializeInfo Informationen über das zu serialisierende Objekt hinzu.</span>
+<a name="l00098"></a>00098 <span class="comment">        * @param[in] info Objekt vom Typ SerializationInfo</span>
+<a name="l00099"></a>00099 <span class="comment">        * @param[in] ctxt Objekt vom Typ StreamingContext</span>
+<a name="l00100"></a>00100 <span class="comment">        */</span>
+<a name="l00101"></a><a class="code" href="class_j_a_d_e_1_1_daten.html#a3b1b4727626c878a19eca99da33f7362">00101</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_j_a_d_e_1_1_daten.html#a3b1b4727626c878a19eca99da33f7362">GetObjectData</a>(SerializationInfo info, StreamingContext ctxt)
+<a name="l00102"></a>00102         {
+<a name="l00103"></a>00103             info.AddValue(<span class="stringliteral">&quot;Daten&quot;</span>, this.<a class="code" href="class_j_a_d_e_1_1_daten.html#ace8fc8439a2b12c6e62f2799ba3c0a73">data</a>);
+<a name="l00104"></a>00104         }
+<a name="l00105"></a>00105         
+<a name="l00106"></a>00106   }
+<a name="l00107"></a>00107 }
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -213,7 +226,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
     <ul>
       <li class="navelem"><b>daten.cs</b>      </li>
 
-    <li class="footer">Erzeugt am Fre Mär 2 2012 09:59:13 für JaDe Tokenizer von
+    <li class="footer">Erzeugt am Fre Mär 2 2012 15:42:41 für JaDe Tokenizer von
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>
