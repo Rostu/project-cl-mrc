@@ -55,6 +55,10 @@ namespace JADE
                 Alist[Satznummer] = Satz;                                      //Schreiben des geänderten Satzes in die Arraylist.
                 obj.Zugriff = Alist;                                           //Schreiben der geänderten ARRAYLIST zurück in die Datenstruktur.
                 SearchEngine.DisposeTable(Satznummer, Tok);
+
+                //Nach der Stelle, an der eine Bearbeitung vorgenommen wurde, müssen die Indizes in den Namen von eventuell vorhandenen Tabellen mit Sucheinträgen um 1 erniedrigt werden.
+                //Dafür werden alle Indizes im Satz eine Stelle nach der Stelle des Trennens mit ShiftTable auf Tabellen überprüft und ggf. abgeändert. Die Schleife muss rückwärts über die Indzes laufe,
+                //da nach die Indizes den Tabellennamen nach rechts verschoben werden.
                 for (int i = Satz.Count - 1; i >= Tok + 1; i--)
                 {
                     SearchEngine.ShiftTable(Satznummer, i, false);
