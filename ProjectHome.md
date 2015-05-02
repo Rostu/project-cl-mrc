@@ -1,0 +1,1 @@
+This project comprises a tokenizer for Japanese as a translation tool (language pair: Japanese-German).
